@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import { Navbar } from './components/layout/Navbar';
@@ -15,11 +15,20 @@ import { AboutPage } from './pages/AboutPage';
 import { WishlistPage } from './pages/WishlistPage';
 import { AccountPage } from './pages/AccountPage';
 import { LoginPage } from './pages/LoginPage';
+import { GiftFinderPage } from './pages/GiftFinderPage';
 
 import { AdminLayout } from './pages/admin/AdminLayout';
 import { AdminDashboard } from './pages/admin/AdminDashboard';
 import { AdminProducts } from './pages/admin/AdminProducts';
 import { AdminOrders } from './pages/admin/AdminOrders';
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
 
 function StorePage() {
   const location = useLocation();
@@ -27,6 +36,7 @@ function StorePage() {
 
   return (
     <>
+      <ScrollToTop />
       <Navbar onSearchOpen={() => setSearchOpen(true)} />
       <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
       <CartDrawer />
@@ -42,6 +52,9 @@ function StorePage() {
           <Routes location={location}>
             <Route path="/" element={<HomePage />} />
             <Route path="/shop" element={<ShopPage />} />
+            <Route path="/gift-finder" element={<GiftFinderPage />} />
+            <Route path="/find-gifts" element={<GiftFinderPage />} />
+            <Route path="/giftfinder" element={<GiftFinderPage />} />
             <Route path="/products/:slug" element={<ProductPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
             <Route path="/about" element={<AboutPage />} />

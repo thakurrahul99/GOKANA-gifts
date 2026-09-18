@@ -9,7 +9,8 @@ function InstagramPost({ post, className }) {
       href="https://instagram.com"
       target="_blank"
       rel="noopener noreferrer"
-      className={`block relative overflow-hidden bg-beige group ${className}`}
+      className={`block relative overflow-hidden rounded-xl group ${className}`}
+      style={{ background: 'var(--surface-alt)' }}
       whileHover={{ scale: 1.01 }}
       transition={{ duration: 0.4 }}
     >
@@ -20,9 +21,13 @@ function InstagramPost({ post, className }) {
         loading="lazy"
       />
       {/* Overlay */}
-      <div className="absolute inset-0 bg-charcoal/0 group-hover:bg-charcoal/40 transition-colors duration-500 flex items-center justify-center">
+      <div className="absolute inset-0 flex items-center justify-center transition-colors duration-500" style={{ background: 'rgba(11,31,58,0)' }}
+        onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(11,31,58,0.4)'; }}
+        onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(11,31,58,0)'; }}
+      >
         <motion.div
-          className="flex flex-col items-center gap-2 text-ivory opacity-0 group-hover:opacity-100 transition-opacity duration-400"
+          className="flex flex-col items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          style={{ color: '#FFFFFF' }}
         >
           <Link2 size={24} strokeWidth={1.5} />
           <span className="font-sans text-xs tracking-[0.15em] uppercase">♥ {post.likes}</span>
@@ -36,14 +41,14 @@ export function InstagramGrid() {
   const [p1, p2, p3, p4, p5, p6] = instagramPosts;
 
   return (
-    <section className="section-py-sm bg-beige overflow-hidden">
+    <section className="section-py-sm overflow-hidden" style={{ background: 'var(--surface-alt)' }}>
       <div className="container-gokana">
         {/* Header */}
         <div className="text-center mb-12">
           <ScrollReveal delay={0.1}>
-            <p className="label-text text-gold mb-4">✦ @gokana.in</p>
+              <p className="label-text mb-4" style={{ color: 'var(--accent)' }}>✦ @gokana.in</p>
           </ScrollReveal>
-          <AnimatedHeading className="heading-md text-charcoal" delay={0.15}>
+          <AnimatedHeading className="heading-md" delay={0.15}>
             Moments from GŌKANA
           </AnimatedHeading>
         </div>
@@ -75,7 +80,10 @@ export function InstagramGrid() {
             href="https://instagram.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 font-sans text-sm text-charcoal/50 hover:text-charcoal transition-colors"
+            className="inline-flex items-center gap-2 font-sans text-sm transition-colors duration-200 focus-visible:outline-none focus-visible:rounded"
+            style={{ color: 'var(--muted)' }}
+            onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--primary)'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--muted)'; }}
           >
             <Link2 size={16} strokeWidth={1.5} />
             Follow us on Instagram

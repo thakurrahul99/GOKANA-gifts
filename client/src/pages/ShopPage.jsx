@@ -40,13 +40,13 @@ export function ShopPage() {
   };
 
   return (
-    <main className="pt-28 min-h-screen bg-ivory">
+    <main className="pt-28 min-h-screen" style={{ background: 'var(--bg)' }}>
       {/* Page header */}
-      <div className="bg-charcoal py-16">
+      <div className="py-16" style={{ background: 'var(--primary)' }}>
         <div className="container-gokana text-center">
-          <p className="label-text text-gold/70 mb-4">✦ Our Collection</p>
-          <h1 className="heading-xl text-ivory">All Gifts</h1>
-          <p className="body-text text-ivory/50 mt-4 max-w-lg mx-auto">
+          <p className="label-text mb-4" style={{ color: 'rgba(212,175,55,0.7)' }}>✦ Our Collection</p>
+          <h1 className="heading-xl" style={{ color: '#FFFFFF' }}>All Gifts</h1>
+          <p className="font-sans text-base leading-relaxed mt-4 max-w-lg mx-auto" style={{ color: 'rgba(255,255,255,0.5)' }}>
             Thoughtfully curated gifts for every person, every occasion.
           </p>
         </div>
@@ -61,11 +61,13 @@ export function ShopPage() {
               <button
                 key={occ.id}
                 onClick={() => handleOccasion(occ.id)}
-                className={`flex-none px-4 py-2 font-sans text-xs font-medium tracking-[0.08em] uppercase transition-all duration-300 whitespace-nowrap ${
-                  activeOccasion === occ.id
-                    ? 'bg-charcoal text-ivory'
-                    : 'border border-charcoal/20 text-charcoal/60 hover:border-charcoal hover:text-charcoal'
-                }`}
+                className="flex-none px-4 py-2 font-sans text-xs font-medium tracking-[0.08em] uppercase transition-all duration-200 whitespace-nowrap rounded-full focus-visible:outline-none focus-visible:ring-2"
+                style={{
+                  background: activeOccasion === occ.id ? 'var(--primary)' : 'transparent',
+                  color: activeOccasion === occ.id ? '#FFFFFF' : 'var(--muted)',
+                  border: `1px solid ${activeOccasion === occ.id ? 'var(--primary)' : 'var(--border)'}`,
+                  '--tw-ring-color': 'var(--accent)',
+                }}
               >
                 {occ.label}
               </button>
@@ -74,11 +76,14 @@ export function ShopPage() {
 
           {/* Sort */}
           <div className="flex items-center gap-3 flex-shrink-0">
-            <span className="font-sans text-xs text-charcoal/40">{filtered.length} products</span>
+            <span className="font-sans text-xs" style={{ color: 'var(--muted-2)' }}>{filtered.length} products</span>
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="font-sans text-sm text-charcoal border border-charcoal/20 px-3 py-2 bg-transparent focus:outline-none focus:border-gold"
+              className="font-sans text-sm rounded-lg px-3 py-2 bg-transparent focus:outline-none transition-colors"
+              style={{ color: 'var(--text)', border: '1px solid var(--border)' }}
+              onFocus={(e) => { e.target.style.borderColor = 'var(--accent)'; }}
+              onBlur={(e) => { e.target.style.borderColor = 'var(--border)'; }}
             >
               {sortOptions.map((o) => (
                 <option key={o.value} value={o.value}>{o.label}</option>
@@ -96,7 +101,7 @@ export function ShopPage() {
               animate={{ opacity: 1 }}
               className="text-center py-24"
             >
-              <p className="font-serif text-2xl font-light text-charcoal/40 mb-4">No gifts found</p>
+              <p className="font-serif text-2xl font-light mb-4" style={{ color: 'var(--muted-2)' }}>No gifts found</p>
               <button onClick={() => handleOccasion('all')} className="btn-ghost">
                 Clear filters
               </button>

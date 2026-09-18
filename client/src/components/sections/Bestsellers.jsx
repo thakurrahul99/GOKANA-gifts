@@ -20,30 +20,36 @@ export function Bestsellers() {
   };
 
   return (
-    <section className="section-py bg-beige-100 overflow-hidden">
+    <section className="section-py overflow-hidden" style={{ background: 'var(--surface)' }}>
       <div className="container-gokana">
         {/* Header */}
         <div className="flex items-end justify-between mb-12">
           <div>
             <ScrollReveal delay={0.1}>
-              <p className="label-text text-gold mb-4">✦ Most Loved</p>
+              <p className="label-text mb-4" style={{ color: 'var(--accent)' }}>✦ Most Loved</p>
             </ScrollReveal>
-            <AnimatedHeading className="heading-lg text-charcoal" delay={0.15}>
+            <AnimatedHeading className="heading-lg" delay={0.15}>
               Our Bestsellers
             </AnimatedHeading>
           </div>
           <ScrollReveal delay={0.3} className="flex items-center gap-3">
             <button
               onClick={() => scroll('left')}
-              className="w-11 h-11 border border-charcoal/20 flex items-center justify-center text-charcoal/60 hover:border-charcoal hover:text-charcoal transition-all duration-300"
+              className="w-11 h-11 flex items-center justify-center rounded-lg transition-all duration-200 focus-visible:outline-none focus-visible:ring-2"
+              style={{ border: '1px solid var(--border)', color: 'var(--muted)', '--tw-ring-color': 'var(--accent)' }}
               aria-label="Scroll left"
+              onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--primary)'; e.currentTarget.style.color = 'var(--primary)'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.color = 'var(--muted)'; }}
             >
               <ChevronLeft size={18} strokeWidth={1.5} />
             </button>
             <button
               onClick={() => scroll('right')}
-              className="w-11 h-11 border border-charcoal/20 flex items-center justify-center text-charcoal/60 hover:border-charcoal hover:text-charcoal transition-all duration-300"
+              className="w-11 h-11 flex items-center justify-center rounded-lg transition-all duration-200 focus-visible:outline-none focus-visible:ring-2"
+              style={{ border: '1px solid var(--border)', color: 'var(--muted)', '--tw-ring-color': 'var(--accent)' }}
               aria-label="Scroll right"
+              onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--primary)'; e.currentTarget.style.color = 'var(--primary)'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.color = 'var(--muted)'; }}
             >
               <ChevronRight size={18} strokeWidth={1.5} />
             </button>
@@ -69,7 +75,7 @@ export function Bestsellers() {
 
         {/* Mobile drag hint */}
         <ScrollReveal delay={0.2} className="text-center mt-6 md:hidden">
-          <p className="font-sans text-xs text-charcoal/35 tracking-widest">← Swipe to explore →</p>
+          <p className="font-sans text-xs tracking-widest" style={{ color: 'var(--muted-2)' }}>← Swipe to explore →</p>
         </ScrollReveal>
       </div>
     </section>

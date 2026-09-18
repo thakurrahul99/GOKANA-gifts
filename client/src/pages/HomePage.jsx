@@ -5,11 +5,13 @@ import { BrandStory } from '../components/sections/BrandStory';
 import { ShopByOccasion } from '../components/sections/ShopByOccasion';
 import { FeaturedCollection } from '../components/sections/FeaturedCollection';
 import { PersonalizedGifting } from '../components/sections/PersonalizedGifting';
+import { WhyGokana } from '../components/sections/WhyGokana';
 import { GiftFinder } from '../components/sections/GiftFinder';
 import { Bestsellers } from '../components/sections/Bestsellers';
 import { Testimonials } from '../components/sections/Testimonials';
 import { InstagramGrid } from '../components/sections/InstagramGrid';
 import { Newsletter } from '../components/sections/Newsletter';
+import { FAB } from '../components/ui/FAB';
 
 const INTRO_KEY = 'gokana_intro_shown';
 
@@ -37,6 +39,7 @@ export function HomePage() {
         <BrandStory />
         <ShopByOccasion />
         <FeaturedCollection />
+        <WhyGokana />
         <PersonalizedGifting />
         <GiftFinder />
         <Bestsellers />
@@ -44,6 +47,8 @@ export function HomePage() {
         <InstagramGrid />
         <Newsletter />
       </main>
+      <FAB />
     </>
   );
 }
+

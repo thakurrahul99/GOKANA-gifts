@@ -9,14 +9,14 @@ export function FeaturedCollection() {
   const featured = products.filter((p) => p.tags.includes('featured'));
 
   return (
-    <section className="section-py bg-ivory">
+    <section className="section-py" style={{ background: 'var(--bg)' }}>
       <div className="container-gokana">
         {/* Header */}
         <div className="text-center mb-16">
           <ScrollReveal delay={0.1}>
-            <p className="label-text text-gold mb-5">✦ Featured Collection</p>
+            <p className="label-text mb-5" style={{ color: 'var(--accent)' }}>✦ Featured Collection</p>
           </ScrollReveal>
-          <AnimatedHeading className="heading-lg text-charcoal mb-6" delay={0.15}>
+          <AnimatedHeading className="heading-lg mb-6" delay={0.15}>
             Curated For You
           </AnimatedHeading>
           <ScrollReveal delay={0.35}>
