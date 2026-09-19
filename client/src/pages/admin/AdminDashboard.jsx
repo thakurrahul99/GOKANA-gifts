@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react';
 import { ShoppingBag, Users, Package, TrendingUp, Star, Loader2, AlertCircle } from 'lucide-react';
 import { useAuthStore } from '../../store';
 import { formatPrice } from '../../components/ui';
+import { API_BASE } from '../../lib/api';
 
-const API = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const API = API_BASE;
 
 const STATUS_COLOR = {
   PENDING:    'bg-yellow-100 text-yellow-700',
@@ -51,13 +52,13 @@ export function AdminDashboard() {
   return (
     <div>
       <div className="mb-8">
-        <h2 className="text-2xl font-semibold text-gray-800">Dashboard</h2>
-        <p className="text-sm text-gray-500 mt-1">Welcome back, Admin. Here's what's happening with GŌKANA.</p>
+        <h2 className="text-2xl font-semibold text-[var(--primary)]">Dashboard</h2>
+        <p className="text-sm text-[var(--text-muted)] mt-1">Welcome back, Admin. Here's what's happening with GŌKANA.</p>
       </div>
 
       {/* Loading */}
       {loading && (
-        <div className="flex items-center justify-center py-20 text-gray-400">
+        <div className="flex items-center justify-center py-20 text-[var(--text-muted)]">
           <Loader2 size={24} className="animate-spin mr-3" />
           <span className="text-sm">Loading stats…</span>
         </div>
@@ -65,7 +66,7 @@ export function AdminDashboard() {
 
       {/* Error */}
       {error && !loading && (
-        <div className="flex items-center gap-3 bg-red-50 text-red-700 px-5 py-4 text-sm mb-8 rounded-sm">
+        <div className="flex items-center gap-3 bg-red-50 border border-red-200 text-red-700 px-5 py-4 text-sm mb-8">
           <AlertCircle size={16} />
           <span>Could not load stats: {error}</span>
         </div>
@@ -76,38 +77,38 @@ export function AdminDashboard() {
         <>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
             {stats.map((s) => (
-              <div key={s.label} className="bg-white rounded-sm border border-gray-100 p-5">
+              <div key={s.label} className="bg-[var(--surface)] border border-[var(--border)] p-5 shadow-sm">
                 <div className="flex items-start justify-between mb-4">
                   <div className={`p-2 ${s.bg} rounded-sm`}>
                     <s.icon size={18} className={s.color} />
                   </div>
                   {data?.stats.pendingOrders > 0 && s.label === 'Total Orders' && (
-                    <span className="text-xs text-amber-600 font-medium bg-amber-50 px-2 py-0.5 rounded-full">
+                    <span className="text-xs text-amber-700 font-semibold bg-amber-50 border border-amber-200 px-2 py-0.5">
                       {data.stats.pendingOrders} pending
                     </span>
                   )}
                 </div>
-                <p className="text-2xl font-semibold text-gray-800">{s.value}</p>
-                <p className="text-xs text-gray-500 mt-1">{s.label}</p>
+                <p className="text-2xl font-semibold text-[var(--primary)]">{s.value}</p>
+                <p className="text-xs text-[var(--text-muted)] mt-1">{s.label}</p>
               </div>
             ))}
           </div>
 
           {/* Recent orders from API */}
-          <div className="bg-white border border-gray-100 rounded-sm">
-            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
-              <h3 className="font-semibold text-gray-800 text-sm">Recent Orders</h3>
-              <a href="/admin/orders" className="text-xs text-gold hover:underline">View all</a>
+          <div className="bg-[var(--surface)] border border-[var(--border)] shadow-sm">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-[var(--border)]">
+              <h3 className="font-semibold text-[var(--primary)] text-sm">Recent Orders</h3>
+              <a href="/admin/orders" className="text-xs text-[var(--accent)] hover:underline font-medium">View all</a>
             </div>
             <div className="overflow-x-auto">
               {!data?.recentOrders?.length ? (
-                <div className="text-center py-10 text-gray-400 text-sm">
+                <div className="text-center py-10 text-[var(--text-muted)] text-sm">
                   {error ? 'Could not load orders.' : 'No orders yet.'}
                 </div>
               ) : (
                 <table className="w-full text-sm">
                   <thead>
-                    <tr className="text-xs text-gray-500 font-medium border-b border-gray-50">
+                    <tr className="text-xs text-[var(--text-muted)] font-semibold border-b border-[var(--border)] bg-[var(--bg)]">
                       <th className="text-left px-6 py-3">Order</th>
                       <th className="text-left px-6 py-3">Customer</th>
                       <th className="text-left px-6 py-3 hidden md:table-cell">Amount</th>
@@ -117,20 +118,20 @@ export function AdminDashboard() {
                   </thead>
                   <tbody>
                     {data.recentOrders.map((order) => (
-                      <tr key={order._id} className="border-b border-gray-50 hover:bg-gray-50 transition-colors">
-                        <td className="px-6 py-4 font-mono text-xs text-gray-600">{order.orderId || order._id?.slice(-8)}</td>
-                        <td className="px-6 py-4 font-medium text-gray-800">
+                      <tr key={order._id} className="border-b border-[var(--border)] hover:bg-[var(--bg)] transition-colors">
+                        <td className="px-6 py-4 font-mono text-xs text-[var(--text-muted)]">{order.orderId || order._id?.slice(-8)}</td>
+                        <td className="px-6 py-4 font-medium text-[var(--primary)]">
                           {order.user?.name || order.shippingAddress?.name || 'Guest'}
                         </td>
-                        <td className="px-6 py-4 font-medium text-gray-800 hidden md:table-cell">
+                        <td className="px-6 py-4 font-semibold text-[var(--primary)] hidden md:table-cell">
                           {formatPrice(order.billing?.total || 0)}
                         </td>
                         <td className="px-6 py-4">
-                          <span className={`px-2 py-1 rounded-full text-[10px] font-semibold ${STATUS_COLOR[order.status] || STATUS_COLOR.PENDING}`}>
+                          <span className={`px-2 py-1 text-[10px] font-semibold ${STATUS_COLOR[order.status] || STATUS_COLOR.PENDING}`}>
                             {order.status}
                           </span>
                         </td>
-                        <td className="px-6 py-4 text-gray-400 hidden md:table-cell text-xs">
+                        <td className="px-6 py-4 text-[var(--text-muted)] hidden md:table-cell text-xs">
                           {new Date(order.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' })}
                         </td>
                       </tr>

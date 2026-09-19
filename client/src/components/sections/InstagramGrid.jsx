@@ -1,7 +1,22 @@
 import { motion } from 'framer-motion';
-import { Link2 } from 'lucide-react';
 import { ScrollReveal, AnimatedHeading } from '../ui/ScrollReveal';
 import { instagramPosts } from '../../data';
+
+// Inline SVG — lucide-react dropped the Instagram icon in newer versions
+const SvgInstagram = ({ size = 22, className = '' }) => (
+  <svg
+    width={size} height={size}
+    viewBox="0 0 24 24" fill="none"
+    stroke="currentColor" strokeWidth="1.8"
+    strokeLinecap="round" strokeLinejoin="round"
+    className={className}
+    aria-hidden="true"
+  >
+    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+    <circle cx="12" cy="12" r="4"/>
+    <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+  </svg>
+);
 
 function InstagramPost({ post, className }) {
   return (
@@ -9,29 +24,25 @@ function InstagramPost({ post, className }) {
       href="https://instagram.com"
       target="_blank"
       rel="noopener noreferrer"
-      className={`block relative overflow-hidden rounded-xl group ${className}`}
-      style={{ background: 'var(--surface-alt)' }}
+      className={`block relative overflow-hidden rounded-xl bg-[#FBF8F2] border border-[#E8DFD3] group ${className}`}
       whileHover={{ scale: 1.01 }}
-      transition={{ duration: 0.4 }}
+      transition={{ duration: 0.3 }}
+      aria-label="View GŌKANA moments on Instagram"
     >
       <img
         src={post.image}
-        alt="GŌKANA Instagram post"
+        alt="GŌKANA luxury unboxing moment"
         className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
         loading="lazy"
       />
       {/* Overlay */}
-      <div className="absolute inset-0 flex items-center justify-center transition-colors duration-500" style={{ background: 'rgba(11,31,58,0)' }}
-        onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(11,31,58,0.4)'; }}
-        onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(11,31,58,0)'; }}
-      >
-        <motion.div
-          className="flex flex-col items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-          style={{ color: '#FFFFFF' }}
-        >
-          <Link2 size={24} strokeWidth={1.5} />
-          <span className="font-sans text-xs tracking-[0.15em] uppercase">♥ {post.likes}</span>
-        </motion.div>
+      <div className="absolute inset-0 bg-[#0B1F3A]/0 group-hover:bg-[#0B1F3A]/45 transition-colors duration-400 flex items-center justify-center">
+        <div className="flex flex-col items-center gap-1.5 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <SvgInstagram size={22} className="text-[#D4AF37]" />
+          <span className="font-sans text-xs tracking-wider uppercase font-semibold">
+            ♥ {post.likes}
+          </span>
+        </div>
       </div>
     </motion.a>
   );
@@ -41,53 +52,37 @@ export function InstagramGrid() {
   const [p1, p2, p3, p4, p5, p6] = instagramPosts;
 
   return (
-    <section className="section-py-sm overflow-hidden" style={{ background: 'var(--surface-alt)' }}>
+    <section className="section-py-sm bg-white overflow-hidden" aria-labelledby="instagram-heading">
       <div className="container-gokana">
         {/* Header */}
         <div className="text-center mb-12">
           <ScrollReveal delay={0.1}>
-              <p className="label-text mb-4" style={{ color: 'var(--accent)' }}>✦ @gokana.in</p>
+            <p className="label-text text-[#D4AF37] mb-3">✦ Join Our Community</p>
           </ScrollReveal>
-          <AnimatedHeading className="heading-md" delay={0.15}>
-            Moments from GŌKANA
+          <AnimatedHeading id="instagram-heading" className="heading-md text-[#0B1F3A] mb-2" delay={0.15}>
+            Moments from @gokana.in
           </AnimatedHeading>
+          <p className="font-sans text-xs text-[#6B6B6B]">
+            Tag us to be featured in our gifting chronicles
+          </p>
         </div>
 
-        {/* Asymmetric grid */}
+        {/* Asymmetric Gallery Grid */}
         <ScrollReveal direction="scale" delay={0.2}>
-          <div className="grid grid-cols-3 gap-3 md:gap-4" style={{ height: 'min(70vh, 600px)' }}>
-            {/* Column 1 — tall */}
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4" style={{ height: 'min(65vh, 560px)' }}>
             <div className="flex flex-col gap-3 md:gap-4">
               <InstagramPost post={p1} className="flex-[2] min-h-0" />
               <InstagramPost post={p2} className="flex-1 min-h-0" />
             </div>
-            {/* Column 2 — short top, tall bottom */}
             <div className="flex flex-col gap-3 md:gap-4">
               <InstagramPost post={p3} className="flex-1 min-h-0" />
-              <InstagramPost post={p4} className="flex-[1.5] min-h-0" />
+              <InstagramPost post={p4} className="flex-[2] min-h-0" />
             </div>
-            {/* Column 3 — tall single */}
-            <div className="flex flex-col gap-3 md:gap-4">
+            <div className="hidden md:flex flex-col gap-3 md:gap-4">
               <InstagramPost post={p5} className="flex-[1.5] min-h-0" />
-              <InstagramPost post={p6} className="flex-1 min-h-0" />
+              <InstagramPost post={p6} className="flex-[1.5] min-h-0" />
             </div>
           </div>
-        </ScrollReveal>
-
-        {/* CTA */}
-        <ScrollReveal delay={0.3} className="text-center mt-8">
-          <a
-            href="https://instagram.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 font-sans text-sm transition-colors duration-200 focus-visible:outline-none focus-visible:rounded"
-            style={{ color: 'var(--muted)' }}
-            onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--primary)'; }}
-            onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--muted)'; }}
-          >
-            <Link2 size={16} strokeWidth={1.5} />
-            Follow us on Instagram
-          </a>
         </ScrollReveal>
       </div>
     </section>

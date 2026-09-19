@@ -1,53 +1,76 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, ChevronLeft, RotateCcw } from 'lucide-react';
+import { ArrowRight, ChevronLeft, RotateCcw, Check, Sparkles } from 'lucide-react';
 import { ScrollReveal, AnimatedHeading } from '../ui/ScrollReveal';
-import { formatPrice, Badge } from '../ui';
+import { formatPrice } from '../ui';
 import { products } from '../../data';
+import { useCartStore } from '../../store';
 
-const steps = [
-  {
-    id: 'who',
-    question: 'Who are you gifting?',
-    options: [
-      { label: 'Partner', emoji: '💑', value: 'partner' },
-      { label: 'Friend', emoji: '🤝', value: 'friend' },
-      { label: 'Family', emoji: '👨‍👩‍👧', value: 'family' },
-      { label: 'Colleague', emoji: '💼', value: 'colleague' },
-      { label: 'Parent', emoji: '🌸', value: 'parent' },
-    ],
-  },
+const STEPS = [
   {
     id: 'occasion',
-    question: "What's the occasion?",
+    title: "What's the occasion?",
+    subtitle: 'Every celebration has its own unique sentiment.',
     options: [
       { label: 'Birthday', emoji: '🎂', value: 'birthday' },
       { label: 'Anniversary', emoji: '💍', value: 'anniversary' },
       { label: 'Wedding', emoji: '🌺', value: 'wedding' },
-      { label: 'Festival', emoji: '🪔', value: 'diwali' },
+      { label: 'Festival / Diwali', emoji: '🪔', value: 'diwali' },
       { label: 'Thank You', emoji: '🙏', value: 'thankyou' },
       { label: 'Just Because', emoji: '✨', value: 'justbecause' },
     ],
   },
   {
-    id: 'budget',
-    question: "What's your budget?",
+    id: 'recipient',
+    title: 'Who is this gift for?',
+    subtitle: 'We tailor our curations to their personal aesthetic.',
     options: [
-      { label: 'Under ₹500', emoji: '💫', value: '0-500' },
-      { label: '₹500 – ₹1,000', emoji: '✨', value: '500-1000' },
-      { label: '₹1,000 – ₹2,500', emoji: '⭐', value: '1000-2500' },
-      { label: '₹2,500+', emoji: '💎', value: '2500-999999' },
+      { label: 'For Her', emoji: '🌸', value: 'her' },
+      { label: 'For Him', emoji: '🎩', value: 'him' },
+      { label: 'For a Couple', emoji: '💑', value: 'couple' },
+      { label: 'For Kids / Teens', emoji: '🎈', value: 'kids' },
+      { label: 'For Parents', emoji: '🏡', value: 'parents' },
+      { label: 'Corporate / Client', emoji: '💼', value: 'corporate' },
+    ],
+  },
+  {
+    id: 'budget',
+    title: 'What is your budget?',
+    subtitle: 'Luxury gifting designed thoughtfully across every tier.',
+    options: [
+      { label: 'Under ₹1,000', emoji: '💫', value: '0-1000', min: 0, max: 1000 },
+      { label: '₹1,000 – ₹2,500', emoji: '✨', value: '1000-2500', min: 1000, max: 2500 },
+      { label: '₹2,500 – ₹5,000', emoji: '⭐', value: '2500-5000', min: 2500, max: 5000 },
+      { label: '₹5,000+', emoji: '💎', value: '5000-999999', min: 5000, max: 999999 },
+    ],
+  },
+  {
+    id: 'personalisation',
+    title: 'Would you like to personalise it?',
+    subtitle: 'Add a memorable touch to make it truly unforgettable.',
+    options: [
+      { label: 'Custom Name / Monogram', emoji: '✍️', value: 'name' },
+      { label: 'Handwritten Message Card', emoji: '💌', value: 'message' },
+      { label: 'Cherished Photo Keepsake', emoji: '📷', value: 'photo' },
+      { label: 'Standard Signature Packaging', emoji: '🎁', value: 'none' },
     ],
   },
 ];
 
-const STORAGE_KEY = 'gokana_giftfinder_selections';
+const STORAGE_KEY = 'gokana_giftfinder_v2';
 
 export function GiftFinder() {
   const [currentStep, setCurrentStep] = useState(0);
-  const [selections, setSelections] = useState({ who: null, occasion: null, budget: null });
+  const [selections, setSelections] = useState({
+    occasion: null,
+    recipient: null,
+    budget: null,
+    personalisation: null,
+  });
   const [showResults, setShowResults] = useState(false);
+  const [addedId, setAddedId] = useState(null);
+  const { addItem } = useCartStore();
 
   // Restore from localStorage
   useEffect(() => {
@@ -56,7 +79,6 @@ export function GiftFinder() {
       if (saved) {
         const parsed = JSON.parse(saved);
         if (parsed.selections) setSelections(parsed.selections);
-        if (parsed.currentStep) setCurrentStep(parsed.currentStep);
         if (parsed.showResults) setShowResults(parsed.showResults);
       }
     } catch (_) {}
@@ -64,97 +86,118 @@ export function GiftFinder() {
 
   // Persist to localStorage
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({ selections, currentStep, showResults }));
-  }, [selections, currentStep, showResults]);
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ selections, showResults }));
+    } catch (_) {}
+  }, [selections, showResults]);
 
-  const step = steps[currentStep];
-
-  const handleSelect = (value) => {
-    const key = step.id;
+  const handleSelect = (key, value) => {
     const updated = { ...selections, [key]: value };
     setSelections(updated);
-    if (currentStep < steps.length - 1) {
-      setTimeout(() => setCurrentStep((s) => s + 1), 300);
+    if (currentStep < STEPS.length - 1) {
+      setTimeout(() => setCurrentStep((s) => s + 1), 200);
     } else {
-      setTimeout(() => setShowResults(true), 300);
+      setTimeout(() => setShowResults(true), 250);
+    }
+  };
+
+  const handleSkip = () => {
+    if (currentStep < STEPS.length - 1) {
+      setCurrentStep((s) => s + 1);
+    } else {
+      setShowResults(true);
     }
   };
 
   const handleReset = () => {
     setCurrentStep(0);
-    setSelections({ who: null, occasion: null, budget: null });
+    setSelections({ occasion: null, recipient: null, budget: null, personalisation: null });
     setShowResults(false);
-    localStorage.removeItem(STORAGE_KEY);
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+    } catch (_) {}
   };
 
-  const getResults = () => {
-    let results = [...products];
+  const handleAddToCart = (e, product) => {
+    e.preventDefault();
+    addItem(product, product.variants?.[0] || null);
+    setAddedId(product.id);
+    setTimeout(() => setAddedId(null), 1500);
+  };
+
+  // Compute matched items
+  const results = useMemo(() => {
+    let list = [...products];
+
     if (selections.occasion) {
-      const byOccasion = results.filter((p) => p.categories?.includes(selections.occasion));
-      results = byOccasion.length > 0 ? byOccasion : results;
+      const byOccasion = list.filter((p) => p.categories?.includes(selections.occasion));
+      if (byOccasion.length > 0) list = byOccasion;
     }
+
     if (selections.budget) {
       const [min, max] = selections.budget.split('-').map(Number);
-      const byBudget = results.filter((p) => p.price >= min && p.price <= max);
-      if (byBudget.length > 0) results = byBudget;
+      const byBudget = list.filter((p) => p.price >= min && p.price <= max);
+      if (byBudget.length > 0) list = byBudget;
     }
-    return results.slice(0, 3);
-  };
+
+    if (selections.personalisation && selections.personalisation !== 'none') {
+      const customisable = list.filter((p) => p.personalisable);
+      if (customisable.length > 0) list = customisable;
+    }
+
+    if (list.length < 3) {
+      const remaining = products.filter((p) => !list.some((i) => i.id === p.id));
+      list = [...list, ...remaining.slice(0, 3 - list.length)];
+    }
+
+    return list.slice(0, 3);
+  }, [selections]);
+
+  const currentStepData = STEPS[currentStep];
 
   return (
-    <section id="gift-finder" className="section-py overflow-hidden" style={{ background: 'var(--primary)' }}>
+    <section id="gift-finder" className="section-py overflow-hidden bg-[#0B1F3A] text-white" aria-labelledby="gift-finder-heading">
       <div className="container-gokana">
         <div className="max-w-3xl mx-auto">
           {/* Header */}
-          <div className="text-center mb-14">
+          <div className="text-center mb-12">
             <ScrollReveal delay={0.1}>
-              <p className="label-text mb-5" style={{ color: 'rgba(212,175,55,0.75)' }}>✦ Gift Finder</p>
+              <p className="label-text text-[#D4AF37] mb-3">✦ 5-Step Gifting Assistant</p>
             </ScrollReveal>
-            <AnimatedHeading className="heading-lg mb-5" delay={0.15} style={{ color: '#FFFFFF' }}>
+            <AnimatedHeading id="gift-finder-heading" className="heading-lg text-white mb-4" delay={0.15}>
               Not Sure What to Gift?
             </AnimatedHeading>
-            <ScrollReveal delay={0.3}>
-              <p className="font-sans text-base leading-relaxed max-w-md mx-auto" style={{ color: 'rgba(255,255,255,0.5)' }}>
-                Tell us the moment. We'll help you find the perfect gift.
+            <ScrollReveal delay={0.25}>
+              <p className="font-sans text-base text-[#C9D2DE] max-w-md mx-auto leading-relaxed">
+                Take our 60-second quiz. We will match you with hand-selected gifts guaranteed to be remembered.
               </p>
             </ScrollReveal>
           </div>
 
-          <ScrollReveal delay={0.4}>
-            <div
-              className="p-8 md:p-12 rounded-2xl"
-              style={{
-                background: 'rgba(255,255,255,0.04)',
-                border: '1px solid rgba(255,255,255,0.08)',
-              }}
-            >
-              {/* Progress stepper */}
-              {!showResults && (
-                <div className="flex items-center gap-3 mb-10" aria-label="Step progress">
-                  {steps.map((s, i) => (
-                    <div key={s.id} className="flex items-center gap-3 flex-1">
-                      <div
-                        className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-sans font-medium transition-all duration-400"
-                        style={{
-                          background: i < currentStep ? 'var(--accent)' : i === currentStep ? 'rgba(212,175,55,0.15)' : 'rgba(255,255,255,0.06)',
-                          color: i < currentStep ? '#121212' : i === currentStep ? 'var(--accent)' : 'rgba(255,255,255,0.2)',
-                          border: i === currentStep ? '1px solid rgba(212,175,55,0.5)' : 'none',
-                        }}
-                        aria-current={i === currentStep ? 'step' : undefined}
-                      >
-                        {i < currentStep ? '✓' : i + 1}
-                      </div>
-                      {i < steps.length - 1 && (
-                        <div
-                          className="flex-1 h-px transition-all duration-600"
-                          style={{ background: i < currentStep ? 'var(--accent)' : 'rgba(255,255,255,0.1)' }}
-                          aria-hidden="true"
-                        />
-                      )}
-                    </div>
-                  ))}
+          <ScrollReveal delay={0.3}>
+            <div className="p-6 md:p-10 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
+              {/* Progress Indicator (Step X of 5) */}
+              <div className="flex items-center justify-between gap-4 mb-8 pb-4 border-b border-white/10">
+                <div className="flex items-center gap-2.5">
+                  <span className="w-7 h-7 rounded-full bg-[#D4AF37] text-[#121212] font-sans text-xs font-bold flex items-center justify-center">
+                    {showResults ? '5' : currentStep + 1}
+                  </span>
+                  <span className="font-sans text-xs uppercase tracking-wider text-[#C9D2DE]">
+                    {showResults ? 'Step 5 of 5: Curated Results' : `Step ${currentStep + 1} of 5: ${currentStepData.title}`}
+                  </span>
                 </div>
-              )}
+
+                {(showResults || currentStep > 0) && (
+                  <button
+                    onClick={handleReset}
+                    className="flex items-center gap-1.5 text-xs text-[#C9D2DE] hover:text-[#D4AF37] transition-colors"
+                    aria-label="Restart quiz"
+                  >
+                    <RotateCcw size={13} />
+                    Reset
+                  </button>
+                )}
+              </div>
 
               <AnimatePresence mode="wait">
                 {!showResults ? (
@@ -163,116 +206,135 @@ export function GiftFinder() {
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: -20 }}
-                    transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                    transition={{ duration: 0.3 }}
                   >
-                    <p className="font-serif text-2xl md:text-3xl font-light mb-8" style={{ color: '#FFFFFF' }}>
-                      {step.question}
+                    <h3 className="font-serif text-2xl md:text-3xl font-light text-white mb-2">
+                      {currentStepData.title}
+                    </h3>
+                    <p className="font-sans text-xs text-[#C9D2DE] mb-6">
+                      {currentStepData.subtitle}
                     </p>
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3" role="group" aria-label={step.question}>
-                      {step.options.map((opt) => {
-                        const isSelected = selections[step.id] === opt.value;
+
+                    {/* Step Options Grid */}
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-8">
+                      {currentStepData.options.map((opt) => {
+                        const isSelected = selections[currentStepData.id] === opt.value;
                         return (
                           <button
                             key={opt.value}
-                            onClick={() => handleSelect(opt.value)}
-                            aria-pressed={isSelected}
-                            className="gift-option focus-visible:outline-none focus-visible:ring-2"
-                            style={{
-                              '--tw-ring-color': 'var(--accent)',
-                              borderColor: isSelected ? 'var(--accent)' : 'rgba(255,255,255,0.12)',
-                              background: isSelected ? 'rgba(212,175,55,0.12)' : 'transparent',
-                              color: isSelected ? 'var(--accent)' : 'rgba(255,255,255,0.65)',
-                            }}
+                            onClick={() => handleSelect(currentStepData.id, opt.value)}
+                            className={`p-4 rounded-xl border text-left transition-all duration-200 flex flex-col justify-between min-h-[84px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37] ${
+                              isSelected
+                                ? 'border-[#D4AF37] bg-[#D4AF37]/15 text-[#D4AF37]'
+                                : 'border-white/10 bg-white/5 text-white/80 hover:border-white/30 hover:bg-white/10'
+                            }`}
                           >
-                            <span className="text-2xl" aria-hidden="true">{opt.emoji}</span>
-                            <span className="font-sans text-sm font-medium tracking-wide">{opt.label}</span>
+                            <span className="text-2xl mb-2" aria-hidden="true">{opt.emoji}</span>
+                            <span className="font-sans text-xs font-semibold tracking-wide">
+                              {opt.label}
+                            </span>
                           </button>
                         );
                       })}
                     </div>
 
-                    {currentStep > 0 && (
+                    {/* Navigation Buttons: Back & Skip */}
+                    <div className="flex items-center justify-between pt-4 border-t border-white/10">
+                      {currentStep > 0 ? (
+                        <button
+                          onClick={() => setCurrentStep((s) => s - 1)}
+                          className="flex items-center gap-1.5 text-xs text-[#C9D2DE] hover:text-white transition-colors"
+                        >
+                          <ChevronLeft size={16} />
+                          Back
+                        </button>
+                      ) : <div />}
+
                       <button
-                        onClick={() => setCurrentStep((s) => s - 1)}
-                        className="flex items-center gap-2 mt-7 font-sans text-xs transition-colors duration-200 focus-visible:outline-none focus-visible:rounded"
-                        style={{ color: 'rgba(255,255,255,0.3)' }}
-                        onMouseEnter={(e) => { e.currentTarget.style.color = 'rgba(255,255,255,0.65)'; }}
-                        onMouseLeave={(e) => { e.currentTarget.style.color = 'rgba(255,255,255,0.3)'; }}
-                        aria-label="Go back to previous step"
+                        onClick={handleSkip}
+                        className="text-xs text-[#D4AF37] hover:underline font-semibold"
                       >
-                        <ChevronLeft size={14} />
-                        Back
+                        Skip this step →
                       </button>
-                    )}
+                    </div>
                   </motion.div>
                 ) : (
+                  /* Step 5: Results */
                   <motion.div
                     key="results"
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 15 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                    transition={{ duration: 0.4 }}
                   >
-                    <div className="flex items-center justify-between mb-7">
-                      <p className="font-serif text-2xl font-light" style={{ color: '#FFFFFF' }}>
-                        We think you'll love these ✦
-                      </p>
+                    <div className="flex items-center justify-between mb-6">
+                      <div>
+                        <h3 className="font-serif text-2xl text-white font-light">
+                          We Think You'll Love These ✦
+                        </h3>
+                        <p className="font-sans text-xs text-[#C9D2DE]">
+                          Curated specifically to your celebration preferences
+                        </p>
+                      </div>
                       <button
                         onClick={handleReset}
-                        className="flex items-center gap-1.5 font-sans text-xs transition-colors duration-200 focus-visible:outline-none focus-visible:rounded"
-                        style={{ color: 'rgba(255,255,255,0.35)' }}
-                        onMouseEnter={(e) => { e.currentTarget.style.color = 'rgba(255,255,255,0.7)'; }}
-                        onMouseLeave={(e) => { e.currentTarget.style.color = 'rgba(255,255,255,0.35)'; }}
-                        aria-label="Start the gift finder over"
+                        className="flex items-center gap-1.5 text-xs text-[#D4AF37] hover:underline"
                       >
-                        <RotateCcw size={12} />
-                        Start over
+                        <RotateCcw size={13} />
+                        Retake Quiz
                       </button>
                     </div>
 
+                    {/* Results Product Grid */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-                      {getResults().map((product) => (
-                        <Link
+                      {results.map((product) => (
+                        <div
                           key={product.id}
-                          to={`/products/${product.slug}`}
-                          className="group rounded-xl overflow-hidden transition-all duration-300 focus-visible:outline-none focus-visible:ring-2"
-                          style={{
-                            border: '1px solid rgba(255,255,255,0.1)',
-                            background: 'rgba(255,255,255,0.05)',
-                            '--tw-ring-color': 'var(--accent)',
-                          }}
-                          onMouseEnter={(e) => {
-                            e.currentTarget.style.borderColor = 'rgba(212,175,55,0.35)';
-                            e.currentTarget.style.background = 'rgba(255,255,255,0.08)';
-                          }}
-                          onMouseLeave={(e) => {
-                            e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
-                            e.currentTarget.style.background = 'rgba(255,255,255,0.05)';
-                          }}
+                          className="rounded-xl overflow-hidden bg-white/10 border border-white/15 flex flex-col justify-between"
                         >
-                          <div className="aspect-square overflow-hidden">
-                            <img
-                              src={product.image}
-                              alt={product.name}
-                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                              loading="lazy"
-                            />
+                          <div>
+                            <Link to={`/products/${product.slug}`} className="block aspect-square overflow-hidden">
+                              <img
+                                src={product.image}
+                                alt={product.name}
+                                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                              />
+                            </Link>
+                            <div className="p-4">
+                              <h4 className="font-serif text-base font-light text-white mb-1 line-clamp-1">
+                                {product.name}
+                              </h4>
+                              <p className="font-sans text-sm font-semibold text-[#D4AF37] mb-3">
+                                {formatPrice(product.price)}
+                              </p>
+                            </div>
                           </div>
-                          <div className="p-4">
-                            <p className="font-serif text-base font-light leading-tight mb-1" style={{ color: '#FFFFFF' }}>
-                              {product.name}
-                            </p>
-                            <p className="font-sans text-sm font-semibold" style={{ color: 'var(--accent)' }}>
-                              {formatPrice(product.price)}
-                            </p>
+
+                          <div className="p-4 pt-0">
+                            <button
+                              onClick={(e) => handleAddToCart(e, product)}
+                              className={`w-full py-2 px-3 rounded-lg text-xs font-sans font-semibold uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 min-h-[40px] ${
+                                addedId === product.id
+                                  ? 'bg-[#2E7D32] text-white'
+                                  : 'bg-[#D4AF37] text-[#121212] hover:bg-[#B08D57]'
+                              }`}
+                            >
+                              {addedId === product.id ? (
+                                <>
+                                  <Check size={14} /> Added
+                                </>
+                              ) : (
+                                'Add to Cart'
+                              )}
+                            </button>
                           </div>
-                        </Link>
+                        </div>
                       ))}
                     </div>
 
-                    <div className="text-center">
-                      <Link to="/shop" className="btn-accent">
-                        Explore All Gifts
-                        <ArrowRight size={16} />
+                    <div className="text-center pt-2">
+                      <Link to="/shop" className="btn-accent py-3 px-8 text-xs">
+                        Explore Full Collection
+                        <ArrowRight size={15} />
                       </Link>
                     </div>
                   </motion.div>

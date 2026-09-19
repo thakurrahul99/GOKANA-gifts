@@ -2,8 +2,9 @@ import { useState, useEffect, useRef } from 'react';
 import { Plus, Edit2, Trash2, Search, Loader2, AlertCircle, RefreshCw, X } from 'lucide-react';
 import { useAuthStore } from '../../store';
 import { formatPrice } from '../../components/ui';
+import { API_BASE } from '../../lib/api';
 
-const API = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const API = API_BASE;
 
 const EMPTY_FORM = {
   name: '',
@@ -215,16 +216,16 @@ export function AdminProducts() {
 
       {/* Table */}
       {!loading && !error && (
-        <div className="bg-white border border-gray-100 overflow-x-auto">
+        <div className="bg-[var(--surface)] border border-[var(--border)] overflow-x-auto">
           {filtered.length === 0 ? (
-            <div className="text-center py-16 text-gray-400">
+            <div className="text-center py-16 text-[var(--text-muted)]">
               <p className="text-sm">No products found.</p>
-              <button onClick={openAdd} className="mt-4 text-xs text-gold hover:underline">Add your first product</button>
+              <button onClick={openAdd} className="mt-4 text-xs text-[var(--accent)] hover:underline">Add your first product</button>
             </div>
           ) : (
             <table className="w-full text-sm">
               <thead>
-                <tr className="text-xs text-gray-500 border-b border-gray-100">
+                <tr className="text-xs text-[var(--text-muted)] font-semibold border-b border-[var(--border)] bg-[var(--bg)]">
                   <th className="text-left px-4 py-3">Product</th>
                   <th className="text-left px-4 py-3 hidden md:table-cell">Price</th>
                   <th className="text-left px-4 py-3 hidden md:table-cell">Stock</th>
@@ -233,31 +234,31 @@ export function AdminProducts() {
                   <th className="text-right px-4 py-3">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-50">
+              <tbody className="divide-y divide-[var(--border)]">
                 {filtered.map(product => (
-                  <tr key={product._id} className="hover:bg-gray-50">
+                  <tr key={product._id} className="hover:bg-[var(--bg)] transition-colors">
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-3">
                         {product.thumbnail ? (
-                          <img src={product.thumbnail} alt="" className="w-10 h-10 object-cover rounded-sm" />
+                          <img src={product.thumbnail} alt="" className="w-10 h-10 object-cover" />
                         ) : (
-                          <div className="w-10 h-10 bg-gray-100 rounded-sm flex items-center justify-center text-gray-300 text-xs">IMG</div>
+                          <div className="w-10 h-10 bg-[var(--bg)] border border-[var(--border)] flex items-center justify-center text-[var(--text-muted)] text-xs">IMG</div>
                         )}
                         <div>
-                          <p className="font-medium text-gray-800">{product.name}</p>
-                          <p className="text-xs text-gray-400 hidden md:block font-mono">{product.slug}</p>
+                          <p className="font-semibold text-[var(--primary)]">{product.name}</p>
+                          <p className="text-xs text-[var(--text-muted)] hidden md:block font-mono">{product.slug}</p>
                         </div>
                       </div>
                     </td>
-                    <td className="px-4 py-3 font-medium text-gray-800 hidden md:table-cell">{formatPrice(product.price)}</td>
+                    <td className="px-4 py-3 font-semibold text-[var(--primary)] hidden md:table-cell">{formatPrice(product.price)}</td>
                     <td className="px-4 py-3 hidden md:table-cell">
-                      <span className={`text-[10px] px-2 py-1 rounded-full font-semibold ${product.inStock ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'}`}>
+                      <span className={`text-[10px] px-2 py-1 font-semibold border ${product.inStock ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-red-50 text-red-700 border-red-200'}`}>
                         {product.inStock ? 'In Stock' : 'Out of Stock'}
                       </span>
                     </td>
-                    <td className="px-4 py-3 hidden md:table-cell text-xs text-gray-500">{product.badge || '—'}</td>
+                    <td className="px-4 py-3 hidden md:table-cell text-xs text-[var(--text-muted)]">{product.badge || '—'}</td>
                     <td className="px-4 py-3 hidden md:table-cell">
-                      <span className={`text-[10px] px-2 py-1 rounded-full font-semibold ${product.isFeatured ? 'bg-amber-50 text-amber-700' : 'bg-gray-50 text-gray-400'}`}>
+                      <span className={`text-[10px] px-2 py-1 font-semibold border ${product.isFeatured ? 'bg-amber-50 text-amber-700 border-amber-200' : 'bg-[var(--bg)] text-[var(--text-muted)] border-[var(--border)]'}`}>
                         {product.isFeatured ? 'Yes' : 'No'}
                       </span>
                     </td>
@@ -265,21 +266,22 @@ export function AdminProducts() {
                       <div className="flex items-center justify-end gap-2">
                         <button
                           onClick={() => openEdit(product)}
-                          className="p-1.5 text-gray-400 hover:text-blue-600 transition-colors"
-                          title="Edit"
+                          className="p-2 text-[var(--text-muted)] hover:text-blue-600 transition-colors min-h-[36px] min-w-[36px] flex items-center justify-center"
+                          title="Edit product"
+                          aria-label="Edit product"
                         >
                           <Edit2 size={14} />
                         </button>
                         <button
                           onClick={() => handleDelete(product)}
                           disabled={deletingId === product._id}
-                          className="p-1.5 text-gray-400 hover:text-red-600 transition-colors disabled:opacity-50"
-                          title="Delete"
+                          className="p-2 text-[var(--text-muted)] hover:text-red-600 transition-colors disabled:opacity-50 min-h-[36px] min-w-[36px] flex items-center justify-center"
+                          title="Delete product"
+                          aria-label="Delete product"
                         >
                           {deletingId === product._id
                             ? <Loader2 size={14} className="animate-spin" />
-                            : <Trash2 size={14} />
-                          }
+                            : <Trash2 size={14} />}
                         </button>
                       </div>
                     </td>
@@ -294,13 +296,13 @@ export function AdminProducts() {
       {/* Product Form Modal */}
       {showForm && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-          <div className="bg-white w-full max-w-lg max-h-[90vh] overflow-y-auto">
+          <div className="bg-[var(--surface)] w-full max-w-lg max-h-[90vh] overflow-y-auto border border-[var(--border)] shadow-xl">
             {/* Header */}
-            <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100">
-              <h3 className="text-lg font-semibold text-gray-800">
+            <div className="flex items-center justify-between px-6 py-5 border-b border-[var(--border)]">
+              <h3 className="text-lg font-semibold text-[var(--primary)]">
                 {editProduct ? 'Edit Product' : 'Add New Product'}
               </h3>
-              <button onClick={() => setShowForm(false)} className="text-gray-400 hover:text-gray-700">
+              <button onClick={() => setShowForm(false)} className="text-[var(--text-muted)] hover:text-[var(--primary)] p-2" aria-label="Close modal">
                 <X size={20} />
               </button>
             </div>

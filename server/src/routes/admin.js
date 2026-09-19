@@ -4,6 +4,7 @@ import { Product } from '../models/Product.js';
 import { User } from '../models/User.js';
 import { protect, adminOnly } from '../middleware/auth.js';
 import { AppError } from '../middleware/errorHandler.js';
+import { escapeRegex } from '../utils/escapeRegex.js';
 
 const router = Router();
 
@@ -53,9 +54,10 @@ router.get('/orders', async (req, res, next) => {
     const filter = {};
     if (status) filter.status = status;
     if (search) {
+      const safe = escapeRegex(search);
       filter.$or = [
-        { orderId: new RegExp(search, 'i') },
-        { 'shippingAddress.name': new RegExp(search, 'i') },
+        { orderId: new RegExp(safe, 'i') },
+        { 'shippingAddress.name': new RegExp(safe, 'i') },
       ];
     }
     const skip = (Number(page) - 1) * Number(limit);
@@ -100,10 +102,13 @@ router.get('/customers', async (req, res, next) => {
   try {
     const { search, page = 1, limit = 20 } = req.query;
     const filter = { role: 'customer' };
-    if (search) filter.$or = [
-      { name: new RegExp(search, 'i') },
-      { email: new RegExp(search, 'i') },
-    ];
+    if (search) {
+      const safe = escapeRegex(search);
+      filter.$or = [
+        { name: new RegExp(safe, 'i') },
+        { email: new RegExp(safe, 'i') },
+      ];
+    }
     const skip = (Number(page) - 1) * Number(limit);
     const [customers, total] = await Promise.all([
       User.find(filter).sort('-createdAt').skip(skip).limit(Number(limit)).select('-password'),

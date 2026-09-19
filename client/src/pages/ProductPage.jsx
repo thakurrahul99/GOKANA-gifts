@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Heart, ShoppingBag, MessageCircle, Star, ChevronDown, Plus, Minus, ArrowRight, Check } from 'lucide-react';
+import { Heart, ShoppingBag, MessageCircle, ChevronDown, Plus, Minus, Check, Clock, AlertCircle, Sparkles } from 'lucide-react';
 import clsx from 'clsx';
 import { products } from '../data';
 import { useCartStore, useWishlistStore } from '../store';
-import { Rating, Badge, Divider, formatPrice } from '../components/ui';
+import { Rating, Badge, Divider, formatPrice, getDeliveryDate } from '../components/ui';
 import { ProductCard } from '../components/product/ProductCard';
 import { ScrollReveal } from '../components/ui/ScrollReveal';
 
@@ -14,24 +14,25 @@ const WHATSAPP_NUMBER = '919999999999';
 function buildWhatsAppMsg(product, variant, qty) {
   const url = window.location.href;
   return encodeURIComponent(
-    `Hi GŌKANA! 👋\n\nI'd like to order:\n\n🎁 *${product.name}*\n📦 Variant: ${variant || 'Standard'}\n🔢 Quantity: ${qty}\n💰 Price: ${formatPrice(product.price * qty)}\n\n${url}\n\nPlease help me complete the order. Thank you!`
+    `Hi GŌKANA! 👋\n\nI'd like to order:\n\n🎁 *${product.name}*\n📦 Variant: ${variant || 'Standard'}\n🔢 Quantity: ${qty}\n💰 Price: ${formatPrice(product.price * qty)}\n\n${url}\n\nPlease help me complete this order. Thank you!`
   );
 }
 
-function ImageGallery({ images }) {
+function ImageGallery({ images, productName }) {
   const [active, setActive] = useState(0);
 
   return (
-    <div className="flex gap-4">
+    <div className="flex flex-col-reverse sm:flex-row gap-4">
       {/* Thumbnails */}
-      <div className="flex flex-col gap-3 w-20 flex-shrink-0">
+      <div className="flex sm:flex-col gap-3 overflow-x-auto no-scrollbar sm:w-20 flex-shrink-0">
         {images.map((img, i) => (
           <button
             key={i}
             onClick={() => setActive(i)}
+            aria-label={`View image ${i + 1} of ${productName}`}
             className={clsx(
-              'w-20 h-20 overflow-hidden border-2 transition-all duration-200',
-              active === i ? 'border-gold' : 'border-transparent hover:border-charcoal/20'
+              'w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden border-2 transition-all duration-200 flex-shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37]',
+              active === i ? 'border-[#D4AF37] shadow-xs' : 'border-[#E8DFD3] opacity-75 hover:opacity-100'
             )}
           >
             <img src={img} alt="" className="w-full h-full object-cover" />
@@ -39,18 +40,18 @@ function ImageGallery({ images }) {
         ))}
       </div>
 
-      {/* Main image */}
-      <div className="flex-1 relative overflow-hidden bg-beige aspect-[4/5]">
+      {/* Main Image */}
+      <div className="flex-1 relative overflow-hidden rounded-2xl bg-[#FBF8F2] border border-[#E8DFD3] aspect-[4/5]">
         <AnimatePresence mode="wait">
           <motion.img
             key={active}
             src={images[active]}
-            alt="Product"
+            alt={productName}
             className="w-full h-full object-cover"
             initial={{ opacity: 0, scale: 1.02 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.4 }}
+            transition={{ duration: 0.35 }}
           />
         </AnimatePresence>
       </div>
@@ -58,29 +59,30 @@ function ImageGallery({ images }) {
   );
 }
 
-function AccordionItem({ title, children }) {
-  const [open, setOpen] = useState(false);
+function AccordionItem({ title, children, defaultOpen = false }) {
+  const [open, setOpen] = useState(defaultOpen);
   return (
-    <div className="border-b border-charcoal/10">
+    <div className="border-b border-[#E8DFD3]">
       <button
-        className="w-full flex items-center justify-between py-4 text-left"
+        className="w-full flex items-center justify-between py-4 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37] rounded-sm min-h-[44px]"
         onClick={() => setOpen(!open)}
+        aria-expanded={open}
       >
-        <span className="font-sans text-sm font-medium text-charcoal">{title}</span>
-        <motion.div animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.3 }}>
-          <ChevronDown size={16} strokeWidth={1.5} className="text-charcoal/40" />
+        <span className="font-sans text-sm font-semibold text-[#0B1F3A]">{title}</span>
+        <motion.div animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.25 }}>
+          <ChevronDown size={17} className="text-[#6B6B6B]" />
         </motion.div>
       </button>
-      <AnimatePresence>
+      <AnimatePresence initial={false}>
         {open && (
           <motion.div
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.25 }}
             className="overflow-hidden"
           >
-            <div className="pb-5 font-sans text-sm text-charcoal/60 leading-relaxed">
+            <div className="pb-4 font-sans text-sm text-[#6B6B6B] leading-relaxed">
               {children}
             </div>
           </motion.div>
@@ -104,6 +106,7 @@ export function ProductPage() {
 
   const related = products.filter((p) => p.id !== product?.id).slice(0, 4);
   const images = [product?.image, product?.image2 || product?.image].filter(Boolean);
+  const estimatedDate = getDeliveryDate(3);
 
   const handleAddToCart = () => {
     addItem(product, selectedVariant, qty, personalisation.name ? personalisation : null);
@@ -115,79 +118,106 @@ export function ProductPage() {
     ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
     : null;
 
-  if (!product) return (
-    <div className="pt-40 text-center">
-      <p className="font-serif text-2xl text-charcoal/40">Product not found</p>
-      <Link to="/shop" className="btn-ghost mt-4">Back to Shop</Link>
-    </div>
-  );
+  if (!product) {
+    return (
+      <div className="pt-40 text-center min-h-screen bg-[#F7F3EC]">
+        <h1 className="font-serif text-3xl text-[#0B1F3A]">Product Not Found</h1>
+        <Link to="/shop" className="btn-accent mt-6 inline-block">Return to Shop</Link>
+      </div>
+    );
+  }
 
   return (
-    <main className="pt-24 bg-ivory min-h-screen">
-      <div className="container-gokana py-10">
-        {/* Breadcrumb */}
-        <nav className="flex items-center gap-2 font-sans text-xs text-charcoal/40 mb-8">
-          <Link to="/" className="hover:text-charcoal">Home</Link>
+    <main id="main-content" className="pt-24 md:pt-28 bg-[#F7F3EC] min-h-screen pb-20">
+      <div className="container-gokana py-8">
+        {/* Breadcrumb Navigation */}
+        <nav aria-label="Breadcrumb" className="flex items-center gap-2 font-sans text-xs text-[#6B6B6B] mb-8">
+          <Link to="/" className="hover:text-[#0B1F3A] transition-colors">Home</Link>
           <span>/</span>
-          <Link to="/shop" className="hover:text-charcoal">Shop</Link>
+          <Link to="/shop" className="hover:text-[#0B1F3A] transition-colors">Shop</Link>
           <span>/</span>
-          <span className="text-charcoal">{product.name}</span>
+          <span className="text-[#0B1F3A] font-medium truncate max-w-xs">{product.name}</span>
         </nav>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
-          {/* Left — Gallery */}
-          <ScrollReveal direction="scale">
-            <ImageGallery images={images} />
-          </ScrollReveal>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
+          {/* Left — Image Gallery (7 cols) */}
+          <div className="lg:col-span-7">
+            <ScrollReveal direction="scale">
+              <ImageGallery images={images} productName={product.name} />
+            </ScrollReveal>
+          </div>
 
-          {/* Right — Product info */}
-          <div>
-            {/* Badges */}
-            <div className="flex items-center gap-2 mb-4">
-              {product.badge && <Badge variant="gold">{product.badge}</Badge>}
-              {discount && <Badge variant="sale">−{discount}% off</Badge>}
-              {product.personalisable && <Badge variant="champagne">Personalisable</Badge>}
+          {/* Right — Product Purchasing Details (5 cols) */}
+          <div className="lg:col-span-5 flex flex-col justify-start">
+            {/* Badges & Urgency */}
+            <div className="flex flex-wrap items-center gap-2 mb-3">
+              {product.badge && <Badge variant="bestseller">{product.badge}</Badge>}
+              {discount && <Badge variant="sale">Save {discount}%</Badge>}
+              {product.personalisable && <Badge variant="personalisable">✦ Custom Engravable</Badge>}
             </div>
 
-            <h1 className="font-serif text-3xl md:text-4xl font-light text-charcoal mb-3 leading-tight">
+            {/* Product Title */}
+            <h1 className="font-serif text-3xl sm:text-4xl font-light text-[#0B1F3A] mb-3 leading-tight">
               {product.name}
             </h1>
 
-            <div className="flex items-center gap-3 mb-5">
-              <Rating value={product.rating} count={product.reviews} size="md" />
+            {/* Star Rating */}
+            <div className="flex items-center gap-3 mb-4">
+              <Rating value={product.rating || 5} count={product.reviews || 94} size="md" />
+              <span className="text-xs font-sans text-[#2E7D32] font-semibold bg-[#E7ECF3] px-2 py-0.5 rounded-full">
+                Verified Curation
+              </span>
             </div>
 
-            {/* Price */}
-            <div className="flex items-baseline gap-3 mb-6">
-              <span className="font-serif text-3xl font-light text-charcoal">{formatPrice(product.price)}</span>
+            {/* Price Row */}
+            <div className="flex items-baseline gap-3 mb-4">
+              <span className="font-serif text-3xl font-light text-[#0B1F3A]">
+                {formatPrice(product.price)}
+              </span>
               {product.originalPrice && (
-                <span className="font-sans text-lg text-charcoal/35 line-through">{formatPrice(product.originalPrice)}</span>
+                <span className="font-sans text-base text-[#9A9A9A] line-through">
+                  {formatPrice(product.originalPrice)}
+                </span>
               )}
               {discount && (
-                <span className="font-sans text-sm text-green-700 font-medium">Save {discount}%</span>
+                <span className="font-sans text-xs font-semibold px-2 py-0.5 rounded bg-[#F3D9D4] text-[#0B1F3A]">
+                  Save {formatPrice(product.originalPrice - product.price)}
+                </span>
               )}
             </div>
 
-            <Divider className="mb-6" />
+            {/* Scarcity & Delivery Estimator (CRO Requirement) */}
+            <div className="p-3.5 rounded-xl bg-white border border-[#E8DFD3] space-y-2 mb-6 shadow-xs">
+              <div className="flex items-center gap-2 text-xs font-semibold text-[#B7791F]">
+                <AlertCircle size={15} />
+                <span>Only 4 left in stock — hand-packed in limited batches</span>
+              </div>
+              <div className="flex items-center gap-2 text-xs text-[#0B1F3A] font-medium pt-1 border-t border-[#E8DFD3]/50">
+                <Clock size={15} className="text-[#D4AF37]" />
+                <span>Order today, estimated delivery by <b>{estimatedDate}</b></span>
+              </div>
+            </div>
 
-            <p className="body-text text-charcoal/65 mb-8 max-w-lg">{product.description}</p>
+            <p className="font-sans text-sm text-[#6B6B6B] leading-relaxed mb-6">
+              {product.description}
+            </p>
 
-            {/* Variant selector */}
+            {/* Variant Selector */}
             {product.variants && (
-              <div className="mb-8">
-                <p className="font-sans text-xs font-medium text-charcoal tracking-[0.1em] uppercase mb-3">
-                  Select: <span className="text-gold">{selectedVariant}</span>
-                </p>
+              <div className="mb-6">
+                <label className="form-label mb-2">
+                  Select Size / Variant: <span className="text-[#D4AF37] font-semibold">{selectedVariant}</span>
+                </label>
                 <div className="flex flex-wrap gap-2">
                   {product.variants.map((v) => (
                     <button
                       key={v}
                       onClick={() => setSelectedVariant(v)}
                       className={clsx(
-                        'px-4 py-2 font-sans text-sm border transition-all duration-200',
+                        'px-4 py-2 rounded-lg font-sans text-xs font-semibold uppercase tracking-wider border transition-all min-h-[44px]',
                         selectedVariant === v
-                          ? 'border-gold bg-gold/10 text-charcoal'
-                          : 'border-charcoal/20 text-charcoal/60 hover:border-charcoal'
+                          ? 'border-[#0B1F3A] bg-[#0B1F3A] text-white shadow-xs'
+                          : 'border-[#E8DFD3] bg-white text-[#0B1F3A] hover:border-[#D4AF37]'
                       )}
                     >
                       {v}
@@ -197,129 +227,181 @@ export function ProductPage() {
               </div>
             )}
 
-            {/* Personalization */}
+            {/* Custom Personalization Inputs with Visible Labels (Section 3 & 7) */}
             {product.personalisable && (
-              <div className="mb-8 p-5 bg-champagne/20 border border-champagne/40">
-                <p className="font-sans text-xs font-medium tracking-[0.12em] uppercase text-gold mb-4">✦ Personalise Your Gift</p>
+              <div className="mb-6 p-5 rounded-xl bg-white border border-[#E8DFD3] shadow-xs">
+                <div className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[#D4AF37] mb-3">
+                  <Sparkles size={14} />
+                  <span>Complimentary Personalisation</span>
+                </div>
+
                 <div className="space-y-3">
-                  <input
-                    type="text"
-                    placeholder="Recipient's name (e.g. Priya)"
-                    value={personalisation.name}
-                    onChange={(e) => setPersonalisation((p) => ({ ...p, name: e.target.value }))}
-                    className="input-premium"
-                  />
-                  <textarea
-                    placeholder="Custom message (e.g. Happy Birthday Priya! Wishing you…)"
-                    value={personalisation.message}
-                    onChange={(e) => setPersonalisation((p) => ({ ...p, message: e.target.value }))}
-                    className="input-premium resize-none"
-                    rows={2}
-                  />
-                  <input
-                    type="text"
-                    placeholder="Special note for packaging"
-                    value={personalisation.note}
-                    onChange={(e) => setPersonalisation((p) => ({ ...p, note: e.target.value }))}
-                    className="input-premium"
-                  />
+                  <div>
+                    <label htmlFor="recipient-name" className="form-label">
+                      Recipient's Name (for box & card)
+                    </label>
+                    <input
+                      id="recipient-name"
+                      type="text"
+                      name="recipient-name"
+                      autoComplete="name"
+                      placeholder="e.g. Radhika Sharma"
+                      value={personalisation.name}
+                      onChange={(e) => setPersonalisation((p) => ({ ...p, name: e.target.value }))}
+                      className="input-field"
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="custom-message" className="form-label">
+                      Handwritten Note Message
+                    </label>
+                    <textarea
+                      id="custom-message"
+                      rows={2}
+                      placeholder="Write your heartfelt words here..."
+                      value={personalisation.message}
+                      onChange={(e) => setPersonalisation((p) => ({ ...p, message: e.target.value }))}
+                      className="input-field resize-none"
+                    />
+                  </div>
                 </div>
               </div>
             )}
 
-            {/* Qty */}
-            <div className="flex items-center gap-4 mb-6">
-              <p className="font-sans text-xs font-medium tracking-[0.1em] uppercase text-charcoal">Qty</p>
-              <div className="flex items-center border border-charcoal/20">
-                <button onClick={() => setQty(Math.max(1, qty - 1))} className="px-3 py-2 text-charcoal/60 hover:text-charcoal">
-                  <Minus size={14} />
+            {/* Quantity Selector & Main CTAs */}
+            <div className="space-y-4 mb-8">
+              <div className="flex items-center gap-4">
+                <span className="form-label mb-0">Quantity:</span>
+                <div className="flex items-center border border-[#E8DFD3] rounded-lg bg-white">
+                  <button
+                    onClick={() => setQty(Math.max(1, qty - 1))}
+                    aria-label="Decrease quantity"
+                    className="min-w-[40px] min-h-[40px] flex items-center justify-center text-[#0B1F3A] hover:bg-[#FBF8F2] rounded-l-lg transition-colors"
+                  >
+                    <Minus size={14} />
+                  </button>
+                  <span className="w-10 text-center font-sans text-sm font-semibold text-[#0B1F3A]">
+                    {qty}
+                  </span>
+                  <button
+                    onClick={() => setQty(qty + 1)}
+                    aria-label="Increase quantity"
+                    className="min-w-[40px] min-h-[40px] flex items-center justify-center text-[#0B1F3A] hover:bg-[#FBF8F2] rounded-r-lg transition-colors"
+                  >
+                    <Plus size={14} />
+                  </button>
+                </div>
+                <span className="font-sans text-sm font-semibold text-[#0B1F3A]">
+                  Total: {formatPrice(product.price * qty)}
+                </span>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={handleAddToCart}
+                  className={`btn-primary flex-1 ${addedToCart ? 'bg-[#2E7D32] hover:bg-[#2E7D32]' : ''}`}
+                >
+                  {addedToCart ? (
+                    <>
+                      <Check size={18} />
+                      Added to Cart!
+                    </>
+                  ) : (
+                    <>
+                      <ShoppingBag size={18} />
+                      Add to Cart • {formatPrice(product.price * qty)}
+                    </>
+                  )}
                 </button>
-                <span className="w-10 text-center font-sans text-sm font-medium">{qty}</span>
-                <button onClick={() => setQty(qty + 1)} className="px-3 py-2 text-charcoal/60 hover:text-charcoal">
-                  <Plus size={14} />
+
+                <button
+                  onClick={() => toggle(product)}
+                  aria-label={isWished ? 'Remove from wishlist' : 'Save to wishlist'}
+                  className={clsx(
+                    'min-w-[48px] min-h-[48px] rounded-xl border flex items-center justify-center transition-all',
+                    isWished
+                      ? 'border-[#D4AF37] bg-[#F5E9C8] text-[#D4AF37]'
+                      : 'border-[#E8DFD3] bg-white text-[#0B1F3A] hover:border-[#D4AF37]'
+                  )}
+                >
+                  <Heart size={20} className={isWished ? 'fill-[#D4AF37]' : ''} />
                 </button>
               </div>
-              <p className="font-sans text-sm font-medium text-charcoal">{formatPrice(product.price * qty)}</p>
+
+              {/* WhatsApp Quick Order Link */}
+              <a
+                href={`https://wa.me/${WHATSAPP_NUMBER}?text=${buildWhatsAppMsg(product, selectedVariant, qty)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full py-3 px-4 rounded-xl border border-[#2E7D32]/30 bg-[#2E7D32]/5 hover:bg-[#2E7D32]/10 text-[#2E7D32] font-sans text-xs font-semibold tracking-wider uppercase transition-colors flex items-center justify-center gap-2 min-h-[44px]"
+              >
+                <MessageCircle size={17} />
+                Order via WhatsApp Concierge
+              </a>
             </div>
 
-            {/* CTA buttons */}
-            <div className="flex flex-col sm:flex-row gap-3 mb-4">
-              <button
-                onClick={handleAddToCart}
-                className={clsx(
-                  'btn-primary flex-1 justify-center',
-                  addedToCart && 'bg-green-700'
-                )}
-              >
-                {addedToCart ? (
-                  <><Check size={16} /> Added to Cart</>
-                ) : (
-                  <><ShoppingBag size={16} /> Add to Cart</>
-                )}
-              </button>
-              <button
-                onClick={handleAddToCart}
-                className="btn-secondary flex-1 justify-center"
-              >
-                Buy Now
-              </button>
-              <button
-                onClick={() => toggle(product)}
-                className={clsx(
-                  'w-12 h-12 border flex items-center justify-center transition-all duration-300 flex-shrink-0',
-                  isWished
-                    ? 'border-gold bg-gold/10 text-gold'
-                    : 'border-charcoal/20 text-charcoal/50 hover:border-gold hover:text-gold'
-                )}
-                aria-label="Wishlist"
-              >
-                <Heart size={18} strokeWidth={1.5} fill={isWished ? 'currentColor' : 'none'} />
-              </button>
-            </div>
-
-            {/* WhatsApp CTA */}
-            <a
-              href={`https://wa.me/${WHATSAPP_NUMBER}?text=${buildWhatsAppMsg(product, selectedVariant, qty)}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 w-full py-3 border border-green-700/40 text-green-700 hover:bg-green-50 transition-colors font-sans text-sm font-medium mb-8"
-            >
-              <MessageCircle size={16} />
-              Order via WhatsApp
-            </a>
-
-            {/* Info accordions */}
-            <div>
-              <AccordionItem title="What's Included">
-                <ul className="list-disc list-inside space-y-1">
-                  <li>Premium {product.name}</li>
-                  <li>Handcrafted gift box with tissue paper</li>
-                  <li>Silk ribbon and custom gift tag</li>
-                  {product.personalisable && <li>Personalised message card (if added)</li>}
+            {/* Accordions */}
+            <div className="space-y-1 border-t border-[#E8DFD3] pt-2">
+              <AccordionItem title="What's Inside the Box" defaultOpen={true}>
+                <ul className="list-disc list-inside space-y-1.5 text-xs text-[#6B6B6B]">
+                  <li>Hand-crafted rigid keepsake box with embossed gold seal</li>
+                  <li>Double-faced satin ribbon tying with gift tag</li>
+                  <li>Signature protective botanical tissue wrapping</li>
+                  <li>Complimentary calligraphy note card (if personalized)</li>
                 </ul>
               </AccordionItem>
-              <AccordionItem title="Shipping Information">
-                <p>We ship across India in 2–4 business days. Express delivery available at checkout. Free shipping on orders above ₹999.</p>
+              <AccordionItem title="Shipping & Climate Control">
+                <p className="text-xs text-[#6B6B6B] leading-relaxed">
+                  Shipped in insulated protective packing to ensure pristine condition even in summer months. Free delivery across India for orders over ₹999.
+                </p>
               </AccordionItem>
-              <AccordionItem title="Returns & Exchanges">
-                <p>Personalised items cannot be returned unless defective. Non-personalised items can be returned within 7 days of delivery. Please contact us on WhatsApp or email.</p>
+              <AccordionItem title="7-Day Guarantee & Returns">
+                <p className="text-xs text-[#6B6B6B] leading-relaxed">
+                  Every product is inspected by our quality manager before dispatch. Non-personalized items can be returned within 7 days with zero friction.
+                </p>
               </AccordionItem>
             </div>
           </div>
         </div>
 
-        {/* Related products */}
-        <div className="mt-24">
-          <ScrollReveal>
-            <h2 className="heading-md text-charcoal mb-10">You may also love</h2>
-          </ScrollReveal>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-6">
+        {/* Related Curations */}
+        <div className="mt-20 pt-16 border-t border-[#E8DFD3]">
+          <div className="text-center mb-10">
+            <p className="label-text text-[#D4AF37] mb-2">✦ More to Cherish</p>
+            <h2 className="heading-md text-[#0B1F3A]">You May Also Love</h2>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {related.map((p, i) => (
               <ProductCard key={p.id} product={p} index={i} />
             ))}
           </div>
         </div>
       </div>
+
+      {/* ── Sticky Mobile CTA Bar (Section 4 & 6 CRO Requirement) ── */}
+      <aside
+        className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-[#E8DFD3] p-3 shadow-lg flex items-center justify-between gap-3 md:hidden"
+        aria-label="Quick mobile checkout"
+      >
+        <div className="pl-2">
+          <p className="font-serif text-lg font-semibold text-[#0B1F3A] leading-none">
+            {formatPrice(product.price)}
+          </p>
+          <p className="font-sans text-[11px] text-[#2E7D32] font-medium mt-0.5">
+            ✓ In Stock
+          </p>
+        </div>
+        <button
+          onClick={handleAddToCart}
+          className="btn-accent py-2.5 px-5 text-xs flex items-center gap-1.5"
+          aria-label="Add product to cart"
+        >
+          {addedToCart ? <Check size={16} /> : <ShoppingBag size={16} />}
+          {addedToCart ? 'Added!' : 'Add to Cart'}
+        </button>
+      </aside>
     </main>
   );
 }

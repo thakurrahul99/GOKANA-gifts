@@ -31,3 +31,23 @@ export const adminOnly = (req, res, next) => {
   }
   next();
 };
+
+// Like `protect`, but never blocks the request — just attaches req.user when a
+// valid token is present. Used on routes that serve both guests and logged-in
+// users (e.g. order lookup) where we still need to know *who* is asking.
+export const optionalAuth = async (req, res, next) => {
+  try {
+    const token = req.headers.authorization?.startsWith('Bearer ')
+      ? req.headers.authorization.split(' ')[1]
+      : null;
+
+    if (!token) return next();
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await User.findById(decoded.id).select('-password');
+    if (user && user.isActive) req.user = user;
+  } catch (err) {
+    // Invalid/expired token on an optional route — just proceed as a guest.
+  }
+  next();
+};

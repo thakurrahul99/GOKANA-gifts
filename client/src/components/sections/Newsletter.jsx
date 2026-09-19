@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, CheckCircle } from 'lucide-react';
+import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import { ScrollReveal, AnimatedHeading } from '../ui/ScrollReveal';
 
 export function Newsletter() {
@@ -10,8 +10,8 @@ export function Newsletter() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!email.includes('@') || !email.includes('.')) {
-      setError('Please enter a valid email address.');
+    if (!email || !email.includes('@') || !email.includes('.')) {
+      setError('Please enter a valid email address');
       return;
     }
     setError('');
@@ -19,108 +19,76 @@ export function Newsletter() {
   };
 
   return (
-    <section className="section-py-sm" style={{ background: 'var(--primary)' }}>
+    <section className="section-py-sm bg-[#0B1F3A] text-white" aria-labelledby="newsletter-heading">
       <div className="container-gokana">
         <div className="max-w-2xl mx-auto text-center">
-          {/* Label */}
           <ScrollReveal delay={0.1}>
-            <p className="label-text mb-6" style={{ color: 'rgba(212,175,55,0.75)' }}>✦ Stay Connected</p>
+            <p className="label-text text-[#D4AF37] mb-3">✦ Stay Inspired</p>
           </ScrollReveal>
 
-          <AnimatedHeading className="heading-lg mb-5" delay={0.15} style={{ color: '#FFFFFF' }}>
-            A little inspiration,<br />
-            <span className="italic" style={{ color: 'var(--accent)' }}>delivered.</span>
+          <AnimatedHeading id="newsletter-heading" className="heading-lg text-white mb-4" delay={0.15}>
+            A Little Gifting Inspiration,<br />
+            <span className="italic text-[#F5E9C8]">delivered to your inbox.</span>
           </AnimatedHeading>
 
-          <ScrollReveal delay={0.35}>
-            <p className="font-sans text-base leading-relaxed mb-10 max-w-md mx-auto" style={{ color: 'rgba(255,255,255,0.5)' }}>
-              Discover new collections, gifting ideas and special moments from GŌKANA — straight to your inbox.
+          <ScrollReveal delay={0.25}>
+            <p className="font-sans text-sm md:text-base text-[#C9D2DE] mb-8 max-w-md mx-auto leading-relaxed">
+              Be the first to explore seasonal festive curations, artisan collaborations, and exclusive member privileges.
             </p>
           </ScrollReveal>
 
-          <ScrollReveal delay={0.45}>
+          <ScrollReveal delay={0.35}>
             <AnimatePresence mode="wait">
               {!subscribed ? (
                 <motion.form
                   key="form"
                   onSubmit={handleSubmit}
-                  className="flex flex-col sm:flex-row gap-0 max-w-md mx-auto"
-                  initial={{ opacity: 1 }}
-                  exit={{ opacity: 0, y: -10 }}
                   noValidate
-                  aria-label="Newsletter signup"
+                  className="max-w-md mx-auto"
+                  initial={{ opacity: 1 }}
+                  exit={{ opacity: 0, y: -8 }}
                 >
-                  <div className="flex-1 flex flex-col">
-                    <label htmlFor="newsletter-input" className="sr-only">Email address</label>
+                  <div className="flex flex-col sm:flex-row gap-2">
                     <input
-                      id="newsletter-input"
                       type="email"
                       value={email}
-                      onChange={(e) => { setEmail(e.target.value); setError(''); }}
-                      placeholder="Your email address"
-                      className="flex-1 py-4 px-5 font-sans text-sm focus:outline-none transition-all duration-300"
-                      style={{
-                        background: 'rgba(255,255,255,0.07)',
-                        border: '1px solid rgba(255,255,255,0.12)',
-                        borderRight: 'none',
-                        color: '#FFFFFF',
-                        borderRadius: '10px 0 0 10px',
+                      onChange={(e) => {
+                        setEmail(e.target.value);
+                        if (error) setError('');
                       }}
+                      placeholder="Enter your email address"
+                      className="flex-1 bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-white/40 font-sans text-sm focus:outline-none focus:border-[#D4AF37] transition-colors min-h-[44px]"
+                      aria-label="Email address for newsletter"
                       required
-                      autoComplete="email"
-                      aria-invalid={!!error}
-                      aria-describedby={error ? 'nl-error' : undefined}
-                      onFocus={(e) => { e.target.style.borderColor = 'var(--accent)'; }}
-                      onBlur={(e) => { e.target.style.borderColor = 'rgba(255,255,255,0.12)'; }}
                     />
+                    <button
+                      type="submit"
+                      className="btn-accent py-3 px-6 text-xs flex items-center justify-center gap-2 whitespace-nowrap min-h-[44px]"
+                    >
+                      Join GŌKANA
+                      <ArrowRight size={14} />
+                    </button>
                   </div>
-                  <button
-                    type="submit"
-                    className="px-8 py-4 font-sans text-xs font-semibold tracking-[0.12em] uppercase flex items-center justify-center gap-2 whitespace-nowrap transition-colors duration-200 focus-visible:outline-none"
-                    style={{
-                      background: 'var(--accent)',
-                      color: '#121212',
-                      borderRadius: '0 10px 10px 0',
-                    }}
-                    onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--accent-dark)'; }}
-                    onMouseLeave={(e) => { e.currentTarget.style.background = 'var(--accent)'; }}
-                  >
-                    Join GŌKANA
-                    <ArrowRight size={14} />
-                  </button>
+                  {error && (
+                    <p className="text-xs text-[#F3D9D4] font-medium mt-2 text-left sm:text-center" role="alert">
+                      {error}
+                    </p>
+                  )}
                 </motion.form>
               ) : (
                 <motion.div
                   key="success"
-                  initial={{ opacity: 0, y: 20, scale: 0.95 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                  className="py-6 flex flex-col items-center gap-3"
-                  role="status"
-                  aria-live="polite"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="inline-flex items-center gap-2 px-6 py-4 rounded-xl bg-white/10 border border-[#D4AF37]/40 text-[#D4AF37]"
                 >
-                  <CheckCircle size={32} style={{ color: 'var(--accent)' }} />
-                  <p className="font-serif text-2xl font-light" style={{ color: '#FFFFFF' }}>
-                    Welcome to GŌKANA. ✦
-                  </p>
-                  <p className="font-sans text-sm" style={{ color: 'rgba(255,255,255,0.5)' }}>
-                    Thank you for subscribing. Expect beautiful things.
-                  </p>
+                  <CheckCircle2 size={18} />
+                  <span className="font-serif text-lg italic text-white">
+                    Welcome to GŌKANA. Expect something beautiful soon.
+                  </span>
                 </motion.div>
               )}
             </AnimatePresence>
-
-            {error && (
-              <p id="nl-error" className="font-sans text-xs mt-2" style={{ color: '#FCA5A5' }} role="alert">
-                {error}
-              </p>
-            )}
-
-            {!subscribed && (
-              <p className="font-sans text-xs mt-4" style={{ color: 'rgba(255,255,255,0.2)' }}>
-                No spam. Unsubscribe anytime. Privacy guaranteed.
-              </p>
-            )}
           </ScrollReveal>
         </div>
       </div>

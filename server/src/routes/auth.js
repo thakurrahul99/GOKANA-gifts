@@ -1,16 +1,27 @@
 import { Router } from 'express';
 import jwt from 'jsonwebtoken';
+import rateLimit from 'express-rate-limit';
 import { User } from '../models/User.js';
 import { protect } from '../middleware/auth.js';
 import { AppError } from '../middleware/errorHandler.js';
 
 const router = Router();
 
+// Login/register get brute-forced far more than the rest of the API, so
+// they need a tighter limit than the global one in index.js.
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 min
+  limit: 10,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { success: false, message: 'Too many attempts — please try again later.' },
+});
+
 const signToken = (id) =>
   jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES_IN || '30d' });
 
 // POST /api/auth/register
-router.post('/register', async (req, res, next) => {
+router.post('/register', authLimiter, async (req, res, next) => {
   try {
     const { name, email, phone, password } = req.body;
     if (!name || !email || !password) throw new AppError('Name, email and password required');
@@ -28,7 +39,7 @@ router.post('/register', async (req, res, next) => {
 });
 
 // POST /api/auth/login
-router.post('/login', async (req, res, next) => {
+router.post('/login', authLimiter, async (req, res, next) => {
   try {
     const { email, password } = req.body;
     if (!email || !password) throw new AppError('Email and password required');

@@ -1,106 +1,79 @@
 import { motion } from 'framer-motion';
-import { Sparkles, PackageCheck, Clock, Leaf, RefreshCw, Award } from 'lucide-react';
+import { Sparkles, PackageCheck, Truck, HeartHandshake } from 'lucide-react';
 import { ScrollReveal, StaggerReveal, staggerItem, AnimatedHeading } from '../ui/ScrollReveal';
 
-const reasons = [
+const pillars = [
   {
     icon: Sparkles,
-    title: 'Curated with Care',
-    desc: 'Every product is handpicked by our gifting experts — quality over quantity, always.',
+    title: 'Personalisation',
+    subtitle: 'Every Gift is One-of-a-Kind',
+    desc: 'Custom monograms, engraved wooden keepsakes, and handwritten calligraphy cards on 300 GSM cotton paper.',
   },
   {
     icon: PackageCheck,
-    title: 'Beautifully Packaged',
-    desc: 'Premium gift boxes, satin ribbons, and branded tissue — ready to gift the moment it arrives.',
+    title: 'Premium Packaging',
+    subtitle: 'The Art of the Unboxing',
+    desc: 'Textured rigid boxes, embossed gold foil accents, and double-faced satin ribbons that create immediate anticipation.',
   },
   {
-    icon: Clock,
-    title: 'Express Delivery',
-    desc: 'Need it urgently? We offer same-day and next-day delivery across major cities in India.',
+    icon: Truck,
+    title: 'Fast & Secure Delivery',
+    subtitle: 'Guaranteed On-Time Across India',
+    desc: 'Climate-controlled courier partners and real-time tracking ensure delicate chocolates and candles arrive pristine.',
   },
   {
-    icon: Leaf,
-    title: 'Eco-Conscious',
-    desc: 'Sustainable packaging, responsibly sourced products, and plastic-free shipping.',
-  },
-  {
-    icon: RefreshCw,
-    title: 'Hassle-Free Returns',
-    desc: 'Not quite right? Easy 7-day returns with no questions asked — your satisfaction guaranteed.',
-  },
-  {
-    icon: Award,
-    title: 'Premium Quality',
-    desc: 'We partner only with artisans and brands who share our obsession with craft and quality.',
+    icon: HeartHandshake,
+    title: 'Handcrafted Curation',
+    subtitle: 'Artisanal Small-Batch Excellence',
+    desc: 'Partnered with indigenous master artisans and luxury chocolatiers who put unmatched passion into every single piece.',
   },
 ];
 
 export function WhyGokana() {
   return (
-    <section className="section-py" style={{ background: 'var(--surface)' }}>
+    <section className="section-py bg-[#FBF8F2]" aria-labelledby="why-gokana-heading">
       <div className="container-gokana">
-        {/* Header */}
-        <div className="max-w-xl mb-16">
+        {/* Section Header */}
+        <div className="text-center max-w-2xl mx-auto mb-14">
           <ScrollReveal delay={0.1}>
-            <p className="label-text mb-5" style={{ color: 'var(--accent)' }}>✦ Why GŌKANA</p>
+            <p className="label-text text-[#D4AF37] mb-3">✦ The GŌKANA Distinction</p>
           </ScrollReveal>
-          <AnimatedHeading className="heading-lg mb-5" delay={0.15}>
-            Gifting, elevated.
+          <AnimatedHeading id="why-gokana-heading" className="heading-lg text-[#0B1F3A] mb-4" delay={0.15}>
+            Why Choose GŌKANA
           </AnimatedHeading>
-          <ScrollReveal delay={0.35}>
-            <p className="font-sans text-base leading-relaxed" style={{ color: 'var(--muted)' }}>
-              We believe the best gifts deserve more than just beautiful wrapping. Here's what makes GŌKANA different.
+          <ScrollReveal delay={0.25}>
+            <p className="font-sans text-base text-[#6B6B6B] leading-relaxed">
+              We obsess over every detail so that when your gift is opened, it creates a genuine moment of reverence, delight, and connection.
             </p>
           </ScrollReveal>
         </div>
 
-        {/* Reasons grid */}
+        {/* 4 Pillars Grid (CRO Requirement) */}
         <StaggerReveal
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
-          stagger={0.07}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+          stagger={0.08}
           delay={0.2}
         >
-          {reasons.map(({ icon: Icon, title, desc }) => (
+          {pillars.map(({ icon: Icon, title, subtitle, desc }) => (
             <motion.div
               key={title}
               variants={staggerItem}
-              className="group flex flex-col gap-4 p-7 rounded-2xl transition-all duration-300 cursor-default"
-              style={{
-                border: '1px solid var(--border)',
-                background: 'var(--surface)',
-              }}
-              whileHover={{
-                boxShadow: '0 8px 24px rgba(11,31,58,0.06)',
-                y: -2,
-              }}
+              className="card-premium flex flex-col justify-between"
             >
-              {/* Icon */}
-              <div
-                className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 transition-colors duration-300"
-                style={{ background: 'var(--primary-soft)' }}
-              >
-                <Icon
-                  size={22}
-                  strokeWidth={1.5}
-                  style={{ color: 'var(--primary)' }}
-                />
-              </div>
-
-              {/* Text */}
               <div>
-                <h3 className="font-serif text-xl font-light mb-2" style={{ color: 'var(--text-strong)' }}>
+                <div className="w-14 h-14 rounded-2xl bg-[#E7ECF3] flex items-center justify-center text-[#0B1F3A] mb-6 group-hover:bg-[#F5E9C8] transition-colors">
+                  <Icon size={26} strokeWidth={1.8} className="text-[#0B1F3A]" />
+                </div>
+                <h3 className="font-serif text-2xl font-light text-[#0B1F3A] mb-1">
                   {title}
                 </h3>
-                <p className="font-sans text-sm leading-relaxed" style={{ color: 'var(--muted)' }}>
+                <p className="font-sans text-xs font-semibold uppercase tracking-wider text-[#D4AF37] mb-3">
+                  {subtitle}
+                </p>
+                <p className="font-sans text-sm text-[#6B6B6B] leading-relaxed">
                   {desc}
                 </p>
               </div>
-
-              {/* Gold accent line on hover */}
-              <div
-                className="h-0.5 w-0 group-hover:w-8 transition-all duration-400 rounded-full"
-                style={{ background: 'var(--accent)' }}
-              />
             </motion.div>
           ))}
         </StaggerReveal>

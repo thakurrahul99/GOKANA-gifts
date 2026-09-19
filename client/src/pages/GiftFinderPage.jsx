@@ -8,83 +8,84 @@ import {
   ArrowRight, 
   CheckCircle2, 
   MessageCircle, 
-  Gift, 
-  Heart, 
+  ShoppingBag,
+  Check,
   SlidersHorizontal,
   PackageCheck,
-  ShieldCheck,
+  Heart,
   Truck
 } from 'lucide-react';
 import { ProductCard } from '../components/product/ProductCard';
 import { ScrollReveal, AnimatedHeading } from '../components/ui/ScrollReveal';
 import { products, occasions } from '../data';
 import { formatPrice } from '../components/ui';
+import { useCartStore } from '../store';
 
 const STEPS = [
   {
-    id: 'recipient',
-    title: 'Who are you gifting for?',
-    subtitle: 'Select your recipient so we can curate matching aesthetics and styles.',
-    options: [
-      { id: 'partner', label: 'Partner / Spouse', emoji: '💑', desc: 'Romantic & intimate keepsakes' },
-      { id: 'friend', label: 'Close Friend', emoji: '🤝', desc: 'Joyful, thoughtful & fun treats' },
-      { id: 'parents', label: 'Parents / In-Laws', emoji: '🌸', desc: 'Traditional, respectful & comforting' },
-      { id: 'colleague', label: 'Colleague / Client', emoji: '💼', desc: 'Refined, elegant & professional' },
-      { id: 'family', label: 'Family & Siblings', emoji: '👨‍👩‍👧', desc: 'Celebratory & heartwarming' },
-      { id: 'self', label: 'Myself (Self-Care)', emoji: '✨', desc: 'Indulgent, relaxing & rejuvenating' },
-    ],
-  },
-  {
     id: 'occasion',
-    title: "What's the special occasion?",
-    subtitle: 'Every occasion carries its own sentiment and tradition.',
+    title: "Step 1: What's the special occasion?",
+    subtitle: 'Every celebration has its own unique sentiment and tradition.',
     options: [
       { id: 'birthday', label: 'Birthday', emoji: '🎂', desc: 'Celebrate their special milestone' },
       { id: 'anniversary', label: 'Anniversary', emoji: '💍', desc: 'Timeless symbols of love' },
-      { id: 'wedding', label: 'Wedding / Festive', emoji: '🌺', desc: 'Grand wishes & celebrations' },
+      { id: 'wedding', label: 'Wedding / Festive', emoji: '🌺', desc: 'Grand wishes & blessings' },
       { id: 'diwali', label: 'Festive & Diwali', emoji: '🪔', desc: 'Radiance, sweets & prosperity' },
       { id: 'thankyou', label: 'Gratitude & Thanks', emoji: '🙏', desc: 'A heartfelt token of appreciation' },
       { id: 'justbecause', label: 'Just Because', emoji: '💫', desc: 'A pleasant surprise without reason' },
     ],
   },
   {
-    id: 'budget',
-    title: 'What is your preferred budget?',
-    subtitle: 'We offer thoughtfully packed luxury at every price point.',
+    id: 'recipient',
+    title: 'Step 2: Who are you gifting for?',
+    subtitle: 'We tailor aesthetics and selections to their unique vibe.',
     options: [
-      { id: 'under-1000', label: 'Under ₹1,000', emoji: '✨', min: 0, max: 1000, desc: 'Charming essentials & petite delights' },
-      { id: '1000-2000', label: '₹1,000 – ₹2,000', emoji: '⭐', min: 1000, max: 2000, desc: 'Our most popular handcrafted boxes' },
-      { id: '2000-3500', label: '₹2,000 – ₹3,500', emoji: '👑', min: 2000, max: 3500, desc: 'Grand multi-item luxury hampers' },
-      { id: 'above-3500', label: '₹3,500 and above', emoji: '💎', min: 3500, max: 999999, desc: 'Bespoke, heirloom-grade curations' },
+      { id: 'her', label: 'For Her', emoji: '🌸', desc: 'Elegant botanicals, scents & luxury' },
+      { id: 'him', label: 'For Him', emoji: '🎩', desc: 'Sophisticated gourmet, leather & woods' },
+      { id: 'couple', label: 'For a Couple', emoji: '💑', desc: 'Romantic and shared memories' },
+      { id: 'kids', label: 'For Kids & Teens', emoji: '🎈', desc: 'Playful confections and treats' },
+      { id: 'parents', label: 'For Parents', emoji: '🏡', desc: 'Comforting, traditional & warm' },
+      { id: 'corporate', label: 'Corporate / Client', emoji: '💼', desc: 'Refined, prestigious & executive' },
     ],
   },
   {
-    id: 'vibe',
-    title: 'What vibe fits them best?',
-    subtitle: 'Fine-tune recommendations to match their personal aesthetic.',
+    id: 'budget',
+    title: 'Step 3: What is your preferred budget?',
+    subtitle: 'Handcrafted luxury designed thoughtfully across every tier.',
     options: [
-      { id: 'all', label: 'Everything / Surprise Me', emoji: '🌟', desc: 'Show the most celebrated items' },
-      { id: 'gourmet', label: 'Gourmet & Chocolates', emoji: '🍫', desc: 'Artisan flavours, berries & confections' },
-      { id: 'aroma', label: 'Aromatherapy & Candles', emoji: '🕯️', desc: 'Hand-poured soy wax & calming scents' },
-      { id: 'selfcare', label: 'Luxury Self-Care', emoji: '🌿', desc: 'Soothing body treats & rituals' },
+      { id: 'under-1000', label: 'Under ₹1,000', emoji: '💫', min: 0, max: 1000, desc: 'Petite delights & curated essentials' },
+      { id: '1000-2500', label: '₹1,000 – ₹2,500', emoji: '✨', min: 1000, max: 2500, desc: 'Our most popular artisan gift boxes' },
+      { id: '2500-5000', label: '₹2,500 – ₹5,000', emoji: '⭐', min: 2500, max: 5000, desc: 'Grand multi-item luxury hampers' },
+      { id: 'above-5000', label: '₹5,000 and above', emoji: '💎', min: 5000, max: 999999, desc: 'Bespoke heirloom-grade curations' },
+    ],
+  },
+  {
+    id: 'personalisation',
+    title: 'Step 4: Would you like personalization?',
+    subtitle: 'Add a handwritten touch to transform your gift into a keepsake.',
+    options: [
+      { id: 'name', label: 'Name / Monogram', emoji: '✍️', desc: 'Laser engraved on keepsake box' },
+      { id: 'message', label: 'Calligraphy Card', emoji: '💌', desc: 'Complimentary handwritten letter' },
+      { id: 'photo', label: 'Photo Keepsake', emoji: '📷', desc: 'Include a printed memory photograph' },
+      { id: 'none', label: 'Standard Luxury Packaging', emoji: '🎁', desc: 'Signature rigid box with satin ribbon' },
     ],
   },
 ];
 
-const STORAGE_KEY = 'gokana_giftfinder_full_selections';
+const STORAGE_KEY = 'gokana_giftfinder_v2_full';
 
 export function GiftFinderPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [currentStep, setCurrentStep] = useState(0);
   const [selections, setSelections] = useState({
-    recipient: searchParams.get('recipient') || null,
     occasion: searchParams.get('occasion') || null,
+    recipient: searchParams.get('recipient') || null,
     budget: searchParams.get('budget') || null,
-    vibe: searchParams.get('vibe') || 'all',
+    personalisation: searchParams.get('personalisation') || null,
   });
   const [showResults, setShowResults] = useState(false);
 
-  // Restore saved selections if any
+  // Restore saved state
   useEffect(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
@@ -98,194 +99,117 @@ export function GiftFinderPage() {
     } catch (_) {}
   }, [searchParams]);
 
-  // Sync with searchParams if provided
-  useEffect(() => {
-    const occParam = searchParams.get('occasion');
-    if (occParam) {
-      setSelections((prev) => ({ ...prev, occasion: occParam }));
-    }
-  }, [searchParams]);
-
   // Persist state
   useEffect(() => {
     try {
-      localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify({ selections, currentStep, showResults })
-      );
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ selections, showResults }));
     } catch (_) {}
-  }, [selections, currentStep, showResults]);
+  }, [selections, showResults]);
 
-  const handleSelectOption = (key, value) => {
-    const nextSelections = { ...selections, [key]: value };
-    setSelections(nextSelections);
-
+  const handleSelect = (key, value) => {
+    const updated = { ...selections, [key]: value };
+    setSelections(updated);
     if (currentStep < STEPS.length - 1) {
-      setTimeout(() => setCurrentStep((prev) => prev + 1), 220);
+      setTimeout(() => setCurrentStep((s) => s + 1), 200);
     } else {
       setTimeout(() => {
         setShowResults(true);
-        window.scrollTo({ top: 380, behavior: 'smooth' });
+        window.scrollTo({ top: 400, behavior: 'smooth' });
       }, 250);
     }
   };
 
+  const handleSkip = () => {
+    if (currentStep < STEPS.length - 1) {
+      setCurrentStep((s) => s + 1);
+    } else {
+      setShowResults(true);
+    }
+  };
+
   const handleReset = () => {
-    setSelections({
-      recipient: null,
-      occasion: null,
-      budget: null,
-      vibe: 'all',
-    });
     setCurrentStep(0);
+    setSelections({ occasion: null, recipient: null, budget: null, personalisation: null });
     setShowResults(false);
     try {
       localStorage.removeItem(STORAGE_KEY);
     } catch (_) {}
   };
 
-  // Compute matched products
+  // Compute matched items
   const matchedProducts = useMemo(() => {
     let list = [...products];
 
-    // Filter by occasion
     if (selections.occasion) {
-      const byOccasion = list.filter(
-        (p) => p.categories && p.categories.includes(selections.occasion)
-      );
-      if (byOccasion.length > 0) {
-        list = byOccasion;
-      }
+      const byOccasion = list.filter((p) => p.categories?.includes(selections.occasion));
+      if (byOccasion.length > 0) list = byOccasion;
     }
 
-    // Filter by budget
     if (selections.budget) {
       const budgetObj = STEPS[2].options.find((b) => b.id === selections.budget);
       if (budgetObj) {
-        const byBudget = list.filter(
-          (p) => p.price >= budgetObj.min && p.price <= budgetObj.max
-        );
-        if (byBudget.length > 0) {
-          list = byBudget;
-        }
+        const byBudget = list.filter((p) => p.price >= budgetObj.min && p.price <= budgetObj.max);
+        if (byBudget.length > 0) list = byBudget;
       }
     }
 
-    // Filter by vibe / category keywords
-    if (selections.vibe && selections.vibe !== 'all') {
-      const vibeMap = {
-        gourmet: ['chocolate', 'gourmet', 'sweet', 'chocolates'],
-        aroma: ['candle', 'candles', 'scent', 'serenity'],
-        selfcare: ['skincare', 'bath', 'care', 'pamper'],
-      };
-      const keywords = vibeMap[selections.vibe] || [];
-      const byVibe = list.filter((p) =>
-        keywords.some(
-          (k) =>
-            p.slug.includes(k) ||
-            p.name.toLowerCase().includes(k) ||
-            (p.categories && p.categories.includes(k))
-        )
-      );
-      if (byVibe.length > 0) {
-        list = byVibe;
-      }
+    if (selections.personalisation && selections.personalisation !== 'none') {
+      const customisable = list.filter((p) => p.personalisable);
+      if (customisable.length > 0) list = customisable;
     }
 
-    // Always ensure at least 3-4 top products if criteria were too narrow
     if (list.length < 3) {
-      const remaining = products.filter((p) => !list.some((item) => item.id === p.id));
+      const remaining = products.filter((p) => !list.some((i) => i.id === p.id));
       list = [...list, ...remaining.slice(0, 4 - list.length)];
     }
 
     return list;
   }, [selections]);
 
-  const activeStepData = STEPS[currentStep];
+  const currentStepData = STEPS[currentStep];
 
   return (
-    <main className="min-h-screen pt-24 md:pt-28" style={{ background: 'var(--bg)' }}>
-      {/* ── Page Header / Hero ── */}
-      <section className="relative py-16 md:py-24 overflow-hidden" style={{ background: 'var(--primary)' }}>
-        {/* Subtle decorative glow */}
-        <div 
-          className="absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[700px] rounded-full opacity-15 pointer-events-none blur-3xl"
-          style={{ background: 'radial-gradient(circle, var(--accent) 0%, transparent 70%)' }}
-          aria-hidden="true"
-        />
-
-        <div className="container-gokana relative z-10 text-center">
-          {/* Breadcrumbs */}
-          <nav aria-label="Breadcrumb" className="flex items-center justify-center gap-2 mb-6 font-sans text-xs tracking-wider uppercase text-white/50">
+    <main id="main-content" className="min-h-screen pt-24 md:pt-28 bg-[#F7F3EC]">
+      {/* ── Page Hero ── */}
+      <section className="relative py-16 md:py-20 bg-[#0B1F3A] text-white overflow-hidden">
+        <div className="container-gokana text-center relative z-10">
+          <nav aria-label="Breadcrumb" className="flex items-center justify-center gap-2 mb-5 font-sans text-xs tracking-wider uppercase text-white/50">
             <Link to="/" className="hover:text-white transition-colors">Home</Link>
             <span>/</span>
-            <span style={{ color: 'var(--accent)' }}>Gift Finder</span>
+            <span className="text-[#D4AF37]">Gift Finder</span>
           </nav>
 
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <span 
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full font-sans text-xs font-semibold tracking-widest uppercase mb-4"
-              style={{
-                background: 'rgba(212,175,55,0.15)',
-                color: 'var(--accent)',
-                border: '1px solid rgba(212,175,55,0.3)',
-              }}
-            >
-              <Sparkles size={13} />
-              GŌKANA Concierge & Gift Finder
-            </span>
-          </motion.div>
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full font-sans text-xs font-semibold tracking-widest uppercase mb-4 bg-white/10 text-[#D4AF37] border border-[#D4AF37]/30">
+            <Sparkles size={13} />
+            Step-by-Step Curation Engine
+          </span>
 
-          <motion.h1
-            className="heading-xl text-white mb-5 max-w-2xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1 }}
-          >
-            Find the Perfect Gift in Moments
-          </motion.h1>
+          <h1 className="heading-xl text-white mb-4 max-w-2xl mx-auto">
+            Find the Perfect Gift
+          </h1>
 
-          <motion.p
-            className="font-sans text-base md:text-lg text-white/70 max-w-xl mx-auto leading-relaxed"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-          >
-            Answer a few quick questions. Our bespoke gifting assistant will curate
-            meaningful, hand-packed gifts guaranteed to spark genuine delight.
-          </motion.p>
+          <p className="font-sans text-base text-[#C9D2DE] max-w-xl mx-auto leading-relaxed">
+            Answer 4 quick questions. Our bespoke concierge algorithm will match you with hand-crafted, beautifully packaged gifts tailored to your recipient.
+          </p>
         </div>
       </section>
 
-      {/* ── Wizard / Stepper Section ── */}
-      <section className="section-py relative">
+      {/* ── Stepper Quiz Section ── */}
+      <section className="section-py">
         <div className="container-gokana max-w-4xl mx-auto">
-          <div
-            className="p-6 md:p-12 rounded-2xl shadow-xl transition-all"
-            style={{
-              background: 'var(--surface)',
-              border: '1px solid var(--border)',
-            }}
-          >
-            {/* Step Progress Header */}
-            <div className="flex items-center justify-between gap-4 mb-8 pb-6 border-b border-border/50">
+          <div className="p-6 md:p-12 rounded-2xl bg-white border border-[#E8DFD3] shadow-lg">
+            {/* Header / Progress bar */}
+            <div className="flex items-center justify-between gap-4 mb-8 pb-6 border-b border-[#E8DFD3]">
               <div className="flex items-center gap-3">
-                <span 
-                  className="w-8 h-8 rounded-full flex items-center justify-center font-sans text-sm font-semibold"
-                  style={{ background: 'var(--accent-soft)', color: 'var(--primary)' }}
-                >
-                  {showResults ? '✓' : currentStep + 1}
+                <span className="w-8 h-8 rounded-full flex items-center justify-center font-sans text-sm font-bold bg-[#F5E9C8] text-[#0B1F3A]">
+                  {showResults ? '5' : currentStep + 1}
                 </span>
                 <div>
-                  <p className="font-sans text-xs uppercase tracking-wider text-muted font-medium">
-                    {showResults ? 'Completed' : `Step ${currentStep + 1} of ${STEPS.length}`}
+                  <p className="font-sans text-xs uppercase tracking-wider text-[#6B6B6B]">
+                    {showResults ? 'Completed • Step 5 of 5' : `Step ${currentStep + 1} of 5`}
                   </p>
-                  <p className="font-sans text-sm font-semibold text-primary">
-                    {showResults ? 'Your Curated Selection' : activeStepData.title}
+                  <p className="font-sans text-sm font-semibold text-[#0B1F3A]">
+                    {showResults ? 'Your Curated Selection' : currentStepData.title.split(': ')[1]}
                   </p>
                 </div>
               </div>
@@ -293,38 +217,29 @@ export function GiftFinderPage() {
               {(showResults || currentStep > 0) && (
                 <button
                   onClick={handleReset}
-                  className="flex items-center gap-2 font-sans text-xs font-medium text-muted hover:text-primary transition-colors px-3 py-1.5 rounded-lg border border-border hover:bg-surface-alt"
+                  className="flex items-center gap-2 font-sans text-xs font-medium text-[#6B6B6B] hover:text-[#0B1F3A] px-3 py-1.5 rounded-lg border border-[#E8DFD3] hover:bg-[#FBF8F2] transition-colors"
                 >
                   <RotateCcw size={13} />
-                  Reset & Start Over
+                  Reset Quiz
                 </button>
               )}
             </div>
 
-            {/* Stepper Dots */}
+            {/* Step Indicators */}
             <div className="flex items-center gap-2 mb-8">
-              {STEPS.map((s, idx) => (
-                <button
-                  key={s.id}
-                  onClick={() => {
-                    if (idx <= currentStep || showResults) {
-                      setCurrentStep(idx);
-                      setShowResults(false);
-                    }
-                  }}
-                  disabled={idx > currentStep && !showResults}
-                  className="flex-1 h-2 rounded-full transition-all duration-300 relative overflow-hidden"
+              {[1, 2, 3, 4, 5].map((s, idx) => (
+                <div
+                  key={s}
+                  className="flex-1 h-2 rounded-full transition-all duration-300"
                   style={{
-                    background:
+                    backgroundColor:
                       idx < currentStep || showResults
-                        ? 'var(--accent)'
+                        ? '#D4AF37'
                         : idx === currentStep
-                        ? 'var(--primary)'
-                        : 'var(--border)',
-                    cursor: idx <= currentStep || showResults ? 'pointer' : 'default',
+                        ? '#0B1F3A'
+                        : '#E8DFD3',
                   }}
-                  title={`Jump to: ${s.title}`}
-                  aria-label={`Step ${idx + 1}: ${s.title}`}
+                  title={`Step ${s}`}
                 />
               ))}
             </div>
@@ -333,60 +248,56 @@ export function GiftFinderPage() {
               {!showResults ? (
                 <motion.div
                   key={currentStep}
-                  initial={{ opacity: 0, x: 25 }}
+                  initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -25 }}
-                  transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.3 }}
                 >
-                  <div className="mb-8">
-                    <h2 className="heading-md text-primary mb-2">
-                      {activeStepData.title}
-                    </h2>
-                    <p className="font-sans text-sm text-muted">
-                      {activeStepData.subtitle}
-                    </p>
-                  </div>
+                  <h2 className="heading-md text-[#0B1F3A] mb-1">
+                    {currentStepData.title}
+                  </h2>
+                  <p className="font-sans text-sm text-[#6B6B6B] mb-8">
+                    {currentStepData.subtitle}
+                  </p>
 
-                  {/* Options Grid */}
+                  {/* Options */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-10">
-                    {activeStepData.options.map((option) => {
-                      const isSelected = selections[activeStepData.id] === option.id;
+                    {currentStepData.options.map((opt) => {
+                      const isSelected = selections[currentStepData.id] === opt.id;
                       return (
                         <button
-                          key={option.id}
-                          onClick={() => handleSelectOption(activeStepData.id, option.id)}
-                          className="flex flex-col text-left p-5 rounded-xl border transition-all duration-200 group relative focus-visible:outline-none focus-visible:ring-2"
-                          style={{
-                            borderColor: isSelected ? 'var(--accent)' : 'var(--border)',
-                            backgroundColor: isSelected ? 'var(--accent-soft)' : 'var(--surface-alt)',
-                            boxShadow: isSelected ? '0 4px 14px rgba(212,175,55,0.2)' : 'none',
-                            '--tw-ring-color': 'var(--accent)',
-                          }}
+                          key={opt.id}
+                          onClick={() => handleSelect(currentStepData.id, opt.id)}
+                          className={`p-5 rounded-xl border text-left transition-all duration-200 flex flex-col justify-between focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37] ${
+                            isSelected
+                              ? 'border-[#D4AF37] bg-[#F5E9C8] text-[#0B1F3A] shadow-xs'
+                              : 'border-[#E8DFD3] bg-[#FBF8F2] text-[#0B1F3A] hover:border-[#D4AF37]'
+                          }`}
                         >
                           <div className="flex items-center justify-between mb-3">
-                            <span className="text-3xl p-2 rounded-lg bg-surface shadow-xs">
-                              {option.emoji}
+                            <span className="text-3xl p-2 rounded-lg bg-white shadow-xs" aria-hidden="true">
+                              {opt.emoji}
                             </span>
-                            {isSelected && (
-                              <CheckCircle2 size={20} style={{ color: 'var(--accent-dark)' }} />
-                            )}
+                            {isSelected && <CheckCircle2 size={20} className="text-[#D4AF37]" />}
                           </div>
-                          <span className="font-sans text-base font-semibold text-primary mb-1">
-                            {option.label}
-                          </span>
-                          <span className="font-sans text-xs text-muted leading-relaxed">
-                            {option.desc}
-                          </span>
+                          <div>
+                            <p className="font-sans text-base font-semibold text-[#0B1F3A] mb-1">
+                              {opt.label}
+                            </p>
+                            <p className="font-sans text-xs text-[#6B6B6B] leading-relaxed">
+                              {opt.desc}
+                            </p>
+                          </div>
                         </button>
                       );
                     })}
                   </div>
 
-                  {/* Navigation Buttons */}
-                  <div className="flex items-center justify-between pt-4 border-t border-border/50">
+                  {/* Nav Controls */}
+                  <div className="flex items-center justify-between pt-4 border-t border-[#E8DFD3]">
                     {currentStep > 0 ? (
                       <button
-                        onClick={() => setCurrentStep((prev) => prev - 1)}
+                        onClick={() => setCurrentStep((s) => s - 1)}
                         className="btn-secondary py-2.5 px-5 text-xs flex items-center gap-2"
                       >
                         <ChevronLeft size={16} />
@@ -394,71 +305,57 @@ export function GiftFinderPage() {
                       </button>
                     ) : <div />}
 
-                    {selections[activeStepData.id] && (
-                      <button
-                        onClick={() => {
-                          if (currentStep < STEPS.length - 1) {
-                            setCurrentStep((prev) => prev + 1);
-                          } else {
-                            setShowResults(true);
-                          }
-                        }}
-                        className="btn-primary py-2.5 px-6 text-xs flex items-center gap-2"
-                      >
-                        {currentStep === STEPS.length - 1 ? 'View Matches' : 'Next Step'}
-                        <ArrowRight size={16} />
-                      </button>
-                    )}
+                    <button
+                      onClick={handleSkip}
+                      className="text-xs text-[#D4AF37] hover:underline font-semibold"
+                    >
+                      Skip this question →
+                    </button>
                   </div>
                 </motion.div>
               ) : (
-                /* ── Results View ── */
+                /* Step 5: Curated Results */
                 <motion.div
                   key="results"
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ duration: 0.4 }}
                 >
-                  {/* Applied Filter Tags */}
-                  <div className="flex flex-wrap items-center gap-2 mb-8 p-4 rounded-xl bg-surface-alt border border-border">
-                    <span className="font-sans text-xs font-semibold tracking-wider uppercase text-primary mr-2 flex items-center gap-1.5">
+                  {/* Active Criteria Chips */}
+                  <div className="flex flex-wrap items-center gap-2 mb-8 p-4 rounded-xl bg-[#FBF8F2] border border-[#E8DFD3]">
+                    <span className="font-sans text-xs font-semibold uppercase tracking-wider text-[#0B1F3A] mr-2 flex items-center gap-1.5">
                       <SlidersHorizontal size={14} />
-                      Your Criteria:
+                      Your Matches:
                     </span>
-                    {selections.recipient && (
-                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-surface border border-border text-primary">
-                        Recipient: <b>{STEPS[0].options.find((o) => o.id === selections.recipient)?.label}</b>
+                    {selections.occasion && (
+                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-white border border-[#E8DFD3] text-[#0B1F3A]">
+                        Occasion: <b>{STEPS[0].options.find((o) => o.id === selections.occasion)?.label}</b>
                       </span>
                     )}
-                    {selections.occasion && (
-                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-surface border border-border text-primary">
-                        Occasion: <b>{STEPS[1].options.find((o) => o.id === selections.occasion)?.label}</b>
+                    {selections.recipient && (
+                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-white border border-[#E8DFD3] text-[#0B1F3A]">
+                        Recipient: <b>{STEPS[1].options.find((o) => o.id === selections.recipient)?.label}</b>
                       </span>
                     )}
                     {selections.budget && (
-                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-surface border border-border text-primary">
+                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-white border border-[#E8DFD3] text-[#0B1F3A]">
                         Budget: <b>{STEPS[2].options.find((o) => o.id === selections.budget)?.label}</b>
-                      </span>
-                    )}
-                    {selections.vibe && selections.vibe !== 'all' && (
-                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-surface border border-border text-primary">
-                        Vibe: <b>{STEPS[3].options.find((o) => o.id === selections.vibe)?.label}</b>
                       </span>
                     )}
                     <button
                       onClick={handleReset}
-                      className="text-xs text-accent hover:underline font-semibold ml-auto"
+                      className="text-xs text-[#D4AF37] hover:underline font-semibold ml-auto"
                     >
-                      Change all
+                      Change Preferences
                     </button>
                   </div>
 
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+                  <div className="flex items-center justify-between mb-8">
                     <div>
-                      <h2 className="heading-md text-primary mb-1">
+                      <h2 className="heading-md text-[#0B1F3A] mb-1">
                         Curated Gifts For You
                       </h2>
-                      <p className="font-sans text-sm text-muted">
+                      <p className="font-sans text-sm text-[#6B6B6B]">
                         Showing {matchedProducts.length} thoughtfully matched presents
                       </p>
                     </div>
@@ -469,18 +366,17 @@ export function GiftFinderPage() {
                     </Link>
                   </div>
 
-                  {/* Products Grid */}
+                  {/* Product Cards with Live Add to Cart */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-12">
                     {matchedProducts.map((product, idx) => (
                       <ProductCard key={product.id} product={product} index={idx} />
                     ))}
                   </div>
 
-                  {/* Secondary Call to Action */}
-                  <div className="text-center pt-6 border-t border-border">
+                  <div className="text-center pt-6 border-t border-[#E8DFD3]">
                     <button
                       onClick={handleReset}
-                      className="btn-ghost text-xs inline-flex items-center gap-2 text-primary"
+                      className="btn-ghost text-xs inline-flex items-center gap-2 text-[#0B1F3A]"
                     >
                       <RotateCcw size={14} />
                       Take the quiz again with different preferences
@@ -493,84 +389,32 @@ export function GiftFinderPage() {
         </div>
       </section>
 
-      {/* ── Concierge & WhatsApp Assistance ── */}
-      <section className="py-16" style={{ background: 'var(--surface-alt)' }}>
+      {/* ── Concierge Support ── */}
+      <section className="py-16 bg-[#FBF8F2] border-t border-[#E8DFD3]">
         <div className="container-gokana max-w-4xl">
-          <div 
-            className="p-8 md:p-10 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-8 border"
-            style={{
-              background: 'var(--surface)',
-              borderColor: 'var(--border)',
-            }}
-          >
+          <div className="p-8 md:p-10 rounded-2xl bg-white border border-[#E8DFD3] flex flex-col md:flex-row items-center justify-between gap-8 shadow-xs">
             <div className="max-w-lg">
-              <span 
-                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase mb-3"
-                style={{ background: 'var(--primary-soft)', color: 'var(--primary)' }}
-              >
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase mb-3 bg-[#E7ECF3] text-[#0B1F3A]">
                 <MessageCircle size={13} />
                 Bespoke & Bulk Gifting Concierge
               </span>
-              <h3 className="heading-md text-primary mb-3">
-                Need customized hampers or corporate gifts?
+              <h3 className="heading-md text-[#0B1F3A] mb-2">
+                Need bespoke curation or corporate hampers?
               </h3>
-              <p className="font-sans text-sm text-muted leading-relaxed">
-                Connect directly with our gifting stylist for customized wooden keepsakes,
-                corporate logos, bulk discounts, and hand-lettered calligraphy cards.
+              <p className="font-sans text-sm text-[#6B6B6B] leading-relaxed">
+                Connect directly with our gifting stylist for customized wooden keepsakes, corporate logos, volume discounts, and personalized calligraphy cards.
               </p>
             </div>
 
             <a
-              href="https://wa.me/919999999999?text=Hi%20GŌKANA!%20I'd%20like%20assistance%20finding%20the%20perfect%20gift."
+              href="https://wa.me/919999999999?text=Hi%20GŌKANA!%20I'd%20like%20assistance%20curating%20a%20custom%20gift."
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-accent flex-none flex items-center gap-2 py-4 px-8 text-sm whitespace-nowrap"
+              className="btn-accent flex items-center gap-2 py-3 px-6 text-xs whitespace-nowrap"
             >
-              <MessageCircle size={18} />
+              <MessageCircle size={16} />
               Chat on WhatsApp
             </a>
-          </div>
-        </div>
-      </section>
-
-      {/* ── The GŌKANA Gifting Standard ── */}
-      <section className="section-py border-t border-border/60">
-        <div className="container-gokana">
-          <div className="text-center max-w-xl mx-auto mb-12">
-            <p className="label-text text-accent mb-3">✦ The GŌKANA Experience</p>
-            <h2 className="heading-lg text-primary">Thoughtfully Packaged Perfection</h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            <div className="card-premium p-8 text-center flex flex-col items-center">
-              <div className="w-14 h-14 rounded-full flex items-center justify-center mb-5" style={{ background: 'var(--accent-soft)', color: 'var(--primary)' }}>
-                <PackageCheck size={26} />
-              </div>
-              <h4 className="font-serif text-xl font-medium text-primary mb-2">Luxury Rigid Boxes</h4>
-              <p className="font-sans text-sm text-muted leading-relaxed">
-                Every hamper arrives in custom textured keepsake boxes, wrapped with silk satin ribbon and gold foil seal.
-              </p>
-            </div>
-
-            <div className="card-premium p-8 text-center flex flex-col items-center">
-              <div className="w-14 h-14 rounded-full flex items-center justify-center mb-5" style={{ background: 'var(--accent-soft)', color: 'var(--primary)' }}>
-                <Heart size={26} />
-              </div>
-              <h4 className="font-serif text-xl font-medium text-primary mb-2">Calligraphy Notes</h4>
-              <p className="font-sans text-sm text-muted leading-relaxed">
-                Complimentary personalized messages handwritten by calligraphers on 300 GSM handmade cotton paper.
-              </p>
-            </div>
-
-            <div className="card-premium p-8 text-center flex flex-col items-center">
-              <div className="w-14 h-14 rounded-full flex items-center justify-center mb-5" style={{ background: 'var(--accent-soft)', color: 'var(--primary)' }}>
-                <Truck size={26} />
-              </div>
-              <h4 className="font-serif text-xl font-medium text-primary mb-2">Guaranteed On-Time Delivery</h4>
-              <p className="font-sans text-sm text-muted leading-relaxed">
-                Climate-controlled shipping with live tracking so your delicate chocolates and gifts arrive fresh and flawless.
-              </p>
-            </div>
           </div>
         </div>
       </section>

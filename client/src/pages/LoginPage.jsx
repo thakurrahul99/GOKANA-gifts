@@ -1,24 +1,26 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Eye, EyeOff, ArrowRight, Gift } from 'lucide-react';
+import { Eye, EyeOff, ArrowRight, AlertCircle, Loader2 } from 'lucide-react';
 import { useAuthStore } from '../store';
+import { API_BASE } from '../lib/api';
 
 export function LoginPage() {
   const navigate = useNavigate();
   const { login } = useAuthStore();
-  const [mode, setMode] = useState('login');
+  const [mode, setMode] = useState('login'); // 'login' | 'register'
   const [showPass, setShowPass] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [form, setForm] = useState({ name: '', email: '', password: '' });
 
-  const API = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+  const API = API_BASE;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     setLoading(true);
+
     try {
       const endpoint = mode === 'login' ? '/auth/login' : '/auth/register';
       const body = mode === 'login'
@@ -32,7 +34,8 @@ export function LoginPage() {
       });
 
       const data = await res.json();
-      if (!res.ok) throw new Error(data.message || 'Something went wrong');
+
+      if (!res.ok) throw new Error(data.message || 'Authentication failed. Please check your credentials.');
 
       login(data.user, data.token);
       navigate('/account');
@@ -46,184 +49,205 @@ export function LoginPage() {
   const set = (key) => (e) => setForm((f) => ({ ...f, [key]: e.target.value }));
 
   return (
-    <main className="min-h-screen flex" style={{ background: 'var(--bg)' }}>
-      {/* Left panel — decorative navy */}
+    <main className="min-h-screen bg-[var(--bg)] flex">
+      {/* Left — Midnight Navy decorative hero */}
       <div
-        className="hidden lg:flex lg:w-1/2 relative overflow-hidden flex-col items-center justify-center p-16 text-center"
-        style={{ background: 'var(--primary)' }}
+        className="hidden lg:flex lg:w-1/2 bg-[var(--primary)] relative overflow-hidden flex-col items-center justify-center p-16 text-center text-[var(--surface)]"
+        style={{
+          backgroundImage: `radial-gradient(ellipse at 30% 20%, rgba(212,175,55,0.12) 0%, transparent 60%), radial-gradient(ellipse at 80% 80%, rgba(243,217,212,0.08) 0%, transparent 50%)`,
+        }}
       >
-        <Link
-          to="/"
-          className="font-serif text-4xl font-light tracking-[0.2em] uppercase mb-6 focus-visible:outline-none focus-visible:rounded"
-          style={{ color: '#FFFFFF' }}
-        >
-          GŌKANA
-        </Link>
-        <div className="h-px w-12 mb-8" style={{ background: 'var(--accent)' }} />
-        <p className="font-serif text-2xl font-light leading-relaxed" style={{ color: 'rgba(255,255,255,0.65)' }}>
-          "Every gift tells a story.<br />Make yours unforgettable."
-        </p>
-
-        <div className="absolute bottom-12 left-0 right-0 text-center">
-          <p className="font-sans text-xs tracking-[0.2em] uppercase" style={{ color: 'rgba(255,255,255,0.2)' }}>
-            Premium Gifting · India
-          </p>
+        <div className="relative z-10 max-w-md">
+          <Link
+            to="/"
+            className="inline-block font-serif text-4xl font-light tracking-[0.25em] uppercase text-[var(--surface)] mb-6 hover:text-[var(--accent)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
+          >
+            GŌKANA
+          </Link>
+          <div className="w-12 h-0.5 bg-[var(--accent)] mx-auto mb-8" />
+          <blockquote className="font-serif text-2xl font-light text-[var(--surface)]/80 leading-relaxed italic mb-8">
+            "Every gift tells a story.<br />Make yours unforgettable."
+          </blockquote>
+          <div className="flex items-center justify-center gap-6 text-xs text-[var(--surface)]/50 tracking-wider uppercase">
+            <span>✦ Handcrafted</span>
+            <span>✦ Artisanal</span>
+            <span>✦ Pan-India Delivery</span>
+          </div>
         </div>
 
-        {/* Decorative circles */}
-        <div className="absolute top-20 left-20 w-32 h-32 rounded-full" style={{ border: '1px solid rgba(212,175,55,0.12)' }} />
-        <div className="absolute bottom-32 right-16 w-48 h-48 rounded-full" style={{ border: '1px solid rgba(212,175,55,0.07)' }} />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full" style={{ border: '1px solid rgba(255,255,255,0.04)' }} />
+        {/* Decorative ambient elements */}
+        <div className="absolute -top-12 -left-12 w-64 h-64 border border-[var(--accent)]/15 rounded-full pointer-events-none" />
+        <div className="absolute -bottom-20 -right-20 w-80 h-80 border border-[var(--accent)]/10 rounded-full pointer-events-none" />
+        <div className="absolute bottom-8 left-0 right-0 text-center">
+          <p className="font-sans text-[11px] text-[var(--surface)]/40 tracking-[0.2em] uppercase">
+            Luxury Gifting Atelier · India
+          </p>
+        </div>
       </div>
 
-      {/* Right panel — form */}
-      <div className="flex-1 flex items-center justify-center px-8 py-16">
+      {/* Right — Form */}
+      <div className="flex-1 flex items-center justify-center px-6 sm:px-10 py-16">
         <motion.div
           key={mode}
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-          className="w-full max-w-md"
+          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          className="w-full max-w-md bg-[var(--surface)] p-8 sm:p-10 border border-[var(--border)] shadow-sm"
         >
           {/* Logo on mobile */}
           <Link
             to="/"
-            className="lg:hidden block font-serif text-2xl font-light tracking-[0.15em] uppercase mb-10 text-center focus-visible:outline-none focus-visible:rounded"
-            style={{ color: 'var(--primary)' }}
+            className="lg:hidden block font-serif text-2xl font-light tracking-[0.18em] uppercase text-[var(--primary)] mb-8 text-center"
           >
             GŌKANA
           </Link>
 
-          <p className="label-text mb-3" style={{ color: 'var(--accent)' }}>
-            {mode === 'login' ? '✦ Welcome Back' : '✦ Create Account'}
-          </p>
-          <h1 className="font-serif text-4xl font-light mb-2" style={{ color: 'var(--text-strong)' }}>
-            {mode === 'login' ? 'Sign In' : 'Join GŌKANA'}
-          </h1>
-          <p className="font-sans text-sm mb-10" style={{ color: 'var(--muted)' }}>
-            {mode === 'login'
-              ? 'Sign in to manage your orders and wishlist.'
-              : 'Create your account for a seamless gifting experience.'}
-          </p>
+          <div className="mb-8">
+            <span className="inline-block text-xs font-medium tracking-[0.15em] text-[var(--accent)] uppercase mb-2">
+              {mode === 'login' ? '✦ Welcome Back' : '✦ Create Account'}
+            </span>
+            <h1 className="font-serif text-3xl font-normal text-[var(--primary)] mb-2">
+              {mode === 'login' ? 'Sign In' : 'Join GŌKANA'}
+            </h1>
+            <p className="font-sans text-sm text-[var(--text-muted)]">
+              {mode === 'login'
+                ? 'Sign in to access your orders, saved addresses, and wishlist.'
+                : 'Create your account for personalized gifting and tracking.'}
+            </p>
+          </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+          <form onSubmit={handleSubmit} className="space-y-5" noValidate={false}>
             {mode === 'register' && (
               <div>
-                <label htmlFor="reg-name" className="form-label">Full Name</label>
+                <label
+                  htmlFor="reg-name"
+                  className="block font-sans text-xs font-semibold text-[var(--text)] mb-2 uppercase tracking-wider"
+                >
+                  Full Name <span className="text-[var(--accent)]">*</span>
+                </label>
                 <input
                   id="reg-name"
                   type="text"
                   value={form.name}
                   onChange={set('name')}
                   required
-                  placeholder="Priya Menon"
-                  className="input-premium"
                   autoComplete="name"
+                  placeholder="Priya Menon"
+                  className="w-full px-4 py-3 bg-[var(--surface)] border border-[var(--border)] text-[var(--text)] text-sm focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/30 outline-none transition-all placeholder:text-[var(--text-muted)]/60"
                 />
               </div>
             )}
 
             <div>
-              <label htmlFor="login-email" className="form-label">Email Address</label>
+              <label
+                htmlFor="auth-email"
+                className="block font-sans text-xs font-semibold text-[var(--text)] mb-2 uppercase tracking-wider"
+              >
+                Email Address <span className="text-[var(--accent)]">*</span>
+              </label>
               <input
-                id="login-email"
+                id="auth-email"
                 type="email"
                 value={form.email}
                 onChange={set('email')}
                 required
-                placeholder="you@example.com"
-                className="input-premium"
                 autoComplete="email"
+                placeholder="you@example.com"
+                className="w-full px-4 py-3 bg-[var(--surface)] border border-[var(--border)] text-[var(--text)] text-sm focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/30 outline-none transition-all placeholder:text-[var(--text-muted)]/60"
               />
             </div>
 
             <div>
-              <label htmlFor="login-password" className="form-label">Password</label>
+              <label
+                htmlFor="auth-password"
+                className="block font-sans text-xs font-semibold text-[var(--text)] mb-2 uppercase tracking-wider"
+              >
+                Password <span className="text-[var(--accent)]">*</span>
+              </label>
               <div className="relative">
                 <input
-                  id="login-password"
+                  id="auth-password"
                   type={showPass ? 'text' : 'password'}
                   value={form.password}
                   onChange={set('password')}
                   required
                   minLength={6}
-                  placeholder="Minimum 6 characters"
-                  className="input-premium pr-10"
                   autoComplete={mode === 'login' ? 'current-password' : 'new-password'}
+                  placeholder="Minimum 6 characters"
+                  className="w-full px-4 py-3 pr-12 bg-[var(--surface)] border border-[var(--border)] text-[var(--text)] text-sm focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/30 outline-none transition-all placeholder:text-[var(--text-muted)]/60"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPass(!showPass)}
-                  className="absolute right-0 top-1/2 -translate-y-1/2 transition-colors duration-200 p-2 focus-visible:outline-none focus-visible:rounded"
-                  style={{ color: 'var(--muted-2)' }}
+                  className="absolute right-0 top-0 bottom-0 px-3 flex items-center justify-center text-[var(--text-muted)] hover:text-[var(--primary)] transition-colors min-w-[44px] min-h-[44px]"
                   aria-label={showPass ? 'Hide password' : 'Show password'}
-                  onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--primary)'; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--muted-2)'; }}
                 >
-                  {showPass ? <EyeOff size={16} /> : <Eye size={16} />}
+                  {showPass ? <EyeOff size={18} /> : <Eye size={18} />}
                 </button>
               </div>
             </div>
 
             {error && (
-              <motion.p
+              <motion.div
                 initial={{ opacity: 0, y: -6 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="font-sans text-sm px-4 py-3 rounded-lg"
-                style={{ color: 'var(--error)', background: '#FEE2E2' }}
+                className="flex items-start gap-2.5 bg-[#B3261E]/10 border border-[#B3261E]/30 text-[#B3261E] rounded-lg px-4 py-3 text-sm"
                 role="alert"
               >
-                {error}
-              </motion.p>
+                <AlertCircle size={16} className="flex-shrink-0 mt-0.5 text-[#B3261E]" />
+                <p className="font-sans text-xs leading-relaxed font-medium">{error}</p>
+              </motion.div>
             )}
 
             <button
               type="submit"
               disabled={loading}
-              className="btn-primary w-full justify-center"
+              className="btn-primary w-full justify-center disabled:opacity-60 disabled:cursor-not-allowed min-h-[44px]"
             >
-              {loading ? 'Please wait…' : mode === 'login' ? 'Sign In' : 'Create Account'}
-              {!loading && <ArrowRight size={16} />}
+              {loading ? (
+                <>
+                  <Loader2 size={16} className="animate-spin mr-2" />
+                  Please wait…
+                </>
+              ) : (
+                <>
+                  {mode === 'login' ? 'Sign In' : 'Create Account'}
+                  <ArrowRight size={16} className="ml-2" />
+                </>
+              )}
             </button>
           </form>
 
-          <p className="mt-8 text-center font-sans text-sm" style={{ color: 'var(--muted)' }}>
+          <div className="mt-6 text-center font-sans text-sm text-[var(--text-muted)]">
             {mode === 'login' ? (
-              <>
+              <p>
                 Don't have an account?{' '}
                 <button
+                  type="button"
                   onClick={() => { setMode('register'); setError(''); }}
-                  className="font-semibold transition-colors duration-200 focus-visible:outline-none focus-visible:rounded"
-                  style={{ color: 'var(--primary)' }}
-                  onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--accent)'; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--primary)'; }}
+                  className="text-[var(--primary)] font-semibold hover:text-[var(--accent)] underline underline-offset-4 transition-colors p-1"
                 >
                   Register
                 </button>
-              </>
+              </p>
             ) : (
-              <>
+              <p>
                 Already have an account?{' '}
                 <button
+                  type="button"
                   onClick={() => { setMode('login'); setError(''); }}
-                  className="font-semibold transition-colors duration-200 focus-visible:outline-none focus-visible:rounded"
-                  style={{ color: 'var(--primary)' }}
-                  onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--accent)'; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--primary)'; }}
+                  className="text-[var(--primary)] font-semibold hover:text-[var(--accent)] underline underline-offset-4 transition-colors p-1"
                 >
                   Sign In
                 </button>
-              </>
+              </p>
             )}
-          </p>
+          </div>
 
-          <div className="mt-10 pt-8 text-center" style={{ borderTop: '1px solid var(--border)' }}>
+          <div className="mt-8 pt-6 border-t border-[var(--border)] text-center">
             <Link
               to="/"
-              className="font-sans text-xs transition-colors duration-200 focus-visible:outline-none focus-visible:rounded"
-              style={{ color: 'var(--muted-2)' }}
-              onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--primary)'; }}
-              onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--muted-2)'; }}
+              className="inline-flex items-center gap-1 font-sans text-xs text-[var(--text-muted)] hover:text-[var(--primary)] transition-colors p-2"
             >
               ← Back to GŌKANA
             </Link>

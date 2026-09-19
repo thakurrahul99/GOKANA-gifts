@@ -1,46 +1,24 @@
-import { useState, useEffect, useRef } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Heart, User, ShoppingBag, Menu, X, ChevronDown, Gift } from 'lucide-react';
-import clsx from 'clsx';
-import { useCartStore, useWishlistStore, useAuthStore } from '../../store';
+import { useState, useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import { Search, Heart, User, ShoppingBag, Menu, X } from "lucide-react";
+import clsx from "clsx";
+import { useCartStore, useWishlistStore, useAuthStore } from "../../store";
 
 const navLinks = [
-  { label: 'Home', href: '/' },
-  { label: 'Shop', href: '/shop' },
-  { label: 'Gift Finder', href: '/gift-finder' },
-  {
-    label: 'Collections',
-    href: '/collections',
-    children: [
-      { label: 'New Arrivals', href: '/collections/new-arrivals' },
-      { label: 'Bestsellers', href: '/collections/bestsellers' },
-      { label: 'Personalized Gifts', href: '/collections/personalized' },
-      { label: 'Gift Hampers', href: '/collections/hampers' },
-    ],
-  },
-  {
-    label: 'Gifts',
-    href: '/gifts',
-    children: [
-      { label: 'Birthday', href: '/shop?occasion=birthday' },
-      { label: 'Anniversary', href: '/shop?occasion=anniversary' },
-      { label: 'Wedding', href: '/shop?occasion=wedding' },
-      { label: 'Diwali', href: '/shop?occasion=diwali' },
-      { label: 'Corporate', href: '/shop?occasion=corporate' },
-    ],
-  },
-  { label: 'About', href: '/about' },
-  { label: 'Contact', href: '/contact' },
+  { label: "Home", href: "/" },
+  { label: "Shop", href: "/shop" },
+  { label: "Gift Finder", href: "/gift-finder" },
+  { label: "Personalisation", href: "/#personalisation", isHash: true },
+  { label: "Reviews", href: "/#reviews", isHash: true },
+  { label: "Contact", href: "/contact" },
 ];
 
 export function Navbar({ onSearchOpen }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [activeDropdown, setActiveDropdown] = useState(null);
-  const drawerRef = useRef(null);
-  const closeButtonRef = useRef(null);
   const location = useLocation();
+  const navigate = useNavigate();
   const { items: cartItems, openCart } = useCartStore();
   const { items: wishlistItems } = useWishlistStore();
   const { user, isAdmin } = useAuthStore();
@@ -49,355 +27,265 @@ export function Navbar({ onSearchOpen }) {
   const wishCount = wishlistItems.length;
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 60);
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    const handleScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
     setMobileOpen(false);
-    setActiveDropdown(null);
-  }, [location]);
+  }, [location.pathname]);
 
-  // Focus trap in mobile drawer
-  useEffect(() => {
-    if (mobileOpen && closeButtonRef.current) {
-      closeButtonRef.current.focus();
+  const isHomePage = location.pathname === "/";
+
+  // Handle hash links smoothly
+  const handleNavClick = (link, e) => {
+    if (link.isHash) {
+      if (isHomePage) {
+        e.preventDefault();
+        const elementId = link.href.replace("/#", "");
+        const elem = document.getElementById(elementId);
+        if (elem) {
+          elem.scrollIntoView({ behavior: "smooth" });
+        }
+      } else {
+        navigate(link.href);
+      }
     }
-  }, [mobileOpen]);
-
-  // Close drawer on Escape
-  useEffect(() => {
-    const handleKey = (e) => {
-      if (e.key === 'Escape' && mobileOpen) setMobileOpen(false);
-    };
-    window.addEventListener('keydown', handleKey);
-    return () => window.removeEventListener('keydown', handleKey);
-  }, [mobileOpen]);
-
-  // Lock body scroll when drawer is open
-  useEffect(() => {
-    document.body.style.overflow = mobileOpen ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
-  }, [mobileOpen]);
-
-  const isHomePage = location.pathname === '/';
-  const transparent = !scrolled && isHomePage;
-
-  const navStyle = {
-    background: scrolled
-      ? 'rgba(247,243,236,0.92)'
-      : isHomePage
-      ? 'transparent'
-      : 'rgba(247,243,236,0.96)',
-    backdropFilter: scrolled || !isHomePage ? 'blur(20px) saturate(180%)' : 'none',
-    borderBottom: !transparent ? '1px solid var(--border-soft)' : 'none',
-    boxShadow: scrolled ? '0 2px 8px rgba(11,31,58,0.04)' : 'none',
+    setMobileOpen(false);
   };
 
-  const textColor = transparent ? '#FFFFFF' : 'var(--primary)';
+  const navClasses = scrolled
+    ? "bg-[var(--bg)]/95 nav-blur shadow-sm border-b border-[var(--border)]"
+    : isHomePage
+      ? "bg-transparent"
+      : "bg-[var(--bg)]/95 nav-blur border-b border-[var(--border)]";
+
+  const textColor =
+    !scrolled && isHomePage ? "text-[var(--surface)]" : "text-[var(--primary)]";
+  const logoColor =
+    !scrolled && isHomePage ? "text-[var(--surface)]" : "text-[var(--primary)]";
 
   return (
     <>
-      {/* Skip to content */}
-      <a href="#main-content" className="skip-link">Skip to main content</a>
+      <a href="#main-content" className="skip-link">
+        Skip to main content
+      </a>
 
       <motion.header
-        className="fixed top-0 left-0 right-0 z-40 transition-all duration-500"
+        className={clsx(
+          "fixed top-0 left-0 right-0 z-40 transition-all duration-300",
+          navClasses,
+        )}
         style={{
-          ...navStyle,
-          height: scrolled ? '64px' : '80px',
-          transition: 'height 0.4s ease, background 0.4s ease, box-shadow 0.4s ease',
+          height: scrolled ? "68px" : "80px",
         }}
-        role="banner"
       >
         <div className="container-gokana h-full flex items-center justify-between">
-
           {/* Logo */}
           <Link
             to="/"
-            className="font-serif text-2xl font-light tracking-[0.15em] uppercase transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:rounded"
-            style={{ color: textColor, '--tw-ring-color': 'var(--accent)' }}
-            aria-label="GŌKANA — Home"
+            className={clsx(
+              "font-serif text-2xl md:text-3xl font-light tracking-[0.15em] uppercase transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 rounded-sm",
+              logoColor,
+            )}
+            aria-label="GŌKANA Home"
           >
             GŌKANA
           </Link>
 
-          {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-7" aria-label="Main navigation">
+          {/* Desktop Navigation Links */}
+          <nav
+            className="hidden lg:flex items-center gap-8"
+            aria-label="Main Navigation"
+          >
             {navLinks.map((link) => {
-              const isActive = location.pathname === link.href ||
-                (link.href !== '/' && location.pathname.startsWith(link.href));
+              const isActive = location.pathname === link.href;
               return (
-                <div
-                  key={link.href}
-                  className="relative"
-                  onMouseEnter={() => link.children && setActiveDropdown(link.label)}
-                  onMouseLeave={() => setActiveDropdown(null)}
+                <Link
+                  key={link.label}
+                  to={link.href}
+                  onClick={(e) => handleNavClick(link, e)}
+                  className={clsx(
+                    "relative py-2 font-sans text-xs font-semibold tracking-[0.1em] uppercase transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 rounded-sm",
+                    textColor,
+                    isActive
+                      ? "text-[var(--accent)]"
+                      : "hover:text-[var(--accent)]",
+                  )}
+                  aria-current={isActive ? "page" : undefined}
                 >
-                  <Link
-                    to={link.href}
-                    aria-current={isActive ? 'page' : undefined}
-                    className={clsx(
-                      'flex items-center gap-1 font-sans text-xs font-medium tracking-[0.1em] uppercase transition-all duration-200 py-1 relative focus-visible:outline-none focus-visible:rounded',
-                    )}
-                    style={{
-                      color: isActive ? 'var(--accent)' : textColor,
-                      '--tw-ring-color': 'var(--accent)',
-                    }}
-                    onFocus={() => link.children && setActiveDropdown(link.label)}
-                  >
-                    {link.label === 'Gift Finder' && (
-                      <Gift size={12} className="opacity-80" />
-                    )}
-                    {link.label}
-                    {link.children && <ChevronDown size={12} className="opacity-60" />}
-                    {/* Active indicator */}
-                    {isActive && (
-                      <span
-                        className="absolute -bottom-1 left-0 right-0 h-0.5"
-                        style={{ background: 'var(--accent)' }}
-                      />
-                    )}
-                  </Link>
-
-                  {/* Dropdown */}
-                  <AnimatePresence>
-                    {link.children && activeDropdown === link.label && (
-                      <motion.div
-                        className="absolute top-full left-0 mt-4 w-52 shadow-premium-lg rounded-xl overflow-hidden"
-                        style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}
-                        initial={{ opacity: 0, y: -8 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -8 }}
-                        transition={{ duration: 0.2, ease: 'easeOut' }}
-                        role="menu"
-                      >
-                        <div className="py-2">
-                          {link.children.map((child) => (
-                            <Link
-                              key={child.href}
-                              to={child.href}
-                              role="menuitem"
-                              className="block px-4 py-2.5 font-sans text-xs font-medium tracking-[0.08em] uppercase transition-colors duration-200 focus-visible:outline-none"
-                              style={{ color: 'var(--muted)' }}
-                              onMouseEnter={(e) => {
-                                e.currentTarget.style.background = 'var(--accent-soft)';
-                                e.currentTarget.style.color = 'var(--primary)';
-                              }}
-                              onMouseLeave={(e) => {
-                                e.currentTarget.style.background = '';
-                                e.currentTarget.style.color = 'var(--muted)';
-                              }}
-                            >
-                              {child.label}
-                            </Link>
-                          ))}
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
+                  {link.label}
+                  {isActive && (
+                    <motion.div
+                      layoutId="navUnderline"
+                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-[var(--accent)]"
+                      transition={{
+                        type: "spring",
+                        stiffness: 350,
+                        damping: 30,
+                      }}
+                    />
+                  )}
+                </Link>
               );
             })}
           </nav>
 
-          {/* Right Icons */}
-          <div className="flex items-center gap-0.5">
-            <IconBtn onClick={onSearchOpen} label="Search" textColor={textColor}>
-              <Search size={18} strokeWidth={1.5} />
-            </IconBtn>
-
-            <Link to="/wishlist" className="relative">
-              <IconBtn label={`Wishlist${wishCount > 0 ? ` (${wishCount} items)` : ''}`} textColor={textColor}>
-                <Heart size={18} strokeWidth={1.5} />
-                {wishCount > 0 && <CountBadge count={wishCount} />}
-              </IconBtn>
-            </Link>
-
-            <Link to={user ? '/account' : '/login'}>
-              <IconBtn label={user ? 'My Account' : 'Sign In'} textColor={textColor}>
-                <User size={18} strokeWidth={1.5} />
-              </IconBtn>
-            </Link>
-
-            <div className="relative">
-              <IconBtn
-                onClick={openCart}
-                label={`Shopping cart${cartCount > 0 ? `, ${cartCount} items` : ''}`}
-                textColor={textColor}
-              >
-                <ShoppingBag size={18} strokeWidth={1.5} />
-                {cartCount > 0 && <CountBadge count={cartCount} />}
-              </IconBtn>
-            </div>
-
-            {/* Mobile hamburger */}
+          {/* Right Action Icons */}
+          <div className="flex items-center gap-1.5 sm:gap-2">
             <button
-              className="lg:hidden p-2.5 rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2"
-              style={{ color: textColor, '--tw-ring-color': 'var(--accent)', minWidth: '44px', minHeight: '44px' }}
+              onClick={onSearchOpen}
+              aria-label="Open search dialog"
+              className={clsx(
+                "min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 hover:text-[var(--accent)]",
+                textColor,
+              )}
+            >
+              <Search size={19} strokeWidth={1.8} />
+            </button>
+
+            <Link
+              to="/wishlist"
+              aria-label={`Wishlist, ${wishCount} items`}
+              className={clsx(
+                "relative min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 hover:text-[var(--accent)]",
+                textColor,
+              )}
+            >
+              <Heart size={19} strokeWidth={1.8} />
+              {wishCount > 0 && (
+                <span className="absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-[var(--accent)] text-[var(--text)] text-[10px] font-bold font-sans flex items-center justify-center">
+                  {wishCount > 9 ? "9+" : wishCount}
+                </span>
+              )}
+            </Link>
+
+            <Link
+              to={user ? "/account" : "/login"}
+              aria-label={user ? "My Account" : "Sign in to account"}
+              className={clsx(
+                "min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 hover:text-[var(--accent)]",
+                textColor,
+              )}
+            >
+              <User size={19} strokeWidth={1.8} />
+            </Link>
+
+            <button
+              onClick={openCart}
+              aria-label={`Open shopping cart, ${cartCount} items`}
+              className={clsx(
+                "relative min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 hover:text-[var(--accent)]",
+                textColor,
+              )}
+            >
+              <ShoppingBag size={19} strokeWidth={1.8} />
+              {cartCount > 0 && (
+                <motion.span
+                  key={cartCount}
+                  initial={{ scale: 0.6 }}
+                  animate={{ scale: 1 }}
+                  className="absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-[var(--accent)] text-[var(--text)] text-[10px] font-bold font-sans flex items-center justify-center"
+                >
+                  {cartCount > 9 ? "9+" : cartCount}
+                </motion.span>
+              )}
+            </button>
+
+            {/* Mobile Hamburger Toggle */}
+            <button
+              className={clsx(
+                "lg:hidden min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 hover:text-[var(--accent)]",
+                textColor,
+              )}
               onClick={() => setMobileOpen(true)}
-              aria-label="Open navigation menu"
+              aria-label="Open mobile navigation menu"
               aria-expanded={mobileOpen}
             >
-              <Menu size={22} strokeWidth={1.5} />
+              <Menu size={24} strokeWidth={1.8} />
             </button>
           </div>
         </div>
       </motion.header>
 
-      {/* Mobile Drawer */}
+      {/* ── Mobile Slide-in Drawer ── */}
       <AnimatePresence>
         {mobileOpen && (
-          <>
-            {/* Overlay */}
+          <div role="dialog" aria-modal="true" aria-label="Mobile Navigation">
+            {/* Backdrop */}
             <motion.div
-              className="fixed inset-0 z-50"
-              style={{ background: 'rgba(11,31,58,0.6)', backdropFilter: 'blur(4px)' }}
+              className="drawer-overlay"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setMobileOpen(false)}
-              aria-hidden="true"
             />
 
-            {/* Drawer */}
+            {/* Slide-in panel from right */}
             <motion.div
-              ref={drawerRef}
-              className="fixed top-0 right-0 bottom-0 z-50 w-80 flex flex-col"
-              style={{ background: 'var(--surface)', borderLeft: '1px solid var(--border)' }}
-              initial={{ x: '100%' }}
+              className="fixed top-0 right-0 bottom-0 z-50 w-full max-w-sm bg-[var(--bg)] flex flex-col shadow-2xl border-l border-[var(--border)]"
+              initial={{ x: "100%" }}
               animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ type: 'tween', duration: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
-              role="dialog"
-              aria-modal="true"
-              aria-label="Navigation menu"
+              exit={{ x: "100%" }}
+              transition={{
+                type: "tween",
+                duration: 0.35,
+                ease: [0.25, 0.1, 0.25, 1],
+              }}
             >
-              {/* Drawer header */}
-              <div
-                className="flex items-center justify-between px-6 py-5"
-                style={{ borderBottom: '1px solid var(--border)' }}
-              >
-                <Link
-                  to="/"
-                  className="font-serif text-xl tracking-[0.15em] uppercase"
-                  style={{ color: 'var(--primary)' }}
-                >
+              <div className="flex items-center justify-between px-6 py-5 border-b border-[var(--border)]">
+                <span className="font-serif text-2xl font-light tracking-[0.15em] uppercase text-[var(--primary)]">
                   GŌKANA
-                </Link>
+                </span>
                 <button
-                  ref={closeButtonRef}
                   onClick={() => setMobileOpen(false)}
-                  className="p-2 rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2"
-                  style={{ color: 'var(--muted)', '--tw-ring-color': 'var(--accent)', minWidth: '44px', minHeight: '44px' }}
                   aria-label="Close navigation menu"
+                  className="min-w-[44px] min-h-[44px] flex items-center justify-center text-[var(--primary)] hover:text-[var(--accent)] rounded-lg transition-colors"
                 >
-                  <X size={22} strokeWidth={1.5} />
+                  <X size={24} strokeWidth={1.8} />
                 </button>
               </div>
 
-              {/* Nav links */}
-              <nav className="flex-1 overflow-y-auto px-6 py-6" aria-label="Mobile navigation">
-                {navLinks.map((link) => {
-                  const isActive = location.pathname === link.href;
-                  return (
-                    <div key={link.href}>
-                      <Link
-                        to={link.href}
-                        aria-current={isActive ? 'page' : undefined}
-                        className="flex items-center gap-2 py-4 font-serif text-2xl font-light transition-colors focus-visible:outline-none"
-                        style={{
-                          color: isActive ? 'var(--accent)' : 'var(--primary)',
-                          borderBottom: '1px solid var(--border-soft)',
-                        }}
-                      >
-                        {link.label === 'Gift Finder' && <Gift size={20} />}
-                        {link.label}
-                      </Link>
-                      {link.children && (
-                        <div className="pl-4 pb-2">
-                          {link.children.map((child) => (
-                            <Link
-                              key={child.href}
-                              to={child.href}
-                              className="block py-2 font-sans text-sm transition-colors focus-visible:outline-none"
-                              style={{ color: 'var(--muted)' }}
-                            >
-                              {child.label}
-                            </Link>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  );
-                })}
+              <nav className="flex-1 overflow-y-auto px-6 py-8 space-y-4">
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.label}
+                    to={link.href}
+                    onClick={(e) => handleNavClick(link, e)}
+                    className="block py-3 font-serif text-2xl font-light text-[var(--primary)] hover:text-[var(--accent)] transition-colors border-b border-[var(--border)]/60"
+                  >
+                    {link.label}
+                  </Link>
+                ))}
 
                 {isAdmin && (
                   <Link
                     to="/admin"
-                    className="block py-4 font-sans text-sm font-medium focus-visible:outline-none"
-                    style={{ color: 'var(--accent)', borderBottom: '1px solid var(--border-soft)' }}
+                    onClick={() => setMobileOpen(false)}
+                    className="block py-3 font-sans text-sm font-semibold tracking-wider uppercase text-[var(--accent)] border-b border-[var(--border)]/60"
                   >
-                    Admin Panel
+                    Admin Dashboard
                   </Link>
                 )}
               </nav>
 
-              {/* Drawer footer */}
-              <div className="px-6 py-5" style={{ borderTop: '1px solid var(--border)' }}>
+              <div className="p-6 border-t border-[var(--border)] bg-[var(--surface-alt)] space-y-3">
                 <Link
                   to="/gift-finder"
-                  className="btn-accent w-full justify-center text-center flex"
+                  onClick={() => setMobileOpen(false)}
+                  className="btn-accent w-full text-center"
                 >
-                  <Gift size={16} />
-                  Find the Perfect Gift
+                  ✦ Gift Finder Quiz
                 </Link>
+                <div className="text-center text-xs text-[var(--muted)]">
+                  Handcrafted & Delivered Across India
+                </div>
               </div>
             </motion.div>
-          </>
+          </div>
         )}
       </AnimatePresence>
     </>
-  );
-}
-
-function IconBtn({ children, onClick, label, textColor }) {
-  return (
-    <button
-      onClick={onClick}
-      aria-label={label}
-      className="relative rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 flex items-center justify-center"
-      style={{
-        color: textColor,
-        '--tw-ring-color': 'var(--accent)',
-        minWidth: '44px',
-        minHeight: '44px',
-        padding: '10px',
-      }}
-      onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--accent)'; }}
-      onMouseLeave={(e) => { e.currentTarget.style.color = textColor; }}
-    >
-      {children}
-    </button>
-  );
-}
-
-function CountBadge({ count }) {
-  return (
-    <motion.span
-      key={count}
-      initial={{ scale: 0.5 }}
-      animate={{ scale: 1 }}
-      className="absolute -top-0.5 -right-0.5 w-4 h-4 font-sans font-bold flex items-center justify-center rounded-full"
-      style={{
-        fontSize: '9px',
-        background: 'var(--accent)',
-        color: '#121212',
-      }}
-      aria-hidden="true"
-    >
-      {count > 9 ? '9+' : count}
-    </motion.span>
   );
 }

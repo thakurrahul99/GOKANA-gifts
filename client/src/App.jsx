@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import { Navbar } from './components/layout/Navbar';
@@ -21,14 +21,7 @@ import { AdminLayout } from './pages/admin/AdminLayout';
 import { AdminDashboard } from './pages/admin/AdminDashboard';
 import { AdminProducts } from './pages/admin/AdminProducts';
 import { AdminOrders } from './pages/admin/AdminOrders';
-
-function ScrollToTop() {
-  const { pathname } = useLocation();
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
-  return null;
-}
+import { FAB } from './components/ui/FAB';
 
 function StorePage() {
   const location = useLocation();
@@ -36,7 +29,6 @@ function StorePage() {
 
   return (
     <>
-      <ScrollToTop />
       <Navbar onSearchOpen={() => setSearchOpen(true)} />
       <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
       <CartDrawer />
@@ -53,8 +45,6 @@ function StorePage() {
             <Route path="/" element={<HomePage />} />
             <Route path="/shop" element={<ShopPage />} />
             <Route path="/gift-finder" element={<GiftFinderPage />} />
-            <Route path="/find-gifts" element={<GiftFinderPage />} />
-            <Route path="/giftfinder" element={<GiftFinderPage />} />
             <Route path="/products/:slug" element={<ProductPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
             <Route path="/about" element={<AboutPage />} />
@@ -71,17 +61,18 @@ function StorePage() {
       </AnimatePresence>
 
       <Footer />
+      {location.pathname !== '/gift-finder' && location.pathname !== '/checkout' && <FAB />}
     </>
   );
 }
 
 function ContactPage() {
   return (
-    <main className="pt-28 min-h-screen bg-ivory">
+    <main className="pt-28 min-h-screen bg-[var(--bg)]">
       <div className="container-gokana section-py">
         <div className="max-w-2xl">
-          <p className="label-text text-gold mb-5">✦ Get in Touch</p>
-          <h1 className="heading-xl text-charcoal mb-8">We'd love to<br />hear from you.</h1>
+          <p className="label-text text-[var(--accent)] mb-5">✦ Get in Touch</p>
+          <h1 className="heading-xl text-[var(--primary)] mb-8">We'd love to<br />hear from you.</h1>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-12">
             {[
               { label: 'WhatsApp', value: '+91 99999 99999', href: 'https://wa.me/919999999999' },
@@ -90,19 +81,19 @@ function ContactPage() {
               { label: 'Working Hours', value: 'Mon–Sat: 9am–7pm', href: null },
             ].map((item) => (
               <div key={item.label}>
-                <p className="label-text text-charcoal/40 mb-2">{item.label}</p>
+                <p className="label-text text-[var(--muted)] mb-2">{item.label}</p>
                 {item.href ? (
-                  <a href={item.href} className="font-serif text-xl text-charcoal hover:text-gold transition-colors">{item.value}</a>
+                  <a href={item.href} className="font-serif text-xl text-[var(--primary)] hover:text-[var(--accent)] transition-colors">{item.value}</a>
                 ) : (
-                  <p className="font-serif text-xl text-charcoal">{item.value}</p>
+                  <p className="font-serif text-xl text-[var(--primary)]">{item.value}</p>
                 )}
               </div>
             ))}
           </div>
           <div className="space-y-4 max-w-md">
-            <input placeholder="Your name" className="input-premium" />
-            <input placeholder="Email address" className="input-premium" />
-            <textarea placeholder="Your message" rows={4} className="input-premium resize-none" />
+            <input placeholder="Your name" className="input-field" aria-label="Your name" />
+            <input placeholder="Email address" type="email" className="input-field" aria-label="Email address" />
+            <textarea placeholder="Your message" rows={4} className="input-field resize-none" aria-label="Your message" />
             <button className="btn-primary">Send Message</button>
           </div>
         </div>
@@ -113,11 +104,14 @@ function ContactPage() {
 
 function NotFound() {
   return (
-    <main className="pt-40 min-h-screen bg-ivory flex items-center justify-center text-center">
+    <main className="pt-40 min-h-screen bg-[var(--bg)] flex items-center justify-center text-center px-4">
       <div>
-        <p className="font-serif text-8xl font-light text-charcoal/10 mb-4">404</p>
-        <h1 className="font-serif text-3xl font-light text-charcoal mb-4">Page not found</h1>
-        <a href="/" className="btn-ghost">Back to Home</a>
+        <p className="font-serif text-8xl font-light text-[var(--primary)]/20 mb-4">404</p>
+        <h1 className="font-serif text-3xl font-light text-[var(--primary)] mb-4">Page not found</h1>
+        <p className="font-sans text-sm text-[var(--muted)] max-w-md mx-auto mb-8 leading-relaxed">
+          The curated gift or page you are seeking could not be found or may have moved.
+        </p>
+        <a href="/" className="btn-primary">Back to Home</a>
       </div>
     </main>
   );
@@ -145,8 +139,8 @@ export default function App() {
 function AdminCustomersPlaceholder() {
   return (
     <div>
-      <h2 className="text-xl font-semibold text-gray-800 mb-4">Customers</h2>
-      <div className="bg-white border border-gray-100 p-6 text-center text-gray-400">
+      <h2 className="text-xl font-semibold text-[var(--primary)] mb-4">Customers</h2>
+      <div className="bg-[var(--surface)] border border-[var(--border)] p-8 text-center text-[var(--muted)] rounded-xl">
         <p className="text-sm">Customer management interface — connect to backend API to populate.</p>
       </div>
     </div>
@@ -163,15 +157,15 @@ function AdminCouponsPlaceholder() {
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl font-semibold text-gray-800">Coupons</h2>
-        <button className="px-4 py-2 bg-charcoal text-ivory text-sm font-medium hover:bg-accent transition-colors">
+        <h2 className="text-xl font-semibold text-[var(--primary)]">Coupons</h2>
+        <button className="btn-primary py-2 px-4 text-xs">
           + Create Coupon
         </button>
       </div>
-      <div className="bg-white border border-gray-100 overflow-x-auto">
+      <div className="bg-[var(--surface)] border border-[var(--border)] rounded-xl overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
-            <tr className="text-xs text-gray-500 border-b border-gray-100">
+            <tr className="text-xs text-[var(--muted)] border-b border-[var(--border)] bg-[var(--surface-alt)]">
               <th className="text-left px-4 py-3">Code</th>
               <th className="text-left px-4 py-3">Discount</th>
               <th className="text-left px-4 py-3">Min Order</th>
@@ -179,14 +173,14 @@ function AdminCouponsPlaceholder() {
               <th className="text-left px-4 py-3">Used</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-50">
+          <tbody className="divide-y divide-[var(--border)]">
             {coupons.map(c => (
-              <tr key={c.code} className="hover:bg-gray-50">
-                <td className="px-4 py-3 font-mono font-bold text-charcoal">{c.code}</td>
+              <tr key={c.code} className="hover:bg-[var(--surface-alt)] transition-colors">
+                <td className="px-4 py-3 font-mono font-bold text-[var(--primary)]">{c.code}</td>
                 <td className="px-4 py-3">{c.type === 'percentage' ? `${c.value}%` : `₹${c.value}`}</td>
                 <td className="px-4 py-3">₹{c.minOrder}</td>
-                <td className="px-4 py-3 text-gray-500">{c.expires}</td>
-                <td className="px-4 py-3 text-gray-500">{c.used} times</td>
+                <td className="px-4 py-3 text-[var(--muted)]">{c.expires}</td>
+                <td className="px-4 py-3 text-[var(--muted)]">{c.used} times</td>
               </tr>
             ))}
           </tbody>

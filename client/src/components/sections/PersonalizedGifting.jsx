@@ -1,103 +1,86 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowRight, Pen, MessageCircle, Camera, Gift, StickyNote } from 'lucide-react';
+import { ArrowRight, Pen, MessageCircle, Camera, Gift, Sparkles } from 'lucide-react';
 import { ScrollReveal, StaggerReveal, staggerItem, AnimatedHeading } from '../ui/ScrollReveal';
-import { Divider } from '../ui';
 
 const features = [
-  { icon: Pen, label: 'Name Personalisation', desc: 'Add a recipient\'s name, monogram or custom text to selected items.' },
-  { icon: MessageCircle, label: 'Custom Message', desc: 'A heartfelt handwritten message card included with every gift.' },
-  { icon: Camera, label: 'Photo Upload', desc: 'Add a cherished photograph to create a one-of-a-kind keepsake.' },
-  { icon: Gift, label: 'Gift Packaging', desc: 'Premium gift boxes, silk ribbons and branded tissue — beautifully done.' },
-  { icon: StickyNote, label: 'Special Notes', desc: 'Add private notes or delivery instructions for a flawless experience.' },
+  { icon: Pen, label: 'Name Monograms', desc: 'Custom laser engraving on wooden gift boxes and signature sleeves.' },
+  { icon: MessageCircle, label: 'Calligraphy Notes', desc: 'Complimentary handwritten notes on 300 GSM cotton paper with wax seal.' },
+  { icon: Camera, label: 'Photo Keepsakes', desc: 'Upload cherished polaroids or moments to embed inside memory boxes.' },
+  { icon: Gift, label: 'Bespoke Ribbons', desc: 'Choice of double-faced satin ribbons in champagne, emerald, or gold.' },
 ];
 
 export function PersonalizedGifting() {
   return (
-    <section className="section-py overflow-hidden" style={{ background: 'linear-gradient(135deg, var(--bg) 0%, var(--accent-soft) 50%, var(--bg) 100%)' }}>
+    <section id="personalisation" className="section-py bg-[#F7F3EC] overflow-hidden" aria-labelledby="personalisation-heading">
       <div className="container-gokana">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-          {/* Left — Visual */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          {/* Left — Visual Calligraphy Keepsake Preview */}
           <ScrollReveal direction="scale" className="relative">
-            <div className="relative aspect-square max-w-lg mx-auto overflow-hidden rounded-2xl" style={{ background: 'var(--surface-alt)' }}>
-              {/* Central text display */}
-              <div className="absolute inset-0 flex items-center justify-center" style={{ background: 'linear-gradient(135deg, var(--accent-soft) 0%, var(--bg) 60%, var(--surface-alt) 100%)' }}>
-                <div className="text-center p-12">
-                  <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-8" style={{ border: '1px solid rgba(212,175,55,0.3)' }}>
-                    <Gift size={28} strokeWidth={1} style={{ color: 'var(--accent)' }} />
-                  </div>
-                  <p className="font-serif text-4xl font-light italic mb-3" style={{ color: 'var(--text-strong)' }}>For Ananya,</p>
-                  <p className="font-sans text-sm leading-relaxed max-w-48" style={{ color: 'var(--muted)' }}>
-                    "Wishing you a year filled with joy, love and beautiful moments."
-                  </p>
-                  <div className="mt-6 pt-6" style={{ borderTop: '1px solid var(--border)' }}>
-                    <p className="font-sans text-xs tracking-[0.2em] uppercase" style={{ color: 'var(--accent)' }}>Personalised by GŌKANA</p>
-                  </div>
-                </div>
+            <div className="relative aspect-square max-w-md mx-auto bg-white rounded-2xl p-8 md:p-12 border border-[#E8DFD3] shadow-lg flex flex-col items-center justify-center text-center">
+              {/* Decorative Gold Header */}
+              <div className="w-12 h-12 rounded-full bg-[#F5E9C8] flex items-center justify-center text-[#0B1F3A] mb-6">
+                <Sparkles size={22} className="text-[#D4AF37]" />
               </div>
 
-              {/* Decorative corner lines */}
-              <div className="absolute top-4 left-4 w-10 h-10 border-t border-l" style={{ borderColor: 'rgba(212,175,55,0.35)' }} />
-              <div className="absolute top-4 right-4 w-10 h-10 border-t border-r" style={{ borderColor: 'rgba(212,175,55,0.35)' }} />
-              <div className="absolute bottom-4 left-4 w-10 h-10 border-b border-l" style={{ borderColor: 'rgba(212,175,55,0.35)' }} />
-              <div className="absolute bottom-4 right-4 w-10 h-10 border-b border-r" style={{ borderColor: 'rgba(212,175,55,0.35)' }} />
-            </div>
+              {/* Sample Calligraphy Letter */}
+              <p className="font-sans text-xs font-semibold uppercase tracking-[0.2em] text-[#D4AF37] mb-2">
+                Handwritten with Care
+              </p>
+              <h4 className="font-serif text-3xl md:text-4xl font-light text-[#0B1F3A] mb-3 italic">
+                Dearest Ananya,
+              </h4>
+              <p className="font-serif text-base md:text-lg text-[#6B6B6B] leading-relaxed max-w-xs italic mb-6">
+                "May this year bring you endless laughter, peaceful mornings, and sweeter memories."
+              </p>
 
-            {/* Floating tag */}
-            <motion.div
-              className="absolute -top-4 -right-4 px-5 py-3 shadow-premium-lg hidden md:block rounded-lg"
-              style={{ background: 'var(--primary)' }}
-              initial={{ opacity: 0, rotate: -5, scale: 0.9 }}
-              whileInView={{ opacity: 1, rotate: 0, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-            >
-              <p className="font-sans text-xs tracking-[0.15em] uppercase" style={{ color: 'var(--accent)' }}>✦ Personalisable</p>
-            </motion.div>
+              <div className="pt-4 border-t border-[#E8DFD3] w-full flex items-center justify-between text-xs text-[#0B1F3A] font-sans">
+                <span className="font-medium">Wax Sealed • 300 GSM</span>
+                <span className="font-semibold text-[#D4AF37]">Complimentary</span>
+              </div>
+
+              {/* Floating Tag */}
+              <div className="absolute -top-3 -right-3 bg-[#0B1F3A] text-white px-4 py-2 rounded-full text-xs font-semibold tracking-wider uppercase shadow-md flex items-center gap-1.5">
+                <Sparkles size={13} className="text-[#D4AF37]" />
+                100% Personalised
+              </div>
+            </div>
           </ScrollReveal>
 
-          {/* Right — Content */}
+          {/* Right — Features and Description */}
           <div>
             <ScrollReveal delay={0.1}>
-              <p className="label-text mb-5" style={{ color: 'var(--accent)' }}>✦ Make It Personal</p>
+              <p className="label-text text-[#D4AF37] mb-3">✦ The Thought That Counts</p>
             </ScrollReveal>
-
-            <AnimatedHeading className="heading-lg mb-5" delay={0.15}>
-              A gift that's<br />
-              <span className="italic" style={{ color: 'var(--accent)' }}>only yours.</span>
+            <AnimatedHeading id="personalisation-heading" className="heading-lg text-[#0B1F3A] mb-5" delay={0.15}>
+              Every Gift Tells Their Story
             </AnimatedHeading>
-
-            <ScrollReveal delay={0.3}>
-              <Divider className="mb-7" />
-            </ScrollReveal>
-
-            <ScrollReveal delay={0.35}>
-              <p className="font-sans text-base leading-relaxed mb-10 max-w-md" style={{ color: 'var(--muted)' }}>
-                Add names, messages, photos and personal touches to create a gift that could never belong to anyone else. We handle the details — you get all the credit.
+            <ScrollReveal delay={0.25}>
+              <p className="font-sans text-base text-[#6B6B6B] leading-relaxed mb-8">
+                A gift should never feel generic. Our artisans hand-letter your exact words, apply custom name seals, and tailor each detail to turn your present into an enduring heirloom.
               </p>
             </ScrollReveal>
 
-            <StaggerReveal className="space-y-5" stagger={0.08} delay={0.4}>
+            {/* Feature List */}
+            <StaggerReveal className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8" stagger={0.06}>
               {features.map(({ icon: Icon, label, desc }) => (
                 <motion.div
                   key={label}
                   variants={staggerItem}
-                  className="flex items-start gap-4"
+                  className="p-4 rounded-xl bg-white border border-[#E8DFD3]"
                 >
-                  <div className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5" style={{ border: '1px solid rgba(212,175,55,0.25)', background: 'var(--accent-soft)' }}>
-                    <Icon size={18} strokeWidth={1.5} style={{ color: 'var(--accent)' }} />
+                  <div className="flex items-center gap-2.5 mb-1.5 text-[#0B1F3A]">
+                    <Icon size={17} className="text-[#D4AF37]" />
+                    <h5 className="font-sans text-sm font-semibold text-[#0B1F3A]">{label}</h5>
                   </div>
-                  <div>
-                    <p className="font-sans text-sm font-medium mb-0.5" style={{ color: 'var(--text-strong)' }}>{label}</p>
-                    <p className="font-sans text-sm" style={{ color: 'var(--muted)' }}>{desc}</p>
-                  </div>
+                  <p className="font-sans text-xs text-[#6B6B6B] leading-relaxed">{desc}</p>
                 </motion.div>
               ))}
             </StaggerReveal>
 
-            <ScrollReveal delay={0.7} className="mt-10">
-              <Link to="/shop?personalized=true" className="btn-primary">
-                Create Your Gift
+            <ScrollReveal delay={0.4}>
+              <Link to="/shop" className="btn-primary inline-flex items-center gap-2">
+                Browse Personalised Gifts
                 <ArrowRight size={16} />
               </Link>
             </ScrollReveal>

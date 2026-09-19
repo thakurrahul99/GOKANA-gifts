@@ -40,18 +40,18 @@ export function AdminLayout() {
   };
 
   return (
-    <div className="flex h-screen bg-gray-50 font-sans">
+    <div className="flex h-screen bg-[var(--bg)] font-sans">
       {/* Sidebar */}
       <aside className={clsx(
-        'flex flex-col bg-charcoal transition-all duration-300 flex-shrink-0',
+        'flex flex-col bg-[var(--primary)] transition-all duration-300 flex-shrink-0 shadow-lg',
         sidebarOpen ? 'w-60' : 'w-16'
       )}>
         {/* Logo */}
-        <div className="flex items-center gap-3 px-4 py-5 border-b border-white/[0.08]">
-          <span className={clsx('font-serif tracking-[0.15em] uppercase text-ivory transition-all', sidebarOpen ? 'text-xl' : 'text-sm')}>
+        <div className="flex items-center gap-3 px-4 py-5 border-b border-[var(--surface)]/[0.08]">
+          <span className={clsx('font-serif tracking-[0.15em] uppercase text-[var(--surface)] transition-all', sidebarOpen ? 'text-xl' : 'text-sm')}>
             {sidebarOpen ? 'GŌKANA' : 'G'}
           </span>
-          {sidebarOpen && <span className="text-xs text-white/30 font-sans">Admin</span>}
+          {sidebarOpen && <span className="text-xs text-[var(--accent)]/60 font-sans font-medium tracking-widest uppercase">Admin</span>}
         </div>
 
         {/* Nav */}
@@ -63,10 +63,10 @@ export function AdminLayout() {
                 key={href}
                 to={href}
                 className={clsx(
-                  'flex items-center gap-3 px-4 py-3 mx-2 rounded-sm transition-all duration-200 group',
+                  'flex items-center gap-3 px-4 py-3 mx-2 rounded-sm transition-all duration-200 group min-h-[44px]',
                   active
-                    ? 'bg-gold/20 text-gold'
-                    : 'text-white/50 hover:text-white hover:bg-white/5'
+                    ? 'bg-[var(--accent)]/20 text-[var(--accent)]'
+                    : 'text-[var(--surface)]/50 hover:text-[var(--surface)] hover:bg-[var(--surface)]/5'
                 )}
               >
                 <Icon size={18} strokeWidth={1.5} />
@@ -78,23 +78,23 @@ export function AdminLayout() {
         </nav>
 
         {/* Footer */}
-        <div className="p-4 border-t border-white/[0.08]">
+        <div className="p-4 border-t border-[var(--surface)]/[0.08]">
           {sidebarOpen && (
             <div className="flex items-center gap-2 mb-3">
-              <div className="w-8 h-8 bg-gold/20 rounded-full flex items-center justify-center">
-                <span className="text-gold text-xs font-medium">
+              <div className="w-8 h-8 bg-[var(--accent)]/20 rounded-full flex items-center justify-center border border-[var(--accent)]/30">
+                <span className="text-[var(--accent)] text-xs font-semibold">
                   {user?.name?.[0]?.toUpperCase() || 'A'}
                 </span>
               </div>
               <div>
-                <p className="text-xs text-white/70">{user?.name || 'Admin'}</p>
-                <p className="text-[10px] text-white/30">{user?.email || 'admin@gokana.in'}</p>
+                <p className="text-xs text-[var(--surface)]/80 font-medium">{user?.name || 'Admin'}</p>
+                <p className="text-[10px] text-[var(--surface)]/40">{user?.email || 'admin@gokana.in'}</p>
               </div>
             </div>
           )}
           <button
             onClick={handleLogout}
-            className="flex items-center gap-2 text-white/30 hover:text-white transition-colors text-xs"
+            className="flex items-center gap-2 text-[var(--surface)]/40 hover:text-[var(--surface)] transition-colors text-xs min-h-[40px]"
           >
             <LogOut size={14} />
             {sidebarOpen && 'Logout'}
@@ -105,22 +105,26 @@ export function AdminLayout() {
       {/* Main */}
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* Top bar */}
-        <header className="bg-white border-b border-gray-200 px-6 py-4 flex items-center gap-4">
-          <button onClick={() => setSidebarOpen(!sidebarOpen)} className="text-gray-500 hover:text-gray-700">
+        <header className="bg-[var(--surface)] border-b border-[var(--border)] px-6 py-4 flex items-center gap-4 shadow-sm">
+          <button
+            onClick={() => setSidebarOpen(!sidebarOpen)}
+            className="text-[var(--text-muted)] hover:text-[var(--primary)] transition-colors p-1 min-h-[40px] min-w-[40px] flex items-center justify-center"
+            aria-label={sidebarOpen ? 'Collapse sidebar' : 'Expand sidebar'}
+          >
             {sidebarOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
-          <h1 className="font-sans text-sm font-medium text-gray-700">
+          <h1 className="font-sans text-sm font-semibold text-[var(--primary)]">
             {navItems.find(n => n.href === location.pathname)?.label || 'Admin'}
           </h1>
           <div className="ml-auto flex items-center gap-3">
-            <Link to="/" target="_blank" className="text-xs text-gold hover:underline">
+            <Link to="/" target="_blank" className="text-xs text-[var(--accent)] hover:underline font-medium">
               View Store ↗
             </Link>
           </div>
         </header>
 
         {/* Content */}
-        <main className="flex-1 overflow-y-auto p-6">
+        <main className="flex-1 overflow-y-auto p-6 bg-[var(--bg)]">
           <Outlet />
         </main>
       </div>

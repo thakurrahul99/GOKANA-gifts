@@ -1,15 +1,8 @@
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowRight, ChevronDown, Star, Gift, Truck, Shield, Award } from 'lucide-react';
+import { ArrowRight, ChevronDown, Star, Truck, ShieldCheck, RotateCcw, Sparkles } from 'lucide-react';
 import { heroImg } from '../../data';
-
-const trustStats = [
-  { icon: Award, label: '50,000+ Gifts Delivered' },
-  { icon: Star, label: '4.9★ Average Rating' },
-  { icon: Truck, label: 'Free Shipping on ₹999+' },
-  { icon: Gift, label: 'Handcrafted with Love' },
-];
 
 export function Hero() {
   const containerRef = useRef(null);
@@ -18,183 +11,185 @@ export function Hero() {
     offset: ['start start', 'end start'],
   });
 
-  const imgY = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
-  const textY = useTransform(scrollYProgress, [0, 1], ['0%', '35%']);
-  const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+  const imgY = useTransform(scrollYProgress, [0, 1], ['0%', '18%']);
+  const textY = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
+  const opacity = useTransform(scrollYProgress, [0, 0.65], [1, 0]);
 
   const scrollDown = () => {
-    window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
+    window.scrollTo({ top: window.innerHeight - 30, behavior: 'smooth' });
   };
 
   return (
     <>
       <section
         ref={containerRef}
-        className="relative w-full h-screen min-h-[600px] overflow-hidden"
-        style={{ background: 'var(--primary)' }}
-        aria-label="Hero — Premium Gifting"
+        className="relative w-full min-h-[640px] h-[92vh] max-h-[960px] overflow-hidden bg-[#0B1F3A]"
+        aria-label="Hero Introduction"
       >
         {/* Parallax Image */}
         <motion.div
-          className="absolute inset-0 scale-110 origin-center"
+          className="absolute inset-0 scale-105 origin-center"
           style={{ y: imgY }}
         >
           <img
             src={heroImg}
-            alt="GŌKANA premium gift collection — curated, handcrafted gifts"
+            alt="GŌKANA handcrafted luxury gift boxes and hampers"
             className="w-full h-full object-cover"
             loading="eager"
-            fetchpriority="high"
+            fetchPriority="high"
           />
-          {/* Layered overlays for depth */}
-          <div className="absolute inset-0" style={{ background: 'rgba(11,31,58,0.55)' }} />
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(11,31,58,0.75) 0%, rgba(11,31,58,0.15) 55%, transparent 100%)' }} />
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, rgba(11,31,58,0.45) 0%, transparent 60%)' }} />
+          {/* Gradients */}
+          <div className="absolute inset-0 bg-[#0B1F3A]/45" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0B1F3A] via-[#0B1F3A]/35 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0B1F3A]/60 via-[#0B1F3A]/20 to-transparent" />
         </motion.div>
 
-        {/* Hero content */}
+        {/* Content */}
         <motion.div
-          className="absolute inset-0 flex flex-col justify-end pb-20 md:pb-28"
+          className="absolute inset-0 flex flex-col justify-end pb-16 md:pb-20"
           style={{ y: textY, opacity }}
         >
           <div className="container-gokana">
-            {/* Pre-label */}
-            <motion.p
-              className="label-text mb-6"
-              style={{ color: 'rgba(212,175,55,0.85)' }}
-              initial={{ opacity: 0, y: 20 }}
+            {/* Trust Badges Pill (Above the fold) */}
+            <motion.div
+              className="inline-flex flex-wrap items-center gap-3 px-3.5 py-1.5 rounded-full bg-[#0B1F3A]/80 backdrop-blur-md border border-[#D4AF37]/30 text-white text-xs font-sans mb-6"
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
             >
-              ✦ Curated Collections
-            </motion.p>
+              <div className="flex items-center gap-1 text-[#D4AF37]">
+                <Star size={13} className="fill-[#D4AF37]" />
+                <span className="font-semibold text-white">4.9/5 Rating</span>
+              </div>
+              <span className="text-white/30">•</span>
+              <span className="text-white/80">50,000+ Gifts Delivered with Love</span>
+            </motion.div>
 
-            {/* Main heading */}
-            <div className="overflow-hidden mb-6">
+            {/* Main Headline */}
+            <div className="overflow-hidden mb-5 max-w-4xl">
               <motion.h1
-                className="font-serif font-light text-white leading-[1.05] tracking-tight max-w-4xl"
-                style={{ fontSize: 'clamp(3rem, 8vw, 7rem)' }}
+                className="font-serif text-[clamp(2.75rem,7vw,6.5rem)] font-light text-white leading-[1.05] tracking-tight"
                 initial={{ y: '100%' }}
                 animate={{ y: '0%' }}
-                transition={{ duration: 1.1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
               >
-                Gifts that become{' '}
-                <span className="italic" style={{ color: 'var(--accent)' }}>memories.</span>
+                Gifts that become
+                <span className="text-[#F5E9C8] italic"> unforgettable.</span>
               </motion.h1>
             </div>
 
-            {/* Supporting text */}
+            {/* Supporting Subheadline */}
             <motion.p
-              className="font-sans text-base md:text-lg max-w-md leading-relaxed mb-4"
-              style={{ color: 'rgba(255,255,255,0.65)' }}
+              className="font-sans text-base md:text-lg text-white/85 max-w-xl leading-relaxed mb-8"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.9 }}
+              transition={{ duration: 0.8, delay: 0.5 }}
             >
-              Discover thoughtfully curated gifts for every moment worth celebrating.
+              Artisan chocolates, hand-poured soy candles, and bespoke keepsakes. Hand-packed in luxury rigid boxes with complimentary handwritten calligraphy cards.
             </motion.p>
-
-            {/* Trust social proof near hero */}
-            <motion.div
-              className="flex items-center gap-2 mb-8"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 1.0 }}
-            >
-              <div className="flex -space-x-1">
-                {[1,2,3,4,5].map(i => (
-                  <Star key={i} size={14} fill="var(--accent)" color="var(--accent)" />
-                ))}
-              </div>
-              <span className="font-sans text-sm font-medium" style={{ color: 'rgba(255,255,255,0.8)' }}>
-                4.9 · Loved by 50,000+ happy customers
-              </span>
-            </motion.div>
 
             {/* CTAs */}
             <motion.div
-              className="flex flex-col sm:flex-row items-start gap-4"
+              className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1.1 }}
+              transition={{ duration: 0.8, delay: 0.7 }}
             >
               <Link
-                to="/shop"
+                to="/gift-finder"
                 className="btn-accent"
               >
-                Explore Collection
+                ✦ Find the Perfect Gift
                 <ArrowRight size={16} />
               </Link>
               <Link
-                to="/gift-finder"
-                className="inline-flex items-center gap-3 px-8 py-4 font-sans text-sm font-semibold tracking-[0.08em] uppercase rounded-[10px] transition-all duration-200"
-                style={{
-                  background: 'transparent',
-                  border: '1.5px solid rgba(255,255,255,0.35)',
-                  color: '#FFFFFF',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = 'rgba(255,255,255,0.1)';
-                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.7)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'transparent';
-                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.35)';
-                }}
+                to="/shop"
+                className="btn-outline border-white text-white hover:bg-white/10 hover:border-white"
               >
-                <Gift size={16} />
-                Find the Perfect Gift
+                Explore Collection
               </Link>
             </motion.div>
           </div>
         </motion.div>
 
-        {/* Scroll indicator */}
-        <motion.button
+        {/* Scroll Indicator */}
+        <button
           onClick={scrollDown}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 transition-colors focus-visible:outline-none"
-          style={{ color: 'rgba(255,255,255,0.4)' }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 2, duration: 0.8 }}
-          aria-label="Scroll down to explore"
-          onMouseEnter={(e) => { e.currentTarget.style.color = 'rgba(255,255,255,0.7)'; }}
-          onMouseLeave={(e) => { e.currentTarget.style.color = 'rgba(255,255,255,0.4)'; }}
+          className="absolute bottom-5 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 text-white/50 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 rounded p-1"
+          aria-label="Scroll down to content"
         >
-          <span className="label-text" style={{ fontSize: '10px' }}>Scroll</span>
+          <span className="font-sans text-[10px] tracking-[0.2em] uppercase text-[#D4AF37]">Scroll</span>
           <motion.div
-            animate={{ y: [0, 6, 0] }}
-            transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
+            animate={{ y: [0, 5, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
           >
-            <ChevronDown size={16} strokeWidth={1.5} />
+            <ChevronDown size={16} strokeWidth={2} />
           </motion.div>
-        </motion.button>
-
-        {/* Side decoration */}
-        <div
-          className="absolute right-6 top-1/2 -translate-y-1/2 writing-vertical hidden lg:block"
-          style={{ fontSize: '10px', fontFamily: 'var(--font-sans)', letterSpacing: '0.25em', color: 'rgba(255,255,255,0.2)' }}
-          aria-hidden="true"
-        >
-          01 / GŌKANA
-        </div>
+        </button>
       </section>
 
-      {/* Trust Strip — below hero */}
-      <div style={{ background: 'var(--primary-2)' }}>
+      {/* ── Trust Strip Directly Below Hero (Section 4 CRO Requirement) ── */}
+      <aside className="bg-[#FFFFFF] border-b border-[#E8DFD3] py-4 relative z-10" aria-label="Trust and Guarantees">
         <div className="container-gokana">
-          <div className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-white/10">
-            {trustStats.map(({ icon: Icon, label }) => (
-              <div key={label} className="flex items-center justify-center gap-2.5 py-4 px-3">
-                <Icon size={16} style={{ color: 'var(--accent)', flexShrink: 0 }} />
-                <span className="font-sans text-xs font-medium" style={{ color: 'rgba(255,255,255,0.8)' }}>
-                  {label}
-                </span>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 text-center md:text-left">
+            <div className="flex items-center justify-center md:justify-start gap-3">
+              <div className="w-9 h-9 rounded-full bg-[#E7ECF3] flex items-center justify-center text-[#0B1F3A] flex-shrink-0">
+                <Truck size={17} />
               </div>
-            ))}
+              <div>
+                <p className="font-sans text-xs font-semibold uppercase tracking-wider text-[#0B1F3A]">
+                  Free Express Shipping
+                </p>
+                <p className="font-sans text-[11px] text-[#6B6B6B] hidden sm:block">
+                  On all orders above ₹999
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center justify-center md:justify-start gap-3">
+              <div className="w-9 h-9 rounded-full bg-[#F5E9C8] flex items-center justify-center text-[#0B1F3A] flex-shrink-0">
+                <ShieldCheck size={17} />
+              </div>
+              <div>
+                <p className="font-sans text-xs font-semibold uppercase tracking-wider text-[#0B1F3A]">
+                  100% Secure Payment
+                </p>
+                <p className="font-sans text-[11px] text-[#6B6B6B] hidden sm:block">
+                  Encrypted UPI, Cards & NetBanking
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center justify-center md:justify-start gap-3">
+              <div className="w-9 h-9 rounded-full bg-[#F3D9D4] flex items-center justify-center text-[#0B1F3A] flex-shrink-0">
+                <RotateCcw size={17} />
+              </div>
+              <div>
+                <p className="font-sans text-xs font-semibold uppercase tracking-wider text-[#0B1F3A]">
+                  Easy 7-Day Returns
+                </p>
+                <p className="font-sans text-[11px] text-[#6B6B6B] hidden sm:block">
+                  No questions asked guarantee
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center justify-center md:justify-start gap-3">
+              <div className="w-9 h-9 rounded-full bg-[#E7ECF3] flex items-center justify-center text-[#0B1F3A] flex-shrink-0">
+                <Sparkles size={17} />
+              </div>
+              <div>
+                <p className="font-sans text-xs font-semibold uppercase tracking-wider text-[#0B1F3A]">
+                  Handcrafted Luxury
+                </p>
+                <p className="font-sans text-[11px] text-[#6B6B6B] hidden sm:block">
+                  Signature rigid box packaging
+                </p>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      </aside>
     </>
   );
 }

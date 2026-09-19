@@ -1,5 +1,4 @@
 import { useRef } from 'react';
-import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { ScrollReveal, AnimatedHeading } from '../ui/ScrollReveal';
@@ -9,74 +8,63 @@ import { products } from '../../data';
 export function Bestsellers() {
   const scrollRef = useRef(null);
   const bestsellers = products.filter((p) => p.tags.includes('bestseller'));
-  // Duplicate for carousel feel
   const carouselItems = [...bestsellers, ...products.slice(0, 2)];
 
   const scroll = (dir) => {
     const container = scrollRef.current;
     if (!container) return;
-    const amount = container.offsetWidth * 0.8;
+    const amount = container.offsetWidth * 0.75;
     container.scrollBy({ left: dir === 'left' ? -amount : amount, behavior: 'smooth' });
   };
 
   return (
-    <section className="section-py overflow-hidden" style={{ background: 'var(--surface)' }}>
+    <section className="section-py bg-white overflow-hidden" aria-labelledby="bestsellers-heading">
       <div className="container-gokana">
-        {/* Header */}
-        <div className="flex items-end justify-between mb-12">
+        {/* Header with Navigation Controls */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
           <div>
             <ScrollReveal delay={0.1}>
-              <p className="label-text mb-4" style={{ color: 'var(--accent)' }}>✦ Most Loved</p>
+              <p className="label-text text-[#D4AF37] mb-3">✦ Most Adored</p>
             </ScrollReveal>
-            <AnimatedHeading className="heading-lg" delay={0.15}>
+            <AnimatedHeading id="bestsellers-heading" className="heading-lg text-[#0B1F3A]" delay={0.15}>
               Our Bestsellers
             </AnimatedHeading>
           </div>
-          <ScrollReveal delay={0.3} className="flex items-center gap-3">
+
+          <ScrollReveal delay={0.2} className="flex items-center gap-2">
             <button
               onClick={() => scroll('left')}
-              className="w-11 h-11 flex items-center justify-center rounded-lg transition-all duration-200 focus-visible:outline-none focus-visible:ring-2"
-              style={{ border: '1px solid var(--border)', color: 'var(--muted)', '--tw-ring-color': 'var(--accent)' }}
-              aria-label="Scroll left"
-              onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--primary)'; e.currentTarget.style.color = 'var(--primary)'; }}
-              onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.color = 'var(--muted)'; }}
+              className="min-w-[44px] min-h-[44px] rounded-full border border-[#E8DFD3] flex items-center justify-center text-[#0B1F3A] hover:border-[#D4AF37] hover:bg-[#F5E9C8] transition-all"
+              aria-label="Scroll bestsellers left"
             >
-              <ChevronLeft size={18} strokeWidth={1.5} />
+              <ChevronLeft size={18} strokeWidth={2} />
             </button>
             <button
               onClick={() => scroll('right')}
-              className="w-11 h-11 flex items-center justify-center rounded-lg transition-all duration-200 focus-visible:outline-none focus-visible:ring-2"
-              style={{ border: '1px solid var(--border)', color: 'var(--muted)', '--tw-ring-color': 'var(--accent)' }}
-              aria-label="Scroll right"
-              onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--primary)'; e.currentTarget.style.color = 'var(--primary)'; }}
-              onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.color = 'var(--muted)'; }}
+              className="min-w-[44px] min-h-[44px] rounded-full border border-[#E8DFD3] flex items-center justify-center text-[#0B1F3A] hover:border-[#D4AF37] hover:bg-[#F5E9C8] transition-all"
+              aria-label="Scroll bestsellers right"
             >
-              <ChevronRight size={18} strokeWidth={1.5} />
+              <ChevronRight size={18} strokeWidth={2} />
             </button>
           </ScrollReveal>
         </div>
 
-        {/* Carousel */}
+        {/* Carousel Row */}
         <motion.div
           ref={scrollRef}
-          className="flex gap-5 overflow-x-auto no-scrollbar pb-4 -mx-4 px-4"
+          className="flex gap-6 overflow-x-auto no-scrollbar pb-6 -mx-5 px-5 sm:-mx-8 sm:px-8"
           style={{ scrollSnapType: 'x mandatory' }}
         >
           {carouselItems.map((product, i) => (
             <div
               key={`${product.id}-${i}`}
-              className="flex-none w-[260px] md:w-[300px]"
+              className="flex-none w-[280px] sm:w-[320px]"
               style={{ scrollSnapAlign: 'start' }}
             >
               <ProductCard product={product} index={i} />
             </div>
           ))}
         </motion.div>
-
-        {/* Mobile drag hint */}
-        <ScrollReveal delay={0.2} className="text-center mt-6 md:hidden">
-          <p className="font-sans text-xs tracking-widest" style={{ color: 'var(--muted-2)' }}>← Swipe to explore →</p>
-        </ScrollReveal>
       </div>
     </section>
   );

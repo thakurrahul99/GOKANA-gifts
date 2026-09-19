@@ -2,6 +2,8 @@ import express from "express";
 import cors from "cors";
 import morgan from "morgan";
 import dotenv from "dotenv";
+import helmet from "helmet";
+import rateLimit from "express-rate-limit";
 import { connectDB } from "./config/db.js";
 
 // Route imports
@@ -22,6 +24,17 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // ─── Middleware ───
+app.use(helmet());
+
+// Basic global rate limit — a tighter one is applied to auth routes below.
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 min
+  limit: 300,
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+app.use("/api", apiLimiter);
+
 app.use(
   cors({
     origin: (origin, callback) => {
@@ -42,7 +55,17 @@ app.use(
     credentials: true,
   }),
 );
-app.use(express.json({ limit: "10mb" }));
+// `verify` stashes the raw request bytes on req.rawBody before parsing —
+// needed so the Razorpay webhook can HMAC-verify against the exact payload
+// Razorpay signed, instead of a re-serialized (and possibly different) copy.
+app.use(
+  express.json({
+    limit: "10mb",
+    verify: (req, res, buf) => {
+      req.rawBody = buf;
+    },
+  }),
+);
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 
