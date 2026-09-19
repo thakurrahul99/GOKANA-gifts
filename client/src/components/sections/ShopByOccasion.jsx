@@ -73,7 +73,7 @@ export function ShopByOccasion() {
           <ScrollReveal delay={0.3}>
             <Link
               to="/shop"
-              className="btn-outline border-white/40 text-white hover:bg-white/10 hover:border-white inline-flex items-center gap-2 text-xs py-3 px-6"
+              className="btn-primary inline-flex items-center gap-2 text-xs py-3 px-6"
             >
               View All Occasions
               <ArrowRight size={15} />
