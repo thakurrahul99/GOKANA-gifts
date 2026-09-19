@@ -129,7 +129,7 @@ export function Hero() {
       </section>
 
       {/* ── Trust Strip Directly Below Hero (Section 4 CRO Requirement) ── */}
-      <aside className="bg-[#FFFFFF] border-b border-[#E8DFD3] py-4 relative z-10" aria-label="Trust and Guarantees">
+      <aside className="bg-[#0B1F3A] border-b border-[#1E3A5F] py-4 relative z-10" aria-label="Trust and Guarantees">
         <div className="container-gokana">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 text-center md:text-left">
             <div className="flex items-center justify-center md:justify-start gap-3">
@@ -137,10 +137,10 @@ export function Hero() {
                 <Truck size={17} />
               </div>
               <div>
-                <p className="font-sans text-xs font-semibold uppercase tracking-wider text-[#0B1F3A]">
+                <p className="font-sans text-xs font-semibold uppercase tracking-wider text-white">
                   Free Express Shipping
                 </p>
-                <p className="font-sans text-[11px] text-[#6B6B6B] hidden sm:block">
+                <p className="font-sans text-[11px] text-white/65 hidden sm:block">
                   On all orders above ₹999
                 </p>
               </div>
@@ -151,10 +151,10 @@ export function Hero() {
                 <ShieldCheck size={17} />
               </div>
               <div>
-                <p className="font-sans text-xs font-semibold uppercase tracking-wider text-[#0B1F3A]">
+                <p className="font-sans text-xs font-semibold uppercase tracking-wider text-white">
                   100% Secure Payment
                 </p>
-                <p className="font-sans text-[11px] text-[#6B6B6B] hidden sm:block">
+                <p className="font-sans text-[11px] text-white/65 hidden sm:block">
                   Encrypted UPI, Cards & NetBanking
                 </p>
               </div>
@@ -165,10 +165,10 @@ export function Hero() {
                 <RotateCcw size={17} />
               </div>
               <div>
-                <p className="font-sans text-xs font-semibold uppercase tracking-wider text-[#0B1F3A]">
+                <p className="font-sans text-xs font-semibold uppercase tracking-wider text-white">
                   Easy 7-Day Returns
                 </p>
-                <p className="font-sans text-[11px] text-[#6B6B6B] hidden sm:block">
+                <p className="font-sans text-[11px] text-white/65 hidden sm:block">
                   No questions asked guarantee
                 </p>
               </div>
@@ -179,10 +179,10 @@ export function Hero() {
                 <Sparkles size={17} />
               </div>
               <div>
-                <p className="font-sans text-xs font-semibold uppercase tracking-wider text-[#0B1F3A]">
+                <p className="font-sans text-xs font-semibold uppercase tracking-wider text-white">
                   Handcrafted Luxury
                 </p>
-                <p className="font-sans text-[11px] text-[#6B6B6B] hidden sm:block">
+                <p className="font-sans text-[11px] text-white/65 hidden sm:block">
                   Signature rigid box packaging
                 </p>
               </div>
