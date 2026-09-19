@@ -110,7 +110,9 @@ export function Navbar({ onSearchOpen }) {
             aria-label="Main Navigation"
           >
             {navLinks.map((link) => {
-              const isActive = location.pathname === link.href;
+              const isActive = link.isHash
+                ? location.pathname === "/" && location.hash === link.href.split("#")[1] ? true : location.pathname === "/" && location.hash === `#${link.href.split("#")[1]}`
+                : location.pathname === link.href;
               return (
                 <Link
                   key={link.label}
