@@ -314,7 +314,7 @@ export function GiftFinder() {
                               onClick={(e) => handleAddToCart(e, product)}
                               className={`w-full py-2 px-3 rounded-lg text-xs font-sans font-semibold uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 min-h-[40px] ${
                                 addedId === product.id
-                                  ? 'bg-[#2E7D32] text-white'
+                                  ? 'bg-[#D4AF37] text-[#121212]'
                                   : 'bg-[#D4AF37] text-[#121212] hover:bg-[#B08D57]'
                               }`}
                             >
