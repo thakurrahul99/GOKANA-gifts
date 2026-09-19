@@ -124,7 +124,7 @@ export function CheckoutPage() {
                   <div
                     className={`w-9 h-9 rounded-full flex items-center justify-center font-sans text-xs font-bold transition-all ${
                       idx < step
-                        ? 'bg-[#2E7D32] text-white'
+                        ? 'bg-[#D4AF37] text-[#121212]'
                         : idx === step
                         ? 'bg-[#0B1F3A] text-white ring-4 ring-[#E8DFD3]'
                         : 'bg-[#E8DFD3] text-[#6B6B6B]'
@@ -139,7 +139,7 @@ export function CheckoutPage() {
                 {idx < STEPS.length - 1 && (
                   <div
                     className={`flex-1 h-0.5 mx-2 transition-all ${
-                      idx < step ? 'bg-[#2E7D32]' : 'bg-[#E8DFD3]'
+                      idx < step ? 'bg-[#D4AF37]' : 'bg-[#E8DFD3]'
                     }`}
                   />
                 )}
@@ -151,7 +151,7 @@ export function CheckoutPage() {
         {/* Confirmation Screen */}
         {step === 4 ? (
           <div className="card-premium max-w-xl mx-auto text-center p-8 md:p-12">
-            <div className="w-16 h-16 rounded-full bg-[#E7ECF3] text-[#2E7D32] flex items-center justify-center mx-auto mb-6">
+            <div className="w-16 h-16 rounded-full bg-[#F5E9C8] text-[#B08D57] flex items-center justify-center mx-auto mb-6">
               <PackageCheck size={32} />
             </div>
             <span className="label-text text-[#D4AF37] mb-2 block">Order Placed Successfully</span>
