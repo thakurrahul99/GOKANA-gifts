@@ -107,7 +107,7 @@ export function Navbar({ onSearchOpen }) {
                   to={link.href}
                   onClick={(e) => handleNavClick(link, e)}
                   className={clsx(
-                    "relative py-2 font-sans text-xs font-semibold tracking-[0.1em] uppercase transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 rounded-sm",
+                    "relative py-3 px-1 font-sans text-xs font-semibold tracking-[0.1em] uppercase transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 rounded-sm",
                     textColor,
                     isActive
                       ? "text-[var(--accent)]"
@@ -253,7 +253,7 @@ export function Navbar({ onSearchOpen }) {
                     key={link.label}
                     to={link.href}
                     onClick={(e) => handleNavClick(link, e)}
-                    className="block py-3 font-serif text-2xl font-light text-[var(--primary)] hover:text-[var(--accent)] transition-colors border-b border-[var(--border)]/60"
+                    className="block py-4 px-2 font-serif text-2xl font-light text-[var(--primary)] hover:text-[var(--accent)] transition-colors border-b border-[var(--border)]/60"
                   >
                     {link.label}
                   </Link>
