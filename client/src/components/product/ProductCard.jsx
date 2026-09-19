@@ -110,7 +110,7 @@ export function ProductCard({ product, index = 0 }) {
           <div className="flex items-center justify-between">
             <Rating value={product.rating || 5} count={product.reviews || 48} size="sm" />
             {product.inStock && (
-              <span className="text-[11px] font-sans font-medium text-[#2E7D32]">
+              <span className="text-[11px] font-sans font-medium text-[#B08D57]">
                 In Stock
               </span>
             )}
@@ -146,8 +146,8 @@ export function ProductCard({ product, index = 0 }) {
         aria-label={`Add ${product.name} to cart`}
         className={`w-full py-2.5 px-4 rounded-lg font-sans text-xs font-semibold uppercase tracking-wider transition-all duration-200 flex items-center justify-center gap-2 min-h-[44px] ${
           added
-            ? 'bg-[#2E7D32] text-white'
-            : 'bg-[#0B1F3A] text-white hover:bg-[#1E3A5F] active:scale-[0.98]'
+            ? 'bg-[#D4AF37] text-[#121212]'
+            : 'bg-[#D4AF37] text-[#121212] hover:bg-[#B08D57] active:scale-[0.98]'
         }`}
       >
         {added ? (
