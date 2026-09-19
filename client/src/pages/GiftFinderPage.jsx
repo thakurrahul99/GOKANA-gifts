@@ -394,7 +394,7 @@ export function GiftFinderPage() {
         <div className="container-gokana max-w-4xl">
           <div className="p-8 md:p-10 rounded-2xl bg-white border border-[#E8DFD3] flex flex-col md:flex-row items-center justify-between gap-8 shadow-xs">
             <div className="max-w-lg">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase mb-3 bg-[#E7ECF3] text-[#0B1F3A]">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase mb-3 bg-[#F3D9D4] text-[#0B1F3A]">
                 <MessageCircle size={13} />
                 Bespoke & Bulk Gifting Concierge
               </span>
