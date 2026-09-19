@@ -164,7 +164,7 @@ export function ProductPage() {
             {/* Star Rating */}
             <div className="flex items-center gap-3 mb-4">
               <Rating value={product.rating || 5} count={product.reviews || 94} size="md" />
-              <span className="text-xs font-sans text-[#2E7D32] font-semibold bg-[#E7ECF3] px-2 py-0.5 rounded-full">
+              <span className="text-xs font-sans text-[#B08D57] font-semibold bg-[#F3D9D4] px-2 py-0.5 rounded-full">
                 Verified Curation
               </span>
             </div>
@@ -301,7 +301,7 @@ export function ProductPage() {
               <div className="flex items-center gap-3">
                 <button
                   onClick={handleAddToCart}
-                  className={`btn-primary flex-1 ${addedToCart ? 'bg-[#2E7D32] hover:bg-[#2E7D32]' : ''}`}
+                  className={`btn-primary flex-1 ${addedToCart ? 'bg-[#B08D57] hover:bg-[#B08D57]' : ''}`}
                 >
                   {addedToCart ? (
                     <>
@@ -389,7 +389,7 @@ export function ProductPage() {
           <p className="font-serif text-lg font-semibold text-[#0B1F3A] leading-none">
             {formatPrice(product.price)}
           </p>
-          <p className="font-sans text-[11px] text-[#2E7D32] font-medium mt-0.5">
+          <p className="font-sans text-[11px] text-[#B08D57] font-medium mt-0.5">
             ✓ In Stock
           </p>
         </div>
