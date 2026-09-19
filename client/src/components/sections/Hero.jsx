@@ -90,7 +90,7 @@ export function Hero() {
 
             {/* CTAs */}
             <motion.div
-              className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5"
+              className="hero-cta-stack flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.7 }}
