@@ -174,7 +174,7 @@ select:disabled {
   }
 
   a:visited {
-    color: var(--primary-2);
+    color: inherit;
   }
 
   img {
