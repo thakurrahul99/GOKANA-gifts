@@ -56,8 +56,8 @@ export function Navbar({ onSearchOpen }) {
 
   // Keep the navbar solid and readable over every hero/section background.
   const navClasses = scrolled
-    ? "bg-[var(--surface)] shadow-[0_8px_24px_rgba(11,31,58,0.10)] border-b-2 border-[var(--border)]"
-    : "bg-[var(--surface)] shadow-[0_4px_16px_rgba(11,31,58,0.08)] border-b-2 border-[var(--border)]";
+    ? "bg-[var(--surface)] shadow-[0_4px_18px_rgba(11,31,58,0.08)] border-b border-[var(--border)]"
+    : "bg-[var(--surface)] border-b border-[var(--border)]";
 
   const textColor = "text-[var(--primary)]";
   const logoColor = "text-[var(--primary)]";
@@ -74,7 +74,7 @@ export function Navbar({ onSearchOpen }) {
           navClasses,
         )}
         style={{
-          height: scrolled ? "68px" : "80px",
+          height: scrolled ? "72px" : "76px",
         }}
       >
         <div className="container-gokana h-full flex items-center justify-between">
@@ -82,7 +82,7 @@ export function Navbar({ onSearchOpen }) {
           <Link
             to="/"
             className={clsx(
-              "font-serif text-2xl md:text-3xl font-light tracking-[0.15em] uppercase transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 rounded-sm",
+              "font-serif text-[1.75rem] md:text-[2rem] font-medium tracking-[0.12em] uppercase transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 rounded-sm",
               logoColor,
             )}
             aria-label="GŌKANA Home"
@@ -92,7 +92,7 @@ export function Navbar({ onSearchOpen }) {
 
           {/* Desktop Navigation Links */}
           <nav
-            className="hidden lg:flex items-center gap-8"
+            className="hidden lg:flex items-center gap-1"
             aria-label="Main Navigation"
           >
             {navLinks.map((link) => {
@@ -103,11 +103,11 @@ export function Navbar({ onSearchOpen }) {
                   to={link.href}
                   onClick={(e) => handleNavClick(link, e)}
                   className={clsx(
-                    "relative py-2.5 px-3 font-sans text-xs font-semibold tracking-[0.1em] uppercase transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 rounded-md",
+                    "relative px-3.5 py-2 font-sans text-[0.72rem] font-semibold tracking-[0.11em] uppercase transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 rounded-md",
                     textColor,
                     isActive
-                      ? "text-[var(--accent)] bg-[var(--accent-soft)]"
-                      : "hover:text-[var(--accent)] hover:bg-[var(--blush)]/60",
+                      ? "text-[var(--accent)]"
+                      : "hover:text-[var(--accent)]",
                   )}
                   aria-current={isActive ? "page" : undefined}
                 >
@@ -134,7 +134,7 @@ export function Navbar({ onSearchOpen }) {
               onClick={onSearchOpen}
               aria-label="Open search dialog"
               className={clsx(
-                "min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 hover:text-[var(--accent)]",
+                "min-w-[40px] min-h-[40px] flex items-center justify-center rounded-full transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 hover:bg-[var(--bg)] hover:text-[var(--accent)]",
                 textColor,
               )}
             >
@@ -145,7 +145,7 @@ export function Navbar({ onSearchOpen }) {
               to="/wishlist"
               aria-label={`Wishlist, ${wishCount} items`}
               className={clsx(
-                "relative min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 hover:text-[var(--accent)]",
+                "relative min-w-[40px] min-h-[40px] flex items-center justify-center rounded-full transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 hover:bg-[var(--bg)] hover:text-[var(--accent)]",
                 textColor,
               )}
             >
@@ -161,7 +161,7 @@ export function Navbar({ onSearchOpen }) {
               to={user ? "/account" : "/login"}
               aria-label={user ? "My Account" : "Sign in to account"}
               className={clsx(
-                "min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 hover:text-[var(--accent)]",
+                "min-w-[40px] min-h-[40px] flex items-center justify-center rounded-full transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 hover:bg-[var(--bg)] hover:text-[var(--accent)]",
                 textColor,
               )}
             >
@@ -172,7 +172,7 @@ export function Navbar({ onSearchOpen }) {
               onClick={openCart}
               aria-label={`Open shopping cart, ${cartCount} items`}
               className={clsx(
-                "relative min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 hover:text-[var(--accent)]",
+                "relative min-w-[40px] min-h-[40px] flex items-center justify-center rounded-full transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 hover:bg-[var(--bg)] hover:text-[var(--accent)]",
                 textColor,
               )}
             >
@@ -192,7 +192,7 @@ export function Navbar({ onSearchOpen }) {
             {/* Mobile Hamburger Toggle */}
             <button
               className={clsx(
-                "lg:hidden min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 hover:text-[var(--accent)]",
+                "lg:hidden min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 hover:bg-[var(--bg)] hover:text-[var(--accent)]",
                 textColor,
               )}
               onClick={() => setMobileOpen(true)}
