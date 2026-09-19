@@ -13,13 +13,13 @@ const mockOrders = [
 ];
 
 const STATUS_BADGE = {
-  PENDING:          'bg-amber-50   text-amber-700  border border-amber-200',
-  CONFIRMED:        'bg-blue-50    text-blue-700   border border-blue-200',
-  PROCESSING:       'bg-purple-50  text-purple-700 border border-purple-200',
-  PACKED:           'bg-indigo-50  text-indigo-700 border border-indigo-200',
-  SHIPPED:          'bg-orange-50  text-orange-700 border border-orange-200',
-  OUT_FOR_DELIVERY: 'bg-cyan-50    text-cyan-700   border border-cyan-200',
-  DELIVERED:        'bg-emerald-50 text-emerald-700 border border-emerald-200',
+  PENDING:          'bg-[#F5E9C8] text-[#B08D57] border border-[#D4AF37]/30',
+  CONFIRMED:        'bg-[var(--primary-soft)] text-[var(--primary)] border border-[var(--border)]',
+  PROCESSING:       'bg-[#F3D9D4] text-[var(--primary)] border border-[#E8BFB8]',
+  PACKED:           'bg-[#F3D9D4] text-[var(--primary)] border border-[#E8BFB8]',
+  SHIPPED:          'bg-[#F5E9C8] text-[#B08D57] border border-[#D4AF37]/30',
+  OUT_FOR_DELIVERY: 'bg-[var(--primary-soft)] text-[var(--primary)] border border-[var(--border)]',
+  DELIVERED:        'bg-[#F5E9C8] text-[#B08D57] border border-[#D4AF37]/30',
   CANCELLED:        'bg-red-50     text-red-700    border border-red-200',
   RETURNED:         'bg-[var(--bg)] text-[var(--text-muted)] border border-[var(--border)]',
 };
