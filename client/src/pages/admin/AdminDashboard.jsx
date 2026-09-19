@@ -7,12 +7,12 @@ import { API_BASE } from '../../lib/api';
 const API = API_BASE;
 
 const STATUS_COLOR = {
-  PENDING:    'bg-yellow-100 text-yellow-700',
-  CONFIRMED:  'bg-blue-100 text-blue-700',
-  PROCESSING: 'bg-purple-100 text-purple-700',
-  PACKED:     'bg-indigo-100 text-indigo-700',
-  SHIPPED:    'bg-orange-100 text-orange-700',
-  DELIVERED:  'bg-green-100 text-green-700',
+  PENDING:    'bg-[#F5E9C8] text-[#B08D57]',
+  CONFIRMED:  'bg-[var(--primary-soft)] text-[var(--primary)]',
+  PROCESSING: 'bg-[#F3D9D4] text-[var(--primary)]',
+  PACKED:     'bg-[#F3D9D4] text-[var(--primary)]',
+  SHIPPED:    'bg-[#F5E9C8] text-[#B08D57]',
+  DELIVERED:  'bg-[#F5E9C8] text-[#B08D57]',
   CANCELLED:  'bg-red-100 text-red-700',
 };
 
@@ -43,10 +43,10 @@ export function AdminDashboard() {
   }, [token]);
 
   const stats = data ? [
-    { label: 'Total Orders',     value: data.stats.totalOrders.toLocaleString(),                   change: '',   icon: ShoppingBag, color: 'text-blue-600',   bg: 'bg-blue-50' },
-    { label: 'Revenue (All)',     value: `₹${data.stats.totalRevenue.toLocaleString('en-IN')}`,     change: '',   icon: TrendingUp,  color: 'text-green-600',  bg: 'bg-green-50' },
-    { label: 'Total Customers',   value: data.stats.totalCustomers.toLocaleString(),                change: '',   icon: Users,       color: 'text-purple-600', bg: 'bg-purple-50' },
-    { label: 'Active Products',   value: data.stats.activeProducts.toLocaleString(),                change: '',   icon: Package,     color: 'text-amber-600',  bg: 'bg-amber-50' },
+    { label: 'Total Orders',     value: data.stats.totalOrders.toLocaleString(),                   change: '',   icon: ShoppingBag, color: 'text-[var(--primary)]',   bg: 'bg-[var(--primary-soft)]' },
+    { label: 'Revenue (All)',     value: `₹${data.stats.totalRevenue.toLocaleString('en-IN')}`,     change: '',   icon: TrendingUp,  color: 'text-[#B08D57]',  bg: 'bg-[#F5E9C8]' },
+    { label: 'Total Customers',   value: data.stats.totalCustomers.toLocaleString(),                change: '',   icon: Users,       color: 'text-[var(--primary)]', bg: 'bg-[#F3D9D4]' },
+    { label: 'Active Products',   value: data.stats.activeProducts.toLocaleString(),                change: '',   icon: Package,     color: 'text-[#B08D57]',  bg: 'bg-[#F5E9C8]' },
   ] : [];
 
   return (
@@ -83,7 +83,7 @@ export function AdminDashboard() {
                     <s.icon size={18} className={s.color} />
                   </div>
                   {data?.stats.pendingOrders > 0 && s.label === 'Total Orders' && (
-                    <span className="text-xs text-amber-700 font-semibold bg-amber-50 border border-amber-200 px-2 py-0.5">
+                    <span className="text-xs text-[#B08D57] font-semibold bg-[#F5E9C8] border-[#D4AF37]/30 px-2 py-0.5">
                       {data.stats.pendingOrders} pending
                     </span>
                   )}
