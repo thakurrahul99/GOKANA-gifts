@@ -114,7 +114,7 @@ export function CartDrawer() {
               <div className="flex items-center gap-2 mb-1.5 text-xs font-medium text-[var(--primary)]">
                 <Truck size={15} className="text-[var(--accent)]" />
                 {subtotal >= FREE_SHIPPING_THRESHOLD ? (
-                  <span className="text-[#2E7D32] font-semibold">
+                  <span className="text-[#B08D57] font-semibold">
                     🎉 You unlocked FREE express delivery!
                   </span>
                 ) : (
@@ -256,7 +256,7 @@ export function CartDrawer() {
                   <span>Estimated Shipping</span>
                   <span className="text-[#0B1F3A] font-medium">
                     {shipping === 0 ? (
-                      <span className="text-[#2E7D32]">FREE</span>
+                      <span className="text-[#B08D57]">FREE</span>
                     ) : (
                       formatPrice(shipping)
                     )}
