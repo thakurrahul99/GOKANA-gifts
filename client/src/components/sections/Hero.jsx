@@ -75,7 +75,7 @@ export function Hero() {
                 transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
               >
                 Gifts that become
-                <span className="relative text-[#F5E9C8] italic font-normal whitespace-nowrap"> unforgettable.</span>
+                <span className="relative text-[#D4AF37] italic font-normal whitespace-nowrap"> unforgettable.</span>
               </motion.h1>
             </div>
 
@@ -105,7 +105,7 @@ export function Hero() {
               </Link>
               <Link
                 to="/shop"
-                className="btn-outline border-white/80 text-white hover:bg-white/10 hover:border-white shadow-[0_6px_20px_rgba(0,0,0,0.12)]"
+                className="btn-outline border-white/80 text-white/95 hover:bg-white/10 hover:border-white shadow-[0_6px_20px_rgba(0,0,0,0.12)]"
               >
                 Explore Collection
               </Link>
