@@ -33,25 +33,36 @@ export function Navbar({ onSearchOpen }) {
 
   useEffect(() => {
     setMobileOpen(false);
-  }, [location.pathname]);
+    if (location.pathname !== "/" || !location.hash) {
+      window.scrollTo({ top: 0, behavior: "auto" });
+    }
+  }, [location.pathname, location.hash]);
 
   const isHomePage = location.pathname === "/";
 
-  // Handle hash links smoothly
+  // Handle internal navigation explicitly so route + hash links never fall
+  // back to the previous page or browser anchor behavior.
   const handleNavClick = (link, e) => {
+    e.preventDefault();
+    setMobileOpen(false);
+
     if (link.isHash) {
+      const hash = link.href.split("#")[1];
       if (isHomePage) {
-        e.preventDefault();
-        const elementId = link.href.replace("/#", "");
-        const elem = document.getElementById(elementId);
+        const elem = document.getElementById(hash);
         if (elem) {
-          elem.scrollIntoView({ behavior: "smooth" });
+          elem.scrollIntoView({ behavior: "smooth", block: "start" });
+          window.history.replaceState(null, "", `/#${hash}`);
+        } else {
+          navigate(`/#${hash}`);
         }
       } else {
-        navigate(link.href);
+        navigate(`/#${hash}`);
       }
+      return;
     }
-    setMobileOpen(false);
+
+    navigate(link.href);
   };
 
   // Keep the navbar solid and readable over every hero/section background.
