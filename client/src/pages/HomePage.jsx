@@ -36,13 +36,13 @@ export function HomePage() {
       {showIntro && <IntroReveal onComplete={handleIntroComplete} />}
       <main id="main-content">
         <Hero />
-        <GiftFinder />
         <BrandStory />
         <ShopByOccasion />
         <FeaturedCollection />
         <WhyGokana />
         <PersonalizedGifting />
         <Bestsellers />
+        <GiftFinder />
         <Testimonials />
         <FAQ />
         <InstagramGrid />
