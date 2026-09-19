@@ -266,7 +266,7 @@ export function AdminProducts() {
                       <div className="flex items-center justify-end gap-2">
                         <button
                           onClick={() => openEdit(product)}
-                          className="p-2 text-[var(--text-muted)] hover:text-blue-600 transition-colors min-h-[36px] min-w-[36px] flex items-center justify-center"
+                          className="p-2 text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors min-h-[36px] min-w-[36px] flex items-center justify-center"
                           title="Edit product"
                           aria-label="Edit product"
                         >
