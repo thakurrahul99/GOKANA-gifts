@@ -57,10 +57,10 @@ export function Navbar({ onSearchOpen }) {
   // Keep the navbar solid and readable over every hero/section background.
   const navClasses = scrolled
     ? "bg-[var(--surface)] shadow-[0_4px_18px_rgba(11,31,58,0.08)] border-b border-[var(--border)]"
-    : "bg-[var(--surface)] border-b border-[var(--border)]";
+    : "bg-transparent";
 
-  const textColor = "text-[var(--primary)]";
-  const logoColor = "text-[var(--primary)]";
+  const textColor = scrolled ? "text-[var(--primary)]" : "text-white";
+  const logoColor = scrolled ? "text-[var(--primary)]" : "text-white";
 
   return (
     <>
