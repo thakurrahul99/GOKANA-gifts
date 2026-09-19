@@ -39,9 +39,11 @@ export function Hero() {
             fetchPriority="high"
           />
           {/* Gradients */}
-          <div className="absolute inset-0 bg-[#0B1F3A]/45" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0B1F3A] via-[#0B1F3A]/35 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0B1F3A]/60 via-[#0B1F3A]/20 to-transparent" />
+          <div className="absolute inset-0 bg-[#07172C]/42" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#07172C] via-[#0B1F3A]/48 to-[#0B1F3A]/10" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#07172C]/78 via-[#0B1F3A]/38 to-transparent" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_28%,rgba(212,175,55,0.16),transparent_32%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_70%,rgba(243,217,212,0.08),transparent_28%)]" />
         </motion.div>
 
         {/* Content */}
@@ -50,9 +52,22 @@ export function Hero() {
           style={{ y: textY, opacity }}
         >
           <div className="container-gokana">
+            {/* Premium Eyebrow */}
+            <motion.div
+              className="flex items-center gap-3 mb-5"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.1 }}
+            >
+              <span className="h-px w-10 bg-[#D4AF37]" />
+              <span className="font-sans text-[10px] md:text-xs font-semibold uppercase tracking-[0.28em] text-[#F5E9C8]">
+                The Art of Thoughtful Gifting
+              </span>
+            </motion.div>
+
             {/* Trust Badges Pill (Above the fold) */}
             <motion.div
-              className="inline-flex flex-wrap items-center gap-3 px-3.5 py-1.5 rounded-full bg-[#0B1F3A]/80 backdrop-blur-md border border-[#D4AF37]/30 text-white text-xs font-sans mb-6"
+              className="inline-flex flex-wrap items-center gap-3 px-4 py-2 rounded-full bg-[#07172C]/72 backdrop-blur-xl border border-[#D4AF37]/35 shadow-[0_8px_30px_rgba(0,0,0,0.18)] text-white text-xs font-sans mb-6"
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -68,19 +83,19 @@ export function Hero() {
             {/* Main Headline */}
             <div className="overflow-hidden mb-5 max-w-4xl">
               <motion.h1
-                className="font-serif text-[clamp(2.75rem,7vw,6.5rem)] font-light text-white leading-[1.05] tracking-tight"
+                className="font-serif text-[clamp(2.75rem,7vw,6.5rem)] font-light text-[#FFFDF8] leading-[0.98] tracking-[-0.025em] drop-shadow-[0_8px_28px_rgba(0,0,0,0.22)]"
                 initial={{ y: '100%' }}
                 animate={{ y: '0%' }}
                 transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
               >
                 Gifts that become
-                <span className="text-[#F5E9C8] italic"> unforgettable.</span>
+                <span className="text-[#F5E9C8] italic font-normal"> unforgettable.</span>
               </motion.h1>
             </div>
 
             {/* Supporting Subheadline */}
             <motion.p
-              className="font-sans text-base md:text-lg text-white/85 max-w-xl leading-relaxed mb-8"
+              className="font-sans text-[15px] md:text-lg text-white/78 max-w-xl leading-[1.75] mb-8"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.5 }}
@@ -104,7 +119,7 @@ export function Hero() {
               </Link>
               <Link
                 to="/shop"
-                className="btn-outline border-white text-white hover:bg-white/10 hover:border-white"
+                className="btn-outline border-[#F5E9C8]/70 text-[#FFFDF8] hover:bg-[#F5E9C8]/10 hover:border-[#F5E9C8]"
               >
                 Explore Collection
               </Link>
@@ -115,7 +130,7 @@ export function Hero() {
         {/* Scroll Indicator */}
         <button
           onClick={scrollDown}
-          className="absolute bottom-5 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 text-white/50 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 rounded p-1"
+          className="absolute bottom-5 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 text-white/55 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 rounded p-1"
           aria-label="Scroll down to content"
         >
           <span className="font-sans text-[10px] tracking-[0.2em] uppercase text-[#D4AF37]">Scroll</span>
