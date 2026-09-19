@@ -39,20 +39,21 @@ export function Hero() {
             fetchPriority="high"
           />
           {/* Gradients */}
-          <div className="absolute inset-0 bg-[#0B1F3A]/45" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0B1F3A] via-[#0B1F3A]/35 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0B1F3A]/60 via-[#0B1F3A]/20 to-transparent" />
+          <div className="absolute inset-0 bg-[#07172C]/48" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#07172C] via-[#0B1F3A]/42 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#07172C]/72 via-[#0B1F3A]/28 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-[#07172C]/35" />
         </motion.div>
 
         {/* Content */}
         <motion.div
-          className="absolute inset-0 flex flex-col justify-end pb-16 md:pb-20"
+          className="absolute inset-0 flex flex-col justify-end pb-20 md:pb-24"
           style={{ y: textY, opacity }}
         >
           <div className="container-gokana">
             {/* Trust Badges Pill (Above the fold) */}
             <motion.div
-              className="inline-flex flex-wrap items-center gap-3 px-3.5 py-1.5 rounded-full bg-[#0B1F3A]/75 backdrop-blur-md border border-[#D4AF37]/40 shadow-[0_4px_18px_rgba(0,0,0,0.12)] text-white text-xs font-sans mb-6"
+              className="inline-flex flex-wrap items-center gap-3 px-4 py-2 rounded-full bg-[#07172C]/70 backdrop-blur-lg border border-[#D4AF37]/45 shadow-[0_6px_24px_rgba(0,0,0,0.2)] text-white text-xs font-sans mb-7"
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -68,19 +69,19 @@ export function Hero() {
             {/* Main Headline */}
             <div className="overflow-hidden mb-5 max-w-4xl">
               <motion.h1
-                className="font-serif text-[clamp(2.9rem,6.8vw,6.35rem)] font-light text-white leading-[1.02] tracking-[-0.015em] drop-shadow-[0_5px_18px_rgba(0,0,0,0.16)]"
+                className="font-serif text-[clamp(3rem,7.2vw,6.8rem)] font-light text-[#FFFDF8] leading-[0.98] tracking-[-0.02em] drop-shadow-[0_8px_24px_rgba(0,0,0,0.24)]"
                 initial={{ y: '100%' }}
                 animate={{ y: '0%' }}
                 transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
               >
                 Gifts that become
-                <span className="text-[#F5E9C8] italic font-normal"> unforgettable.</span>
+                <span className="relative text-[#F5E9C8] italic font-normal whitespace-nowrap"> unforgettable.</span>
               </motion.h1>
             </div>
 
             {/* Supporting Subheadline */}
             <motion.p
-              className="font-sans text-base md:text-lg text-white/80 max-w-xl leading-[1.7] mb-8"
+              className="font-sans text-[15px] md:text-lg text-white/80 max-w-[590px] leading-[1.75] mb-9"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.5 }}
@@ -97,14 +98,14 @@ export function Hero() {
             >
               <Link
                 to="/gift-finder"
-                className="btn-accent"
+                className="btn-accent shadow-[0_8px_28px_rgba(212,175,55,0.18)] hover:shadow-[0_12px_32px_rgba(212,175,55,0.28)]"
               >
                 ✦ Find the Perfect Gift
                 <ArrowRight size={16} />
               </Link>
               <Link
                 to="/shop"
-                className="btn-outline border-[#F5E9C8]/80 text-white hover:bg-[#F5E9C8]/10 hover:border-[#F5E9C8]"
+                className="btn-outline border-white/80 text-white hover:bg-white/10 hover:border-white shadow-[0_6px_20px_rgba(0,0,0,0.12)]"
               >
                 Explore Collection
               </Link>
