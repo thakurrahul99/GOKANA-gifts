@@ -133,7 +133,7 @@ export function Hero() {
         <div className="container-gokana">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 text-center md:text-left">
             <div className="flex items-center justify-center md:justify-start gap-3">
-              <div className="w-9 h-9 rounded-full bg-[#E7ECF3] flex items-center justify-center text-[#0B1F3A] flex-shrink-0">
+              <div className="w-9 h-9 rounded-full bg-[#F3D9D4] flex items-center justify-center text-[#0B1F3A] flex-shrink-0">
                 <Truck size={17} />
               </div>
               <div>
@@ -175,7 +175,7 @@ export function Hero() {
             </div>
 
             <div className="flex items-center justify-center md:justify-start gap-3">
-              <div className="w-9 h-9 rounded-full bg-[#E7ECF3] flex items-center justify-center text-[#0B1F3A] flex-shrink-0">
+              <div className="w-9 h-9 rounded-full bg-[#F3D9D4] flex items-center justify-center text-[#0B1F3A] flex-shrink-0">
                 <Sparkles size={17} />
               </div>
               <div>
