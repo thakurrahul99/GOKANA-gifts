@@ -130,7 +130,7 @@ export function Hero() {
       </section>
 
       {/* ── Trust Strip Directly Below Hero (Section 4 CRO Requirement) ── */}
-      <aside className="bg-[#0B1F3A] border-b border-[#1E3A5F] py-4 relative z-10" aria-label="Trust and Guarantees">
+      <aside className="bg-[#0B1F3A] border-b border-[#1E3A5F] py-4 relative z-10 -mt-px" aria-label="Trust and Guarantees">
         <div className="container-gokana">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 text-center md:text-left">
             <div className="flex items-center justify-center md:justify-start gap-3">
