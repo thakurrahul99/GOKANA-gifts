@@ -59,8 +59,8 @@ export function Navbar({ onSearchOpen }) {
     ? "bg-[var(--surface)] shadow-[0_4px_18px_rgba(11,31,58,0.08)] border-b border-[var(--border)]"
     : "bg-transparent";
 
-  const textColor = scrolled ? "text-[var(--primary)]" : "text-white";
-  const logoColor = scrolled ? "text-[var(--primary)]" : "text-white";
+  const textColor = scrolled ? "!text-[var(--primary)]" : "!text-white";
+  const logoColor = scrolled ? "!text-[var(--primary)]" : "!text-white";
 
   return (
     <>
@@ -107,7 +107,7 @@ export function Navbar({ onSearchOpen }) {
                     textColor,
                     isActive
                       ? "text-[var(--accent)]"
-                      : "hover:text-[var(--accent)]",
+                      : "hover:!text-[var(--accent)]",
                   )}
                   aria-current={isActive ? "page" : undefined}
                 >
@@ -134,7 +134,7 @@ export function Navbar({ onSearchOpen }) {
               onClick={onSearchOpen}
               aria-label="Open search dialog"
               className={clsx(
-                "min-w-[40px] min-h-[40px] flex items-center justify-center rounded-full transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 hover:bg-[var(--bg)] hover:text-[var(--accent)]",
+                "min-w-[40px] min-h-[40px] flex items-center justify-center rounded-full transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 hover:bg-[var(--bg)] hover:!text-[var(--accent)]",
                 textColor,
               )}
             >
@@ -145,7 +145,7 @@ export function Navbar({ onSearchOpen }) {
               to="/wishlist"
               aria-label={`Wishlist, ${wishCount} items`}
               className={clsx(
-                "relative min-w-[40px] min-h-[40px] flex items-center justify-center rounded-full transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 hover:bg-[var(--bg)] hover:text-[var(--accent)]",
+                "relative min-w-[40px] min-h-[40px] flex items-center justify-center rounded-full transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 hover:bg-[var(--bg)] hover:!text-[var(--accent)]",
                 textColor,
               )}
             >
