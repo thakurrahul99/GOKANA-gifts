@@ -32,7 +32,7 @@ const mockOrders = [
 
 const STATUS_STYLES = {
   DELIVERED:  'bg-emerald-50 text-emerald-700 border border-emerald-200',
-  SHIPPED:    'bg-sky-50 text-sky-700 border border-sky-200',
+  SHIPPED:    'bg-[var(--primary-soft)] text-[var(--primary)] border border-[var(--border)]',
   PROCESSING: 'bg-amber-50 text-amber-700 border border-amber-200',
   PENDING:    'bg-[var(--bg)] text-[var(--text-muted)] border border-[var(--border)]',
   CANCELLED:  'bg-red-50 text-red-700 border border-red-200',
