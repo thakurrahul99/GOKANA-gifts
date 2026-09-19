@@ -41,7 +41,7 @@ export function Badge({ children, variant = 'default', className }) {
     default: 'bg-[#0B1F3A] text-white',
     gold: 'bg-[#F5E9C8] text-[#0B1F3A] border border-[#D4AF37]/30',
     bestseller: 'bg-[#F5E9C8] text-[#0B1F3A] border border-[#D4AF37]/30',
-    new: 'bg-[#E7ECF3] text-[#0B1F3A]',
+    new: 'bg-[#F3D9D4] text-[#0B1F3A]',
     sale: 'bg-[#F3D9D4] text-[#0B1F3A]',
     limited: 'bg-[#F3D9D4] text-[#0B1F3A]',
     champagne: 'bg-[#F5E9C8] text-[#0B1F3A]',
