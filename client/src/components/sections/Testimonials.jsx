@@ -17,8 +17,8 @@ function TestimonialCard({ testimonial }) {
               <Star key={i} size={15} className="text-[#D4AF37] fill-[#D4AF37]" />
             ))}
           </div>
-          <span className="inline-flex items-center gap-1 text-[11px] font-sans font-semibold text-[#2E7D32] bg-[#E7ECF3] px-2 py-0.5 rounded-full">
-            <CheckCircle size={12} className="text-[#2E7D32]" />
+          <span className="inline-flex items-center gap-1 text-[11px] font-sans font-semibold text-[#0B1F3A] bg-[#F3D9D4]/60 px-2 py-0.5 rounded-full">
+            <CheckCircle size={12} className="text-[#0B1F3A]" />
             Verified Buyer
           </span>
         </div>
