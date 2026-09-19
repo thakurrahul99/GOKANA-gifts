@@ -38,7 +38,7 @@ export function FeaturedCollection() {
 
         {/* Bottom CTA */}
         <ScrollReveal delay={0.2} className="text-center mt-12">
-          <Link to="/shop" className="btn-secondary inline-flex items-center gap-2">
+          <Link to="/shop" className="btn-primary inline-flex items-center gap-2">
             View Complete Collection
             <ArrowRight size={16} />
           </Link>
