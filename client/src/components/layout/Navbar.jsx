@@ -56,8 +56,8 @@ export function Navbar({ onSearchOpen }) {
 
   // Keep the navbar solid and readable over every hero/section background.
   const navClasses = scrolled
-    ? "bg-[var(--bg)] shadow-sm border-b border-[var(--border)]"
-    : "bg-[var(--bg)] border-b border-[var(--border)]";
+    ? "bg-[var(--surface)] shadow-[0_8px_24px_rgba(11,31,58,0.10)] border-b-2 border-[var(--border)]"
+    : "bg-[var(--surface)] shadow-[0_4px_16px_rgba(11,31,58,0.08)] border-b-2 border-[var(--border)]";
 
   const textColor = "text-[var(--primary)]";
   const logoColor = "text-[var(--primary)]";
@@ -103,11 +103,11 @@ export function Navbar({ onSearchOpen }) {
                   to={link.href}
                   onClick={(e) => handleNavClick(link, e)}
                   className={clsx(
-                    "relative py-3 px-1 font-sans text-xs font-semibold tracking-[0.1em] uppercase transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 rounded-sm",
+                    "relative py-2.5 px-3 font-sans text-xs font-semibold tracking-[0.1em] uppercase transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 rounded-md",
                     textColor,
                     isActive
-                      ? "text-[var(--accent)]"
-                      : "hover:text-[var(--accent)]",
+                      ? "text-[var(--accent)] bg-[var(--accent-soft)]"
+                      : "hover:text-[var(--accent)] hover:bg-[var(--blush)]/60",
                   )}
                   aria-current={isActive ? "page" : undefined}
                 >
@@ -266,15 +266,8 @@ export function Navbar({ onSearchOpen }) {
                 )}
               </nav>
 
-              <div className="p-6 border-t border-[var(--border)] bg-[var(--surface-alt)] space-y-3">
-                <Link
-                  to="/gift-finder"
-                  onClick={() => setMobileOpen(false)}
-                  className="btn-accent w-full text-center"
-                >
-                  ✦ Find the Perfect Gift
-                </Link>
-                <div className="text-center text-xs text-[var(--muted)]">
+              <div className="p-6 border-t border-[var(--border)] bg-[var(--surface-alt)]">
+                <div className="text-center text-xs font-medium tracking-wide text-[var(--muted)]">
                   Handcrafted & Delivered Across India
                 </div>
               </div>
