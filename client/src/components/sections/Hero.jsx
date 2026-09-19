@@ -105,7 +105,7 @@ export function Hero() {
               </Link>
               <Link
                 to="/shop"
-                className="btn-outline border-white/80 text-white hover:bg-white/10 hover:border-white shadow-[0_6px_20px_rgba(0,0,0,0.12)]"
+                className="btn-outline !text-white border-white/80 hover:bg-white/10 hover:border-white shadow-[0_6px_20px_rgba(0,0,0,0.12)]"
               >
                 Explore Collection
               </Link>
