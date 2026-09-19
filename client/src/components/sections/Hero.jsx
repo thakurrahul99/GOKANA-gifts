@@ -52,7 +52,7 @@ export function Hero() {
           <div className="container-gokana">
             {/* Trust Badges Pill (Above the fold) */}
             <motion.div
-              className="inline-flex flex-wrap items-center gap-3 px-3.5 py-1.5 rounded-full bg-[#0B1F3A]/80 backdrop-blur-md border border-[#D4AF37]/30 text-white text-xs font-sans mb-6"
+              className="inline-flex flex-wrap items-center gap-3 px-3.5 py-1.5 rounded-full bg-[#0B1F3A]/75 backdrop-blur-md border border-[#D4AF37]/40 shadow-[0_4px_18px_rgba(0,0,0,0.12)] text-white text-xs font-sans mb-6"
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -68,19 +68,19 @@ export function Hero() {
             {/* Main Headline */}
             <div className="overflow-hidden mb-5 max-w-4xl">
               <motion.h1
-                className="font-serif text-[clamp(2.75rem,7vw,6.5rem)] font-light text-white leading-[1.05] tracking-tight"
+                className="font-serif text-[clamp(2.9rem,6.8vw,6.35rem)] font-light text-white leading-[1.02] tracking-[-0.015em] drop-shadow-[0_5px_18px_rgba(0,0,0,0.16)]"
                 initial={{ y: '100%' }}
                 animate={{ y: '0%' }}
                 transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
               >
                 Gifts that become
-                <span className="text-[#F5E9C8] italic"> unforgettable.</span>
+                <span className="text-[#F5E9C8] italic font-normal"> unforgettable.</span>
               </motion.h1>
             </div>
 
             {/* Supporting Subheadline */}
             <motion.p
-              className="font-sans text-base md:text-lg text-white/85 max-w-xl leading-relaxed mb-8"
+              className="font-sans text-base md:text-lg text-white/80 max-w-xl leading-[1.7] mb-8"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.5 }}
@@ -104,7 +104,7 @@ export function Hero() {
               </Link>
               <Link
                 to="/shop"
-                className="btn-outline border-white text-white hover:bg-white/10 hover:border-white"
+                className="btn-outline border-[#F5E9C8]/80 text-white hover:bg-[#F5E9C8]/10 hover:border-[#F5E9C8]"
               >
                 Explore Collection
               </Link>
