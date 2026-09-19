@@ -8,7 +8,6 @@ import { useCartStore, useWishlistStore, useAuthStore } from "../../store";
 const navLinks = [
   { label: "Home", href: "/" },
   { label: "Shop", href: "/shop" },
-  { label: "Gift Finder", href: "/gift-finder" },
   { label: "Personalisation", href: "/#personalisation", isHash: true },
   { label: "Reviews", href: "/#reviews", isHash: true },
   { label: "Contact", href: "/contact" },
@@ -55,16 +54,13 @@ export function Navbar({ onSearchOpen }) {
     setMobileOpen(false);
   };
 
+  // Keep the navbar solid and readable over every hero/section background.
   const navClasses = scrolled
-    ? "bg-[var(--bg)]/95 nav-blur shadow-sm border-b border-[var(--border)]"
-    : isHomePage
-      ? "bg-transparent"
-      : "bg-[var(--bg)]/95 nav-blur border-b border-[var(--border)]";
+    ? "bg-[var(--bg)] shadow-sm border-b border-[var(--border)]"
+    : "bg-[var(--bg)] border-b border-[var(--border)]";
 
-  const textColor =
-    !scrolled && isHomePage ? "text-[var(--surface)]" : "text-[var(--primary)]";
-  const logoColor =
-    !scrolled && isHomePage ? "text-[var(--surface)]" : "text-[var(--primary)]";
+  const textColor = "text-[var(--primary)]";
+  const logoColor = "text-[var(--primary)]";
 
   return (
     <>
@@ -276,7 +272,7 @@ export function Navbar({ onSearchOpen }) {
                   onClick={() => setMobileOpen(false)}
                   className="btn-accent w-full text-center"
                 >
-                  ✦ Gift Finder Quiz
+                  ✦ Find the Perfect Gift
                 </Link>
                 <div className="text-center text-xs text-[var(--muted)]">
                   Handcrafted & Delivered Across India
