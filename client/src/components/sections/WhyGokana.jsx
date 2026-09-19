@@ -58,10 +58,10 @@ export function WhyGokana() {
             <motion.div
               key={title}
               variants={staggerItem}
-              className="card-premium flex flex-col justify-between"
+              className="card-premium group flex flex-col justify-between p-6 md:p-7"
             >
               <div>
-                <div className="w-14 h-14 rounded-2xl bg-[#E7ECF3] flex items-center justify-center text-[#0B1F3A] mb-6 group-hover:bg-[#F5E9C8] transition-colors">
+                <div className="w-14 h-14 rounded-2xl bg-[#F3D9D4]/60 flex items-center justify-center text-[#0B1F3A] mb-6 group-hover:bg-[#F5E9C8] transition-colors">
                   <Icon size={26} strokeWidth={1.8} className="text-[#0B1F3A]" />
                 </div>
                 <h3 className="font-serif text-2xl font-light text-[#0B1F3A] mb-1">
