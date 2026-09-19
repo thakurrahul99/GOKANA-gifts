@@ -12,7 +12,6 @@ import { Testimonials } from '../components/sections/Testimonials';
 import { FAQ } from '../components/sections/FAQ';
 import { InstagramGrid } from '../components/sections/InstagramGrid';
 import { Newsletter } from '../components/sections/Newsletter';
-import { FAB } from '../components/ui/FAB';
 
 const INTRO_KEY = 'gokana_intro_shown';
 
@@ -37,19 +36,18 @@ export function HomePage() {
       {showIntro && <IntroReveal onComplete={handleIntroComplete} />}
       <main id="main-content">
         <Hero />
+        <GiftFinder />
         <BrandStory />
         <ShopByOccasion />
         <FeaturedCollection />
         <WhyGokana />
         <PersonalizedGifting />
-        <GiftFinder />
         <Bestsellers />
         <Testimonials />
         <FAQ />
         <InstagramGrid />
         <Newsletter />
       </main>
-      <FAB />
     </>
   );
 }
