@@ -23,7 +23,7 @@ export function Hero() {
     <>
       <section
         ref={containerRef}
-        className="relative w-full min-h-[640px] h-[92vh] max-h-[960px] overflow-hidden bg-[#0B1F3A]"
+        className="relative w-full min-h-[640px] h-screen max-h-[960px] overflow-hidden bg-[#0B1F3A]"
         aria-label="Hero Introduction"
       >
         {/* Parallax Image */}
