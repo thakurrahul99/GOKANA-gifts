@@ -33,35 +33,37 @@ export function Navbar({ onSearchOpen }) {
 
   useEffect(() => {
     setMobileOpen(false);
+
+    // Route navigation should always start at the top, except for Home
+    // section links which are handled below after the Home page renders.
     if (location.pathname !== "/" || !location.hash) {
       window.scrollTo({ top: 0, behavior: "auto" });
+      return;
     }
+
+    // React Router handles the route first; then scroll to the requested
+    // Home section after its DOM has mounted. This works from every page.
+    const hash = location.hash.slice(1);
+    if (!hash) return;
+
+    const scrollToSection = () => {
+      const element = document.getElementById(hash);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    };
+
+    const frame = window.requestAnimationFrame(scrollToSection);
+    return () => window.cancelAnimationFrame(frame);
   }, [location.pathname, location.hash]);
 
   const isHomePage = location.pathname === "/";
 
-  // Handle internal navigation explicitly so route + hash links never fall
-  // back to the previous page or browser anchor behavior.
+  // Use React Router for every internal link. Hash links are routed to Home
+  // first, then the effect above scrolls to the matching section.
   const handleNavClick = (link, e) => {
     e.preventDefault();
     setMobileOpen(false);
-
-    if (link.isHash) {
-      const hash = link.href.split("#")[1];
-      if (isHomePage) {
-        const elem = document.getElementById(hash);
-        if (elem) {
-          elem.scrollIntoView({ behavior: "smooth", block: "start" });
-          window.history.replaceState(null, "", `/#${hash}`);
-        } else {
-          navigate(`/#${hash}`);
-        }
-      } else {
-        navigate(`/#${hash}`);
-      }
-      return;
-    }
-
     navigate(link.href);
   };
 
