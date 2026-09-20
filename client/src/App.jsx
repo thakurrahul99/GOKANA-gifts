@@ -219,17 +219,79 @@ function AdminCustomers() {
 }
 
 function AdminSettings() {
+  const defaults = {
+    storeName: 'GŌKANA',
+    supportEmail: 'hello@gokana.in',
+    supportPhone: '+91 99999 99999',
+    freeShipping: '999',
+    lowStock: '5',
+    orderNotifications: true,
+    lowStockNotifications: true,
+  };
+  const [settings, setSettings] = useState(defaults);
+  const [saved, setSaved] = useState(false);
+
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem('gokana-admin-settings');
+      if (stored) setSettings({ ...defaults, ...JSON.parse(stored) });
+    } catch {}
+  }, []);
+
+  const update = (key, value) => {
+    setSaved(false);
+    setSettings((current) => ({ ...current, [key]: value }));
+  };
+
+  const saveSettings = () => {
+    localStorage.setItem('gokana-admin-settings', JSON.stringify(settings));
+    setSaved(true);
+  };
+
+  const resetSettings = () => {
+    localStorage.removeItem('gokana-admin-settings');
+    setSettings(defaults);
+    setSaved(false);
+  };
+
+  const inputClass = 'w-full rounded-lg border border-[#E6DED2] bg-white px-3 py-2.5 text-sm text-[#121212] outline-none focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20';
+
   return (
-    <section className="space-y-5 text-white">
+    <section className="space-y-6">
       <div>
-        <h2 className="text-2xl font-semibold text-white">Settings</h2>
-        <p className="text-sm text-white/70 mt-1">Store administration settings</p>
+        <h2 className="text-2xl font-semibold text-[#121212]">Settings</h2>
+        <p className="text-sm text-[#5F6570] mt-1">Manage store preferences and admin notifications.</p>
       </div>
-      <div className="bg-primary border border-primary-2 rounded-xl p-6 space-y-5">
-        <div><h3 className="font-semibold text-white">Store</h3><p className="text-sm text-white/70 mt-1">GŌKANA luxury gifting store</p></div>
-        <div className="grid sm:grid-cols-2 gap-4">
-          <div className="border border-white/15 rounded-lg p-4"><p className="text-xs text-white/60 uppercase tracking-wide">Environment</p><p className="text-sm text-white mt-1">Production</p></div>
-          <div className="border border-white/15 rounded-lg p-4"><p className="text-xs text-white/60 uppercase tracking-wide">Access</p><p className="text-sm text-white mt-1">Administrator</p></div>
+
+      <div className="bg-white border border-[#E6DED2] rounded-xl p-6 space-y-6 shadow-sm">
+        <div>
+          <h3 className="font-semibold text-[#121212]">Store Information</h3>
+          <p className="text-xs text-[#5F6570] mt-1">These preferences are saved for this admin browser.</p>
+        </div>
+        <div className="grid md:grid-cols-2 gap-5">
+          <label className="space-y-2"><span className="text-sm font-medium text-[#121212]">Store name</span><input className={inputClass} value={settings.storeName} onChange={(e) => update('storeName', e.target.value)} /></label>
+          <label className="space-y-2"><span className="text-sm font-medium text-[#121212]">Support email</span><input type="email" className={inputClass} value={settings.supportEmail} onChange={(e) => update('supportEmail', e.target.value)} /></label>
+          <label className="space-y-2"><span className="text-sm font-medium text-[#121212]">Support phone</span><input className={inputClass} value={settings.supportPhone} onChange={(e) => update('supportPhone', e.target.value)} /></label>
+          <label className="space-y-2"><span className="text-sm font-medium text-[#121212]">Free shipping above (₹)</span><input type="number" min="0" className={inputClass} value={settings.freeShipping} onChange={(e) => update('freeShipping', e.target.value)} /></label>
+          <label className="space-y-2"><span className="text-sm font-medium text-[#121212]">Low-stock alert below</span><input type="number" min="0" className={inputClass} value={settings.lowStock} onChange={(e) => update('lowStock', e.target.value)} /></label>
+        </div>
+      </div>
+
+      <div className="bg-white border border-[#E6DED2] rounded-xl p-6 space-y-4 shadow-sm">
+        <div><h3 className="font-semibold text-[#121212]">Notifications</h3><p className="text-xs text-[#5F6570] mt-1">Control which admin alerts are enabled.</p></div>
+        {[
+          ['orderNotifications', 'New order notifications', 'Show a notification preference for new orders.'],
+          ['lowStockNotifications', 'Low-stock notifications', 'Enable low-stock alert preference.'],
+        ].map(([key, title, description]) => (
+          <label key={key} className="flex items-center justify-between gap-4 rounded-lg border border-[#E6DED2] bg-[#F7F3EC] p-4 cursor-pointer">
+            <span><span className="block text-sm font-medium text-[#121212]">{title}</span><span className="block text-xs text-[#5F6570] mt-1">{description}</span></span>
+            <input type="checkbox" className="h-5 w-5 accent-[#D4AF37]" checked={settings[key]} onChange={(e) => update(key, e.target.checked)} />
+          </label>
+        ))}
+        <div className="flex flex-wrap gap-3 pt-2">
+          <button onClick={saveSettings} className="rounded-lg bg-[#D4AF37] px-5 py-2.5 text-sm font-semibold text-[#121212] hover:bg-[#B08D57] transition-colors">Save Settings</button>
+          <button onClick={resetSettings} className="rounded-lg border border-[#D4AF37] px-5 py-2.5 text-sm font-medium text-[#7A5E00] hover:bg-[#F3D9D4] transition-colors">Reset</button>
+          {saved && <span className="self-center text-sm font-medium text-[#7A5E00]">✓ Settings saved</span>}
         </div>
       </div>
     </section>
