@@ -16,6 +16,11 @@ const EMPTY_FORM = {
   badge: '',
   inStock: true,
   isFeatured: false,
+  personalisable: false,
+  personalisationFields: [
+    { type: 'text', label: "Recipient's Name", placeholder: 'e.g. Radhika Sharma', required: false, options: [] },
+    { type: 'textarea', label: 'Handwritten Note Message', placeholder: 'Write your heartfelt words here...', required: false, options: [] },
+  ],
   stock: '0',
   thumbnail: '',
   images: '',
@@ -85,6 +90,8 @@ export function AdminProducts() {
       badge: product.badge || '',
       inStock: product.inStock ?? true,
       isFeatured: product.isFeatured ?? false,
+      personalisable: product.personalisable ?? false,
+      personalisationFields: product.personalisationFields?.length ? product.personalisationFields : EMPTY_FORM.personalisationFields,
       stock: product.stock ?? 0,
       thumbnail: product.thumbnail || '',
       images: Array.isArray(product.images) ? product.images.join('\n') : '',
@@ -135,6 +142,8 @@ export function AdminProducts() {
         inStock: Boolean(formData.inStock),
         thumbnail: imageUrls[0] || formData.thumbnail.trim() || undefined,
         images: imageUrls,
+        personalisable: Boolean(formData.personalisable),
+        personalisationFields: formData.personalisable ? formData.personalisationFields.filter((field) => field.label?.trim()) : [],
       };
 
       let res;
@@ -501,6 +510,34 @@ export function AdminProducts() {
                   <option value="New">New</option>
                   <option value="Most Loved">Most Loved</option>
                 </select>
+              </div>
+
+              <div className="rounded-xl border border-accent/30 bg-blush/40 p-4 space-y-3">
+                <label className="flex items-center gap-2 text-sm text-primary font-semibold cursor-pointer">
+                  <input type="checkbox" checked={formData.personalisable} onChange={setF('personalisable')} className="w-4 h-4 accent-[#D4AF37]" />
+                  Enable Personalisation
+                </label>
+                {formData.personalisable && (
+                  <div className="space-y-3">
+                    {formData.personalisationFields.map((field, index) => (
+                      <div key={index} className="grid grid-cols-[1fr_120px_32px] gap-2 items-end">
+                        <div>
+                          <label className="block text-[11px] text-muted mb-1">Field label</label>
+                          <input value={field.label} onChange={(e) => setFormData((f) => ({ ...f, personalisationFields: f.personalisationFields.map((x, i) => i === index ? { ...x, label: e.target.value } : x) }))} className="w-full border border-border bg-white px-3 py-2 text-sm" />
+                        </div>
+                        <div>
+                          <label className="block text-[11px] text-muted mb-1">Type</label>
+                          <select value={field.type} onChange={(e) => setFormData((f) => ({ ...f, personalisationFields: f.personalisationFields.map((x, i) => i === index ? { ...x, type: e.target.value } : x) }))} className="w-full border border-border bg-white px-2 py-2 text-sm">
+                            <option value="text">Text</option><option value="textarea">Message</option><option value="select">Select</option>
+                          </select>
+                        </div>
+                        <button type="button" onClick={() => setFormData((f) => ({ ...f, personalisationFields: f.personalisationFields.filter((_, i) => i !== index) }))} className="h-9 border border-border text-muted hover:text-primary">×</button>
+                      </div>
+                    ))}
+                    <button type="button" onClick={() => setFormData((f) => ({ ...f, personalisationFields: [...f.personalisationFields, { type: 'text', label: 'Custom Detail', placeholder: '', required: false, options: [] }] }))} className="text-xs font-semibold text-accent-dark hover:text-primary">+ Add personalisation field</button>
+                    <p className="text-[11px] text-muted">These fields appear on the product page and are saved with the cart/order.</p>
+                  </div>
+                )}
               </div>
 
               <div className="flex items-center gap-6 pt-1">
