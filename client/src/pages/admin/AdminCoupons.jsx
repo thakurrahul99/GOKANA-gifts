@@ -165,8 +165,8 @@ export function AdminCoupons() {
 
       {/* Form Modal */}
       {showForm && (
-        <div className="fixed inset-0 bg-black/75 backdrop-blur-xs flex items-center justify-center z-50 p-4">
-          <div className="bg-[#181512] text-ivory border border-[rgba(197,160,89,0.25)] rounded-xl max-w-lg w-full p-6 shadow-2xl">
+        <div data-lenis-prevent className="fixed inset-0 bg-black/75 backdrop-blur-xs flex items-center justify-center z-50 p-4">
+          <div data-lenis-prevent className="bg-[#181512] text-ivory border border-[rgba(197,160,89,0.25)] rounded-xl max-w-lg w-full max-h-[90vh] overflow-y-auto p-6 shadow-2xl overscroll-contain">
             <div className="flex items-center justify-between mb-4 pb-3 border-b border-[rgba(197,160,89,0.18)]">
               <h3 className="text-lg font-serif font-light text-ivory">
                 {editCoupon ? 'Edit Coupon' : 'Create Coupon'}

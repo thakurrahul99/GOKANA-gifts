@@ -34,6 +34,11 @@ export function SmoothScroll() {
 
     window.lenis = lenis;
 
+    // If initial route is admin, pause Lenis so native layout scrolling works unimpeded
+    if (window.location.pathname.startsWith('/admin')) {
+      lenis.stop();
+    }
+
     let animId;
     function raf(time) {
       lenis.raf(time);
@@ -46,7 +51,8 @@ export function SmoothScroll() {
       const isLocked =
         document.body.style.overflow === 'hidden' ||
         document.documentElement.classList.contains('overflow-hidden');
-      if (isLocked) {
+      const isAdmin = window.location.pathname.startsWith('/admin');
+      if (isLocked || isAdmin) {
         lenis.stop();
       } else {
         lenis.start();
@@ -55,7 +61,7 @@ export function SmoothScroll() {
 
     observer.observe(document.body, {
       attributes: true,
-      attributeFilter: ['style'],
+      attributeFilter: ['style', 'class'],
     });
 
     return () => {
@@ -66,8 +72,16 @@ export function SmoothScroll() {
     };
   }, []);
 
-  // Handle route change without section hash: reset smoothly to top
+  // Handle route change without section hash: reset smoothly to top & toggle Lenis for /admin
   useEffect(() => {
+    const isAdmin = location.pathname.startsWith('/admin');
+    if (isAdmin) {
+      window.lenis?.stop();
+      return;
+    } else {
+      window.lenis?.start();
+    }
+
     if (!location.hash) {
       if (window.lenis) {
         window.lenis.scrollTo(0, { immediate: true });

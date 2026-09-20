@@ -366,8 +366,8 @@ export function AdminProducts() {
 
       {/* Product Form Modal */}
       {showForm && (
-        <div className="fixed inset-0 bg-black/75 backdrop-blur-xs z-50 flex items-center justify-center p-4">
-          <div className="bg-[#181512] text-ivory w-full max-w-lg max-h-[90vh] overflow-y-auto border border-[rgba(197,160,89,0.25)] shadow-2xl rounded-xl">
+        <div data-lenis-prevent className="fixed inset-0 bg-black/75 backdrop-blur-xs z-50 flex items-center justify-center p-4">
+          <div data-lenis-prevent className="bg-[#181512] text-ivory w-full max-w-lg max-h-[90vh] overflow-y-auto border border-[rgba(197,160,89,0.25)] shadow-2xl rounded-xl overscroll-contain">
             {/* Header */}
             <div className="flex items-center justify-between px-6 py-5 border-b border-[rgba(197,160,89,0.18)] bg-[#1F1A16]">
               <h3 className="text-lg font-serif font-light text-ivory">
