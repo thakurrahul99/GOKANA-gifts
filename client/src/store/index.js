@@ -46,12 +46,8 @@ export const useCartStore = create(
         return get().items.reduce((acc, i) => acc + i.qty, 0);
       },
 
-      get subtotal() {
-        return get().items.reduce(
-          (acc, i) => acc + i.product.price * i.qty,
-          0
-        );
-      },
+      getSubtotal: () =>
+        get().items.reduce((acc, i) => acc + i.product.price * i.qty, 0),
     }),
     { name: 'gokana-cart' }
   )
