@@ -91,6 +91,13 @@ export function Navbar({ onSearchOpen }) {
   const handleNavClick = (link, e) => {
     e.preventDefault();
     setMobileOpen(false);
+    if (link.label === "Home") {
+      navigate("/");
+      window.setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }, 0);
+      return;
+    }
     if (link.isHash) {
       const hash = link.href.split("#")[1];
       navigate({ pathname: "/", hash: `#${hash}` });
