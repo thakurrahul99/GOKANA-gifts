@@ -203,7 +203,7 @@ export function ContactPage() {
                         required
                         value={form.name}
                         onChange={(e) => setForm({ ...form, name: e.target.value })}
-                        placeholder="e.g. Radhika Sharma"
+                        placeholder="e.g. Deepti Agarwal"
                         className={inputClass}
                       />
                     </div>

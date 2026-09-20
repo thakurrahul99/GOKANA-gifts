@@ -111,7 +111,7 @@ export function ProductPage() {
   const [personalisation, setPersonalisation] = useState({ name: '', message: '', note: '' });
   const personalisationFields = product?.personalisable
     ? (product.personalisationFields?.length ? product.personalisationFields : [
-        { type: 'text', label: "Recipient's Name", placeholder: 'e.g. Radhika Sharma', required: false },
+        { type: 'text', label: "Recipient's Name", placeholder: 'e.g. Deepti Agarwal', required: false },
         { type: 'textarea', label: 'Handwritten Note Message', placeholder: 'Write your heartfelt words here...', required: false },
       ])
     : [];

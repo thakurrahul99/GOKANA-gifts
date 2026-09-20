@@ -18,7 +18,7 @@ const EMPTY_FORM = {
   isFeatured: false,
   personalisable: false,
   personalisationFields: [
-    { type: 'text', label: "Recipient's Name", placeholder: 'e.g. Radhika Sharma', required: false, options: [] },
+    { type: 'text', label: "Recipient's Name", placeholder: 'e.g. Deepti Agarwal', required: false, options: [] },
     { type: 'textarea', label: 'Handwritten Note Message', placeholder: 'Write your heartfelt words here...', required: false, options: [] },
   ],
   stock: '0',

@@ -161,7 +161,7 @@ export function LoginPage() {
                   onChange={set('name')}
                   required
                   autoComplete="name"
-                  placeholder="Priya Menon"
+                  placeholder="Deepti Agarwal"
                   className="w-full px-4 py-3 bg-[#12100E] border border-[rgba(197,160,89,0.25)] text-ivory text-sm rounded-lg focus:border-accent focus:ring-1 focus:ring-accent/30 outline-none transition-all placeholder:text-[#A39A8E]/50"
                 />
               </div>

@@ -323,7 +323,7 @@ export function CheckoutPage() {
                           name="name"
                           type="text"
                           autoComplete="name"
-                          placeholder="e.g. Radhika Sharma"
+                          placeholder="e.g. Deepti Agarwal"
                           value={formData.name}
                           onChange={(e) => setField('name', e.target.value)}
                           className={`w-full bg-[#12100E] border rounded-lg px-4 py-3 text-ivory placeholder:text-[#A39A8E]/60 focus:border-accent focus:outline-none transition-colors ${errors.name ? 'border-red-500/50' : 'border-[rgba(197,160,89,0.25)]'}`}
@@ -339,7 +339,7 @@ export function CheckoutPage() {
                           name="email"
                           type="email"
                           autoComplete="email"
-                          placeholder="radhika@example.com"
+                          placeholder="deepti@example.com"
                           value={formData.email}
                           onChange={(e) => setField('email', e.target.value)}
                           className={`w-full bg-[#12100E] border rounded-lg px-4 py-3 text-ivory placeholder:text-[#A39A8E]/60 focus:border-accent focus:outline-none transition-colors ${errors.email ? 'border-red-500/50' : 'border-[rgba(197,160,89,0.25)]'}`}

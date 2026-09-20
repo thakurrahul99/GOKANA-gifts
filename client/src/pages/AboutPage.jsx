@@ -120,7 +120,7 @@ export function AboutPage() {
           </ScrollReveal>
           <ScrollReveal delay={0.35} className="space-y-5 body-text text-[#A39A8E] leading-relaxed">
             <p>
-              Our founder had a habit: every birthday, anniversary, or festival, she'd spend hours searching for the perfect
+              Our founder, Deepti Agarwal, had a habit: every birthday, anniversary, or festival, she'd spend hours searching for the perfect
               gift — and almost always settle for something generic that felt nothing like the person she was gifting.
             </p>
             <p>

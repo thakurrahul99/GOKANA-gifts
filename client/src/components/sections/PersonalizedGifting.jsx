@@ -44,7 +44,7 @@ export function PersonalizedGifting() {
                 Handwritten with Care
               </p>
               <h4 className="font-serif text-3xl md:text-4xl font-light text-ivory mb-3 italic">
-                Dearest Aanya,
+                Dearest Deepti,
               </h4>
               <p className="font-serif text-base md:text-lg text-[#C7BFB5] leading-relaxed max-w-xs italic mb-6 font-light">
                 "May this milestone bring you quiet joy, unforgettable celebrations, and dreams realized."
