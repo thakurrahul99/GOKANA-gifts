@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Plus, Edit2, Trash2, Search, Loader2, AlertCircle, RefreshCw, X, Upload, Image as ImageIcon } from 'lucide-react';
+import { Plus, Edit2, Trash2, Search, Loader2, AlertCircle, RefreshCw, X, Upload, Image as ImageIcon, ChevronDown, Check } from 'lucide-react';
 import { useAuthStore } from '../../store';
 import { formatPrice } from '../../components/ui';
 import { API_BASE } from '../../lib/api';
@@ -44,7 +44,7 @@ export function AdminProducts() {
   const [formError, setFormError] = useState('');
   const [formSaving, setFormSaving] = useState(false);
   const [deletingId, setDeletingId] = useState(null);
-  const [uploadingImages, setUploadingImages] = useState(false);
+  const [uploadingImages, setUploadingImages] = useState(false);\n  const [categoryDropdownOpen, setCategoryDropdownOpen] = useState(false);
 
   const authHeader = { Authorization: `Bearer ${token}` };
 
@@ -518,30 +518,52 @@ export function AdminProducts() {
 
               <div>
                 <label className="block text-xs text-gray-500 mb-1.5 font-medium">Gift Categories / Occasions</label>
-                <div className="grid grid-cols-2 gap-2 rounded-lg border border-gray-200 p-3 bg-white">
-                  {categories.length > 0 ? categories.map((category) => {
-                    const checked = formData.categories?.includes(category._id);
-                    return (
-                      <label key={category._id} className="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
-                        <input
-                          type="checkbox"
-                          checked={checked}
-                          onChange={() => setFormData((f) => ({
-                            ...f,
-                            categories: checked
-                              ? f.categories.filter((id) => id !== category._id)
-                              : [...(f.categories || []), category._id],
-                          }))}
-                          className="w-4 h-4 accent-[#D4AF37]"
-                        />
-                        <span>{category.emoji ? category.emoji + ' ' : ''}{category.name}</span>
-                      </label>
-                    );
-                  }) : (
-                    <p className="col-span-2 text-xs text-muted">No active categories found.</p>
+                <div className="relative">
+                  <button
+                    type="button"
+                    onClick={() => setCategoryDropdownOpen((open) => !open)}
+                    className="w-full min-h-[44px] border border-gray-200 bg-white px-3 py-2.5 text-sm flex items-center justify-between gap-3 text-left focus:outline-none focus:border-gold"
+                  >
+                    <div className="flex flex-wrap gap-1.5">
+                      {formData.categories?.length ? formData.categories.map((id) => {
+                        const category = categories.find((item) => item._id === id);
+                        return category ? (
+                          <span key={id} className="inline-flex items-center gap-1 rounded-full bg-blush px-2 py-1 text-xs text-primary">
+                            {category.emoji ? category.emoji + ' ' : ''}{category.name}
+                          </span>
+                        ) : null;
+                      }) : <span className="text-gray-400">Select gift categories…</span>}
+                    </div>
+                    <ChevronDown size={17} className={categoryDropdownOpen ? 'rotate-180 transition-transform' : 'transition-transform'} />
+                  </button>
+
+                  {categoryDropdownOpen && (
+                    <div className="absolute z-20 mt-1 w-full max-h-64 overflow-y-auto rounded-lg border border-gray-200 bg-white shadow-lg">
+                      {categories.length > 0 ? categories.map((category) => {
+                        const checked = formData.categories?.includes(category._id);
+                        return (
+                          <button
+                            key={category._id}
+                            type="button"
+                            onClick={() => setFormData((f) => ({
+                              ...f,
+                              categories: checked
+                                ? (f.categories || []).filter((id) => id !== category._id)
+                                : [...(f.categories || []), category._id],
+                            }))}
+                            className="w-full flex items-center justify-between gap-3 px-3 py-2.5 text-sm text-gray-700 hover:bg-gray-50 text-left"
+                          >
+                            <span>{category.emoji ? category.emoji + ' ' : ''}{category.name}</span>
+                            {checked && <Check size={16} className="text-[#D4AF37]" />}
+                          </button>
+                        );
+                      }) : (
+                        <p className="px-3 py-3 text-xs text-muted">No active categories found.</p>
+                      )}
+                    </div>
                   )}
                 </div>
-                <p className="text-[11px] text-muted mt-1.5">Select all occasions that apply, such as Birthday, Anniversary, Wedding or Diwali.</p>
+                <p className="text-[11px] text-muted mt-1.5">Dropdown se multiple occasions select kar sakte ho — Birthday, Anniversary, Wedding, New Baby, Housewarming, Graduation, etc.</p>
               </div>
 
               <div>
