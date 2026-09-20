@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Heart, ShoppingBag, MessageCircle, ChevronDown, Plus, Minus, Check, Clock, AlertCircle, Sparkles } from 'lucide-react';
 import clsx from 'clsx';
-import { products } from '../data';
+import { products as fallbackProducts } from '../data';
+import { API_BASE } from '../lib/api';
 import { useCartStore, useWishlistStore } from '../store';
 import { Rating, Badge, Divider, formatPrice, getDeliveryDate } from '../components/ui';
 import { ProductCard } from '../components/product/ProductCard';
@@ -94,8 +95,45 @@ function AccordionItem({ title, children, defaultOpen = false }) {
 
 export function ProductPage() {
   const { slug } = useParams();
-  const product = products.find((p) => p.slug === slug) || products[0];
+  const [product, setProduct] = useState(null);
+  const [related, setRelated] = useState([]);
+  const [loading, setLoading] = useState(true);
   const { addItem } = useCartStore();
+
+  const normalizeProduct = (p) => ({
+    ...p,
+    id: p._id || p.id,
+    image: p.thumbnail || p.images?.[0],
+    image2: p.images?.[1] || p.thumbnail || p.images?.[0],
+    reviews: p.reviewCount ?? p.reviews ?? 0,
+    categories: (p.categories || []).map((c) => typeof c === 'string' ? c : c.slug).filter(Boolean),
+    variants: (p.variants || []).map((v) => typeof v === 'string' ? v : v.label),
+  });
+
+  useEffect(() => {
+    const loadProduct = async () => {
+      setLoading(true);
+      try {
+        const res = await fetch(`${API_BASE}/products/${encodeURIComponent(slug)}`);
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.message || 'Product not found');
+        const current = normalizeProduct(data.product);
+        setProduct(current);
+
+        const listRes = await fetch(`${API_BASE}/products?limit=8`);
+        const listData = await listRes.json();
+        setRelated((listData.products || []).map(normalizeProduct).filter((p) => p.id !== current.id).slice(0, 4));
+      } catch (error) {
+        console.error('Failed to load product:', error);
+        setProduct(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadProduct();
+  }, [slug]);
+
+  const { toggle, has } = useWishlistStore();
   const { toggle, has } = useWishlistStore();
   const isWished = has(product?.id);
 
@@ -104,8 +142,7 @@ export function ProductPage() {
   const [personalisation, setPersonalisation] = useState({ name: '', message: '', note: '' });
   const [addedToCart, setAddedToCart] = useState(false);
 
-  const related = products.filter((p) => p.id !== product?.id).slice(0, 4);
-  const images = [product?.image, product?.image2 || product?.image].filter(Boolean);
+  const images = [product?.image, ...(product?.images || [])].filter(Boolean).filter((img, index, arr) => arr.indexOf(img) === index);
   const estimatedDate = getDeliveryDate(3);
 
   const handleAddToCart = () => {
@@ -117,6 +154,10 @@ export function ProductPage() {
   const discount = product?.originalPrice
     ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
     : null;
+
+  if (loading) {
+    return <div className="pt-40 text-center min-h-screen bg-bg"><p className="text-muted">Loading product…</p></div>;
+  }
 
   if (!product) {
     return (
