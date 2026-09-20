@@ -3,10 +3,29 @@ import { ArrowRight } from 'lucide-react';
 import { ScrollReveal, AnimatedHeading } from '../ui/ScrollReveal';
 import { Divider } from '../ui';
 import { ProductCard } from '../product/ProductCard';
-import { products } from '../../data';
+import { useEffect, useState } from 'react';
+import { API_BASE } from '../../lib/api';
 
 export function FeaturedCollection() {
-  const featured = products.filter((p) => p.tags.includes('featured'));
+  const [featured, setFeatured] = useState([]);
+
+  useEffect(() => {
+    fetch(`${API_BASE}/products?limit=100&featured=true`)
+      .then((res) => res.json())
+      .then((data) => {
+        const products = (data.products || []).map((p) => ({
+          ...p,
+          id: p._id || p.id,
+          image: p.thumbnail || p.images?.[0],
+          image2: p.images?.[1] || p.thumbnail || p.images?.[0],
+          tags: p.tags || [],
+          categories: (p.categories || []).map((cat) => typeof cat === 'string' ? cat : cat.slug).filter(Boolean),
+          variants: (p.variants || []).map((v) => typeof v === 'string' ? v : v.label),
+        }));
+        setFeatured(products);
+      })
+      .catch(() => setFeatured([]));
+  }, []);
 
   return (
     <section className="section-py bg-surface-alt" aria-labelledby="featured-heading">
