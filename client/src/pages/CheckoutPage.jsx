@@ -10,8 +10,9 @@ const STEPS = ['Contact', 'Delivery Address', 'Shipping', 'Payment', 'Confirmati
 const STORAGE_KEY = 'gokana_checkout_form';
 
 export function CheckoutPage() {
-  const { items, subtotal, clearCart } = useCartStore();
+  const { items, clearCart } = useCartStore();
   const { user, token } = useAuthStore();
+  const subtotal = items.reduce((acc, item) => acc + item.product.price * item.qty, 0);
   const navigate = useNavigate();
   const [step, setStep] = useState(0);
   const [errors, setErrors] = useState({});
