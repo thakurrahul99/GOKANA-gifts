@@ -16,6 +16,9 @@ const EMPTY_FORM = {
   badge: '',
   inStock: true,
   isFeatured: false,
+  stock: '0',
+  thumbnail: '',
+  images: '',
 };
 
 function slugify(text) {
@@ -80,6 +83,9 @@ export function AdminProducts() {
       badge: product.badge || '',
       inStock: product.inStock ?? true,
       isFeatured: product.isFeatured ?? false,
+      stock: product.stock ?? 0,
+      thumbnail: product.thumbnail || '',
+      images: Array.isArray(product.images) ? product.images.join('\n') : '',
     });
     setFormError('');
     setShowForm(true);
@@ -101,6 +107,10 @@ export function AdminProducts() {
         price: Number(formData.price),
         originalPrice: formData.originalPrice ? Number(formData.originalPrice) : undefined,
         badge: formData.badge || null,
+        stock: Number(formData.stock),
+        inStock: Number(formData.stock) > 0 && formData.inStock,
+        thumbnail: formData.thumbnail.trim() || undefined,
+        images: formData.images.split(/\n|,/).map(url => url.trim()).filter(Boolean),
       };
 
       let res;
@@ -259,7 +269,7 @@ export function AdminProducts() {
                     <td className="px-4 py-3 font-semibold text-primary hidden md:table-cell">{formatPrice(product.price)}</td>
                     <td className="px-4 py-3 hidden md:table-cell">
                       <span className={`text-[10px] px-2 py-1 font-semibold border ${product.inStock ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-red-50 text-red-700 border-red-200'}`}>
-                        {product.inStock ? 'In Stock' : 'Out of Stock'}
+                        {product.inStock ? `${product.stock ?? 0} in stock` : 'Out of Stock'}
                       </span>
                     </td>
                     <td className="px-4 py-3 hidden md:table-cell text-xs text-muted">{product.badge || '—'}</td>
@@ -383,6 +393,42 @@ export function AdminProducts() {
                     className="w-full border border-gray-200 px-3 py-2.5 text-sm focus:outline-none focus:border-gold"
                   />
                 </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-xs text-gray-500 mb-1.5 font-medium">Stock *</label>
+                  <input
+                    placeholder="20"
+                    type="number"
+                    min="0"
+                    value={formData.stock}
+                    onChange={setF('stock')}
+                    className="w-full border border-gray-200 px-3 py-2.5 text-sm focus:outline-none focus:border-gold"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs text-gray-500 mb-1.5 font-medium">Thumbnail URL</label>
+                  <input
+                    placeholder="https://..."
+                    type="url"
+                    value={formData.thumbnail}
+                    onChange={setF('thumbnail')}
+                    className="w-full border border-gray-200 px-3 py-2.5 text-sm focus:outline-none focus:border-gold"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs text-gray-500 mb-1.5 font-medium">Product Image URLs</label>
+                <textarea
+                  placeholder="One image URL per line"
+                  rows={3}
+                  value={formData.images}
+                  onChange={setF('images')}
+                  className="w-full border border-gray-200 px-3 py-2.5 text-sm focus:outline-none focus:border-gold resize-none"
+                />
+                <p className="text-[11px] text-gray-400 mt-1">Add direct image URLs, one per line. The first image is used when a thumbnail is not provided.</p>
               </div>
 
               <div>
