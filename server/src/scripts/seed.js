@@ -16,6 +16,15 @@ const CATEGORIES = [
   { name: 'Corporate Gifting', slug: 'corporate', emoji: '💼', sortOrder: 6 },
   { name: 'Thank You', slug: 'thankyou', emoji: '🙏', sortOrder: 7 },
   { name: 'Just Because', slug: 'justbecause', emoji: '✨', sortOrder: 8 },
+  { name: 'New Baby', slug: 'new-baby', emoji: '👶', sortOrder: 9 },
+  { name: 'Housewarming', slug: 'housewarming', emoji: '🏠', sortOrder: 10 },
+  { name: 'Graduation', slug: 'graduation', emoji: '🎓', sortOrder: 11 },
+  { name: 'Friendship', slug: 'friendship', emoji: '🤝', sortOrder: 12 },
+  { name: "Mother's Day", slug: 'mothers-day', emoji: '🌷', sortOrder: 13 },
+  { name: "Father's Day", slug: 'fathers-day', emoji: '👔', sortOrder: 14 },
+  { name: 'Rakhi', slug: 'rakhi', emoji: '🪢', sortOrder: 15 },
+  { name: 'Christmas', slug: 'christmas', emoji: '🎄', sortOrder: 16 },
+  { name: 'Holi', slug: 'holi', emoji: '🎨', sortOrder: 17 },
 ];
 
 const COUPONS = [
