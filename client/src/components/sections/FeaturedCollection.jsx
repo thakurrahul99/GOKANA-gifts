@@ -9,18 +9,18 @@ export function FeaturedCollection() {
   const featured = products.filter((p) => p.tags.includes('featured'));
 
   return (
-    <section className="section-py bg-[#FBF8F2]" aria-labelledby="featured-heading">
+    <section className="section-py bg-surface-alt" aria-labelledby="featured-heading">
       <div className="container-gokana">
         {/* Header */}
         <div className="text-center mb-14 max-w-xl mx-auto">
           <ScrollReveal delay={0.1}>
-            <p className="label-text text-[#D4AF37] mb-3">✦ Hand-Selected Excellence</p>
+            <p className="label-text text-accent mb-3">✦ Hand-Selected Excellence</p>
           </ScrollReveal>
-          <AnimatedHeading id="featured-heading" className="heading-lg text-[#0B1F3A] mb-4" delay={0.15}>
+          <AnimatedHeading id="featured-heading" className="heading-lg text-primary mb-4" delay={0.15}>
             Featured Curations
           </AnimatedHeading>
           <ScrollReveal delay={0.25}>
-            <p className="font-sans text-base text-[#6B6B6B] leading-relaxed">
+            <p className="font-sans text-base text-muted leading-relaxed">
               Every hamper hand-assembled for its narrative, quality ingredients, and unboxing grandeur.
             </p>
           </ScrollReveal>

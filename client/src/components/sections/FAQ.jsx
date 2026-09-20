@@ -39,18 +39,18 @@ export function FAQ() {
   };
 
   return (
-    <section id="faq" className="section-py bg-[#FBF8F2]" aria-labelledby="faq-heading">
+    <section id="faq" className="section-py bg-surface-alt" aria-labelledby="faq-heading">
       <div className="container-gokana max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-14">
           <ScrollReveal delay={0.1}>
-            <p className="label-text text-[#D4AF37] mb-3">✦ Got Questions?</p>
+            <p className="label-text text-accent mb-3">✦ Got Questions?</p>
           </ScrollReveal>
-          <AnimatedHeading id="faq-heading" className="heading-lg text-[#0B1F3A] mb-4" delay={0.15}>
+          <AnimatedHeading id="faq-heading" className="heading-lg text-primary mb-4" delay={0.15}>
             Frequently Asked Questions
           </AnimatedHeading>
           <ScrollReveal delay={0.25}>
-            <p className="font-sans text-base text-[#6B6B6B] leading-relaxed max-w-lg mx-auto">
+            <p className="font-sans text-base text-muted leading-relaxed max-w-lg mx-auto">
               Everything you need to know about our luxury hampers, delivery promises, and custom notes.
             </p>
           </ScrollReveal>
@@ -63,21 +63,21 @@ export function FAQ() {
             return (
               <div
                 key={item.q}
-                className="rounded-xl border border-[#E8DFD3] bg-white overflow-hidden transition-all duration-200"
+                className="rounded-xl border border-border bg-white overflow-hidden transition-all duration-200"
               >
                 <button
                   onClick={() => toggle(idx)}
-                  className="w-full flex items-center justify-between p-5 md:p-6 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37] min-h-[52px]"
+                  className="w-full flex items-center justify-between p-5 md:p-6 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent min-h-[52px]"
                   aria-expanded={isOpen}
                   aria-controls={`faq-answer-${idx}`}
                 >
-                  <span className="font-serif text-lg md:text-xl font-light text-[#0B1F3A] pr-4">
+                  <span className="font-serif text-lg md:text-xl font-light text-primary pr-4">
                     {item.q}
                   </span>
                   <motion.div
                     animate={{ rotate: isOpen ? 180 : 0 }}
                     transition={{ duration: 0.25 }}
-                    className="w-8 h-8 rounded-full bg-[#FBF8F2] flex items-center justify-center text-[#0B1F3A] flex-shrink-0"
+                    className="w-8 h-8 rounded-full bg-surface-alt flex items-center justify-center text-primary flex-shrink-0"
                   >
                     <ChevronDown size={16} />
                   </motion.div>
@@ -92,7 +92,7 @@ export function FAQ() {
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                     >
-                      <div className="px-5 pb-5 md:px-6 md:pb-6 pt-1 text-sm font-sans text-[#6B6B6B] leading-relaxed border-t border-[#E8DFD3]/40">
+                      <div className="px-5 pb-5 md:px-6 md:pb-6 pt-1 text-sm font-sans text-muted leading-relaxed border-t border-border/40">
                         {item.a}
                       </div>
                     </motion.div>
@@ -104,12 +104,12 @@ export function FAQ() {
         </div>
 
         {/* Concierge Help Callout */}
-        <div className="mt-12 text-center p-6 rounded-2xl bg-white border border-[#E8DFD3] flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="mt-12 text-center p-6 rounded-2xl bg-white border border-border flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="text-left">
-            <h4 className="font-serif text-lg font-light text-[#0B1F3A]">
+            <h4 className="font-serif text-lg font-light text-primary">
               Still have questions or need special curation?
             </h4>
-            <p className="font-sans text-xs text-[#6B6B6B]">
+            <p className="font-sans text-xs text-muted">
               Our gifting specialists are active 9am to 7pm on WhatsApp to assist you.
             </p>
           </div>

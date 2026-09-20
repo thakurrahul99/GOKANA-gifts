@@ -31,18 +31,18 @@ const pillars = [
 
 export function WhyGokana() {
   return (
-    <section className="section-py bg-[#FBF8F2]" aria-labelledby="why-gokana-heading">
+    <section className="section-py bg-surface-alt" aria-labelledby="why-gokana-heading">
       <div className="container-gokana">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-14">
           <ScrollReveal delay={0.1}>
-            <p className="label-text text-[#D4AF37] mb-3">✦ The GŌKANA Distinction</p>
+            <p className="label-text text-accent mb-3">✦ The GŌKANA Distinction</p>
           </ScrollReveal>
-          <AnimatedHeading id="why-gokana-heading" className="heading-lg text-[#0B1F3A] mb-4" delay={0.15}>
+          <AnimatedHeading id="why-gokana-heading" className="heading-lg text-primary mb-4" delay={0.15}>
             Why Choose GŌKANA
           </AnimatedHeading>
           <ScrollReveal delay={0.25}>
-            <p className="font-sans text-base text-[#6B6B6B] leading-relaxed">
+            <p className="font-sans text-base text-muted leading-relaxed">
               We obsess over every detail so that when your gift is opened, it creates a genuine moment of reverence, delight, and connection.
             </p>
           </ScrollReveal>
@@ -61,16 +61,16 @@ export function WhyGokana() {
               className="card-premium group flex flex-col justify-between p-6 md:p-7"
             >
               <div>
-                <div className="w-14 h-14 rounded-2xl bg-[#F3D9D4]/60 flex items-center justify-center text-[#0B1F3A] mb-6 group-hover:bg-[#F5E9C8] transition-colors">
-                  <Icon size={26} strokeWidth={1.8} className="text-[#0B1F3A]" />
+                <div className="w-14 h-14 rounded-2xl bg-blush/60 flex items-center justify-center text-primary mb-6 group-hover:bg-accent-soft transition-colors">
+                  <Icon size={26} strokeWidth={1.8} className="text-primary" />
                 </div>
-                <h3 className="font-serif text-2xl font-light text-[#0B1F3A] mb-1">
+                <h3 className="font-serif text-2xl font-light text-primary mb-1">
                   {title}
                 </h3>
-                <p className="font-sans text-xs font-semibold uppercase tracking-wider text-[#D4AF37] mb-3">
+                <p className="font-sans text-xs font-semibold uppercase tracking-wider text-accent mb-3">
                   {subtitle}
                 </p>
-                <p className="font-sans text-sm text-[#6B6B6B] leading-relaxed">
+                <p className="font-sans text-sm text-muted leading-relaxed">
                   {desc}
                 </p>
               </div>

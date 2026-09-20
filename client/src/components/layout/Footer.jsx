@@ -84,13 +84,13 @@ export function Footer() {
   };
 
   return (
-    <footer className="bg-[var(--primary)] text-[var(--bg)] border-t border-white/10" aria-label="Site Footer">
-      <div className="h-1 bg-gradient-to-r from-transparent via-[var(--accent)] to-transparent opacity-40" />
+    <footer className="bg-primary text-bg border-t border-white/10" aria-label="Site Footer">
+      <div className="h-1 bg-gradient-to-r from-transparent via-accent to-transparent opacity-40" />
 
       <div className="container-gokana pt-16 pb-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 pb-14 border-b border-white/10">
           <div className="lg:col-span-4">
-            <Link to="/" style={footerTextStyle} className="font-serif text-3xl font-light tracking-[0.15em] uppercase mb-4 block hover:text-[var(--accent)] transition-colors">
+            <Link to="/" style={footerTextStyle} className="font-serif text-3xl font-light tracking-[0.15em] uppercase mb-4 block hover:text-accent transition-colors">
               GŌKANA
             </Link>
             <p style={footerTextStyle} className="font-sans text-sm leading-relaxed max-w-sm mb-6">
@@ -105,16 +105,16 @@ export function Footer() {
 
               {!subscribed ? (
                 <form onSubmit={handleSubscribe} className="space-y-2" noValidate>
-                  <div className="flex rounded-lg overflow-hidden border border-white/20 focus-within:border-[var(--accent)] transition-colors">
-                    <input type="email" value={email} onChange={(e) => { setEmail(e.target.value); if (error) setError(""); }} placeholder="Enter your email" style={footerTextStyle} className="flex-1 bg-white/5 px-4 py-3 text-sm placeholder-[var(--bg)]/60 focus:outline-none min-h-[44px]" aria-label="Email for newsletter" required />
-                    <button type="submit" className="px-5 bg-[var(--accent)] text-[var(--text)] font-sans text-xs font-semibold uppercase tracking-wider hover:bg-[var(--accent-dark)] transition-colors flex items-center gap-1.5 min-h-[44px]" aria-label="Subscribe to newsletter">
+                  <div className="flex rounded-lg overflow-hidden border border-white/20 focus-within:border-accent transition-colors">
+                    <input type="email" value={email} onChange={(e) => { setEmail(e.target.value); if (error) setError(""); }} placeholder="Enter your email" style={footerTextStyle} className="flex-1 bg-white/5 px-4 py-3 text-sm placeholder-bg/60 focus:outline-none min-h-[44px]" aria-label="Email for newsletter" required />
+                    <button type="submit" className="px-5 bg-accent text-text font-sans text-xs font-semibold uppercase tracking-wider hover:bg-accent-dark transition-colors flex items-center gap-1.5 min-h-[44px]" aria-label="Subscribe to newsletter">
                       Join <ArrowRight size={14} />
                     </button>
                   </div>
-                  {error && <p className="text-xs text-[var(--blush)] font-medium mt-1" role="alert">{error}</p>}
+                  {error && <p className="text-xs text-blush font-medium mt-1" role="alert">{error}</p>}
                 </form>
               ) : (
-                <div className="flex items-center gap-2 p-3 rounded-lg bg-white/10 text-[var(--accent)] text-sm" role="status" aria-live="polite">
+                <div className="flex items-center gap-2 p-3 rounded-lg bg-white/10 text-accent text-sm" role="status" aria-live="polite">
                   <CheckCircle2 size={16} />
                   <span>Welcome to GŌKANA. You're on the list!</span>
                 </div>
@@ -123,7 +123,7 @@ export function Footer() {
 
             <div className="flex items-center gap-3">
               {socials.map(({ Icon, href, label }) => (
-                <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} style={footerTextStyle} className="w-10 h-10 rounded-full border border-white/15 flex items-center justify-center hover:text-[var(--accent)] hover:border-[var(--accent)] hover:bg-white/5 transition-all">
+                <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} style={footerTextStyle} className="w-10 h-10 rounded-full border border-white/15 flex items-center justify-center hover:text-accent hover:border-accent hover:bg-white/5 transition-all">
                   <Icon size={18} />
                 </a>
               ))}
@@ -138,9 +138,9 @@ export function Footer() {
                   <li key={item.label}>
                     {item.href ? (
                       item.isExternal ? (
-                        <a href={item.href} target="_blank" rel="noopener noreferrer" style={footerTextStyle} className="font-sans text-sm hover:text-[var(--accent)] transition-colors">{item.label}</a>
+                        <a href={item.href} target="_blank" rel="noopener noreferrer" style={footerTextStyle} className="font-sans text-sm hover:text-accent transition-colors">{item.label}</a>
                       ) : (
-                        <Link to={item.href} style={footerTextStyle} className="font-sans text-sm hover:text-[var(--accent)] transition-colors">{item.label}</Link>
+                        <Link to={item.href} style={footerTextStyle} className="font-sans text-sm hover:text-accent transition-colors">{item.label}</Link>
                       )
                     ) : (
                       <span style={footerTextStyle}>{item.label}</span>
@@ -163,11 +163,11 @@ export function Footer() {
           <div className="flex flex-wrap items-center gap-4 text-center md:text-right">
             <span style={footerTextStyle}>© {new Date().getFullYear()} GŌKANA Gifting Private Limited. All rights reserved.</span>
             <div className="flex items-center gap-3">
-              <Link to="/contact" style={footerTextStyle} className="hover:text-[var(--accent)] transition-colors">Privacy Policy</Link>
+              <Link to="/contact" style={footerTextStyle} className="hover:text-accent transition-colors">Privacy Policy</Link>
               <span style={footerTextStyle}>•</span>
-              <Link to="/contact" style={footerTextStyle} className="hover:text-[var(--accent)] transition-colors">Terms of Service</Link>
+              <Link to="/contact" style={footerTextStyle} className="hover:text-accent transition-colors">Terms of Service</Link>
               <span style={footerTextStyle}>•</span>
-              <Link to="/contact" style={footerTextStyle} className="hover:text-[var(--accent)] transition-colors">Refund & Return Policy</Link>
+              <Link to="/contact" style={footerTextStyle} className="hover:text-accent transition-colors">Refund & Return Policy</Link>
             </div>
           </div>
         </div>

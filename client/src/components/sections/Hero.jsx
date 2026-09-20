@@ -23,7 +23,7 @@ export function Hero() {
     <>
       <section
         ref={containerRef}
-        className="relative w-full min-h-[640px] h-[92vh] max-h-[960px] overflow-hidden bg-[#0B1F3A]"
+        className="relative w-full min-h-[640px] h-screen max-h-[960px] overflow-hidden bg-primary"
         aria-label="Hero Introduction"
       >
         {/* Parallax Image */}
@@ -39,26 +39,27 @@ export function Hero() {
             fetchPriority="high"
           />
           {/* Gradients */}
-          <div className="absolute inset-0 bg-[#0B1F3A]/45" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0B1F3A] via-[#0B1F3A]/35 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0B1F3A]/60 via-[#0B1F3A]/20 to-transparent" />
+          <div className="absolute inset-0 bg-primary-dark/48" />
+          <div className="absolute inset-0 bg-gradient-to-t from-primary-dark via-primary/42 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-primary-dark/72 via-primary/28 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-primary-dark/35" />
         </motion.div>
 
         {/* Content */}
         <motion.div
-          className="absolute inset-0 flex flex-col justify-end pb-16 md:pb-20"
+          className="absolute inset-0 flex flex-col justify-end pb-20 md:pb-24"
           style={{ y: textY, opacity }}
         >
           <div className="container-gokana">
             {/* Trust Badges Pill (Above the fold) */}
             <motion.div
-              className="inline-flex flex-wrap items-center gap-3 px-3.5 py-1.5 rounded-full bg-[#0B1F3A]/80 backdrop-blur-md border border-[#D4AF37]/30 text-white text-xs font-sans mb-6"
+              className="inline-flex flex-wrap items-center gap-3 px-4 py-2 rounded-full bg-primary-dark/70 backdrop-blur-lg border border-accent/45 shadow-[0_6px_24px_rgba(0,0,0,0.2)] text-white text-xs font-sans mb-7"
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <div className="flex items-center gap-1 text-[#D4AF37]">
-                <Star size={13} className="fill-[#D4AF37]" />
+              <div className="flex items-center gap-1 text-accent">
+                <Star size={13} className="fill-accent" />
                 <span className="font-semibold text-white">4.9/5 Rating</span>
               </div>
               <span className="text-white/30">•</span>
@@ -68,19 +69,19 @@ export function Hero() {
             {/* Main Headline */}
             <div className="overflow-hidden mb-5 max-w-4xl">
               <motion.h1
-                className="font-serif text-[clamp(2.75rem,7vw,6.5rem)] font-light text-white leading-[1.05] tracking-tight"
+                className="font-serif text-[clamp(3rem,7.2vw,6.8rem)] font-light text-surface-tint leading-[0.98] tracking-[-0.02em] drop-shadow-[0_8px_24px_rgba(0,0,0,0.24)]"
                 initial={{ y: '100%' }}
                 animate={{ y: '0%' }}
                 transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
               >
-                Gifts that become
-                <span className="text-[#F5E9C8] italic"> unforgettable.</span>
+                <span className="block whitespace-nowrap">Gifts that become</span>
+                <span className="block whitespace-nowrap text-accent italic font-normal">unforgettable.</span>
               </motion.h1>
             </div>
 
             {/* Supporting Subheadline */}
             <motion.p
-              className="font-sans text-base md:text-lg text-white/85 max-w-xl leading-relaxed mb-8"
+              className="font-sans text-[15px] md:text-lg text-white/80 max-w-[590px] leading-[1.75] mb-9"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.5 }}
@@ -97,14 +98,14 @@ export function Hero() {
             >
               <Link
                 to="/gift-finder"
-                className="btn-accent"
+                className="btn-accent shadow-[0_8px_28px_rgba(212,175,55,0.18)] hover:shadow-[0_12px_32px_rgba(212,175,55,0.28)]"
               >
                 ✦ Find the Perfect Gift
                 <ArrowRight size={16} />
               </Link>
               <Link
                 to="/shop"
-                className="btn-outline border-white text-white hover:bg-white/10 hover:border-white"
+                className="btn-outline !text-white border-white/80 hover:bg-white/10 hover:border-white shadow-[0_6px_20px_rgba(0,0,0,0.12)]"
               >
                 Explore Collection
               </Link>
@@ -118,7 +119,7 @@ export function Hero() {
           className="absolute bottom-5 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 text-white/50 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 rounded p-1"
           aria-label="Scroll down to content"
         >
-          <span className="font-sans text-[10px] tracking-[0.2em] uppercase text-[#D4AF37]">Scroll</span>
+          <span className="font-sans text-[10px] tracking-[0.2em] uppercase text-accent">Scroll</span>
           <motion.div
             animate={{ y: [0, 5, 0] }}
             transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
@@ -129,11 +130,11 @@ export function Hero() {
       </section>
 
       {/* ── Trust Strip Directly Below Hero (Section 4 CRO Requirement) ── */}
-      <aside className="bg-[#0B1F3A] border-b border-[#1E3A5F] py-4 relative z-10" aria-label="Trust and Guarantees">
+      <aside className="bg-primary border-b border-primary-2 py-4 relative z-10 -mt-px" aria-label="Trust and Guarantees">
         <div className="container-gokana">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 text-center md:text-left">
             <div className="flex items-center justify-center md:justify-start gap-3">
-              <div className="w-9 h-9 rounded-full bg-[#F3D9D4] flex items-center justify-center text-[#0B1F3A] flex-shrink-0">
+              <div className="w-9 h-9 rounded-full bg-blush flex items-center justify-center text-primary flex-shrink-0">
                 <Truck size={17} />
               </div>
               <div>
@@ -147,7 +148,7 @@ export function Hero() {
             </div>
 
             <div className="flex items-center justify-center md:justify-start gap-3">
-              <div className="w-9 h-9 rounded-full bg-[#F5E9C8] flex items-center justify-center text-[#0B1F3A] flex-shrink-0">
+              <div className="w-9 h-9 rounded-full bg-accent-soft flex items-center justify-center text-primary flex-shrink-0">
                 <ShieldCheck size={17} />
               </div>
               <div>
@@ -161,7 +162,7 @@ export function Hero() {
             </div>
 
             <div className="flex items-center justify-center md:justify-start gap-3">
-              <div className="w-9 h-9 rounded-full bg-[#F3D9D4] flex items-center justify-center text-[#0B1F3A] flex-shrink-0">
+              <div className="w-9 h-9 rounded-full bg-blush flex items-center justify-center text-primary flex-shrink-0">
                 <RotateCcw size={17} />
               </div>
               <div>
@@ -175,7 +176,7 @@ export function Hero() {
             </div>
 
             <div className="flex items-center justify-center md:justify-start gap-3">
-              <div className="w-9 h-9 rounded-full bg-[#F3D9D4] flex items-center justify-center text-[#0B1F3A] flex-shrink-0">
+              <div className="w-9 h-9 rounded-full bg-blush flex items-center justify-center text-primary flex-shrink-0">
                 <Sparkles size={17} />
               </div>
               <div>

@@ -24,9 +24,9 @@ export function Bestsellers() {
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
           <div>
             <ScrollReveal delay={0.1}>
-              <p className="label-text text-[#D4AF37] mb-3">✦ Most Adored</p>
+              <p className="label-text text-accent mb-3">✦ Most Adored</p>
             </ScrollReveal>
-            <AnimatedHeading id="bestsellers-heading" className="heading-lg text-[#0B1F3A]" delay={0.15}>
+            <AnimatedHeading id="bestsellers-heading" className="heading-lg text-primary" delay={0.15}>
               Our Bestsellers
             </AnimatedHeading>
           </div>
@@ -34,14 +34,14 @@ export function Bestsellers() {
           <ScrollReveal delay={0.2} className="flex items-center gap-2">
             <button
               onClick={() => scroll('left')}
-              className="min-w-[44px] min-h-[44px] rounded-full border border-[#E8DFD3] flex items-center justify-center text-[#0B1F3A] hover:border-[#D4AF37] hover:bg-[#F5E9C8] transition-all"
+              className="min-w-[44px] min-h-[44px] rounded-full border border-border flex items-center justify-center text-primary hover:border-accent hover:bg-accent-soft transition-all"
               aria-label="Scroll bestsellers left"
             >
               <ChevronLeft size={18} strokeWidth={2} />
             </button>
             <button
               onClick={() => scroll('right')}
-              className="min-w-[44px] min-h-[44px] rounded-full border border-[#E8DFD3] flex items-center justify-center text-[#0B1F3A] hover:border-[#D4AF37] hover:bg-[#F5E9C8] transition-all"
+              className="min-w-[44px] min-h-[44px] rounded-full border border-border flex items-center justify-center text-primary hover:border-accent hover:bg-accent-soft transition-all"
               aria-label="Scroll bestsellers right"
             >
               <ChevronRight size={18} strokeWidth={2} />

@@ -29,7 +29,7 @@ export function IntroReveal({ onComplete }) {
     <AnimatePresence>
       {phase !== 'done' && (
         <motion.div
-          className="fixed inset-0 z-[100] bg-[#0B1F3A] flex flex-col items-center justify-center"
+          className="fixed inset-0 z-[100] bg-primary flex flex-col items-center justify-center"
           animate={phase === 'out' ? { opacity: 0 } : { opacity: 1 }}
           transition={phase === 'out' ? { duration: 1.2, ease: 'easeInOut' } : { duration: 0 }}
         >
@@ -42,7 +42,7 @@ export function IntroReveal({ onComplete }) {
 
           {/* Top decorative line */}
           <motion.div
-            className="absolute top-16 left-1/2 -translate-x-1/2 h-px bg-[#D4AF37]/40"
+            className="absolute top-16 left-1/2 -translate-x-1/2 h-px bg-accent/40"
             initial={{ width: 0 }}
             animate={phase !== 'in' ? { width: '60px' } : { width: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
@@ -52,7 +52,7 @@ export function IntroReveal({ onComplete }) {
           <div className="text-center relative">
             {/* Pre-label */}
             <motion.p
-              className="font-sans text-[10px] tracking-[0.4em] uppercase text-[#D4AF37]/70 mb-8"
+              className="font-sans text-[10px] tracking-[0.4em] uppercase text-accent/70 mb-8"
               initial={{ opacity: 0, y: 10 }}
               animate={phase !== 'in' ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.4 }}
@@ -74,7 +74,7 @@ export function IntroReveal({ onComplete }) {
 
             {/* Tagline */}
             <motion.p
-              className="font-serif text-lg md:text-xl font-light text-[#C9D2DE] tracking-[0.05em] mt-6 italic"
+              className="font-serif text-lg md:text-xl font-light text-charcoal-200 tracking-[0.05em] mt-6 italic"
               initial={{ opacity: 0 }}
               animate={phase !== 'in' ? { opacity: 1 } : {}}
               transition={{ duration: 1, delay: 0.9 }}
@@ -85,7 +85,7 @@ export function IntroReveal({ onComplete }) {
 
           {/* Bottom decorative line */}
           <motion.div
-            className="absolute bottom-16 left-1/2 -translate-x-1/2 h-px bg-[#D4AF37]/40"
+            className="absolute bottom-16 left-1/2 -translate-x-1/2 h-px bg-accent/40"
             initial={{ width: 0 }}
             animate={phase !== 'in' ? { width: '60px' } : { width: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
@@ -94,14 +94,14 @@ export function IntroReveal({ onComplete }) {
           {/* Corner ornaments */}
           <div className="absolute top-8 left-8 w-8 h-8">
             <motion.div
-              className="absolute top-0 left-0 w-full h-px bg-[#D4AF37]/30"
+              className="absolute top-0 left-0 w-full h-px bg-accent/30"
               initial={{ scaleX: 0 }}
               animate={phase !== 'in' ? { scaleX: 1 } : {}}
               style={{ transformOrigin: 'left' }}
               transition={{ duration: 0.6, delay: 0.3 }}
             />
             <motion.div
-              className="absolute top-0 left-0 h-full w-px bg-[#D4AF37]/30"
+              className="absolute top-0 left-0 h-full w-px bg-accent/30"
               initial={{ scaleY: 0 }}
               animate={phase !== 'in' ? { scaleY: 1 } : {}}
               style={{ transformOrigin: 'top' }}
@@ -110,14 +110,14 @@ export function IntroReveal({ onComplete }) {
           </div>
           <div className="absolute top-8 right-8 w-8 h-8">
             <motion.div
-              className="absolute top-0 right-0 w-full h-px bg-[#D4AF37]/30"
+              className="absolute top-0 right-0 w-full h-px bg-accent/30"
               initial={{ scaleX: 0 }}
               animate={phase !== 'in' ? { scaleX: 1 } : {}}
               style={{ transformOrigin: 'right' }}
               transition={{ duration: 0.6, delay: 0.3 }}
             />
             <motion.div
-              className="absolute top-0 right-0 h-full w-px bg-[#D4AF37]/30"
+              className="absolute top-0 right-0 h-full w-px bg-accent/30"
               initial={{ scaleY: 0 }}
               animate={phase !== 'in' ? { scaleY: 1 } : {}}
               style={{ transformOrigin: 'top' }}
@@ -126,14 +126,14 @@ export function IntroReveal({ onComplete }) {
           </div>
           <div className="absolute bottom-8 left-8 w-8 h-8">
             <motion.div
-              className="absolute bottom-0 left-0 w-full h-px bg-[#D4AF37]/30"
+              className="absolute bottom-0 left-0 w-full h-px bg-accent/30"
               initial={{ scaleX: 0 }}
               animate={phase !== 'in' ? { scaleX: 1 } : {}}
               style={{ transformOrigin: 'left' }}
               transition={{ duration: 0.6, delay: 0.3 }}
             />
             <motion.div
-              className="absolute bottom-0 left-0 h-full w-px bg-[#D4AF37]/30"
+              className="absolute bottom-0 left-0 h-full w-px bg-accent/30"
               initial={{ scaleY: 0 }}
               animate={phase !== 'in' ? { scaleY: 1 } : {}}
               style={{ transformOrigin: 'bottom' }}
@@ -142,14 +142,14 @@ export function IntroReveal({ onComplete }) {
           </div>
           <div className="absolute bottom-8 right-8 w-8 h-8">
             <motion.div
-              className="absolute bottom-0 right-0 w-full h-px bg-[#D4AF37]/30"
+              className="absolute bottom-0 right-0 w-full h-px bg-accent/30"
               initial={{ scaleX: 0 }}
               animate={phase !== 'in' ? { scaleX: 1 } : {}}
               style={{ transformOrigin: 'right' }}
               transition={{ duration: 0.6, delay: 0.3 }}
             />
             <motion.div
-              className="absolute bottom-0 right-0 h-full w-px bg-[#D4AF37]/30"
+              className="absolute bottom-0 right-0 h-full w-px bg-accent/30"
               initial={{ scaleY: 0 }}
               animate={phase !== 'in' ? { scaleY: 1 } : {}}
               style={{ transformOrigin: 'bottom' }}

@@ -210,22 +210,28 @@ export function AdminProducts() {
         <div className="flex items-center gap-3 bg-red-50 text-red-700 px-5 py-4 text-sm mb-5">
           <AlertCircle size={16} />
           <span>{error}</span>
-          <button onClick={fetchProducts} className="ml-auto underline text-xs">Retry</button>
+          <button
+            onClick={fetchProducts}
+            className="ml-auto inline-flex items-center gap-1.5 text-xs font-semibold text-red-700 underline underline-offset-2 hover:text-error transition-colors"
+          >
+            <RefreshCw size={12} />
+            Retry
+          </button>
         </div>
       )}
 
       {/* Table */}
       {!loading && !error && (
-        <div className="bg-[var(--surface)] border border-[var(--border)] overflow-x-auto">
+        <div className="bg-surface border border-border overflow-x-auto">
           {filtered.length === 0 ? (
-            <div className="text-center py-16 text-[var(--text-muted)]">
+            <div className="text-center py-16 text-muted">
               <p className="text-sm">No products found.</p>
-              <button onClick={openAdd} className="mt-4 text-xs text-[var(--accent)] hover:underline">Add your first product</button>
+              <button onClick={openAdd} className="mt-4 text-xs text-accent hover:underline">Add your first product</button>
             </div>
           ) : (
             <table className="w-full text-sm">
               <thead>
-                <tr className="text-xs text-[var(--text-muted)] font-semibold border-b border-[var(--border)] bg-[var(--bg)]">
+                <tr className="text-xs text-muted font-semibold border-b border-border bg-bg">
                   <th className="text-left px-4 py-3">Product</th>
                   <th className="text-left px-4 py-3 hidden md:table-cell">Price</th>
                   <th className="text-left px-4 py-3 hidden md:table-cell">Stock</th>
@@ -234,31 +240,31 @@ export function AdminProducts() {
                   <th className="text-right px-4 py-3">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[var(--border)]">
+              <tbody className="divide-y divide-border">
                 {filtered.map(product => (
-                  <tr key={product._id} className="hover:bg-[var(--bg)] transition-colors">
+                  <tr key={product._id} className="hover:bg-bg transition-colors">
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-3">
                         {product.thumbnail ? (
                           <img src={product.thumbnail} alt="" className="w-10 h-10 object-cover" />
                         ) : (
-                          <div className="w-10 h-10 bg-[var(--bg)] border border-[var(--border)] flex items-center justify-center text-[var(--text-muted)] text-xs">IMG</div>
+                          <div className="w-10 h-10 bg-bg border border-border flex items-center justify-center text-muted text-xs">IMG</div>
                         )}
                         <div>
-                          <p className="font-semibold text-[var(--primary)]">{product.name}</p>
-                          <p className="text-xs text-[var(--text-muted)] hidden md:block font-mono">{product.slug}</p>
+                          <p className="font-semibold text-primary">{product.name}</p>
+                          <p className="text-xs text-muted hidden md:block font-mono">{product.slug}</p>
                         </div>
                       </div>
                     </td>
-                    <td className="px-4 py-3 font-semibold text-[var(--primary)] hidden md:table-cell">{formatPrice(product.price)}</td>
+                    <td className="px-4 py-3 font-semibold text-primary hidden md:table-cell">{formatPrice(product.price)}</td>
                     <td className="px-4 py-3 hidden md:table-cell">
                       <span className={`text-[10px] px-2 py-1 font-semibold border ${product.inStock ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-red-50 text-red-700 border-red-200'}`}>
                         {product.inStock ? 'In Stock' : 'Out of Stock'}
                       </span>
                     </td>
-                    <td className="px-4 py-3 hidden md:table-cell text-xs text-[var(--text-muted)]">{product.badge || '—'}</td>
+                    <td className="px-4 py-3 hidden md:table-cell text-xs text-muted">{product.badge || '—'}</td>
                     <td className="px-4 py-3 hidden md:table-cell">
-                      <span className={`text-[10px] px-2 py-1 font-semibold border ${product.isFeatured ? 'bg-amber-50 text-amber-700 border-amber-200' : 'bg-[var(--bg)] text-[var(--text-muted)] border-[var(--border)]'}`}>
+                      <span className={`text-[10px] px-2 py-1 font-semibold border ${product.isFeatured ? 'bg-amber-50 text-amber-700 border-amber-200' : 'bg-bg text-muted border-border'}`}>
                         {product.isFeatured ? 'Yes' : 'No'}
                       </span>
                     </td>
@@ -266,7 +272,7 @@ export function AdminProducts() {
                       <div className="flex items-center justify-end gap-2">
                         <button
                           onClick={() => openEdit(product)}
-                          className="p-2 text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors min-h-[36px] min-w-[36px] flex items-center justify-center"
+                          className="p-2 text-muted hover:text-accent transition-colors min-h-[36px] min-w-[36px] flex items-center justify-center"
                           title="Edit product"
                           aria-label="Edit product"
                         >
@@ -275,7 +281,7 @@ export function AdminProducts() {
                         <button
                           onClick={() => handleDelete(product)}
                           disabled={deletingId === product._id}
-                          className="p-2 text-[var(--text-muted)] hover:text-red-600 transition-colors disabled:opacity-50 min-h-[36px] min-w-[36px] flex items-center justify-center"
+                          className="p-2 text-muted hover:text-red-600 transition-colors disabled:opacity-50 min-h-[36px] min-w-[36px] flex items-center justify-center"
                           title="Delete product"
                           aria-label="Delete product"
                         >
@@ -296,13 +302,13 @@ export function AdminProducts() {
       {/* Product Form Modal */}
       {showForm && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-          <div className="bg-[var(--surface)] w-full max-w-lg max-h-[90vh] overflow-y-auto border border-[var(--border)] shadow-xl">
+          <div className="bg-surface w-full max-w-lg max-h-[90vh] overflow-y-auto border border-border shadow-xl">
             {/* Header */}
-            <div className="flex items-center justify-between px-6 py-5 border-b border-[var(--border)]">
-              <h3 className="text-lg font-semibold text-[var(--primary)]">
+            <div className="flex items-center justify-between px-6 py-5 border-b border-border">
+              <h3 className="text-lg font-semibold text-primary">
                 {editProduct ? 'Edit Product' : 'Add New Product'}
               </h3>
-              <button onClick={() => setShowForm(false)} className="text-[var(--text-muted)] hover:text-[var(--primary)] p-2" aria-label="Close modal">
+              <button onClick={() => setShowForm(false)} className="text-muted hover:text-primary p-2" aria-label="Close modal">
                 <X size={20} />
               </button>
             </div>

@@ -9,7 +9,7 @@ function OccasionCard({ occasion, index }) {
     <motion.div variants={staggerItem} className="group">
       <Link
         to={`/shop?occasion=${occasion.id}`}
-        className="block relative overflow-hidden aspect-occasion rounded-xl bg-[#0B1F3A] border border-white/10"
+        className="block relative overflow-hidden aspect-occasion rounded-xl bg-primary border border-white/10"
         aria-label={`Shop ${occasion.label} gifts`}
       >
         {/* Image */}
@@ -21,21 +21,21 @@ function OccasionCard({ occasion, index }) {
         />
 
         {/* Base Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0B1F3A] via-[#0B1F3A]/30 to-transparent transition-opacity duration-500" />
+        <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/30 to-transparent transition-opacity duration-500" />
 
         {/* Hover Overlay */}
-        <div className="absolute inset-0 bg-[#0B1F3A]/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        <div className="absolute inset-0 bg-primary/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
         {/* Content */}
         <div className="absolute inset-0 flex flex-col justify-end p-5">
-          <p className="font-sans text-xs tracking-[0.15em] uppercase text-white/70 mb-1 transition-colors duration-300 group-hover:text-[#D4AF37]">
+          <p className="font-sans text-xs tracking-[0.15em] uppercase text-white/70 mb-1 transition-colors duration-300 group-hover:text-accent">
             {occasion.emoji} {occasion.description}
           </p>
           <div className="flex items-end justify-between">
             <h3 className="font-serif text-2xl font-light text-white leading-tight transition-transform duration-300 group-hover:translate-y-[-2px]">
               {occasion.label}
             </h3>
-            <div className="w-9 h-9 rounded-full border border-white/30 flex items-center justify-center text-white transition-all duration-300 group-hover:border-[#D4AF37] group-hover:bg-[#D4AF37] group-hover:text-[#121212]">
+            <div className="w-9 h-9 rounded-full border border-white/30 flex items-center justify-center text-white transition-all duration-300 group-hover:border-accent group-hover:bg-accent group-hover:text-text">
               <ArrowRight size={15} />
             </div>
           </div>
@@ -52,19 +52,19 @@ function OccasionCard({ occasion, index }) {
 
 export function ShopByOccasion() {
   return (
-    <section className="section-py bg-[#0B1F3A] text-white overflow-hidden" aria-labelledby="occasions-heading">
+    <section className="section-py bg-primary text-white overflow-hidden" aria-labelledby="occasions-heading">
       <div className="container-gokana">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div>
             <ScrollReveal delay={0.1}>
-              <p className="label-text text-[#D4AF37] mb-3">✦ Explore By Moment</p>
+              <p className="label-text text-accent mb-3">✦ Explore By Moment</p>
             </ScrollReveal>
             <AnimatedHeading id="occasions-heading" className="heading-lg text-white mb-2" delay={0.15}>
               Shop by Occasion
             </AnimatedHeading>
             <ScrollReveal delay={0.25}>
-              <p className="font-sans text-sm text-[#C9D2DE] max-w-md">
+              <p className="font-sans text-sm text-charcoal-200 max-w-md">
                 From grand milestone anniversaries to spontaneous surprises, find expressions that fit the emotion.
               </p>
             </ScrollReveal>

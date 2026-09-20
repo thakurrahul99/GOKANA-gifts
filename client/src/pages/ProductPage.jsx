@@ -31,8 +31,8 @@ function ImageGallery({ images, productName }) {
             onClick={() => setActive(i)}
             aria-label={`View image ${i + 1} of ${productName}`}
             className={clsx(
-              'w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden border-2 transition-all duration-200 flex-shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37]',
-              active === i ? 'border-[#D4AF37] shadow-xs' : 'border-[#E8DFD3] opacity-75 hover:opacity-100'
+              'w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden border-2 transition-all duration-200 flex-shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent',
+              active === i ? 'border-accent shadow-xs' : 'border-border opacity-75 hover:opacity-100'
             )}
           >
             <img src={img} alt="" className="w-full h-full object-cover" />
@@ -41,7 +41,7 @@ function ImageGallery({ images, productName }) {
       </div>
 
       {/* Main Image */}
-      <div className="flex-1 relative overflow-hidden rounded-2xl bg-[#FBF8F2] border border-[#E8DFD3] aspect-[4/5]">
+      <div className="flex-1 relative overflow-hidden rounded-2xl bg-surface-alt border border-border aspect-[4/5]">
         <AnimatePresence mode="wait">
           <motion.img
             key={active}
@@ -62,15 +62,15 @@ function ImageGallery({ images, productName }) {
 function AccordionItem({ title, children, defaultOpen = false }) {
   const [open, setOpen] = useState(defaultOpen);
   return (
-    <div className="border-b border-[#E8DFD3]">
+    <div className="border-b border-border">
       <button
-        className="w-full flex items-center justify-between py-4 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37] rounded-sm min-h-[44px]"
+        className="w-full flex items-center justify-between py-4 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-sm min-h-[44px]"
         onClick={() => setOpen(!open)}
         aria-expanded={open}
       >
-        <span className="font-sans text-sm font-semibold text-[#0B1F3A]">{title}</span>
+        <span className="font-sans text-sm font-semibold text-primary">{title}</span>
         <motion.div animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.25 }}>
-          <ChevronDown size={17} className="text-[#6B6B6B]" />
+          <ChevronDown size={17} className="text-muted" />
         </motion.div>
       </button>
       <AnimatePresence initial={false}>
@@ -82,7 +82,7 @@ function AccordionItem({ title, children, defaultOpen = false }) {
             transition={{ duration: 0.25 }}
             className="overflow-hidden"
           >
-            <div className="pb-4 font-sans text-sm text-[#6B6B6B] leading-relaxed">
+            <div className="pb-4 font-sans text-sm text-muted leading-relaxed">
               {children}
             </div>
           </motion.div>
@@ -120,23 +120,23 @@ export function ProductPage() {
 
   if (!product) {
     return (
-      <div className="pt-40 text-center min-h-screen bg-[#F7F3EC]">
-        <h1 className="font-serif text-3xl text-[#0B1F3A]">Product Not Found</h1>
+      <div className="pt-40 text-center min-h-screen bg-bg">
+        <h1 className="font-serif text-3xl text-primary">Product Not Found</h1>
         <Link to="/shop" className="btn-accent mt-6 inline-block">Return to Shop</Link>
       </div>
     );
   }
 
   return (
-    <main id="main-content" className="pt-24 md:pt-28 bg-[#F7F3EC] min-h-screen pb-20">
+    <main id="main-content" className="pt-24 md:pt-28 bg-bg min-h-screen pb-20">
       <div className="container-gokana py-8">
         {/* Breadcrumb Navigation */}
-        <nav aria-label="Breadcrumb" className="flex items-center gap-2 font-sans text-xs text-[#6B6B6B] mb-8">
-          <Link to="/" className="hover:text-[#0B1F3A] transition-colors">Home</Link>
+        <nav aria-label="Breadcrumb" className="flex items-center gap-2 font-sans text-xs text-muted mb-8">
+          <Link to="/" className="hover:text-primary transition-colors">Home</Link>
           <span>/</span>
-          <Link to="/shop" className="hover:text-[#0B1F3A] transition-colors">Shop</Link>
+          <Link to="/shop" className="hover:text-primary transition-colors">Shop</Link>
           <span>/</span>
-          <span className="text-[#0B1F3A] font-medium truncate max-w-xs">{product.name}</span>
+          <span className="text-primary font-medium truncate max-w-xs">{product.name}</span>
         </nav>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
@@ -157,48 +157,48 @@ export function ProductPage() {
             </div>
 
             {/* Product Title */}
-            <h1 className="font-serif text-3xl sm:text-4xl font-light text-[#0B1F3A] mb-3 leading-tight">
+            <h1 className="font-serif text-3xl sm:text-4xl font-light text-primary mb-3 leading-tight">
               {product.name}
             </h1>
 
             {/* Star Rating */}
             <div className="flex items-center gap-3 mb-4">
               <Rating value={product.rating || 5} count={product.reviews || 94} size="md" />
-              <span className="text-xs font-sans text-[#B08D57] font-semibold bg-[#F3D9D4] px-2 py-0.5 rounded-full">
+              <span className="text-xs font-sans text-accent-dark font-semibold bg-blush px-2 py-0.5 rounded-full">
                 Verified Curation
               </span>
             </div>
 
             {/* Price Row */}
             <div className="flex items-baseline gap-3 mb-4">
-              <span className="font-serif text-3xl font-light text-[#0B1F3A]">
+              <span className="font-serif text-3xl font-light text-primary">
                 {formatPrice(product.price)}
               </span>
               {product.originalPrice && (
-                <span className="font-sans text-base text-[#9A9A9A] line-through">
+                <span className="font-sans text-base text-muted-2 line-through">
                   {formatPrice(product.originalPrice)}
                 </span>
               )}
               {discount && (
-                <span className="font-sans text-xs font-semibold px-2 py-0.5 rounded bg-[#F3D9D4] text-[#0B1F3A]">
+                <span className="font-sans text-xs font-semibold px-2 py-0.5 rounded bg-blush text-primary">
                   Save {formatPrice(product.originalPrice - product.price)}
                 </span>
               )}
             </div>
 
             {/* Scarcity & Delivery Estimator (CRO Requirement) */}
-            <div className="p-3.5 rounded-xl bg-white border border-[#E8DFD3] space-y-2 mb-6 shadow-xs">
-              <div className="flex items-center gap-2 text-xs font-semibold text-[#B7791F]">
+            <div className="p-3.5 rounded-xl bg-white border border-border space-y-2 mb-6 shadow-xs">
+              <div className="flex items-center gap-2 text-xs font-semibold text-warning">
                 <AlertCircle size={15} />
                 <span>Only 4 left in stock — hand-packed in limited batches</span>
               </div>
-              <div className="flex items-center gap-2 text-xs text-[#0B1F3A] font-medium pt-1 border-t border-[#E8DFD3]/50">
-                <Clock size={15} className="text-[#D4AF37]" />
+              <div className="flex items-center gap-2 text-xs text-primary font-medium pt-1 border-t border-border/50">
+                <Clock size={15} className="text-accent" />
                 <span>Order today, estimated delivery by <b>{estimatedDate}</b></span>
               </div>
             </div>
 
-            <p className="font-sans text-sm text-[#6B6B6B] leading-relaxed mb-6">
+            <p className="font-sans text-sm text-muted leading-relaxed mb-6">
               {product.description}
             </p>
 
@@ -206,7 +206,7 @@ export function ProductPage() {
             {product.variants && (
               <div className="mb-6">
                 <label className="form-label mb-2">
-                  Select Size / Variant: <span className="text-[#D4AF37] font-semibold">{selectedVariant}</span>
+                  Select Size / Variant: <span className="text-accent font-semibold">{selectedVariant}</span>
                 </label>
                 <div className="flex flex-wrap gap-2">
                   {product.variants.map((v) => (
@@ -216,8 +216,8 @@ export function ProductPage() {
                       className={clsx(
                         'px-4 py-2 rounded-lg font-sans text-xs font-semibold uppercase tracking-wider border transition-all min-h-[44px]',
                         selectedVariant === v
-                          ? 'border-[#0B1F3A] bg-[#0B1F3A] text-white shadow-xs'
-                          : 'border-[#E8DFD3] bg-white text-[#0B1F3A] hover:border-[#D4AF37]'
+                          ? 'border-primary bg-primary text-white shadow-xs'
+                          : 'border-border bg-white text-primary hover:border-accent'
                       )}
                     >
                       {v}
@@ -229,8 +229,8 @@ export function ProductPage() {
 
             {/* Custom Personalization Inputs with Visible Labels (Section 3 & 7) */}
             {product.personalisable && (
-              <div className="mb-6 p-5 rounded-xl bg-white border border-[#E8DFD3] shadow-xs">
-                <div className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[#D4AF37] mb-3">
+              <div className="mb-6 p-5 rounded-xl bg-white border border-border shadow-xs">
+                <div className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-accent mb-3">
                   <Sparkles size={14} />
                   <span>Complimentary Personalisation</span>
                 </div>
@@ -273,26 +273,26 @@ export function ProductPage() {
             <div className="space-y-4 mb-8">
               <div className="flex items-center gap-4">
                 <span className="form-label mb-0">Quantity:</span>
-                <div className="flex items-center border border-[#E8DFD3] rounded-lg bg-white">
+                <div className="flex items-center border border-border rounded-lg bg-white">
                   <button
                     onClick={() => setQty(Math.max(1, qty - 1))}
                     aria-label="Decrease quantity"
-                    className="min-w-[40px] min-h-[40px] flex items-center justify-center text-[#0B1F3A] hover:bg-[#FBF8F2] rounded-l-lg transition-colors"
+                    className="min-w-[40px] min-h-[40px] flex items-center justify-center text-primary hover:bg-surface-alt rounded-l-lg transition-colors"
                   >
                     <Minus size={14} />
                   </button>
-                  <span className="w-10 text-center font-sans text-sm font-semibold text-[#0B1F3A]">
+                  <span className="w-10 text-center font-sans text-sm font-semibold text-primary">
                     {qty}
                   </span>
                   <button
                     onClick={() => setQty(qty + 1)}
                     aria-label="Increase quantity"
-                    className="min-w-[40px] min-h-[40px] flex items-center justify-center text-[#0B1F3A] hover:bg-[#FBF8F2] rounded-r-lg transition-colors"
+                    className="min-w-[40px] min-h-[40px] flex items-center justify-center text-primary hover:bg-surface-alt rounded-r-lg transition-colors"
                   >
                     <Plus size={14} />
                   </button>
                 </div>
-                <span className="font-sans text-sm font-semibold text-[#0B1F3A]">
+                <span className="font-sans text-sm font-semibold text-primary">
                   Total: {formatPrice(product.price * qty)}
                 </span>
               </div>
@@ -301,7 +301,7 @@ export function ProductPage() {
               <div className="flex items-center gap-3">
                 <button
                   onClick={handleAddToCart}
-                  className={`btn-primary flex-1 ${addedToCart ? 'bg-[#B08D57] hover:bg-[#B08D57]' : ''}`}
+                  className={`btn-primary flex-1 ${addedToCart ? 'bg-accent-dark hover:bg-accent-dark' : ''}`}
                 >
                   {addedToCart ? (
                     <>
@@ -322,11 +322,11 @@ export function ProductPage() {
                   className={clsx(
                     'min-w-[48px] min-h-[48px] rounded-xl border flex items-center justify-center transition-all',
                     isWished
-                      ? 'border-[#D4AF37] bg-[#F5E9C8] text-[#D4AF37]'
-                      : 'border-[#E8DFD3] bg-white text-[#0B1F3A] hover:border-[#D4AF37]'
+                      ? 'border-accent bg-accent-soft text-accent'
+                      : 'border-border bg-white text-primary hover:border-accent'
                   )}
                 >
-                  <Heart size={20} className={isWished ? 'fill-[#D4AF37]' : ''} />
+                  <Heart size={20} className={isWished ? 'fill-accent' : ''} />
                 </button>
               </div>
 
@@ -335,7 +335,7 @@ export function ProductPage() {
                 href={`https://wa.me/${WHATSAPP_NUMBER}?text=${buildWhatsAppMsg(product, selectedVariant, qty)}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-3 px-4 rounded-xl border border-[#2E7D32]/30 bg-[#2E7D32]/5 hover:bg-[#2E7D32]/10 text-[#2E7D32] font-sans text-xs font-semibold tracking-wider uppercase transition-colors flex items-center justify-center gap-2 min-h-[44px]"
+                className="w-full py-3 px-4 rounded-xl border border-success/30 bg-success/5 hover:bg-success/10 text-success font-sans text-xs font-semibold tracking-wider uppercase transition-colors flex items-center justify-center gap-2 min-h-[44px]"
               >
                 <MessageCircle size={17} />
                 Order via WhatsApp Concierge
@@ -343,9 +343,9 @@ export function ProductPage() {
             </div>
 
             {/* Accordions */}
-            <div className="space-y-1 border-t border-[#E8DFD3] pt-2">
+            <div className="space-y-1 border-t border-border pt-2">
               <AccordionItem title="What's Inside the Box" defaultOpen={true}>
-                <ul className="list-disc list-inside space-y-1.5 text-xs text-[#6B6B6B]">
+                <ul className="list-disc list-inside space-y-1.5 text-xs text-muted">
                   <li>Hand-crafted rigid keepsake box with embossed gold seal</li>
                   <li>Double-faced satin ribbon tying with gift tag</li>
                   <li>Signature protective botanical tissue wrapping</li>
@@ -353,12 +353,12 @@ export function ProductPage() {
                 </ul>
               </AccordionItem>
               <AccordionItem title="Shipping & Climate Control">
-                <p className="text-xs text-[#6B6B6B] leading-relaxed">
+                <p className="text-xs text-muted leading-relaxed">
                   Shipped in insulated protective packing to ensure pristine condition even in summer months. Free delivery across India for orders over ₹999.
                 </p>
               </AccordionItem>
               <AccordionItem title="7-Day Guarantee & Returns">
-                <p className="text-xs text-[#6B6B6B] leading-relaxed">
+                <p className="text-xs text-muted leading-relaxed">
                   Every product is inspected by our quality manager before dispatch. Non-personalized items can be returned within 7 days with zero friction.
                 </p>
               </AccordionItem>
@@ -367,10 +367,10 @@ export function ProductPage() {
         </div>
 
         {/* Related Curations */}
-        <div className="mt-20 pt-16 border-t border-[#E8DFD3]">
+        <div className="mt-20 pt-16 border-t border-border">
           <div className="text-center mb-10">
-            <p className="label-text text-[#D4AF37] mb-2">✦ More to Cherish</p>
-            <h2 className="heading-md text-[#0B1F3A]">You May Also Love</h2>
+            <p className="label-text text-accent mb-2">✦ More to Cherish</p>
+            <h2 className="heading-md text-primary">You May Also Love</h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {related.map((p, i) => (
@@ -382,14 +382,14 @@ export function ProductPage() {
 
       {/* ── Sticky Mobile CTA Bar (Section 4 & 6 CRO Requirement) ── */}
       <aside
-        className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-[#E8DFD3] p-3 shadow-lg flex items-center justify-between gap-3 md:hidden"
+        className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-border p-3 shadow-lg flex items-center justify-between gap-3 md:hidden"
         aria-label="Quick mobile checkout"
       >
         <div className="pl-2">
-          <p className="font-serif text-lg font-semibold text-[#0B1F3A] leading-none">
+          <p className="font-serif text-lg font-semibold text-primary leading-none">
             {formatPrice(product.price)}
           </p>
-          <p className="font-sans text-[11px] text-[#B08D57] font-medium mt-0.5">
+          <p className="font-sans text-[11px] text-accent-dark font-medium mt-0.5">
             ✓ In Stock
           </p>
         </div>

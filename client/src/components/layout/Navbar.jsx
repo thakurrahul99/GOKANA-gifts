@@ -69,12 +69,12 @@ export function Navbar({ onSearchOpen }) {
 
   // Keep the navbar solid and readable over every hero/section background.
   const navClasses = scrolled || !isHomePage
-    ? "bg-[var(--surface)] shadow-[0_4px_18px_rgba(11,31,58,0.08)] border-b border-[var(--border)]"
+    ? "bg-surface shadow-[0_4px_18px_rgba(11,31,58,0.08)] border-b border-border"
     : "bg-transparent";
 
   const transparentHomeTop = isHomePage && !scrolled;
-  const textColor = transparentHomeTop ? "!text-white" : "!text-[var(--primary)]";
-  const logoColor = transparentHomeTop ? "!text-white" : "!text-[var(--primary)]";
+  const textColor = transparentHomeTop ? "!text-white" : "!text-primary";
+  const logoColor = transparentHomeTop ? "!text-white" : "!text-primary";
 
   return (
     <>
@@ -122,8 +122,8 @@ export function Navbar({ onSearchOpen }) {
                     "relative px-3.5 py-2 font-sans text-[0.72rem] font-semibold tracking-[0.11em] uppercase transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 rounded-md",
                     textColor,
                     isActive
-                      ? "text-[var(--accent)]"
-                      : "hover:!text-[var(--accent)]",
+                      ? "text-accent"
+                      : "hover:!text-accent",
                   )}
                   aria-current={isActive ? "page" : undefined}
                 >
@@ -131,7 +131,7 @@ export function Navbar({ onSearchOpen }) {
                   {isActive && (
                     <motion.div
                       layoutId="navUnderline"
-                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-[var(--accent)]"
+                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-accent"
                       transition={{
                         type: "spring",
                         stiffness: 350,
@@ -150,7 +150,7 @@ export function Navbar({ onSearchOpen }) {
               onClick={onSearchOpen}
               aria-label="Open search dialog"
               className={clsx(
-                "min-w-[40px] min-h-[40px] flex items-center justify-center rounded-full transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 hover:bg-[var(--bg)] hover:!text-[var(--accent)]",
+                "min-w-[40px] min-h-[40px] flex items-center justify-center rounded-full transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 hover:bg-bg hover:!text-accent",
                 textColor,
               )}
             >
@@ -161,13 +161,13 @@ export function Navbar({ onSearchOpen }) {
               to="/wishlist"
               aria-label={`Wishlist, ${wishCount} items`}
               className={clsx(
-                "relative min-w-[40px] min-h-[40px] flex items-center justify-center rounded-full transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 hover:bg-[var(--bg)] hover:!text-[var(--accent)]",
+                "relative min-w-[40px] min-h-[40px] flex items-center justify-center rounded-full transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 hover:bg-bg hover:!text-accent",
                 textColor,
               )}
             >
               <Heart size={19} strokeWidth={1.8} />
               {wishCount > 0 && (
-                <span className="absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-[var(--accent)] text-[var(--text)] text-[10px] font-bold font-sans flex items-center justify-center">
+                <span className="absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-accent text-text text-[10px] font-bold font-sans flex items-center justify-center">
                   {wishCount > 9 ? "9+" : wishCount}
                 </span>
               )}
@@ -177,7 +177,7 @@ export function Navbar({ onSearchOpen }) {
               to={user ? "/account" : "/login"}
               aria-label={user ? "My Account" : "Sign in to account"}
               className={clsx(
-                "min-w-[40px] min-h-[40px] flex items-center justify-center rounded-full transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 hover:bg-[var(--bg)] hover:text-[var(--accent)]",
+                "min-w-[40px] min-h-[40px] flex items-center justify-center rounded-full transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 hover:bg-bg hover:text-accent",
                 textColor,
               )}
             >
@@ -188,7 +188,7 @@ export function Navbar({ onSearchOpen }) {
               onClick={openCart}
               aria-label={`Open shopping cart, ${cartCount} items`}
               className={clsx(
-                "relative min-w-[40px] min-h-[40px] flex items-center justify-center rounded-full transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 hover:bg-[var(--bg)] hover:text-[var(--accent)]",
+                "relative min-w-[40px] min-h-[40px] flex items-center justify-center rounded-full transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 hover:bg-bg hover:text-accent",
                 textColor,
               )}
             >
@@ -198,7 +198,7 @@ export function Navbar({ onSearchOpen }) {
                   key={cartCount}
                   initial={{ scale: 0.6 }}
                   animate={{ scale: 1 }}
-                  className="absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-[var(--accent)] text-[var(--text)] text-[10px] font-bold font-sans flex items-center justify-center"
+                  className="absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-accent text-text text-[10px] font-bold font-sans flex items-center justify-center"
                 >
                   {cartCount > 9 ? "9+" : cartCount}
                 </motion.span>
@@ -208,7 +208,7 @@ export function Navbar({ onSearchOpen }) {
             {/* Mobile Hamburger Toggle */}
             <button
               className={clsx(
-                "lg:hidden min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 hover:bg-[var(--bg)] hover:text-[var(--accent)]",
+                "lg:hidden min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 hover:bg-bg hover:text-accent",
                 textColor,
               )}
               onClick={() => setMobileOpen(true)}
@@ -236,7 +236,7 @@ export function Navbar({ onSearchOpen }) {
 
             {/* Slide-in panel from right */}
             <motion.div
-              className="fixed top-0 right-0 bottom-0 z-50 w-full max-w-sm bg-[var(--bg)] flex flex-col shadow-2xl border-l border-[var(--border)]"
+              className="fixed top-0 right-0 bottom-0 z-50 w-full max-w-sm bg-bg flex flex-col shadow-2xl border-l border-border"
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
@@ -246,14 +246,14 @@ export function Navbar({ onSearchOpen }) {
                 ease: [0.25, 0.1, 0.25, 1],
               }}
             >
-              <div className="flex items-center justify-between px-6 py-5 border-b border-[var(--border)]">
-                <span className="font-serif text-2xl font-light tracking-[0.15em] uppercase text-[var(--primary)]">
+              <div className="flex items-center justify-between px-6 py-5 border-b border-border">
+                <span className="font-serif text-2xl font-light tracking-[0.15em] uppercase text-primary">
                   GŌKANA
                 </span>
                 <button
                   onClick={() => setMobileOpen(false)}
                   aria-label="Close navigation menu"
-                  className="min-w-[44px] min-h-[44px] flex items-center justify-center text-[var(--primary)] hover:text-[var(--accent)] rounded-lg transition-colors"
+                  className="min-w-[44px] min-h-[44px] flex items-center justify-center text-primary hover:text-accent rounded-lg transition-colors"
                 >
                   <X size={24} strokeWidth={1.8} />
                 </button>
@@ -265,7 +265,7 @@ export function Navbar({ onSearchOpen }) {
                     key={link.label}
                     to={link.href}
                     onClick={(e) => handleNavClick(link, e)}
-                    className="block py-4 px-2 font-serif text-2xl font-light text-[var(--primary)] hover:text-[var(--accent)] transition-colors border-b border-[var(--border)]/60"
+                    className="block py-4 px-2 font-serif text-2xl font-light text-primary hover:text-accent transition-colors border-b border-border/60"
                   >
                     {link.label}
                   </Link>
@@ -275,15 +275,15 @@ export function Navbar({ onSearchOpen }) {
                   <Link
                     to="/admin"
                     onClick={() => setMobileOpen(false)}
-                    className="block py-3 font-sans text-sm font-semibold tracking-wider uppercase text-[var(--accent)] border-b border-[var(--border)]/60"
+                    className="block py-3 font-sans text-sm font-semibold tracking-wider uppercase text-accent border-b border-border/60"
                   >
                     Admin Dashboard
                   </Link>
                 )}
               </nav>
 
-              <div className="p-6 border-t border-[var(--border)] bg-[var(--surface-alt)]">
-                <div className="text-center text-xs font-medium tracking-wide text-[var(--muted)]">
+              <div className="p-6 border-t border-border bg-surface-alt">
+                <div className="text-center text-xs font-medium tracking-wide text-muted">
                   Handcrafted & Delivered Across India
                 </div>
               </div>

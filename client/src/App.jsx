@@ -21,6 +21,7 @@ import { AdminLayout } from './pages/admin/AdminLayout';
 import { AdminDashboard } from './pages/admin/AdminDashboard';
 import { AdminProducts } from './pages/admin/AdminProducts';
 import { AdminOrders } from './pages/admin/AdminOrders';
+import { AdminCoupons } from './pages/admin/AdminCoupons';
 import { FAB } from './components/ui/FAB';
 
 function StorePage() {
@@ -68,11 +69,11 @@ function StorePage() {
 
 function ContactPage() {
   return (
-    <main className="pt-28 min-h-screen bg-[var(--bg)]">
+    <main className="pt-28 min-h-screen bg-bg">
       <div className="container-gokana section-py">
         <div className="max-w-2xl">
-          <p className="label-text text-[var(--accent)] mb-5">✦ Get in Touch</p>
-          <h1 className="heading-xl text-[var(--primary)] mb-8">We'd love to<br />hear from you.</h1>
+          <p className="label-text text-accent mb-5">✦ Get in Touch</p>
+          <h1 className="heading-xl text-primary mb-8">We'd love to<br />hear from you.</h1>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-12">
             {[
               { label: 'WhatsApp', value: '+91 99999 99999', href: 'https://wa.me/919999999999' },
@@ -81,11 +82,11 @@ function ContactPage() {
               { label: 'Working Hours', value: 'Mon–Sat: 9am–7pm', href: null },
             ].map((item) => (
               <div key={item.label}>
-                <p className="label-text text-[var(--muted)] mb-2">{item.label}</p>
+                <p className="label-text text-muted mb-2">{item.label}</p>
                 {item.href ? (
-                  <a href={item.href} className="font-serif text-xl text-[var(--primary)] hover:text-[var(--accent)] transition-colors">{item.value}</a>
+                  <a href={item.href} className="font-serif text-xl text-primary hover:text-accent transition-colors">{item.value}</a>
                 ) : (
-                  <p className="font-serif text-xl text-[var(--primary)]">{item.value}</p>
+                  <p className="font-serif text-xl text-primary">{item.value}</p>
                 )}
               </div>
             ))}
@@ -104,11 +105,11 @@ function ContactPage() {
 
 function NotFound() {
   return (
-    <main className="pt-40 min-h-screen bg-[var(--bg)] flex items-center justify-center text-center px-4">
+    <main className="pt-40 min-h-screen bg-bg flex items-center justify-center text-center px-4">
       <div>
-        <p className="font-serif text-8xl font-light text-[var(--primary)]/20 mb-4">404</p>
-        <h1 className="font-serif text-3xl font-light text-[var(--primary)] mb-4">Page not found</h1>
-        <p className="font-sans text-sm text-[var(--muted)] max-w-md mx-auto mb-8 leading-relaxed">
+        <p className="font-serif text-8xl font-light text-primary/20 mb-4">404</p>
+        <h1 className="font-serif text-3xl font-light text-primary mb-4">Page not found</h1>
+        <p className="font-sans text-sm text-muted max-w-md mx-auto mb-8 leading-relaxed">
           The curated gift or page you are seeking could not be found or may have moved.
         </p>
         <a href="/" className="btn-primary">Back to Home</a>
@@ -127,7 +128,7 @@ export default function App() {
           <Route path="products" element={<AdminProducts />} />
           <Route path="orders" element={<AdminOrders />} />
           <Route path="customers" element={<AdminCustomersPlaceholder />} />
-          <Route path="coupons" element={<AdminCouponsPlaceholder />} />
+          <Route path="coupons" element={<AdminCoupons />} />
         </Route>
         {/* Store routes */}
         <Route path="/*" element={<StorePage />} />
@@ -139,52 +140,9 @@ export default function App() {
 function AdminCustomersPlaceholder() {
   return (
     <div>
-      <h2 className="text-xl font-semibold text-[var(--primary)] mb-4">Customers</h2>
-      <div className="bg-[var(--surface)] border border-[var(--border)] p-8 text-center text-[var(--muted)] rounded-xl">
+      <h2 className="text-xl font-semibold text-primary mb-4">Customers</h2>
+      <div className="bg-surface border border-border p-8 text-center text-muted rounded-xl">
         <p className="text-sm">Customer management interface — connect to backend API to populate.</p>
-      </div>
-    </div>
-  );
-}
-
-function AdminCouponsPlaceholder() {
-  const [coupons, setCoupons] = useState([
-    { code: 'WELCOME10', type: 'percentage', value: 10, minOrder: 500, expires: '2025-12-31', used: 142 },
-    { code: 'DIWALI25', type: 'percentage', value: 25, minOrder: 1500, expires: '2024-11-15', used: 88 },
-    { code: 'FLAT200', type: 'fixed', value: 200, minOrder: 1000, expires: '2025-03-31', used: 34 },
-  ]);
-
-  return (
-    <div>
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl font-semibold text-[var(--primary)]">Coupons</h2>
-        <button className="btn-primary py-2 px-4 text-xs">
-          + Create Coupon
-        </button>
-      </div>
-      <div className="bg-[var(--surface)] border border-[var(--border)] rounded-xl overflow-x-auto">
-        <table className="w-full text-sm">
-          <thead>
-            <tr className="text-xs text-[var(--muted)] border-b border-[var(--border)] bg-[var(--surface-alt)]">
-              <th className="text-left px-4 py-3">Code</th>
-              <th className="text-left px-4 py-3">Discount</th>
-              <th className="text-left px-4 py-3">Min Order</th>
-              <th className="text-left px-4 py-3">Expires</th>
-              <th className="text-left px-4 py-3">Used</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-[var(--border)]">
-            {coupons.map(c => (
-              <tr key={c.code} className="hover:bg-[var(--surface-alt)] transition-colors">
-                <td className="px-4 py-3 font-mono font-bold text-[var(--primary)]">{c.code}</td>
-                <td className="px-4 py-3">{c.type === 'percentage' ? `${c.value}%` : `₹${c.value}`}</td>
-                <td className="px-4 py-3">₹{c.minOrder}</td>
-                <td className="px-4 py-3 text-[var(--muted)]">{c.expires}</td>
-                <td className="px-4 py-3 text-[var(--muted)]">{c.used} times</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
       </div>
     </div>
   );

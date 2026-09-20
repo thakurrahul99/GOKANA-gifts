@@ -30,7 +30,7 @@ export function FAB() {
             className="flex items-center gap-2.5 py-3.5 pl-4 pr-5 rounded-full shadow-gold focus-visible:outline-none focus-visible:ring-2 font-sans text-sm font-semibold"
             style={{
               background: 'var(--accent)',
-              color: '#121212',
+              color: 'var(--text)',
               '--tw-ring-color': 'var(--primary)',
             }}
             aria-label="Open Gift Finder"

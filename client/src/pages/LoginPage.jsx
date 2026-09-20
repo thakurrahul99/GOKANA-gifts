@@ -49,10 +49,10 @@ export function LoginPage() {
   const set = (key) => (e) => setForm((f) => ({ ...f, [key]: e.target.value }));
 
   return (
-    <main className="min-h-screen bg-[var(--bg)] flex">
+    <main className="min-h-screen bg-bg flex">
       {/* Left — Midnight Navy decorative hero */}
       <div
-        className="hidden lg:flex lg:w-1/2 bg-[var(--primary)] relative overflow-hidden flex-col items-center justify-center p-16 text-center text-[var(--surface)]"
+        className="hidden lg:flex lg:w-1/2 bg-primary relative overflow-hidden flex-col items-center justify-center p-16 text-center text-surface"
         style={{
           backgroundImage: `radial-gradient(ellipse at 30% 20%, rgba(212,175,55,0.12) 0%, transparent 60%), radial-gradient(ellipse at 80% 80%, rgba(243,217,212,0.08) 0%, transparent 50%)`,
         }}
@@ -60,15 +60,15 @@ export function LoginPage() {
         <div className="relative z-10 max-w-md">
           <Link
             to="/"
-            className="inline-block font-serif text-4xl font-light tracking-[0.25em] uppercase text-[var(--surface)] mb-6 hover:text-[var(--accent)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
+            className="inline-block font-serif text-4xl font-light tracking-[0.25em] uppercase text-surface mb-6 hover:text-accent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
           >
             GŌKANA
           </Link>
-          <div className="w-12 h-0.5 bg-[var(--accent)] mx-auto mb-8" />
-          <blockquote className="font-serif text-2xl font-light text-[var(--surface)]/80 leading-relaxed italic mb-8">
+          <div className="w-12 h-0.5 bg-accent mx-auto mb-8" />
+          <blockquote className="font-serif text-2xl font-light text-surface/80 leading-relaxed italic mb-8">
             "Every gift tells a story.<br />Make yours unforgettable."
           </blockquote>
-          <div className="flex items-center justify-center gap-6 text-xs text-[var(--surface)]/50 tracking-wider uppercase">
+          <div className="flex items-center justify-center gap-6 text-xs text-surface/50 tracking-wider uppercase">
             <span>✦ Handcrafted</span>
             <span>✦ Artisanal</span>
             <span>✦ Pan-India Delivery</span>
@@ -76,10 +76,10 @@ export function LoginPage() {
         </div>
 
         {/* Decorative ambient elements */}
-        <div className="absolute -top-12 -left-12 w-64 h-64 border border-[var(--accent)]/15 rounded-full pointer-events-none" />
-        <div className="absolute -bottom-20 -right-20 w-80 h-80 border border-[var(--accent)]/10 rounded-full pointer-events-none" />
+        <div className="absolute -top-12 -left-12 w-64 h-64 border border-accent/15 rounded-full pointer-events-none" />
+        <div className="absolute -bottom-20 -right-20 w-80 h-80 border border-accent/10 rounded-full pointer-events-none" />
         <div className="absolute bottom-8 left-0 right-0 text-center">
-          <p className="font-sans text-[11px] text-[var(--surface)]/40 tracking-[0.2em] uppercase">
+          <p className="font-sans text-[11px] text-surface/40 tracking-[0.2em] uppercase">
             Luxury Gifting Atelier · India
           </p>
         </div>
@@ -92,24 +92,24 @@ export function LoginPage() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="w-full max-w-md bg-[var(--surface)] p-8 sm:p-10 border border-[var(--border)] shadow-sm"
+          className="w-full max-w-md bg-surface p-8 sm:p-10 border border-border shadow-sm"
         >
           {/* Logo on mobile */}
           <Link
             to="/"
-            className="lg:hidden block font-serif text-2xl font-light tracking-[0.18em] uppercase text-[var(--primary)] mb-8 text-center"
+            className="lg:hidden block font-serif text-2xl font-light tracking-[0.18em] uppercase text-primary mb-8 text-center"
           >
             GŌKANA
           </Link>
 
           <div className="mb-8">
-            <span className="inline-block text-xs font-medium tracking-[0.15em] text-[var(--accent)] uppercase mb-2">
+            <span className="inline-block text-xs font-medium tracking-[0.15em] text-accent uppercase mb-2">
               {mode === 'login' ? '✦ Welcome Back' : '✦ Create Account'}
             </span>
-            <h1 className="font-serif text-3xl font-normal text-[var(--primary)] mb-2">
+            <h1 className="font-serif text-3xl font-normal text-primary mb-2">
               {mode === 'login' ? 'Sign In' : 'Join GŌKANA'}
             </h1>
-            <p className="font-sans text-sm text-[var(--text-muted)]">
+            <p className="font-sans text-sm text-muted">
               {mode === 'login'
                 ? 'Sign in to access your orders, saved addresses, and wishlist.'
                 : 'Create your account for personalized gifting and tracking.'}
@@ -121,9 +121,9 @@ export function LoginPage() {
               <div>
                 <label
                   htmlFor="reg-name"
-                  className="block font-sans text-xs font-semibold text-[var(--text)] mb-2 uppercase tracking-wider"
+                  className="block font-sans text-xs font-semibold text-text mb-2 uppercase tracking-wider"
                 >
-                  Full Name <span className="text-[var(--accent)]">*</span>
+                  Full Name <span className="text-accent">*</span>
                 </label>
                 <input
                   id="reg-name"
@@ -133,7 +133,7 @@ export function LoginPage() {
                   required
                   autoComplete="name"
                   placeholder="Priya Menon"
-                  className="w-full px-4 py-3 bg-[var(--surface)] border border-[var(--border)] text-[var(--text)] text-sm focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/30 outline-none transition-all placeholder:text-[var(--text-muted)]/60"
+                  className="w-full px-4 py-3 bg-surface border border-border text-text text-sm focus:border-accent focus:ring-2 focus:ring-accent/30 outline-none transition-all placeholder:text-muted/60"
                 />
               </div>
             )}
@@ -141,9 +141,9 @@ export function LoginPage() {
             <div>
               <label
                 htmlFor="auth-email"
-                className="block font-sans text-xs font-semibold text-[var(--text)] mb-2 uppercase tracking-wider"
+                className="block font-sans text-xs font-semibold text-text mb-2 uppercase tracking-wider"
               >
-                Email Address <span className="text-[var(--accent)]">*</span>
+                Email Address <span className="text-accent">*</span>
               </label>
               <input
                 id="auth-email"
@@ -153,16 +153,16 @@ export function LoginPage() {
                 required
                 autoComplete="email"
                 placeholder="you@example.com"
-                className="w-full px-4 py-3 bg-[var(--surface)] border border-[var(--border)] text-[var(--text)] text-sm focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/30 outline-none transition-all placeholder:text-[var(--text-muted)]/60"
+                className="w-full px-4 py-3 bg-surface border border-border text-text text-sm focus:border-accent focus:ring-2 focus:ring-accent/30 outline-none transition-all placeholder:text-muted/60"
               />
             </div>
 
             <div>
               <label
                 htmlFor="auth-password"
-                className="block font-sans text-xs font-semibold text-[var(--text)] mb-2 uppercase tracking-wider"
+                className="block font-sans text-xs font-semibold text-text mb-2 uppercase tracking-wider"
               >
-                Password <span className="text-[var(--accent)]">*</span>
+                Password <span className="text-accent">*</span>
               </label>
               <div className="relative">
                 <input
@@ -174,12 +174,12 @@ export function LoginPage() {
                   minLength={6}
                   autoComplete={mode === 'login' ? 'current-password' : 'new-password'}
                   placeholder="Minimum 6 characters"
-                  className="w-full px-4 py-3 pr-12 bg-[var(--surface)] border border-[var(--border)] text-[var(--text)] text-sm focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/30 outline-none transition-all placeholder:text-[var(--text-muted)]/60"
+                  className="w-full px-4 py-3 pr-12 bg-surface border border-border text-text text-sm focus:border-accent focus:ring-2 focus:ring-accent/30 outline-none transition-all placeholder:text-muted/60"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPass(!showPass)}
-                  className="absolute right-0 top-0 bottom-0 px-3 flex items-center justify-center text-[var(--text-muted)] hover:text-[var(--primary)] transition-colors min-w-[44px] min-h-[44px]"
+                  className="absolute right-0 top-0 bottom-0 px-3 flex items-center justify-center text-muted hover:text-primary transition-colors min-w-[44px] min-h-[44px]"
                   aria-label={showPass ? 'Hide password' : 'Show password'}
                 >
                   {showPass ? <EyeOff size={18} /> : <Eye size={18} />}
@@ -191,10 +191,10 @@ export function LoginPage() {
               <motion.div
                 initial={{ opacity: 0, y: -6 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="flex items-start gap-2.5 bg-[#B3261E]/10 border border-[#B3261E]/30 text-[#B3261E] rounded-lg px-4 py-3 text-sm"
+                className="flex items-start gap-2.5 bg-error/10 border border-error/30 text-error rounded-lg px-4 py-3 text-sm"
                 role="alert"
               >
-                <AlertCircle size={16} className="flex-shrink-0 mt-0.5 text-[#B3261E]" />
+                <AlertCircle size={16} className="flex-shrink-0 mt-0.5 text-error" />
                 <p className="font-sans text-xs leading-relaxed font-medium">{error}</p>
               </motion.div>
             )}
@@ -218,14 +218,14 @@ export function LoginPage() {
             </button>
           </form>
 
-          <div className="mt-6 text-center font-sans text-sm text-[var(--text-muted)]">
+          <div className="mt-6 text-center font-sans text-sm text-muted">
             {mode === 'login' ? (
               <p>
                 Don't have an account?{' '}
                 <button
                   type="button"
                   onClick={() => { setMode('register'); setError(''); }}
-                  className="text-[var(--primary)] font-semibold hover:text-[var(--accent)] underline underline-offset-4 transition-colors p-1"
+                  className="text-primary font-semibold hover:text-accent underline underline-offset-4 transition-colors p-1"
                 >
                   Register
                 </button>
@@ -236,7 +236,7 @@ export function LoginPage() {
                 <button
                   type="button"
                   onClick={() => { setMode('login'); setError(''); }}
-                  className="text-[var(--primary)] font-semibold hover:text-[var(--accent)] underline underline-offset-4 transition-colors p-1"
+                  className="text-primary font-semibold hover:text-accent underline underline-offset-4 transition-colors p-1"
                 >
                   Sign In
                 </button>
@@ -244,10 +244,10 @@ export function LoginPage() {
             )}
           </div>
 
-          <div className="mt-8 pt-6 border-t border-[var(--border)] text-center">
+          <div className="mt-8 pt-6 border-t border-border text-center">
             <Link
               to="/"
-              className="inline-flex items-center gap-1 font-sans text-xs text-[var(--text-muted)] hover:text-[var(--primary)] transition-colors p-2"
+              className="inline-flex items-center gap-1 font-sans text-xs text-muted hover:text-primary transition-colors p-2"
             >
               ← Back to GŌKANA
             </Link>

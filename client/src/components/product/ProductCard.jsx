@@ -44,7 +44,7 @@ export function ProductCard({ product, index = 0 }) {
         {/* Image Container with Zoom Effect */}
         <Link
           to={`/products/${product.slug}`}
-          className="block relative aspect-product overflow-hidden rounded-xl bg-[#FBF8F2] mb-4"
+          className="block relative aspect-product overflow-hidden rounded-xl bg-surface-alt mb-4"
           aria-label={`View ${product.name}`}
         >
           {/* Main Image */}
@@ -95,11 +95,11 @@ export function ProductCard({ product, index = 0 }) {
           <button
             onClick={handleWishlist}
             aria-label={isWished ? `Remove ${product.name} from wishlist` : `Save ${product.name} to wishlist`}
-            className="absolute top-3 right-3 w-11 h-11 rounded-full bg-white/90 backdrop-blur-xs flex items-center justify-center text-[var(--primary)] hover:text-[var(--accent)] hover:bg-white shadow-xs transition-all z-10 min-w-[44px] min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
+            className="absolute top-3 right-3 w-11 h-11 rounded-full bg-white/90 backdrop-blur-xs flex items-center justify-center text-primary hover:text-accent hover:bg-white shadow-xs transition-all z-10 min-w-[44px] min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
           >
             <Heart
               size={18}
-              className={isWished ? 'fill-[var(--accent)] text-[var(--accent)]' : 'text-[var(--primary)]'}
+              className={isWished ? 'fill-accent text-accent' : 'text-primary'}
             />
           </button>
         </Link>
@@ -110,29 +110,29 @@ export function ProductCard({ product, index = 0 }) {
           <div className="flex items-center justify-between">
             <Rating value={product.rating || 5} count={product.reviews || 48} size="sm" />
             {product.inStock && (
-              <span className="text-[11px] font-sans font-medium text-[#B08D57]">
+              <span className="text-[11px] font-sans font-medium text-accent-dark">
                 In Stock
               </span>
             )}
           </div>
 
           {/* Title */}
-          <h3 className="font-serif text-lg md:text-xl font-light text-[#0B1F3A] group-hover:text-[#D4AF37] transition-colors line-clamp-1">
+          <h3 className="font-serif text-lg md:text-xl font-light text-primary group-hover:text-accent transition-colors line-clamp-1">
             <Link to={`/products/${product.slug}`}>{product.name}</Link>
           </h3>
 
           {/* Short USP line */}
-          <p className="font-sans text-xs text-[#6B6B6B] line-clamp-1">
+          <p className="font-sans text-xs text-muted line-clamp-1">
             {product.tagline || 'Artisan handcrafted luxury curation'}
           </p>
 
           {/* Pricing */}
           <div className="flex items-baseline gap-2 pt-1">
-            <span className="font-sans text-base font-semibold text-[#0B1F3A]">
+            <span className="font-sans text-base font-semibold text-primary">
               {formatPrice(product.price)}
             </span>
             {product.originalPrice && (
-              <span className="font-sans text-xs text-[#9A9A9A] line-through">
+              <span className="font-sans text-xs text-muted-2 line-through">
                 {formatPrice(product.originalPrice)}
               </span>
             )}
@@ -146,8 +146,8 @@ export function ProductCard({ product, index = 0 }) {
         aria-label={`Add ${product.name} to cart`}
         className={`w-full py-2.5 px-4 rounded-lg font-sans text-xs font-semibold uppercase tracking-wider transition-all duration-200 flex items-center justify-center gap-2 min-h-[44px] ${
           added
-            ? 'bg-[#D4AF37] text-[#121212]'
-            : 'bg-[#D4AF37] text-[#121212] hover:bg-[#B08D57] active:scale-[0.98]'
+            ? 'bg-accent text-text'
+            : 'bg-accent text-text hover:bg-accent-dark active:scale-[0.98]'
         }`}
       >
         {added ? (

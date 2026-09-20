@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import mongoose from 'mongoose';
 import Razorpay from 'razorpay';
 import crypto from 'crypto';
 import { Order } from '../models/Order.js';
@@ -41,13 +42,28 @@ router.post('/', optionalAuth, async (req, res, next) => {
     }
 
     // Validate & price items from the DB — client-supplied prices are ignored.
+    //
+    // Items may identify a product either by its Mongo _id (`productId`) or
+    // by its `slug`. The storefront cart is keyed by slug, so accepting both
+    // means the client never has to know internal ObjectIds — and, crucially,
+    // the price still comes from the DB record either way.
     let calculatedSubtotal = 0;
     const validatedItems = [];
     for (const item of items) {
-      const product = await Product.findById(item.productId);
+      const ref = item.productId || item.slug;
+      if (!ref) throw new AppError('Each item must include a productId or slug');
+
+      const product = mongoose.Types.ObjectId.isValid(ref)
+        ? await Product.findById(ref)
+        : await Product.findOne({ slug: String(ref).toLowerCase() });
+
       if (!product || !product.isActive) {
-        throw new AppError(`Product ${item.productId} not available`);
+        throw new AppError(`Product ${ref} not available`, 404);
       }
+      if (!Number.isFinite(Number(item.qty)) || Number(item.qty) < 1) {
+        throw new AppError(`Invalid quantity for product ${ref}`);
+      }
+      item.qty = Math.floor(Number(item.qty));
       calculatedSubtotal += product.price * item.qty;
       validatedItems.push({
         product: product._id,
@@ -79,6 +95,16 @@ router.post('/', optionalAuth, async (req, res, next) => {
 
     const paymentMethod = payment?.method === 'cod' ? 'cod' : payment?.method === 'whatsapp' ? 'whatsapp' : 'online';
 
+    // Check the gateway BEFORE writing anything. Previously this check lived
+    // after Order.create(), so a server without Razorpay keys left behind an
+    // orphaned PENDING order on every attempted online checkout.
+    if (paymentMethod === 'online' && !razorpay) {
+      throw new AppError(
+        'Online payments are not configured on this server. Please choose Cash on Delivery.',
+        503
+      );
+    }
+
     const order = await Order.create({
       user: req.user?._id,
       guestEmail: billing?.guestEmail,
@@ -105,8 +131,6 @@ router.post('/', optionalAuth, async (req, res, next) => {
 
     // Online payment: create the Razorpay order now, from the server-trusted
     // total, and bind it to this order so it can't be reused for another one.
-    if (!razorpay) throw new AppError('Payment gateway not configured', 503);
-
     const razorpayOrder = await razorpay.orders.create({
       amount: Math.round(total * 100), // paise — derived from server total, never from client input
       currency: 'INR',

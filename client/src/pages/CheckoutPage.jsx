@@ -1,20 +1,24 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Check, ChevronRight, ShieldCheck, Truck, ArrowLeft, ArrowRight, PackageCheck } from 'lucide-react';
-import { useCartStore } from '../store';
+import { Check, ChevronRight, ShieldCheck, Truck, ArrowLeft, ArrowRight, PackageCheck, AlertCircle } from 'lucide-react';
+import { useCartStore, useAuthStore } from '../store';
 import { formatPrice } from '../components/ui';
+import { api } from '../lib/api';
 
 const STEPS = ['Contact', 'Delivery Address', 'Shipping', 'Payment', 'Confirmation'];
 const STORAGE_KEY = 'gokana_checkout_form';
 
 export function CheckoutPage() {
   const { items, subtotal, clearCart } = useCartStore();
+  const { user, token } = useAuthStore();
   const navigate = useNavigate();
   const [step, setStep] = useState(0);
   const [errors, setErrors] = useState({});
   const [processing, setProcessing] = useState(false);
   const [orderId, setOrderId] = useState('');
+  const [placedOrder, setPlacedOrder] = useState(null);
+  const [submitError, setSubmitError] = useState('');
 
   const [formData, setFormData] = useState({
     name: '',
@@ -28,15 +32,27 @@ export function CheckoutPage() {
     paymentMethod: 'upi',
   });
 
-  // Restore form data from localStorage
+  // Restore form data from localStorage, then let the logged-in user's
+  // own details win over anything stale that was cached.
   useEffect(() => {
+    let restored = null;
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved) {
-        setFormData(JSON.parse(saved));
-      }
+      if (saved) restored = JSON.parse(saved);
     } catch (_) {}
-  }, []);
+
+    setFormData((prev) => ({
+      ...prev,
+      ...(restored || {}),
+      ...(user
+        ? {
+            name: user.name || restored?.name || prev.name,
+            email: user.email || restored?.email || prev.email,
+            phone: user.phone || restored?.phone || prev.phone,
+          }
+        : {}),
+    }));
+  }, [user]);
 
   // Save form data on change
   useEffect(() => {
@@ -72,6 +88,128 @@ export function CheckoutPage() {
     return Object.keys(errs).length === 0;
   };
 
+  // Maps the checkout's payment radio options onto what the backend
+  // understands: everything that isn't COD goes through Razorpay ('online').
+  const backendPaymentMethod =
+    formData.paymentMethod === 'cod' ? 'cod' : 'online';
+
+  // Loads the Razorpay checkout script on demand (only when an online
+  // payment is actually being made, so it never blocks first paint).
+  const loadRazorpayScript = () =>
+    new Promise((resolve) => {
+      if (window.Razorpay) return resolve(true);
+      const script = document.createElement('script');
+      script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
+      document.body.appendChild(script);
+    });
+
+  const finishOrder = (order) => {
+    setPlacedOrder(order);
+    setOrderId(order?.orderId || order?._id || '');
+    setStep(4);
+    clearCart();
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+    } catch (_) {}
+  };
+
+  const placeOrder = async () => {
+    setSubmitError('');
+    setProcessing(true);
+
+    try {
+      // Only identifiers and quantities are sent. Prices, discounts,
+      // shipping and the grand total are all recalculated server-side from
+      // the database — nothing here can change what the customer is charged.
+      const payload = {
+        items: items.map(({ product, variant, qty, personalisation }) => ({
+          slug: product.slug,
+          productId: product._id,
+          qty,
+          variant,
+          personalisation,
+        })),
+        shippingAddress: {
+          name: formData.name,
+          phone: formData.phone,
+          line1: formData.address,
+          city: formData.city,
+          state: formData.state,
+          pincode: formData.pincode,
+          country: 'India',
+        },
+        billing: {
+          guestEmail: user ? undefined : formData.email,
+          guestPhone: user ? undefined : formData.phone,
+        },
+        payment: { method: backendPaymentMethod },
+      };
+
+      const data = await api.post('/orders', payload, { auth: Boolean(token) });
+      const order = data.order;
+
+      // COD is confirmed server-side straight away — nothing more to do.
+      if (backendPaymentMethod === 'cod' || !data.razorpayOrder) {
+        finishOrder(order);
+        return;
+      }
+
+      const scriptLoaded = await loadRazorpayScript();
+      if (!scriptLoaded || !window.Razorpay) {
+        throw new Error(
+          'Could not load the payment gateway. Your order has been saved as pending — please retry payment from your account, or choose Cash on Delivery.'
+        );
+      }
+
+      await new Promise((resolve, reject) => {
+        const rzp = new window.Razorpay({
+          key: import.meta.env.VITE_RAZORPAY_KEY_ID,
+          amount: data.razorpayOrder.amount,
+          currency: data.razorpayOrder.currency,
+          name: 'GŌKANA',
+          description: `Order ${order.orderId}`,
+          order_id: data.razorpayOrder.id,
+          prefill: {
+            name: formData.name,
+            email: formData.email,
+            contact: formData.phone,
+          },
+          theme: { color: '#0B1F3A' },
+          handler: async (response) => {
+            try {
+              // The server re-verifies the signature AND checks that this
+              // razorpayOrderId belongs to this order before marking it paid.
+              const verified = await api.post('/orders/verify-payment', {
+                orderId: order._id,
+                razorpayOrderId: response.razorpay_order_id,
+                razorpayPaymentId: response.razorpay_payment_id,
+                razorpaySignature: response.razorpay_signature,
+              });
+              finishOrder(verified.order || order);
+              resolve();
+            } catch (err) {
+              reject(err);
+            }
+          },
+          modal: {
+            ondismiss: () =>
+              reject(new Error('Payment was cancelled. Your order is saved as pending — you can retry payment.')),
+          },
+        });
+        rzp.on('payment.failed', (resp) =>
+          reject(new Error(resp?.error?.description || 'Payment failed. Please try again.'))
+        );
+        rzp.open();
+      });
+    } catch (err) {
+      setSubmitError(err.message || 'Something went wrong while placing your order.');
+    } finally {
+      setProcessing(false);
+    }
+  };
+
   const handleNext = () => {
     if (!validateCurrentStep()) return;
 
@@ -79,18 +217,7 @@ export function CheckoutPage() {
       setStep((s) => s + 1);
       window.scrollTo({ top: 100, behavior: 'smooth' });
     } else {
-      // Process order
-      setProcessing(true);
-      setTimeout(() => {
-        const id = 'GKN-' + Math.random().toString(36).substring(2, 8).toUpperCase();
-        setOrderId(id);
-        setStep(4);
-        setProcessing(false);
-        clearCart();
-        try {
-          localStorage.removeItem(STORAGE_KEY);
-        } catch (_) {}
-      }, 1500);
+      placeOrder();
     }
   };
 
@@ -100,10 +227,10 @@ export function CheckoutPage() {
 
   if (items.length === 0 && step !== 4) {
     return (
-      <main id="main-content" className="pt-32 min-h-screen bg-[#F7F3EC] flex items-center justify-center text-center p-6">
+      <main id="main-content" className="pt-32 min-h-screen bg-bg flex items-center justify-center text-center p-6">
         <div className="card-premium max-w-md p-8">
-          <h1 className="font-serif text-3xl font-light text-[#0B1F3A] mb-3">Your Cart is Empty</h1>
-          <p className="font-sans text-sm text-[#6B6B6B] mb-6">
+          <h1 className="font-serif text-3xl font-light text-primary mb-3">Your Cart is Empty</h1>
+          <p className="font-sans text-sm text-muted mb-6">
             Add items to your cart before proceeding to checkout.
           </p>
           <Link to="/shop" className="btn-accent">Explore Curated Gifts</Link>
@@ -113,7 +240,7 @@ export function CheckoutPage() {
   }
 
   return (
-    <main id="main-content" className="pt-28 min-h-screen bg-[#F7F3EC] pb-20">
+    <main id="main-content" className="pt-28 min-h-screen bg-bg pb-20">
       <div className="container-gokana max-w-5xl py-8">
         {/* Multi-Step Progress Tracker (Section 9 Requirement) */}
         <div className="mb-10" aria-label="Checkout Progress">
@@ -124,22 +251,22 @@ export function CheckoutPage() {
                   <div
                     className={`w-9 h-9 rounded-full flex items-center justify-center font-sans text-xs font-bold transition-all ${
                       idx < step
-                        ? 'bg-[#D4AF37] text-[#121212]'
+                        ? 'bg-accent text-text'
                         : idx === step
-                        ? 'bg-[#0B1F3A] text-white ring-4 ring-[#E8DFD3]'
-                        : 'bg-[#E8DFD3] text-[#6B6B6B]'
+                        ? 'bg-primary text-white ring-4 ring-border'
+                        : 'bg-border text-muted'
                     }`}
                   >
                     {idx < step ? <Check size={16} /> : idx + 1}
                   </div>
-                  <span className="font-sans text-[11px] font-semibold text-[#0B1F3A] mt-2 hidden sm:block">
+                  <span className="font-sans text-[11px] font-semibold text-primary mt-2 hidden sm:block">
                     {s}
                   </span>
                 </div>
                 {idx < STEPS.length - 1 && (
                   <div
                     className={`flex-1 h-0.5 mx-2 transition-all ${
-                      idx < step ? 'bg-[#D4AF37]' : 'bg-[#E8DFD3]'
+                      idx < step ? 'bg-accent' : 'bg-border'
                     }`}
                   />
                 )}
@@ -151,18 +278,21 @@ export function CheckoutPage() {
         {/* Confirmation Screen */}
         {step === 4 ? (
           <div className="card-premium max-w-xl mx-auto text-center p-8 md:p-12">
-            <div className="w-16 h-16 rounded-full bg-[#F5E9C8] text-[#B08D57] flex items-center justify-center mx-auto mb-6">
+            <div className="w-16 h-16 rounded-full bg-accent-soft text-accent-dark flex items-center justify-center mx-auto mb-6">
               <PackageCheck size={32} />
             </div>
-            <span className="label-text text-[#D4AF37] mb-2 block">Order Placed Successfully</span>
-            <h1 className="heading-lg text-[#0B1F3A] mb-3">Thank You for Your Order!</h1>
-            <p className="font-sans text-sm text-[#6B6B6B] mb-6 leading-relaxed">
-              We have received your gift order <b className="text-[#0B1F3A]">#{orderId}</b>. A confirmation email and SMS with live tracking details has been sent to <b>{formData.email}</b>.
+            <span className="label-text text-accent mb-2 block">Order Placed Successfully</span>
+            <h1 className="heading-lg text-primary mb-3">Thank You for Your Order!</h1>
+            <p className="font-sans text-sm text-muted mb-6 leading-relaxed">
+              We have received your gift order <b className="text-primary">#{orderId}</b>. A confirmation email and SMS with live tracking details has been sent to <b>{formData.email}</b>.
             </p>
 
-            <div className="p-4 rounded-xl bg-[#FBF8F2] border border-[#E8DFD3] text-left mb-8 text-xs text-[#0B1F3A] space-y-2">
+            <div className="p-4 rounded-xl bg-surface-alt border border-border text-left mb-8 text-xs text-primary space-y-2">
               <p><b>Recipient:</b> {formData.name}</p>
               <p><b>Address:</b> {formData.address}, {formData.city}, {formData.state} - {formData.pincode}</p>
+              {placedOrder?.billing?.total != null && (
+                <p><b>Amount:</b> {formatPrice(placedOrder.billing.total)} ({placedOrder.payment?.method === 'cod' ? 'Cash on Delivery' : 'Paid online'})</p>
+              )}
               <p><b>Estimated Delivery:</b> 2–4 Business Days</p>
             </div>
 
@@ -179,7 +309,7 @@ export function CheckoutPage() {
                 {/* Step 0: Contact Info */}
                 {step === 0 && (
                   <div>
-                    <h2 className="heading-md text-[#0B1F3A] mb-6">Contact Information</h2>
+                    <h2 className="heading-md text-primary mb-6">Contact Information</h2>
                     <div className="space-y-4">
                       <div className="form-group">
                         <label htmlFor="checkout-name" className="form-label">Full Name</label>
@@ -235,7 +365,7 @@ export function CheckoutPage() {
                 {/* Step 1: Delivery Address */}
                 {step === 1 && (
                   <div>
-                    <h2 className="heading-md text-[#0B1F3A] mb-6">Delivery Address</h2>
+                    <h2 className="heading-md text-primary mb-6">Delivery Address</h2>
                     <div className="space-y-4">
                       <div className="form-group">
                         <label htmlFor="checkout-address" className="form-label">Street Address & Landmark</label>
@@ -304,7 +434,7 @@ export function CheckoutPage() {
                 {/* Step 2: Shipping Option */}
                 {step === 2 && (
                   <div>
-                    <h2 className="heading-md text-[#0B1F3A] mb-6">Choose Shipping Speed</h2>
+                    <h2 className="heading-md text-primary mb-6">Choose Shipping Speed</h2>
                     <div className="space-y-3">
                       {[
                         { id: 'standard', title: 'Standard Express Shipping', time: '2–4 Business Days', cost: subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : 99 },
@@ -314,8 +444,8 @@ export function CheckoutPage() {
                           key={opt.id}
                           className={`p-4 rounded-xl border flex items-center justify-between cursor-pointer transition-all ${
                             formData.shippingMethod === opt.id
-                              ? 'border-[#0B1F3A] bg-[#F5E9C8]/30 shadow-xs'
-                              : 'border-[#E8DFD3] bg-[#FBF8F2] hover:border-[#D4AF37]'
+                              ? 'border-primary bg-accent-soft/30 shadow-xs'
+                              : 'border-border bg-surface-alt hover:border-accent'
                           }`}
                         >
                           <div className="flex items-center gap-3">
@@ -324,15 +454,15 @@ export function CheckoutPage() {
                               name="shippingMethod"
                               checked={formData.shippingMethod === opt.id}
                               onChange={() => setField('shippingMethod', opt.id)}
-                              className="accent-[#D4AF37] w-4 h-4"
+                              className="accent-accent w-4 h-4"
                             />
                             <div>
-                              <p className="font-sans text-sm font-semibold text-[#0B1F3A]">{opt.title}</p>
-                              <p className="font-sans text-xs text-[#6B6B6B]">{opt.time}</p>
+                              <p className="font-sans text-sm font-semibold text-primary">{opt.title}</p>
+                              <p className="font-sans text-xs text-muted">{opt.time}</p>
                             </div>
                           </div>
-                          <span className="font-sans text-sm font-bold text-[#0B1F3A]">
-                            {opt.cost === 0 ? <span className="text-[#2E7D32]">FREE</span> : formatPrice(opt.cost)}
+                          <span className="font-sans text-sm font-bold text-primary">
+                            {opt.cost === 0 ? <span className="text-success">FREE</span> : formatPrice(opt.cost)}
                           </span>
                         </label>
                       ))}
@@ -343,7 +473,7 @@ export function CheckoutPage() {
                 {/* Step 3: Payment Method */}
                 {step === 3 && (
                   <div>
-                    <h2 className="heading-md text-[#0B1F3A] mb-6">Payment Method</h2>
+                    <h2 className="heading-md text-primary mb-6">Payment Method</h2>
                     <div className="space-y-3">
                       {[
                         { id: 'upi', label: 'Instant UPI (Google Pay, PhonePe, Paytm)', desc: 'Fastest & zero transaction fees' },
@@ -355,8 +485,8 @@ export function CheckoutPage() {
                           key={m.id}
                           className={`p-4 rounded-xl border flex items-start gap-3 cursor-pointer transition-all ${
                             formData.paymentMethod === m.id
-                              ? 'border-[#0B1F3A] bg-[#F5E9C8]/30 shadow-xs'
-                              : 'border-[#E8DFD3] bg-[#FBF8F2] hover:border-[#D4AF37]'
+                              ? 'border-primary bg-accent-soft/30 shadow-xs'
+                              : 'border-border bg-surface-alt hover:border-accent'
                           }`}
                         >
                           <input
@@ -364,11 +494,11 @@ export function CheckoutPage() {
                             name="paymentMethod"
                             checked={formData.paymentMethod === m.id}
                             onChange={() => setField('paymentMethod', m.id)}
-                            className="accent-[#D4AF37] w-4 h-4 mt-0.5"
+                            className="accent-accent w-4 h-4 mt-0.5"
                           />
                           <div>
-                            <p className="font-sans text-sm font-semibold text-[#0B1F3A]">{m.label}</p>
-                            <p className="font-sans text-xs text-[#6B6B6B]">{m.desc}</p>
+                            <p className="font-sans text-sm font-semibold text-primary">{m.label}</p>
+                            <p className="font-sans text-xs text-muted">{m.desc}</p>
                           </div>
                         </label>
                       ))}
@@ -376,8 +506,19 @@ export function CheckoutPage() {
                   </div>
                 )}
 
+                {/* Submit error (real server message, not a fake success) */}
+                {submitError && (
+                  <div
+                    role="alert"
+                    className="mt-6 flex items-start gap-2.5 rounded-xl border border-error/30 bg-error/5 px-4 py-3"
+                  >
+                    <AlertCircle size={15} className="text-error flex-shrink-0 mt-0.5" />
+                    <p className="font-sans text-xs text-error leading-relaxed">{submitError}</p>
+                  </div>
+                )}
+
                 {/* Navigation Buttons */}
-                <div className="flex items-center justify-between pt-6 mt-8 border-t border-[#E8DFD3]">
+                <div className="flex items-center justify-between pt-6 mt-8 border-t border-border">
                   {step > 0 ? (
                     <button
                       onClick={handleBack}
@@ -411,7 +552,7 @@ export function CheckoutPage() {
             {/* Right Column: Order Summary (5 cols) */}
             <div className="lg:col-span-5">
               <div className="card-premium p-6 sticky top-28 space-y-4">
-                <h3 className="heading-sm text-[#0B1F3A] pb-3 border-b border-[#E8DFD3]">
+                <h3 className="heading-sm text-primary pb-3 border-b border-border">
                   Order Summary ({items.reduce((a, i) => a + i.qty, 0)} Items)
                 </h3>
 
@@ -422,13 +563,13 @@ export function CheckoutPage() {
                       <img
                         src={product.image}
                         alt={product.name}
-                        className="w-12 h-14 rounded-lg object-cover bg-[#FBF8F2] flex-shrink-0"
+                        className="w-12 h-14 rounded-lg object-cover bg-surface-alt flex-shrink-0"
                       />
                       <div className="flex-1 min-w-0">
-                        <p className="font-serif text-sm font-light text-[#0B1F3A] truncate">{product.name}</p>
-                        <p className="font-sans text-xs text-[#6B6B6B]">Qty: {qty} {variant ? `• ${variant}` : ''}</p>
+                        <p className="font-serif text-sm font-light text-primary truncate">{product.name}</p>
+                        <p className="font-sans text-xs text-muted">Qty: {qty} {variant ? `• ${variant}` : ''}</p>
                       </div>
-                      <span className="font-sans text-xs font-semibold text-[#0B1F3A]">
+                      <span className="font-sans text-xs font-semibold text-primary">
                         {formatPrice(product.price * qty)}
                       </span>
                     </div>
@@ -436,26 +577,26 @@ export function CheckoutPage() {
                 </div>
 
                 {/* Price Breakdown */}
-                <div className="pt-3 border-t border-[#E8DFD3] space-y-2 text-xs">
-                  <div className="flex justify-between text-[#6B6B6B]">
+                <div className="pt-3 border-t border-border space-y-2 text-xs">
+                  <div className="flex justify-between text-muted">
                     <span>Items Subtotal</span>
                     <span>{formatPrice(subtotal)}</span>
                   </div>
-                  <div className="flex justify-between text-[#6B6B6B]">
+                  <div className="flex justify-between text-muted">
                     <span>Packaging & Luxury Box</span>
-                    <span className="text-[#2E7D32] font-semibold">FREE</span>
+                    <span className="text-success font-semibold">FREE</span>
                   </div>
-                  <div className="flex justify-between text-[#6B6B6B]">
+                  <div className="flex justify-between text-muted">
                     <span>Shipping Speed</span>
-                    <span>{shippingCost === 0 ? <span className="text-[#2E7D32]">FREE</span> : formatPrice(shippingCost)}</span>
+                    <span>{shippingCost === 0 ? <span className="text-success">FREE</span> : formatPrice(shippingCost)}</span>
                   </div>
-                  <div className="flex justify-between text-base font-bold text-[#0B1F3A] pt-3 border-t border-[#E8DFD3]">
+                  <div className="flex justify-between text-base font-bold text-primary pt-3 border-t border-border">
                     <span>Grand Total</span>
                     <span>{formatPrice(grandTotal)}</span>
                   </div>
                 </div>
 
-                <div className="pt-3 flex items-center justify-center gap-2 text-xs text-[#2E7D32]">
+                <div className="pt-3 flex items-center justify-center gap-2 text-xs text-success">
                   <ShieldCheck size={16} />
                   <span>256-Bit Bank Level Encryption Guarantee</span>
                 </div>

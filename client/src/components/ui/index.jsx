@@ -15,22 +15,22 @@ export function Rating({ value = 5, count, size = 'sm', className }) {
           <Star
             key={`f${i}`}
             size={starSize}
-            className="fill-[#D4AF37] text-[#D4AF37]"
+            className="fill-accent text-accent"
           />
         ))}
         {half && (
-          <StarHalf size={starSize} className="fill-[#D4AF37] text-[#D4AF37]" />
+          <StarHalf size={starSize} className="fill-accent text-accent" />
         )}
         {Array.from({ length: empty }).map((_, i) => (
           <Star
             key={`e${i}`}
             size={starSize}
-            className="text-[#E8DFD3]"
+            className="text-border"
           />
         ))}
       </div>
       {count !== undefined && (
-        <span className="text-xs text-[#6B6B6B] font-sans ml-0.5">({count})</span>
+        <span className="text-xs text-muted font-sans ml-0.5">({count})</span>
       )}
     </div>
   );
@@ -38,15 +38,15 @@ export function Rating({ value = 5, count, size = 'sm', className }) {
 
 export function Badge({ children, variant = 'default', className }) {
   const variantStyles = {
-    default: 'bg-[#0B1F3A] text-white',
-    gold: 'bg-[#F5E9C8] text-[#0B1F3A] border border-[#D4AF37]/30',
-    bestseller: 'bg-[#F5E9C8] text-[#0B1F3A] border border-[#D4AF37]/30',
-    new: 'bg-[#F3D9D4] text-[#0B1F3A]',
-    sale: 'bg-[#F3D9D4] text-[#0B1F3A]',
-    limited: 'bg-[#F3D9D4] text-[#0B1F3A]',
-    champagne: 'bg-[#F5E9C8] text-[#0B1F3A]',
-    personalisable: 'bg-[#F5E9C8] text-[#0B1F3A] border border-[#D4AF37]/30',
-    outline: 'border border-[#0B1F3A] text-[#0B1F3A] bg-transparent',
+    default: 'bg-primary text-white',
+    gold: 'bg-accent-soft text-primary border border-accent/30',
+    bestseller: 'bg-accent-soft text-primary border border-accent/30',
+    new: 'bg-blush text-primary',
+    sale: 'bg-blush text-primary',
+    limited: 'bg-blush text-primary',
+    champagne: 'bg-accent-soft text-primary',
+    personalisable: 'bg-accent-soft text-primary border border-accent/30',
+    outline: 'border border-primary text-primary bg-transparent',
   };
 
   return (
@@ -63,13 +63,13 @@ export function Badge({ children, variant = 'default', className }) {
 }
 
 export function Divider({ className }) {
-  return <div className={clsx('w-12 h-px bg-[#D4AF37]', className)} role="separator" />;
+  return <div className={clsx('w-12 h-px bg-accent', className)} role="separator" />;
 }
 
 export function LoadingSpinner({ size = 24, className }) {
   return (
     <svg
-      className={clsx('animate-spin text-[#D4AF37]', className)}
+      className={clsx('animate-spin text-accent', className)}
       width={size}
       height={size}
       viewBox="0 0 24 24"
@@ -102,7 +102,7 @@ export function Skeleton({ className }) {
         className
       )}
       style={{
-        background: 'linear-gradient(90deg, #E8DFD3 25%, #FBF8F2 50%, #E8DFD3 75%)',
+        background: 'linear-gradient(90deg, var(--border) 25%, var(--surface-alt) 50%, var(--border) 75%)',
         backgroundSize: '200% 100%',
         animation: 'shimmer 2s linear infinite',
       }}

@@ -12,6 +12,7 @@ export default {
         surface: {
           DEFAULT: '#FFFFFF',
           alt: '#FBF8F2',
+          tint: '#FFFDF8',
         },
         border: {
           DEFAULT: '#E8DFD3',
@@ -20,6 +21,7 @@ export default {
         primary: {
           DEFAULT: '#0B1F3A',
           2: '#1E3A5F',
+          dark: '#07172C',
           soft: '#E7ECF3',
         },
         accent: {

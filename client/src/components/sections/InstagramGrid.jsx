@@ -24,7 +24,7 @@ function InstagramPost({ post, className }) {
       href="https://instagram.com"
       target="_blank"
       rel="noopener noreferrer"
-      className={`block relative overflow-hidden rounded-xl bg-[#FBF8F2] border border-[#E8DFD3] group ${className}`}
+      className={`block relative overflow-hidden rounded-xl bg-surface-alt border border-border group ${className}`}
       whileHover={{ scale: 1.01 }}
       transition={{ duration: 0.3 }}
       aria-label="View GŌKANA moments on Instagram"
@@ -36,9 +36,9 @@ function InstagramPost({ post, className }) {
         loading="lazy"
       />
       {/* Overlay */}
-      <div className="absolute inset-0 bg-[#0B1F3A]/0 group-hover:bg-[#0B1F3A]/45 transition-colors duration-400 flex items-center justify-center">
+      <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/45 transition-colors duration-400 flex items-center justify-center">
         <div className="flex flex-col items-center gap-1.5 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <SvgInstagram size={22} className="text-[#D4AF37]" />
+          <SvgInstagram size={22} className="text-accent" />
           <span className="font-sans text-xs tracking-wider uppercase font-semibold">
             ♥ {post.likes}
           </span>
@@ -57,12 +57,12 @@ export function InstagramGrid() {
         {/* Header */}
         <div className="text-center mb-12">
           <ScrollReveal delay={0.1}>
-            <p className="label-text text-[#D4AF37] mb-3">✦ Join Our Community</p>
+            <p className="label-text text-accent mb-3">✦ Join Our Community</p>
           </ScrollReveal>
-          <AnimatedHeading id="instagram-heading" className="heading-md text-[#0B1F3A] mb-2" delay={0.15}>
+          <AnimatedHeading id="instagram-heading" className="heading-md text-primary mb-2" delay={0.15}>
             Moments from @gokana.in
           </AnimatedHeading>
-          <p className="font-sans text-xs text-[#6B6B6B]">
+          <p className="font-sans text-xs text-muted">
             Tag us to be featured in our gifting chronicles
           </p>
         </div>

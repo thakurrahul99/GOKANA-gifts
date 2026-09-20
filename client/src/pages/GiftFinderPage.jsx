@@ -169,17 +169,17 @@ export function GiftFinderPage() {
   const currentStepData = STEPS[currentStep];
 
   return (
-    <main id="main-content" className="min-h-screen pt-24 md:pt-28 bg-[#F7F3EC]">
+    <main id="main-content" className="min-h-screen pt-24 md:pt-28 bg-bg">
       {/* ── Page Hero ── */}
-      <section className="relative py-16 md:py-20 bg-[#0B1F3A] text-white overflow-hidden">
+      <section className="relative py-16 md:py-20 bg-primary text-white overflow-hidden">
         <div className="container-gokana text-center relative z-10">
           <nav aria-label="Breadcrumb" className="flex items-center justify-center gap-2 mb-5 font-sans text-xs tracking-wider uppercase text-white/50">
             <Link to="/" className="hover:text-white transition-colors">Home</Link>
             <span>/</span>
-            <span className="text-[#D4AF37]">Gift Finder</span>
+            <span className="text-accent">Gift Finder</span>
           </nav>
 
-          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full font-sans text-xs font-semibold tracking-widest uppercase mb-4 bg-white/10 text-[#D4AF37] border border-[#D4AF37]/30">
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full font-sans text-xs font-semibold tracking-widest uppercase mb-4 bg-white/10 text-accent border border-accent/30">
             <Sparkles size={13} />
             Step-by-Step Curation Engine
           </span>
@@ -188,7 +188,7 @@ export function GiftFinderPage() {
             Find the Perfect Gift
           </h1>
 
-          <p className="font-sans text-base text-[#C9D2DE] max-w-xl mx-auto leading-relaxed">
+          <p className="font-sans text-base text-charcoal-200 max-w-xl mx-auto leading-relaxed">
             Answer 4 quick questions. Our bespoke concierge algorithm will match you with hand-crafted, beautifully packaged gifts tailored to your recipient.
           </p>
         </div>
@@ -197,18 +197,18 @@ export function GiftFinderPage() {
       {/* ── Stepper Quiz Section ── */}
       <section className="section-py">
         <div className="container-gokana max-w-4xl mx-auto">
-          <div className="p-6 md:p-12 rounded-2xl bg-white border border-[#E8DFD3] shadow-lg">
+          <div className="p-6 md:p-12 rounded-2xl bg-white border border-border shadow-lg">
             {/* Header / Progress bar */}
-            <div className="flex items-center justify-between gap-4 mb-8 pb-6 border-b border-[#E8DFD3]">
+            <div className="flex items-center justify-between gap-4 mb-8 pb-6 border-b border-border">
               <div className="flex items-center gap-3">
-                <span className="w-8 h-8 rounded-full flex items-center justify-center font-sans text-sm font-bold bg-[#F5E9C8] text-[#0B1F3A]">
+                <span className="w-8 h-8 rounded-full flex items-center justify-center font-sans text-sm font-bold bg-accent-soft text-primary">
                   {showResults ? '5' : currentStep + 1}
                 </span>
                 <div>
-                  <p className="font-sans text-xs uppercase tracking-wider text-[#6B6B6B]">
+                  <p className="font-sans text-xs uppercase tracking-wider text-muted">
                     {showResults ? 'Completed • Step 5 of 5' : `Step ${currentStep + 1} of 5`}
                   </p>
-                  <p className="font-sans text-sm font-semibold text-[#0B1F3A]">
+                  <p className="font-sans text-sm font-semibold text-primary">
                     {showResults ? 'Your Curated Selection' : currentStepData.title.split(': ')[1]}
                   </p>
                 </div>
@@ -217,7 +217,7 @@ export function GiftFinderPage() {
               {(showResults || currentStep > 0) && (
                 <button
                   onClick={handleReset}
-                  className="flex items-center gap-2 font-sans text-xs font-medium text-[#6B6B6B] hover:text-[#0B1F3A] px-3 py-1.5 rounded-lg border border-[#E8DFD3] hover:bg-[#FBF8F2] transition-colors"
+                  className="flex items-center gap-2 font-sans text-xs font-medium text-muted hover:text-primary px-3 py-1.5 rounded-lg border border-border hover:bg-surface-alt transition-colors"
                 >
                   <RotateCcw size={13} />
                   Reset Quiz
@@ -234,10 +234,10 @@ export function GiftFinderPage() {
                   style={{
                     backgroundColor:
                       idx < currentStep || showResults
-                        ? '#D4AF37'
+                        ? 'var(--accent)'
                         : idx === currentStep
-                        ? '#0B1F3A'
-                        : '#E8DFD3',
+                        ? 'var(--primary)'
+                        : 'var(--border)',
                   }}
                   title={`Step ${s}`}
                 />
@@ -253,10 +253,10 @@ export function GiftFinderPage() {
                   exit={{ opacity: 0, x: -20 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <h2 className="heading-md text-[#0B1F3A] mb-1">
+                  <h2 className="heading-md text-primary mb-1">
                     {currentStepData.title}
                   </h2>
-                  <p className="font-sans text-sm text-[#6B6B6B] mb-8">
+                  <p className="font-sans text-sm text-muted mb-8">
                     {currentStepData.subtitle}
                   </p>
 
@@ -268,23 +268,23 @@ export function GiftFinderPage() {
                         <button
                           key={opt.id}
                           onClick={() => handleSelect(currentStepData.id, opt.id)}
-                          className={`p-5 rounded-xl border text-left transition-all duration-200 flex flex-col justify-between focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37] ${
+                          className={`p-5 rounded-xl border text-left transition-all duration-200 flex flex-col justify-between focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
                             isSelected
-                              ? 'border-[#D4AF37] bg-[#F5E9C8] text-[#0B1F3A] shadow-xs'
-                              : 'border-[#E8DFD3] bg-[#FBF8F2] text-[#0B1F3A] hover:border-[#D4AF37]'
+                              ? 'border-accent bg-accent-soft text-primary shadow-xs'
+                              : 'border-border bg-surface-alt text-primary hover:border-accent'
                           }`}
                         >
                           <div className="flex items-center justify-between mb-3">
                             <span className="text-3xl p-2 rounded-lg bg-white shadow-xs" aria-hidden="true">
                               {opt.emoji}
                             </span>
-                            {isSelected && <CheckCircle2 size={20} className="text-[#D4AF37]" />}
+                            {isSelected && <CheckCircle2 size={20} className="text-accent" />}
                           </div>
                           <div>
-                            <p className="font-sans text-base font-semibold text-[#0B1F3A] mb-1">
+                            <p className="font-sans text-base font-semibold text-primary mb-1">
                               {opt.label}
                             </p>
-                            <p className="font-sans text-xs text-[#6B6B6B] leading-relaxed">
+                            <p className="font-sans text-xs text-muted leading-relaxed">
                               {opt.desc}
                             </p>
                           </div>
@@ -294,7 +294,7 @@ export function GiftFinderPage() {
                   </div>
 
                   {/* Nav Controls */}
-                  <div className="flex items-center justify-between pt-4 border-t border-[#E8DFD3]">
+                  <div className="flex items-center justify-between pt-4 border-t border-border">
                     {currentStep > 0 ? (
                       <button
                         onClick={() => setCurrentStep((s) => s - 1)}
@@ -307,7 +307,7 @@ export function GiftFinderPage() {
 
                     <button
                       onClick={handleSkip}
-                      className="text-xs text-[#D4AF37] hover:underline font-semibold"
+                      className="text-xs text-accent hover:underline font-semibold"
                     >
                       Skip this question →
                     </button>
@@ -322,29 +322,29 @@ export function GiftFinderPage() {
                   transition={{ duration: 0.4 }}
                 >
                   {/* Active Criteria Chips */}
-                  <div className="flex flex-wrap items-center gap-2 mb-8 p-4 rounded-xl bg-[#FBF8F2] border border-[#E8DFD3]">
-                    <span className="font-sans text-xs font-semibold uppercase tracking-wider text-[#0B1F3A] mr-2 flex items-center gap-1.5">
+                  <div className="flex flex-wrap items-center gap-2 mb-8 p-4 rounded-xl bg-surface-alt border border-border">
+                    <span className="font-sans text-xs font-semibold uppercase tracking-wider text-primary mr-2 flex items-center gap-1.5">
                       <SlidersHorizontal size={14} />
                       Your Matches:
                     </span>
                     {selections.occasion && (
-                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-white border border-[#E8DFD3] text-[#0B1F3A]">
+                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-white border border-border text-primary">
                         Occasion: <b>{STEPS[0].options.find((o) => o.id === selections.occasion)?.label}</b>
                       </span>
                     )}
                     {selections.recipient && (
-                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-white border border-[#E8DFD3] text-[#0B1F3A]">
+                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-white border border-border text-primary">
                         Recipient: <b>{STEPS[1].options.find((o) => o.id === selections.recipient)?.label}</b>
                       </span>
                     )}
                     {selections.budget && (
-                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-white border border-[#E8DFD3] text-[#0B1F3A]">
+                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-white border border-border text-primary">
                         Budget: <b>{STEPS[2].options.find((o) => o.id === selections.budget)?.label}</b>
                       </span>
                     )}
                     <button
                       onClick={handleReset}
-                      className="text-xs text-[#D4AF37] hover:underline font-semibold ml-auto"
+                      className="text-xs text-accent hover:underline font-semibold ml-auto"
                     >
                       Change Preferences
                     </button>
@@ -352,10 +352,10 @@ export function GiftFinderPage() {
 
                   <div className="flex items-center justify-between mb-8">
                     <div>
-                      <h2 className="heading-md text-[#0B1F3A] mb-1">
+                      <h2 className="heading-md text-primary mb-1">
                         Curated Gifts For You
                       </h2>
-                      <p className="font-sans text-sm text-[#6B6B6B]">
+                      <p className="font-sans text-sm text-muted">
                         Showing {matchedProducts.length} thoughtfully matched presents
                       </p>
                     </div>
@@ -373,10 +373,10 @@ export function GiftFinderPage() {
                     ))}
                   </div>
 
-                  <div className="text-center pt-6 border-t border-[#E8DFD3]">
+                  <div className="text-center pt-6 border-t border-border">
                     <button
                       onClick={handleReset}
-                      className="btn-ghost text-xs inline-flex items-center gap-2 text-[#0B1F3A]"
+                      className="btn-ghost text-xs inline-flex items-center gap-2 text-primary"
                     >
                       <RotateCcw size={14} />
                       Take the quiz again with different preferences
@@ -390,18 +390,18 @@ export function GiftFinderPage() {
       </section>
 
       {/* ── Concierge Support ── */}
-      <section className="py-16 bg-[#FBF8F2] border-t border-[#E8DFD3]">
+      <section className="py-16 bg-surface-alt border-t border-border">
         <div className="container-gokana max-w-4xl">
-          <div className="p-8 md:p-10 rounded-2xl bg-white border border-[#E8DFD3] flex flex-col md:flex-row items-center justify-between gap-8 shadow-xs">
+          <div className="p-8 md:p-10 rounded-2xl bg-white border border-border flex flex-col md:flex-row items-center justify-between gap-8 shadow-xs">
             <div className="max-w-lg">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase mb-3 bg-[#F3D9D4] text-[#0B1F3A]">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase mb-3 bg-blush text-primary">
                 <MessageCircle size={13} />
                 Bespoke & Bulk Gifting Concierge
               </span>
-              <h3 className="heading-md text-[#0B1F3A] mb-2">
+              <h3 className="heading-md text-primary mb-2">
                 Need bespoke curation or corporate hampers?
               </h3>
-              <p className="font-sans text-sm text-[#6B6B6B] leading-relaxed">
+              <p className="font-sans text-sm text-muted leading-relaxed">
                 Connect directly with our gifting stylist for customized wooden keepsakes, corporate logos, volume discounts, and personalized calligraphy cards.
               </p>
             </div>

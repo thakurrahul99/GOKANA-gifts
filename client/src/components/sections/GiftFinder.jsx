@@ -156,19 +156,19 @@ export function GiftFinder() {
   const currentStepData = STEPS[currentStep];
 
   return (
-    <section id="gift-finder" className="section-py overflow-hidden bg-[#0B1F3A] text-white" aria-labelledby="gift-finder-heading">
+    <section id="gift-finder" className="section-py overflow-hidden bg-primary text-white" aria-labelledby="gift-finder-heading">
       <div className="container-gokana">
         <div className="max-w-3xl mx-auto">
           {/* Header */}
           <div className="text-center mb-12">
             <ScrollReveal delay={0.1}>
-              <p className="label-text text-[#D4AF37] mb-3">✦ 5-Step Gifting Assistant</p>
+              <p className="label-text text-accent mb-3">✦ 5-Step Gifting Assistant</p>
             </ScrollReveal>
             <AnimatedHeading id="gift-finder-heading" className="heading-lg text-white mb-4" delay={0.15}>
               Not Sure What to Gift?
             </AnimatedHeading>
             <ScrollReveal delay={0.25}>
-              <p className="font-sans text-base text-[#C9D2DE] max-w-md mx-auto leading-relaxed">
+              <p className="font-sans text-base text-charcoal-200 max-w-md mx-auto leading-relaxed">
                 Take our 60-second quiz. We will match you with hand-selected gifts guaranteed to be remembered.
               </p>
             </ScrollReveal>
@@ -179,10 +179,10 @@ export function GiftFinder() {
               {/* Progress Indicator (Step X of 5) */}
               <div className="flex items-center justify-between gap-4 mb-8 pb-4 border-b border-white/10">
                 <div className="flex items-center gap-2.5">
-                  <span className="w-7 h-7 rounded-full bg-[#D4AF37] text-[#121212] font-sans text-xs font-bold flex items-center justify-center">
+                  <span className="w-7 h-7 rounded-full bg-accent text-text font-sans text-xs font-bold flex items-center justify-center">
                     {showResults ? '5' : currentStep + 1}
                   </span>
-                  <span className="font-sans text-xs uppercase tracking-wider text-[#C9D2DE]">
+                  <span className="font-sans text-xs uppercase tracking-wider text-charcoal-200">
                     {showResults ? 'Step 5 of 5: Curated Results' : `Step ${currentStep + 1} of 5: ${currentStepData.title}`}
                   </span>
                 </div>
@@ -190,7 +190,7 @@ export function GiftFinder() {
                 {(showResults || currentStep > 0) && (
                   <button
                     onClick={handleReset}
-                    className="flex items-center gap-1.5 text-xs text-[#C9D2DE] hover:text-[#D4AF37] transition-colors"
+                    className="flex items-center gap-1.5 text-xs text-charcoal-200 hover:text-accent transition-colors"
                     aria-label="Restart quiz"
                   >
                     <RotateCcw size={13} />
@@ -211,7 +211,7 @@ export function GiftFinder() {
                     <h3 className="font-serif text-2xl md:text-3xl font-light text-white mb-2">
                       {currentStepData.title}
                     </h3>
-                    <p className="font-sans text-xs text-[#C9D2DE] mb-6">
+                    <p className="font-sans text-xs text-charcoal-200 mb-6">
                       {currentStepData.subtitle}
                     </p>
 
@@ -223,9 +223,9 @@ export function GiftFinder() {
                           <button
                             key={opt.value}
                             onClick={() => handleSelect(currentStepData.id, opt.value)}
-                            className={`p-4 rounded-xl border text-left transition-all duration-200 flex flex-col justify-between min-h-[84px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37] ${
+                            className={`p-4 rounded-xl border text-left transition-all duration-200 flex flex-col justify-between min-h-[84px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
                               isSelected
-                                ? 'border-[#D4AF37] bg-[#D4AF37]/15 text-[#D4AF37]'
+                                ? 'border-accent bg-accent/15 text-accent'
                                 : 'border-white/10 bg-white/5 text-white/80 hover:border-white/30 hover:bg-white/10'
                             }`}
                           >
@@ -243,7 +243,7 @@ export function GiftFinder() {
                       {currentStep > 0 ? (
                         <button
                           onClick={() => setCurrentStep((s) => s - 1)}
-                          className="flex items-center gap-1.5 text-xs text-[#C9D2DE] hover:text-white transition-colors"
+                          className="flex items-center gap-1.5 text-xs text-charcoal-200 hover:text-white transition-colors"
                         >
                           <ChevronLeft size={16} />
                           Back
@@ -252,7 +252,7 @@ export function GiftFinder() {
 
                       <button
                         onClick={handleSkip}
-                        className="text-xs text-[#D4AF37] hover:underline font-semibold"
+                        className="text-xs text-accent hover:underline font-semibold"
                       >
                         Skip this step →
                       </button>
@@ -271,13 +271,13 @@ export function GiftFinder() {
                         <h3 className="font-serif text-2xl text-white font-light">
                           We Think You'll Love These ✦
                         </h3>
-                        <p className="font-sans text-xs text-[#C9D2DE]">
+                        <p className="font-sans text-xs text-charcoal-200">
                           Curated specifically to your celebration preferences
                         </p>
                       </div>
                       <button
                         onClick={handleReset}
-                        className="flex items-center gap-1.5 text-xs text-[#D4AF37] hover:underline"
+                        className="flex items-center gap-1.5 text-xs text-accent hover:underline"
                       >
                         <RotateCcw size={13} />
                         Retake Quiz
@@ -303,7 +303,7 @@ export function GiftFinder() {
                               <h4 className="font-serif text-base font-light text-white mb-1 line-clamp-1">
                                 {product.name}
                               </h4>
-                              <p className="font-sans text-sm font-semibold text-[#D4AF37] mb-3">
+                              <p className="font-sans text-sm font-semibold text-accent mb-3">
                                 {formatPrice(product.price)}
                               </p>
                             </div>
@@ -314,8 +314,8 @@ export function GiftFinder() {
                               onClick={(e) => handleAddToCart(e, product)}
                               className={`w-full py-2 px-3 rounded-lg text-xs font-sans font-semibold uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 min-h-[40px] ${
                                 addedId === product.id
-                                  ? 'bg-[#D4AF37] text-[#121212]'
-                                  : 'bg-[#D4AF37] text-[#121212] hover:bg-[#B08D57]'
+                                  ? 'bg-accent text-text'
+                                  : 'bg-accent text-text hover:bg-accent-dark'
                               }`}
                             >
                               {addedId === product.id ? (

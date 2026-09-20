@@ -67,6 +67,96 @@ async function seed() {
     const coupons = await Coupon.insertMany(COUPONS);
     console.log(`✦ Seeded ${coupons.length} coupons`);
 
+    // Seed sample products
+    const SAMPLE_PRODUCTS = [
+      {
+        name: 'Signature Chocolate Collection',
+        slug: 'signature-chocolate-collection',
+        tagline: 'Handcrafted Belgian chocolates with Indian flavours',
+        description: 'A curated selection of 20 handcrafted Belgian chocolates infused with authentic Indian flavours — saffron, cardamom, rose and more.',
+        price: 1899,
+        originalPrice: 2499,
+        stock: 50,
+        inStock: true,
+        isFeatured: true,
+        badge: 'Bestseller',
+        rating: 4.9,
+        reviewCount: 128,
+        tags: ['bestseller', 'featured'],
+        personalisable: true,
+        variants: [
+          { label: '20 Pieces', sku: 'CHOC-20', stock: 25 },
+          { label: '32 Pieces', sku: 'CHOC-32', stock: 15 },
+          { label: '50 Pieces', sku: 'CHOC-50', stock: 10 },
+        ],
+      },
+      {
+        name: 'Serenity Candle Trio',
+        slug: 'serenity-candle-trio',
+        tagline: 'Premium soy candles in three signature scents',
+        description: 'Three premium soy candles in signature scents, presented in artisanal glass vessels with hand-stamped labels.',
+        price: 1499,
+        stock: 40,
+        inStock: true,
+        isFeatured: true,
+        badge: 'New',
+        rating: 4.8,
+        reviewCount: 94,
+        tags: ['featured', 'new'],
+        personalisable: true,
+        variants: [
+          { label: 'Jasmine & Amber', sku: 'CANDLE-JA', stock: 15 },
+          { label: 'Sandalwood & Rose', sku: 'CANDLE-SR', stock: 15 },
+          { label: 'Vetiver & Oud', sku: 'CANDLE-VO', stock: 10 },
+        ],
+      },
+      {
+        name: 'Grand Celebration Hamper',
+        slug: 'grand-celebration-hamper',
+        tagline: 'A curated collection of artisanal Indian delicacies',
+        description: 'A grand hamper filled with artisanal dry fruits, premium teas, saffron cookies and handcrafted sweets — presented in a beautiful wicker basket.',
+        price: 3499,
+        originalPrice: 4200,
+        stock: 20,
+        inStock: true,
+        isFeatured: true,
+        badge: 'Most Loved',
+        rating: 4.9,
+        reviewCount: 67,
+        tags: ['bestseller', 'featured'],
+        personalisable: false,
+        variants: [
+          { label: 'Standard', sku: 'HAMPER-STD', stock: 8 },
+          { label: 'Premium', sku: 'HAMPER-PRE', stock: 7 },
+          { label: 'Luxury', sku: 'HAMPER-LUX', stock: 5 },
+        ],
+      },
+      {
+        name: 'Botanical Skincare Ritual',
+        slug: 'botanical-skincare-ritual',
+        tagline: 'Luxurious botanical skincare curated for gifting',
+        description: 'A luxurious skincare set featuring a botanical face serum, whipped moisturiser and rose water mist — all crafted from Indian botanicals.',
+        price: 2699,
+        originalPrice: 3200,
+        stock: 30,
+        inStock: true,
+        isFeatured: false,
+        badge: null,
+        rating: 4.7,
+        reviewCount: 52,
+        tags: ['featured'],
+        personalisable: true,
+        variants: [
+          { label: 'Rose & Saffron', sku: 'SKIN-RS', stock: 12 },
+          { label: 'Sandalwood & Turmeric', sku: 'SKIN-ST', stock: 10 },
+          { label: 'Vetiver & Neem', sku: 'SKIN-VN', stock: 8 },
+        ],
+      },
+    ];
+
+    const products = await Product.insertMany(SAMPLE_PRODUCTS);
+    console.log(`✦ Seeded ${products.length} products`);
+
     // Seed admin user
     const adminExists = await User.findOne({ email: 'admin@gokana.in' });
     if (!adminExists) {
