@@ -14,6 +14,7 @@ import categoryRoutes from "./routes/categories.js";
 import couponRoutes from "./routes/coupons.js";
 import reviewRoutes from "./routes/reviews.js";
 import adminRoutes from "./routes/admin.js";
+import uploadRoutes from "./routes/upload.js";
 import webhookRoutes from "./routes/webhooks.js";
 
 import { errorHandler } from "./middleware/errorHandler.js";
@@ -77,6 +78,7 @@ app.use("/api/categories", categoryRoutes);
 app.use("/api/coupons", couponRoutes);
 app.use("/api/reviews", reviewRoutes);
 app.use("/api/admin", adminRoutes);
+app.use("/api/admin/uploads", uploadRoutes);
 app.use("/api/webhooks", webhookRoutes);
 
 // ─── Health check ───
