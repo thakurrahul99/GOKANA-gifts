@@ -130,7 +130,9 @@ export function AdminProducts() {
         originalPrice: formData.originalPrice ? Number(formData.originalPrice) : undefined,
         badge: formData.badge || null,
         stock: Number(formData.stock),
-        inStock: Number(formData.stock) > 0 && formData.inStock,
+        // The admin checkbox is the source of truth for availability.
+        // If In Stock is checked while stock is 0, the UI handler keeps stock at 1.
+        inStock: Boolean(formData.inStock),
         thumbnail: imageUrls[0] || formData.thumbnail.trim() || undefined,
         images: imageUrls,
       };
@@ -188,6 +190,8 @@ export function AdminProducts() {
     setFormData(f => ({
       ...f,
       [key]: val,
+      // Keep inventory logically consistent: an In Stock product must have at least 1 unit.
+      ...(key === 'inStock' && val && Number(f.stock) <= 0 ? { stock: 1 } : {}),
       // Auto-generate slug only when creating new product
       ...(key === 'name' && !editProduct ? { slug: slugify(val) } : {}),
     }));
