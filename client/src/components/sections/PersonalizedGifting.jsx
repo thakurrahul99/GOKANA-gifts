@@ -79,7 +79,7 @@ export function PersonalizedGifting() {
             </StaggerReveal>
 
             <ScrollReveal delay={0.4}>
-              <Link to="/shop" className="btn-primary inline-flex items-center gap-2">
+              <Link to="/shop?personalised=true" className="btn-primary inline-flex items-center gap-2">
                 Browse Personalised Gifts
                 <ArrowRight size={16} />
               </Link>
