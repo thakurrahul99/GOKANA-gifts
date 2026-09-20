@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, ChevronLeft, RotateCcw, Check, Sparkles } from 'lucide-react';
 import { ScrollReveal, AnimatedHeading } from '../ui/ScrollReveal';
 import { formatPrice } from '../ui';
-import { products } from '../../data';
+import { API_BASE } from '../../lib/api';
 import { useCartStore } from '../../store';
 
 const STEPS = [
@@ -71,6 +71,21 @@ export function GiftFinder() {
   const [showResults, setShowResults] = useState(false);
   const [addedId, setAddedId] = useState(null);
   const { addItem } = useCartStore();
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    fetch(`${API_BASE}/products?limit=100`)
+      .then((res) => res.json())
+      .then((data) => setProducts((data.products || []).map((p) => ({
+        ...p,
+        id: p._id || p.id,
+        image: p.thumbnail || p.images?.[0],
+        image2: p.images?.[1] || p.thumbnail || p.images?.[0],
+        tags: p.tags || [],
+        categories: (p.categories || []).map((cat) => typeof cat === 'string' ? cat : cat.slug).filter(Boolean),
+        variants: (p.variants || []).map((v) => typeof v === 'string' ? v : v.label),
+      })))).catch(() => setProducts([]));
+  }, []);
 
   // Restore from localStorage
   useEffect(() => {
