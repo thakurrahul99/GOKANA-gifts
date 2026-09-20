@@ -64,7 +64,7 @@ export function Navbar({ onSearchOpen }) {
 
         window.scrollTo({
           top,
-          behavior: attempts === 0 ? "smooth" : "auto",
+          behavior: "smooth",
         });
 
         attempts += 1;
@@ -93,9 +93,7 @@ export function Navbar({ onSearchOpen }) {
     setMobileOpen(false);
     if (link.label === "Home") {
       navigate("/");
-      window.setTimeout(() => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      }, 0);
+      window.scrollTo({ top: 0, behavior: "smooth" });
       return;
     }
     if (link.isHash) {
