@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Users, Search, Loader2 } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 
