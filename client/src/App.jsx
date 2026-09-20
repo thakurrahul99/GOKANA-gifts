@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { useState } from 'react';
+import { Users } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import { Navbar } from './components/layout/Navbar';
@@ -127,7 +128,8 @@ export default function App() {
           <Route index element={<AdminDashboard />} />
           <Route path="products" element={<AdminProducts />} />
           <Route path="orders" element={<AdminOrders />} />
-          <Route path="customers" element={<AdminCustomersPlaceholder />} />
+          <Route path="customers" element={<AdminCustomers />} />
+          <Route path="settings" element={<AdminSettings />} />
           <Route path="coupons" element={<AdminCoupons />} />
         </Route>
         {/* Store routes */}
@@ -137,13 +139,35 @@ export default function App() {
   );
 }
 
-function AdminCustomersPlaceholder() {
+function AdminCustomers() {
   return (
-    <div>
-      <h2 className="text-xl font-semibold text-primary mb-4">Customers</h2>
-      <div className="bg-surface border border-border p-8 text-center text-muted rounded-xl">
-        <p className="text-sm">Customer management interface — connect to backend API to populate.</p>
+    <section className="space-y-5">
+      <div>
+        <h2 className="text-2xl font-semibold text-primary">Customers</h2>
+        <p className="text-sm text-muted mt-1">Customer management</p>
       </div>
-    </div>
+      <div className="bg-surface border border-border p-8 text-center rounded-xl">
+        <div className="mx-auto w-12 h-12 rounded-full bg-blush flex items-center justify-center text-primary"><Users size={22} /></div>
+        <p className="text-sm text-text mt-3">Customer management interface is ready for API integration.</p>
+      </div>
+    </section>
+  );
+}
+
+function AdminSettings() {
+  return (
+    <section className="space-y-5">
+      <div>
+        <h2 className="text-2xl font-semibold text-primary">Settings</h2>
+        <p className="text-sm text-muted mt-1">Store administration settings</p>
+      </div>
+      <div className="bg-surface border border-border rounded-xl p-6 space-y-5">
+        <div><h3 className="font-semibold text-primary">Store</h3><p className="text-sm text-muted mt-1">GŌKANA luxury gifting store</p></div>
+        <div className="grid sm:grid-cols-2 gap-4">
+          <div className="border border-border rounded-lg p-4"><p className="text-xs text-muted uppercase tracking-wide">Environment</p><p className="text-sm text-text mt-1">Production</p></div>
+          <div className="border border-border rounded-lg p-4"><p className="text-xs text-muted uppercase tracking-wide">Access</p><p className="text-sm text-text mt-1">Administrator</p></div>
+        </div>
+      </div>
+    </section>
   );
 }
