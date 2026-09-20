@@ -44,7 +44,8 @@ export function AdminProducts() {
   const [formError, setFormError] = useState('');
   const [formSaving, setFormSaving] = useState(false);
   const [deletingId, setDeletingId] = useState(null);
-  const [uploadingImages, setUploadingImages] = useState(false);\n  const [categoryDropdownOpen, setCategoryDropdownOpen] = useState(false);
+  const [uploadingImages, setUploadingImages] = useState(false);
+  const [categoryDropdownOpen, setCategoryDropdownOpen] = useState(false);
 
   const authHeader = { Authorization: `Bearer ${token}` };
 
@@ -111,7 +112,8 @@ export function AdminProducts() {
       personalisationFields: product.personalisationFields?.length ? product.personalisationFields : EMPTY_FORM.personalisationFields,
       stock: product.stock ?? 0,
       thumbnail: product.thumbnail || '',
-      images: Array.isArray(product.images) ? product.images.join('\n') : '',
+      images: Array.isArray(product.images) ? product.images.join('
+') : '',
       imageFiles: [],
     });
     setFormError('');
@@ -128,7 +130,8 @@ export function AdminProducts() {
 
     setFormSaving(true);
     try {
-      let imageUrls = formData.images.split(/\n|,/).map(url => url.trim()).filter(Boolean);
+      let imageUrls = formData.images.split(/
+|,/).map(url => url.trim()).filter(Boolean);
 
       if (formData.imageFiles.length) {
         setUploadingImages(true);
