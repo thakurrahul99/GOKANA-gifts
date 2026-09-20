@@ -39,7 +39,8 @@ export const useCartStore = create((set, get) => {
 
     addItem: (product, variant = null, qty = 1, personalisation = null) => {
       const { items } = get();
-      const key = String(product.id) + '-' + String(variant);
+      const personalisationKey = personalisation ? JSON.stringify(personalisation) : '';
+      const key = String(product.id) + '-' + String(variant) + '-' + personalisationKey;
       const existing = items.find((i) => i.key === key);
 
       if (existing) {
