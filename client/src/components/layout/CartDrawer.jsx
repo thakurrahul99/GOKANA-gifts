@@ -232,9 +232,14 @@ export function CartDrawer() {
                               <Plus size={12} />
                             </button>
                           </div>
-                          <span className="font-sans text-sm font-semibold text-primary">
-                            {formatPrice(product.price * qty)}
-                          </span>
+                          <div className="text-right">
+                            <span className="block text-[10px] uppercase tracking-wider text-muted">
+                              Item Subtotal
+                            </span>
+                            <span className="font-sans text-sm font-semibold text-primary">
+                              {formatPrice(product.price * qty)}
+                            </span>
+                          </div>
                         </div>
                       </div>
                     </div>
