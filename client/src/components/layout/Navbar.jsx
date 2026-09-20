@@ -46,19 +46,29 @@ export function Navbar({ onSearchOpen }) {
     const hash = location.hash.slice(1);
     if (!hash) return;
 
+    // The Home page can take longer than one render frame to mount its
+    // sections after navigating from Shop/other routes. Keep checking until
+    // the requested section exists instead of falling back to the hero.
+    let attempts = 0;
+    let timer;
+
     const scrollToSection = () => {
       const element = document.getElementById(hash);
+
       if (element) {
-        const headerOffset = scrolled ? 72 : 76;
+        const headerOffset = 76;
         const top = element.getBoundingClientRect().top + window.scrollY - headerOffset;
         window.scrollTo({ top, behavior: "smooth" });
+        return;
+      }
+
+      attempts += 1;
+      if (attempts < 40) {
+        timer = window.setTimeout(scrollToSection, 50);
       }
     };
 
-    // Home sections render after the route transition, so wait briefly before
-    // looking up the target element. This prevents hash navigation from
-    // landing on the Home hero when coming from another page.
-    const timer = window.setTimeout(scrollToSection, 100);
+    timer = window.setTimeout(scrollToSection, 0);
     return () => window.clearTimeout(timer);
   }, [location.pathname, location.hash]);
 
