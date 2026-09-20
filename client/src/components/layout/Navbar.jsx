@@ -49,12 +49,17 @@ export function Navbar({ onSearchOpen }) {
     const scrollToSection = () => {
       const element = document.getElementById(hash);
       if (element) {
-        element.scrollIntoView({ behavior: "smooth", block: "start" });
+        const headerOffset = scrolled ? 72 : 76;
+        const top = element.getBoundingClientRect().top + window.scrollY - headerOffset;
+        window.scrollTo({ top, behavior: "smooth" });
       }
     };
 
-    const frame = window.requestAnimationFrame(scrollToSection);
-    return () => window.cancelAnimationFrame(frame);
+    // Home sections render after the route transition, so wait briefly before
+    // looking up the target element. This prevents hash navigation from
+    // landing on the Home hero when coming from another page.
+    const timer = window.setTimeout(scrollToSection, 100);
+    return () => window.clearTimeout(timer);
   }, [location.pathname, location.hash]);
 
   const isHomePage = location.pathname === "/";
@@ -64,7 +69,12 @@ export function Navbar({ onSearchOpen }) {
   const handleNavClick = (link, e) => {
     e.preventDefault();
     setMobileOpen(false);
-    navigate(link.href);
+    if (link.isHash) {
+      const hash = link.href.split("#")[1];
+      navigate({ pathname: "/", hash: `#${hash}` });
+    } else {
+      navigate(link.href);
+    }
   };
 
   // Keep the navbar solid and readable over every hero/section background.
