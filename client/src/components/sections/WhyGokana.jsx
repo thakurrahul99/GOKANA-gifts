@@ -1,76 +1,94 @@
 import { motion } from 'framer-motion';
-import { Sparkles, PackageCheck, Truck, HeartHandshake } from 'lucide-react';
+import { Sparkles, PackageCheck, HeartHandshake, Compass, ArrowRight } from 'lucide-react';
 import { ScrollReveal, StaggerReveal, staggerItem, AnimatedHeading } from '../ui/ScrollReveal';
 
-const pillars = [
+const journeySteps = [
   {
+    step: '01',
+    action: 'CHOOSE',
+    title: 'Curated with Intention',
+    desc: 'Select from masterfully curated collections of Belgian chocolates, artisanal soy candles, and luxury keepsakes.',
+    icon: Compass,
+  },
+  {
+    step: '02',
+    action: 'PERSONALISE',
+    title: 'Crafted for Their Story',
+    desc: 'Custom laser engraving, heartfelt wax-sealed calligraphy notes on 300 GSM paper, and custom ribbon finishes.',
     icon: Sparkles,
-    title: 'Personalisation',
-    subtitle: 'Every Gift is One-of-a-Kind',
-    desc: 'Custom monograms, engraved wooden keepsakes, and handwritten calligraphy cards on 300 GSM cotton paper.',
   },
   {
+    step: '03',
+    action: 'WE PACK',
+    title: 'The Art of the Rigid Box',
+    desc: 'Every gift is meticulously hand-assembled in textured rigid boxes, accented with champagne gold foil.',
     icon: PackageCheck,
-    title: 'Premium Packaging',
-    subtitle: 'The Art of the Unboxing',
-    desc: 'Textured rigid boxes, embossed gold foil accents, and double-faced satin ribbons that create immediate anticipation.',
   },
   {
-    icon: Truck,
-    title: 'Fast & Secure Delivery',
-    subtitle: 'Guaranteed On-Time Across India',
-    desc: 'Climate-controlled courier partners and real-time tracking ensure delicate chocolates and candles arrive pristine.',
-  },
-  {
+    step: '04',
+    action: 'THEY REMEMBER',
+    title: 'An Enduring Memory',
+    desc: 'Delivered in immaculate condition across India — creating a breathtaking moment of reverence and unboxing joy.',
     icon: HeartHandshake,
-    title: 'Handcrafted Curation',
-    subtitle: 'Artisanal Small-Batch Excellence',
-    desc: 'Partnered with indigenous master artisans and luxury chocolatiers who put unmatched passion into every single piece.',
   },
 ];
 
 export function WhyGokana() {
   return (
-    <section className="section-py bg-surface-alt" aria-labelledby="why-gokana-heading">
+    <section className="section-py bg-[#181512] text-ivory border-b border-[rgba(197,160,89,0.15)]" aria-labelledby="experience-heading">
       <div className="container-gokana">
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-14">
+        <div className="text-center max-w-2xl mx-auto mb-16">
           <ScrollReveal delay={0.1}>
-            <p className="label-text text-accent mb-3">✦ The GŌKANA Distinction</p>
+            <p className="label-text text-accent mb-3">✦ The Gifting Journey</p>
           </ScrollReveal>
-          <AnimatedHeading id="why-gokana-heading" className="heading-lg text-primary mb-4" delay={0.15}>
-            Why Choose GŌKANA
+          <AnimatedHeading id="experience-heading" className="heading-lg text-ivory mb-4" delay={0.15}>
+            The GŌKANA Experience
           </AnimatedHeading>
           <ScrollReveal delay={0.25}>
-            <p className="font-sans text-base text-muted leading-relaxed">
-              We obsess over every detail so that when your gift is opened, it creates a genuine moment of reverence, delight, and connection.
-            </p>
+            {/* Journey Flow Indicator */}
+            <div className="inline-flex flex-wrap items-center justify-center gap-2 md:gap-3 py-2 px-5 rounded-full bg-[#1F1A16] border border-[rgba(197,160,89,0.25)] text-accent font-sans text-xs font-semibold tracking-[0.18em] uppercase">
+              <span>Choose</span>
+              <span className="text-ivory/30">→</span>
+              <span>Personalise</span>
+              <span className="text-ivory/30">→</span>
+              <span>We Pack</span>
+              <span className="text-ivory/30">→</span>
+              <span>They Remember</span>
+            </div>
           </ScrollReveal>
         </div>
 
-        {/* 4 Pillars Grid (CRO Requirement) */}
+        {/* 4 Steps Journey Grid */}
         <StaggerReveal
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
           stagger={0.08}
           delay={0.2}
         >
-          {pillars.map(({ icon: Icon, title, subtitle, desc }) => (
+          {journeySteps.map(({ step, action, title, desc, icon: Icon }) => (
             <motion.div
-              key={title}
+              key={step}
               variants={staggerItem}
-              className="card-premium group flex flex-col justify-between p-6 md:p-7"
+              className="card-premium group relative flex flex-col justify-between p-6 md:p-7 bg-[#191613] border border-[rgba(197,160,89,0.2)] hover:border-[rgba(197,160,89,0.5)] transition-all duration-300"
             >
               <div>
-                <div className="w-14 h-14 rounded-2xl bg-blush/60 flex items-center justify-center text-primary mb-6 group-hover:bg-accent-soft transition-colors">
-                  <Icon size={26} strokeWidth={1.8} className="text-primary" />
+                {/* Step Marker & Icon */}
+                <div className="flex items-center justify-between mb-6">
+                  <span className="font-serif text-3xl font-light text-accent/60 tracking-wider">
+                    {step}
+                  </span>
+                  <div className="w-10 h-10 rounded-full border border-[rgba(197,160,89,0.3)] bg-[#1F1A16] flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-[#12100E] group-hover:border-accent transition-all duration-300">
+                    <Icon size={18} strokeWidth={1.7} />
+                  </div>
                 </div>
-                <h3 className="font-serif text-2xl font-light text-primary mb-1">
+
+                <p className="font-sans text-[11px] font-semibold uppercase tracking-[0.2em] text-accent mb-1.5">
+                  {action}
+                </p>
+                <h3 className="font-serif text-xl font-light text-ivory mb-2.5">
                   {title}
                 </h3>
-                <p className="font-sans text-xs font-semibold uppercase tracking-wider text-accent mb-3">
-                  {subtitle}
-                </p>
-                <p className="font-sans text-sm text-muted leading-relaxed">
+                <p className="font-sans text-xs text-[#A39A8E] leading-relaxed font-light">
                   {desc}
                 </p>
               </div>

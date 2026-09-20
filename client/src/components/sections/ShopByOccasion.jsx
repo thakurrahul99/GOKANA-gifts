@@ -9,10 +9,10 @@ function OccasionCard({ occasion, index }) {
     <motion.div variants={staggerItem} className="group">
       <Link
         to={`/shop?occasion=${occasion.id}`}
-        className="block relative overflow-hidden aspect-occasion rounded-xl bg-primary border border-white/10"
+        className="block relative overflow-hidden aspect-[4/5] rounded-[6px] bg-[#181512] border border-[rgba(197,160,89,0.2)] hover:border-[rgba(197,160,89,0.5)] transition-colors duration-300"
         aria-label={`Shop ${occasion.label} gifts`}
       >
-        {/* Image */}
+        {/* Image with subtle hover zoom */}
         <img
           src={occasion.image}
           alt={occasion.label}
@@ -20,29 +20,27 @@ function OccasionCard({ occasion, index }) {
           loading="lazy"
         />
 
-        {/* Base Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/30 to-transparent transition-opacity duration-500" />
-
-        {/* Hover Overlay */}
-        <div className="absolute inset-0 bg-primary/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        {/* Cinematic Vignette Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#12100E] via-[#12100E]/40 to-transparent transition-opacity duration-500" />
+        <div className="absolute inset-0 bg-[#12100E]/20 group-hover:bg-[#12100E]/10 transition-colors duration-500" />
 
         {/* Content */}
-        <div className="absolute inset-0 flex flex-col justify-end p-5">
-          <p className="font-sans text-xs tracking-[0.15em] uppercase text-white/70 mb-1 transition-colors duration-300 group-hover:text-accent">
+        <div className="absolute inset-0 flex flex-col justify-end p-6">
+          <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-accent font-semibold mb-1.5">
             {occasion.emoji} {occasion.description}
           </p>
-          <div className="flex items-end justify-between">
-            <h3 className="font-serif text-2xl font-light text-white leading-tight transition-transform duration-300 group-hover:translate-y-[-2px]">
+          <div className="flex items-end justify-between gap-2">
+            <h3 className="font-serif text-2xl md:text-3xl font-light text-ivory leading-tight group-hover:text-accent transition-colors duration-300">
               {occasion.label}
             </h3>
-            <div className="w-9 h-9 rounded-full border border-white/30 flex items-center justify-center text-white transition-all duration-300 group-hover:border-accent group-hover:bg-accent group-hover:text-text">
-              <ArrowRight size={15} />
+            <div className="w-10 h-10 rounded-full border border-[rgba(197,160,89,0.35)] bg-[#12100E]/70 backdrop-blur-xs flex items-center justify-center text-accent transition-all duration-300 group-hover:bg-accent group-hover:text-[#12100E] group-hover:border-accent flex-shrink-0">
+              <ArrowRight size={16} />
             </div>
           </div>
         </div>
 
-        {/* Index number */}
-        <div className="absolute top-4 right-4 font-sans text-[10px] tracking-[0.2em] text-white/30">
+        {/* Editorial Index Number */}
+        <div className="absolute top-4 right-4 font-serif text-xs tracking-[0.2em] text-accent/50 font-light">
           {String(index + 1).padStart(2, '0')}
         </div>
       </Link>
@@ -51,21 +49,23 @@ function OccasionCard({ occasion, index }) {
 }
 
 export function ShopByOccasion() {
+  const coreOccasions = occasions.slice(0, 6);
+
   return (
-    <section className="section-py bg-primary text-white overflow-hidden" aria-labelledby="occasions-heading">
+    <section className="section-py bg-[#12100E] text-ivory overflow-hidden border-b border-[rgba(197,160,89,0.15)]" aria-labelledby="occasions-heading">
       <div className="container-gokana">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
           <div>
             <ScrollReveal delay={0.1}>
-              <p className="label-text text-accent mb-3">✦ Explore By Moment</p>
+              <p className="label-text text-accent mb-3">✦ Curated For Every Milestone</p>
             </ScrollReveal>
-            <AnimatedHeading id="occasions-heading" className="heading-lg text-white mb-2" delay={0.15}>
+            <AnimatedHeading id="occasions-heading" className="heading-lg text-ivory mb-2" delay={0.15}>
               Shop by Occasion
             </AnimatedHeading>
             <ScrollReveal delay={0.25}>
-              <p className="font-sans text-sm text-charcoal-200 max-w-md">
-                From grand milestone anniversaries to spontaneous surprises, find expressions that fit the emotion.
+              <p className="font-sans text-sm text-[#A39A8E] max-w-lg leading-relaxed">
+                From milestone celebrations to heartfelt tokens of gratitude, explore curations tailored to the sentiment of the moment.
               </p>
             </ScrollReveal>
           </div>
@@ -73,7 +73,7 @@ export function ShopByOccasion() {
           <ScrollReveal delay={0.3}>
             <Link
               to="/shop"
-              className="btn-primary inline-flex items-center gap-2 text-xs py-3 px-6"
+              className="btn-outline inline-flex items-center gap-2 text-xs py-3 px-6 !text-accent border-accent hover:bg-accent/10 hover:border-accent-light"
             >
               View All Occasions
               <ArrowRight size={15} />
@@ -81,13 +81,13 @@ export function ShopByOccasion() {
           </ScrollReveal>
         </div>
 
-        {/* Occasions Grid */}
+        {/* 6 Core Occasion Cards Grid */}
         <StaggerReveal
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6"
-          stagger={0.06}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+          stagger={0.07}
           delay={0.2}
         >
-          {occasions.slice(0, 8).map((occasion, i) => (
+          {coreOccasions.map((occasion, i) => (
             <OccasionCard key={occasion.id} occasion={occasion} index={i} />
           ))}
         </StaggerReveal>

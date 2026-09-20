@@ -129,25 +129,25 @@ export function AdminCoupons() {
   };
 
   return (
-    <div>
+    <div className="text-ivory">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="text-xl font-semibold text-primary">Coupons</h2>
-          <p className="text-sm text-muted mt-0.5">{loading ? 'Loading…' : `${coupons.length} coupons`}</p>
+          <h2 className="text-2xl font-semibold text-ivory font-serif">Coupons</h2>
+          <p className="text-sm text-[#A39A8E] mt-0.5">{loading ? 'Loading…' : `${coupons.length} coupons`}</p>
         </div>
-        <button onClick={openAdd} className="btn-primary py-2 px-4 text-xs inline-flex items-center gap-2">
+        <button onClick={openAdd} className="btn-primary py-2.5 px-5 text-xs inline-flex items-center gap-2 uppercase tracking-wider font-semibold">
           <Plus size={14} /> Create Coupon
         </button>
       </div>
 
       {/* Error */}
       {error && !loading && (
-        <div className="flex items-center gap-3 bg-red-50 text-red-700 px-5 py-4 text-sm mb-5">
+        <div className="flex items-center gap-3 bg-red-950/40 border border-red-500/30 text-red-300 px-5 py-4 text-sm mb-5 rounded-lg">
           <AlertCircle size={16} />
           <span>{error}</span>
           <button
             onClick={fetchCoupons}
-            className="ml-auto inline-flex items-center gap-1.5 text-xs font-semibold text-red-700 underline underline-offset-2 hover:text-error transition-colors"
+            className="ml-auto inline-flex items-center gap-1.5 text-xs font-semibold text-red-300 underline underline-offset-2 hover:text-red-200 transition-colors"
           >
             <RefreshCw size={12} />
             Retry
@@ -157,31 +157,31 @@ export function AdminCoupons() {
 
       {/* Loading */}
       {loading && (
-        <div className="bg-surface border border-border text-center py-12">
+        <div className="bg-[#181512] border border-[rgba(197,160,89,0.2)] text-center py-16 rounded-xl shadow-lg">
           <Loader2 size={24} className="mx-auto text-accent animate-spin mb-2" />
-          <p className="text-sm text-muted">Loading coupons…</p>
+          <p className="text-sm text-[#A39A8E]">Loading coupons…</p>
         </div>
       )}
 
       {/* Form Modal */}
       {showForm && (
-        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4">
-          <div className="bg-surface border border-border rounded-lg max-w-lg w-full p-6">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold text-primary">
+        <div className="fixed inset-0 bg-black/75 backdrop-blur-xs flex items-center justify-center z-50 p-4">
+          <div className="bg-[#181512] text-ivory border border-[rgba(197,160,89,0.25)] rounded-xl max-w-lg w-full p-6 shadow-2xl">
+            <div className="flex items-center justify-between mb-4 pb-3 border-b border-[rgba(197,160,89,0.18)]">
+              <h3 className="text-lg font-serif font-light text-ivory">
                 {editCoupon ? 'Edit Coupon' : 'Create Coupon'}
               </h3>
               <button
                 onClick={() => setShowForm(false)}
-                className="p-1 hover:bg-bg transition-colors"
+                className="p-1 text-[#A39A8E] hover:text-accent transition-colors rounded"
                 aria-label="Close"
               >
-                <X size={18} className="text-muted" />
+                <X size={18} />
               </button>
             </div>
 
             {formError && (
-              <div className="mb-4 flex items-start gap-2 rounded-lg border border-error/30 bg-error/5 px-3 py-2 text-xs text-error">
+              <div className="mb-4 flex items-start gap-2 rounded-lg border border-red-500/30 bg-red-950/40 px-3 py-2 text-xs text-red-300">
                 <AlertCircle size={14} className="flex-shrink-0 mt-0.5" />
                 <span>{formError}</span>
               </div>
@@ -189,99 +189,99 @@ export function AdminCoupons() {
 
             <div className="space-y-3">
               <div>
-                <label className="text-xs font-semibold text-muted uppercase">Code</label>
+                <label className="text-xs font-semibold text-[#A39A8E] uppercase tracking-wider">Code</label>
                 <input
                   type="text"
                   value={formData.code}
                   onChange={(e) => setFormData({ ...formData, code: e.target.value })}
                   placeholder="e.g. WELCOME10"
-                  className="w-full mt-1 px-3 py-2 border border-border bg-bg text-text text-sm focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none"
+                  className="w-full mt-1 px-3.5 py-2.5 border border-[rgba(197,160,89,0.25)] bg-[#12100E] text-ivory text-sm focus:border-accent outline-none rounded-lg"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-xs font-semibold text-muted uppercase">Type</label>
+                  <label className="text-xs font-semibold text-[#A39A8E] uppercase tracking-wider">Type</label>
                   <select
                     value={formData.type}
                     onChange={(e) => setFormData({ ...formData, type: e.target.value })}
-                    className="w-full mt-1 px-3 py-2 border border-border bg-bg text-text text-sm focus:border-accent"
+                    className="w-full mt-1 px-3.5 py-2.5 border border-[rgba(197,160,89,0.25)] bg-[#12100E] text-ivory text-sm focus:border-accent rounded-lg cursor-pointer"
                   >
                     <option value="percentage">Percentage %</option>
                     <option value="fixed">Fixed ₹</option>
                   </select>
                 </div>
                 <div>
-                  <label className="text-xs font-semibold text-muted uppercase">Value</label>
+                  <label className="text-xs font-semibold text-[#A39A8E] uppercase tracking-wider">Value</label>
                   <input
                     type="number"
                     value={formData.value}
                     onChange={(e) => setFormData({ ...formData, value: e.target.value })}
                     placeholder="e.g. 10"
-                    className="w-full mt-1 px-3 py-2 border border-border bg-bg text-text text-sm focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none"
+                    className="w-full mt-1 px-3.5 py-2.5 border border-[rgba(197,160,89,0.25)] bg-[#12100E] text-ivory text-sm focus:border-accent outline-none rounded-lg"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="text-xs font-semibold text-muted uppercase">Min Order Amount (₹)</label>
+                <label className="text-xs font-semibold text-[#A39A8E] uppercase tracking-wider">Min Order Amount (₹)</label>
                 <input
                   type="number"
                   value={formData.minOrderAmount}
                   onChange={(e) => setFormData({ ...formData, minOrderAmount: e.target.value })}
                   placeholder="e.g. 500"
-                  className="w-full mt-1 px-3 py-2 border border-border bg-bg text-text text-sm focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none"
+                  className="w-full mt-1 px-3.5 py-2.5 border border-[rgba(197,160,89,0.25)] bg-[#12100E] text-ivory text-sm focus:border-accent outline-none rounded-lg"
                 />
               </div>
 
               {formData.type === 'percentage' && (
                 <div>
-                  <label className="text-xs font-semibold text-muted uppercase">Max Discount Cap (₹, optional)</label>
+                  <label className="text-xs font-semibold text-[#A39A8E] uppercase tracking-wider">Max Discount Cap (₹, optional)</label>
                   <input
                     type="number"
                     value={formData.maxDiscount}
                     onChange={(e) => setFormData({ ...formData, maxDiscount: e.target.value })}
                     placeholder="e.g. 300"
-                    className="w-full mt-1 px-3 py-2 border border-border bg-bg text-text text-sm focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none"
+                    className="w-full mt-1 px-3.5 py-2.5 border border-[rgba(197,160,89,0.25)] bg-[#12100E] text-ivory text-sm focus:border-accent outline-none rounded-lg"
                   />
                 </div>
               )}
 
               <div>
-                <label className="text-xs font-semibold text-muted uppercase">Description</label>
+                <label className="text-xs font-semibold text-[#A39A8E] uppercase tracking-wider">Description</label>
                 <input
                   type="text"
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                   placeholder="e.g. Welcome discount for new users"
-                  className="w-full mt-1 px-3 py-2 border border-border bg-bg text-text text-sm focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none"
+                  className="w-full mt-1 px-3.5 py-2.5 border border-[rgba(197,160,89,0.25)] bg-[#12100E] text-ivory text-sm focus:border-accent outline-none rounded-lg"
                 />
               </div>
 
-              <label className="flex items-center gap-2 text-xs cursor-pointer">
+              <label className="flex items-center gap-2 text-xs cursor-pointer pt-1">
                 <input
                   type="checkbox"
                   checked={formData.isActive}
                   onChange={(e) => setFormData({ ...formData, isActive: e.target.checked })}
-                  className="accent-accent"
+                  className="h-4 w-4 accent-accent"
                 />
-                <span className="text-text">Active</span>
+                <span className="text-ivory">Active</span>
               </label>
             </div>
 
-            <div className="flex items-center justify-end gap-2 mt-5 pt-4 border-t border-border">
+            <div className="flex items-center justify-end gap-2 mt-5 pt-4 border-t border-[rgba(197,160,89,0.18)]">
               <button
                 onClick={() => setShowForm(false)}
-                className="px-4 py-2 text-xs font-semibold text-muted hover:text-text transition-colors"
+                className="px-4 py-2 text-xs font-semibold text-[#A39A8E] hover:text-ivory transition-colors"
               >
                 Cancel
               </button>
               <button
                 onClick={handleSave}
                 disabled={formSaving}
-                className="px-4 py-2 bg-primary text-surface text-xs font-semibold hover:bg-accent hover:text-primary transition-colors disabled:opacity-40"
+                className="px-5 py-2.5 bg-accent text-[#12100E] text-xs font-semibold uppercase tracking-wider rounded-sm hover:bg-accent-light transition-colors disabled:opacity-40"
               >
-                {formSaving ? 'Saving…' : 'Save'}
+                {formSaving ? 'Saving…' : 'Save Coupon'}
               </button>
             </div>
           </div>
@@ -290,52 +290,52 @@ export function AdminCoupons() {
 
       {/* Table */}
       {!loading && !error && (
-        <div className="bg-surface border border-border rounded-lg overflow-x-auto">
+        <div className="bg-[#181512] border border-[rgba(197,160,89,0.2)] rounded-xl overflow-hidden shadow-lg overflow-x-auto">
           {filtered.length === 0 ? (
-            <div className="text-center py-10 text-muted text-sm">
+            <div className="text-center py-10 text-[#A39A8E] text-sm">
               {coupons.length === 0 ? 'No coupons yet. Create one to get started.' : 'No coupons match your search.'}
             </div>
           ) : (
             <table className="w-full text-sm">
               <thead>
-                <tr className="text-xs text-muted border-b border-border bg-bg">
-                  <th className="text-left px-4 py-3 font-semibold">Code</th>
-                  <th className="text-left px-4 py-3 font-semibold">Discount</th>
-                  <th className="text-left px-4 py-3 font-semibold">Min Order</th>
-                  <th className="text-left px-4 py-3 font-semibold">Status</th>
-                  <th className="text-center px-4 py-3 font-semibold">Actions</th>
+                <tr className="text-xs text-[#A39A8E] border-b border-[rgba(197,160,89,0.15)] bg-[#1F1A16]">
+                  <th className="text-left px-4 py-3.5 font-semibold">Code</th>
+                  <th className="text-left px-4 py-3.5 font-semibold">Discount</th>
+                  <th className="text-left px-4 py-3.5 font-semibold">Min Order</th>
+                  <th className="text-left px-4 py-3.5 font-semibold">Status</th>
+                  <th className="text-center px-4 py-3.5 font-semibold">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-border">
+              <tbody className="divide-y divide-[rgba(197,160,89,0.1)]">
                 {filtered.map((coupon) => (
-                  <tr key={coupon._id} className="hover:bg-bg transition-colors">
-                    <td className="px-4 py-3">
-                      <span className="font-mono font-bold text-primary">{coupon.code}</span>
+                  <tr key={coupon._id} className="hover:bg-white/5 transition-colors">
+                    <td className="px-4 py-3.5">
+                      <span className="font-mono font-bold text-accent tracking-wider">{coupon.code}</span>
                       {coupon.description && (
-                        <p className="text-xs text-muted mt-0.5">{coupon.description}</p>
+                        <p className="text-xs text-[#A39A8E] mt-0.5">{coupon.description}</p>
                       )}
                     </td>
-                    <td className="px-4 py-3 text-text">
+                    <td className="px-4 py-3.5 text-ivory">
                       {coupon.type === 'percentage' ? `${coupon.value}%` : `₹${coupon.value}`}
                       {coupon.maxDiscount && (
-                        <p className="text-xs text-muted mt-0.5">Cap: ₹{coupon.maxDiscount}</p>
+                        <p className="text-xs text-[#A39A8E] mt-0.5">Cap: ₹{coupon.maxDiscount}</p>
                       )}
                     </td>
-                    <td className="px-4 py-3 text-text">₹{coupon.minOrderAmount || 0}</td>
-                    <td className="px-4 py-3">
+                    <td className="px-4 py-3.5 text-ivory">₹{coupon.minOrderAmount || 0}</td>
+                    <td className="px-4 py-3.5">
                       <span className={`text-xs font-semibold px-2.5 py-1 rounded inline-block ${
                         coupon.isActive
-                          ? 'bg-accent-soft text-accent-dark'
-                          : 'bg-bg text-muted border border-border'
+                          ? 'bg-accent/15 text-accent border border-accent/30'
+                          : 'bg-[#1F1A16] text-[#A39A8E] border border-[rgba(197,160,89,0.2)]'
                       }`}>
                         {coupon.isActive ? 'Active' : 'Inactive'}
                       </span>
                     </td>
-                    <td className="px-4 py-3 text-center">
+                    <td className="px-4 py-3.5 text-center">
                       <div className="flex items-center justify-center gap-1.5">
                         <button
                           onClick={() => openEdit(coupon)}
-                          className="p-1.5 text-primary hover:bg-bg transition-colors rounded"
+                          className="p-1.5 text-ivory hover:text-accent hover:bg-white/5 transition-colors rounded"
                           title="Edit"
                         >
                           <Edit2 size={14} />
@@ -343,7 +343,7 @@ export function AdminCoupons() {
                         <button
                           onClick={() => handleDelete(coupon._id)}
                           disabled={deletingId === coupon._id}
-                          className="p-1.5 text-red-600 hover:bg-red-50 transition-colors rounded disabled:opacity-40"
+                          className="p-1.5 text-[#A39A8E] hover:text-red-400 hover:bg-red-400/10 transition-colors rounded disabled:opacity-40"
                           title="Delete"
                         >
                           {deletingId === coupon._id ? (

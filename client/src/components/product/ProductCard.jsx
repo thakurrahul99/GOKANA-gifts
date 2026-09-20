@@ -95,11 +95,11 @@ export function ProductCard({ product, index = 0 }) {
           <button
             onClick={handleWishlist}
             aria-label={isWished ? `Remove ${product.name} from wishlist` : `Save ${product.name} to wishlist`}
-            className="absolute top-3 right-3 w-11 h-11 rounded-full bg-white/90 backdrop-blur-xs flex items-center justify-center text-primary hover:text-accent hover:bg-white shadow-xs transition-all z-10 min-w-[44px] min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            className="absolute top-3 right-3 w-10 h-10 rounded-full bg-[#12100E]/80 backdrop-blur-xs border border-[rgba(197,160,89,0.3)] flex items-center justify-center text-ivory hover:text-accent hover:border-accent transition-all z-10 min-w-[40px] min-h-[40px] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent cursor-pointer"
           >
             <Heart
-              size={18}
-              className={isWished ? 'fill-accent text-accent' : 'text-primary'}
+              size={17}
+              className={isWished ? 'fill-accent text-accent' : 'text-ivory'}
             />
           </button>
         </Link>
@@ -110,29 +110,29 @@ export function ProductCard({ product, index = 0 }) {
           <div className="flex items-center justify-between">
             <Rating value={product.rating || 5} count={product.reviews || 48} size="sm" />
             {product.inStock && (
-              <span className="text-[11px] font-sans font-medium text-accent-dark">
+              <span className="text-[10px] font-sans font-semibold tracking-[0.1em] uppercase text-accent">
                 In Stock
               </span>
             )}
           </div>
 
           {/* Title */}
-          <h3 className="font-serif text-lg md:text-xl font-light text-primary group-hover:text-accent transition-colors line-clamp-1">
+          <h3 className="font-serif text-lg md:text-xl font-light text-ivory group-hover:text-accent transition-colors line-clamp-1">
             <Link to={`/products/${product.slug}`}>{product.name}</Link>
           </h3>
 
           {/* Short USP line */}
-          <p className="font-sans text-xs text-muted line-clamp-1">
-            {product.tagline || 'Artisan handcrafted luxury curation'}
+          <p className="font-sans text-xs text-[#A39A8E] line-clamp-1 font-light">
+            {product.tagline || 'Handcrafted luxury gift hamper'}
           </p>
 
           {/* Pricing */}
           <div className="flex items-baseline gap-2 pt-1">
-            <span className="font-sans text-base font-semibold text-primary">
+            <span className="font-sans text-base font-semibold text-ivory">
               {formatPrice(product.price)}
             </span>
             {product.originalPrice && (
-              <span className="font-sans text-xs text-muted-2 line-through">
+              <span className="font-sans text-xs text-[#6E665C] line-through">
                 {formatPrice(product.originalPrice)}
               </span>
             )}
@@ -140,25 +140,25 @@ export function ProductCard({ product, index = 0 }) {
         </div>
       </div>
 
-      {/* Visible "Add to Cart" Button (CRO Requirement) */}
+      {/* Subtle "Add to Bag" Button (Luxury Editorial CRO Interaction) */}
       <button
         onClick={handleAddToCart}
-        aria-label={`Add ${product.name} to cart`}
-        className={`w-full py-2.5 px-4 rounded-lg font-sans text-xs font-semibold uppercase tracking-wider transition-all duration-200 flex items-center justify-center gap-2 min-h-[44px] ${
+        aria-label={`Add ${product.name} to bag`}
+        className={`w-full py-2.5 px-4 rounded-[4px] font-sans text-[11px] font-semibold uppercase tracking-[0.14em] transition-all duration-200 flex items-center justify-center gap-2 min-h-[44px] cursor-pointer ${
           added
-            ? 'bg-accent text-text'
-            : 'bg-accent text-text hover:bg-accent-dark active:scale-[0.98]'
+            ? 'bg-accent-light text-[#12100E]'
+            : 'bg-accent text-[#12100E] hover:bg-accent-light active:scale-[0.98] shadow-xs'
         }`}
       >
         {added ? (
           <>
-            <Check size={16} />
-            Added to Cart
+            <Check size={15} />
+            Added to Bag
           </>
         ) : (
           <>
-            <ShoppingBag size={15} />
-            Add to Cart
+            <ShoppingBag size={14} strokeWidth={1.8} />
+            Add to Bag
           </>
         )}
       </button>

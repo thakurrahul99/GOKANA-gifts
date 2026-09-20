@@ -177,7 +177,7 @@ export function CheckoutPage() {
             email: formData.email,
             contact: formData.phone,
           },
-          theme: { color: '#0B1F3A' },
+          theme: { color: '#1B4D3E' },
           handler: async (response) => {
             try {
               // The server re-verifies the signature AND checks that this
@@ -216,7 +216,11 @@ export function CheckoutPage() {
 
     if (step < STEPS.length - 2) {
       setStep((s) => s + 1);
-      window.scrollTo({ top: 100, behavior: 'smooth' });
+      if (window.lenis) {
+        window.lenis.scrollTo(100, { duration: 0.8 });
+      } else {
+        window.scrollTo({ top: 100, behavior: 'smooth' });
+      }
     } else {
       placeOrder();
     }
@@ -228,22 +232,22 @@ export function CheckoutPage() {
 
   if (items.length === 0 && step !== 4) {
     return (
-      <main id="main-content" className="pt-32 min-h-screen bg-bg flex items-center justify-center text-center p-6">
-        <div className="card-premium max-w-md p-8">
-          <h1 className="font-serif text-3xl font-light text-primary mb-3">Your Cart is Empty</h1>
-          <p className="font-sans text-sm text-muted mb-6">
+      <main id="main-content" className="pt-32 min-h-screen bg-[#12100E] text-ivory flex items-center justify-center text-center p-6">
+        <div className="bg-[#181512] border border-[rgba(197,160,89,0.22)] rounded-2xl shadow-2xl max-w-md p-8">
+          <h1 className="font-serif text-3xl font-light text-ivory mb-3">Your Cart is Empty</h1>
+          <p className="font-sans text-sm text-[#A39A8E] mb-6">
             Add items to your cart before proceeding to checkout.
           </p>
-          <Link to="/shop" className="btn-accent">Explore Curated Gifts</Link>
+          <Link to="/shop" className="btn-primary">Explore Curated Gifts</Link>
         </div>
       </main>
     );
   }
 
   return (
-    <main id="main-content" className="pt-28 min-h-screen bg-bg pb-20">
+    <main id="main-content" className="pt-28 min-h-screen bg-[#12100E] text-ivory pb-20">
       <div className="container-gokana max-w-5xl py-8">
-        {/* Multi-Step Progress Tracker (Section 9 Requirement) */}
+        {/* Multi-Step Progress Tracker */}
         <div className="mb-10" aria-label="Checkout Progress">
           <div className="flex items-center justify-between max-w-2xl mx-auto">
             {STEPS.map((s, idx) => (
@@ -252,22 +256,22 @@ export function CheckoutPage() {
                   <div
                     className={`w-9 h-9 rounded-full flex items-center justify-center font-sans text-xs font-bold transition-all ${
                       idx < step
-                        ? 'bg-accent text-text'
+                        ? 'bg-accent text-[#12100E]'
                         : idx === step
-                        ? 'bg-primary text-white ring-4 ring-border'
-                        : 'bg-border text-muted'
+                        ? 'bg-accent text-[#12100E] ring-4 ring-accent/30'
+                        : 'bg-[#1F1A16] border border-[rgba(197,160,89,0.25)] text-[#A39A8E]'
                     }`}
                   >
                     {idx < step ? <Check size={16} /> : idx + 1}
                   </div>
-                  <span className="font-sans text-[11px] font-semibold text-primary mt-2 hidden sm:block">
+                  <span className={`font-sans text-[11px] font-semibold mt-2 hidden sm:block ${idx <= step ? 'text-ivory' : 'text-[#A39A8E]'}`}>
                     {s}
                   </span>
                 </div>
                 {idx < STEPS.length - 1 && (
                   <div
                     className={`flex-1 h-0.5 mx-2 transition-all ${
-                      idx < step ? 'bg-accent' : 'bg-border'
+                      idx < step ? 'bg-accent' : 'bg-[rgba(197,160,89,0.2)]'
                     }`}
                   />
                 )}
@@ -278,26 +282,26 @@ export function CheckoutPage() {
 
         {/* Confirmation Screen */}
         {step === 4 ? (
-          <div className="card-premium max-w-xl mx-auto text-center p-8 md:p-12">
-            <div className="w-16 h-16 rounded-full bg-accent-soft text-accent-dark flex items-center justify-center mx-auto mb-6">
+          <div className="bg-[#181512] border border-[rgba(197,160,89,0.22)] rounded-2xl shadow-2xl max-w-xl mx-auto text-center p-8 md:p-12">
+            <div className="w-16 h-16 rounded-full bg-accent/15 border border-accent/30 text-accent flex items-center justify-center mx-auto mb-6">
               <PackageCheck size={32} />
             </div>
             <span className="label-text text-accent mb-2 block">Order Placed Successfully</span>
-            <h1 className="heading-lg text-primary mb-3">Thank You for Your Order!</h1>
-            <p className="font-sans text-sm text-muted mb-6 leading-relaxed">
-              We have received your gift order <b className="text-primary">#{orderId}</b>. A confirmation email and SMS with live tracking details has been sent to <b>{formData.email}</b>.
+            <h1 className="heading-lg text-ivory mb-3">Thank You for Your Order!</h1>
+            <p className="font-sans text-sm text-[#A39A8E] mb-6 leading-relaxed">
+              We have received your gift order <b className="text-accent">#{orderId}</b>. A confirmation email and SMS with live tracking details has been sent to <b className="text-ivory">{formData.email}</b>.
             </p>
 
-            <div className="p-4 rounded-xl bg-surface-alt border border-border text-left mb-8 text-xs text-primary space-y-2">
-              <p><b>Recipient:</b> {formData.name}</p>
-              <p><b>Address:</b> {formData.address}, {formData.city}, {formData.state} - {formData.pincode}</p>
+            <div className="p-5 rounded-xl bg-[#12100E] border border-[rgba(197,160,89,0.2)] text-left mb-8 text-xs text-ivory space-y-2">
+              <p><b className="text-[#A39A8E]">Recipient:</b> {formData.name}</p>
+              <p><b className="text-[#A39A8E]">Address:</b> {formData.address}, {formData.city}, {formData.state} - {formData.pincode}</p>
               {placedOrder?.billing?.total != null && (
-                <p><b>Amount:</b> {formatPrice(placedOrder.billing.total)} ({placedOrder.payment?.method === 'cod' ? 'Cash on Delivery' : 'Paid online'})</p>
+                <p><b className="text-[#A39A8E]">Amount:</b> <span className="text-accent font-semibold">{formatPrice(placedOrder.billing.total)}</span> ({placedOrder.payment?.method === 'cod' ? 'Cash on Delivery' : 'Paid online'})</p>
               )}
-              <p><b>Estimated Delivery:</b> 2–4 Business Days</p>
+              <p><b className="text-[#A39A8E]">Estimated Delivery:</b> <span className="text-accent">2–4 Business Days</span></p>
             </div>
 
-            <Link to="/" className="btn-accent w-full justify-center">
+            <Link to="/" className="btn-primary w-full justify-center">
               Return to Homepage
             </Link>
           </div>
@@ -306,14 +310,14 @@ export function CheckoutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
             {/* Form Steps (7 cols) */}
             <div className="lg:col-span-7">
-              <div className="card-premium p-6 md:p-8">
+              <div className="bg-[#181512] border border-[rgba(197,160,89,0.22)] rounded-2xl shadow-xl p-6 md:p-8">
                 {/* Step 0: Contact Info */}
                 {step === 0 && (
                   <div>
-                    <h2 className="heading-md text-primary mb-6">Contact Information</h2>
+                    <h2 className="heading-md text-ivory mb-6">Contact Information</h2>
                     <div className="space-y-4">
                       <div className="form-group">
-                        <label htmlFor="checkout-name" className="form-label">Full Name</label>
+                        <label htmlFor="checkout-name" className="form-label text-accent text-xs uppercase tracking-wider">Full Name</label>
                         <input
                           id="checkout-name"
                           name="name"
@@ -322,14 +326,14 @@ export function CheckoutPage() {
                           placeholder="e.g. Radhika Sharma"
                           value={formData.name}
                           onChange={(e) => setField('name', e.target.value)}
-                          className={`input-field ${errors.name ? 'error' : ''}`}
+                          className={`w-full bg-[#12100E] border rounded-lg px-4 py-3 text-ivory placeholder:text-[#A39A8E]/60 focus:border-accent focus:outline-none transition-colors ${errors.name ? 'border-red-500/50' : 'border-[rgba(197,160,89,0.25)]'}`}
                           aria-invalid={errors.name ? 'true' : 'false'}
                         />
-                        {errors.name && <span className="helper-text error" role="alert">{errors.name}</span>}
+                        {errors.name && <span className="text-xs text-red-400 mt-1 block" role="alert">{errors.name}</span>}
                       </div>
 
                       <div className="form-group">
-                        <label htmlFor="checkout-email" className="form-label">Email Address</label>
+                        <label htmlFor="checkout-email" className="form-label text-accent text-xs uppercase tracking-wider">Email Address</label>
                         <input
                           id="checkout-email"
                           name="email"
@@ -338,14 +342,14 @@ export function CheckoutPage() {
                           placeholder="radhika@example.com"
                           value={formData.email}
                           onChange={(e) => setField('email', e.target.value)}
-                          className={`input-field ${errors.email ? 'error' : ''}`}
+                          className={`w-full bg-[#12100E] border rounded-lg px-4 py-3 text-ivory placeholder:text-[#A39A8E]/60 focus:border-accent focus:outline-none transition-colors ${errors.email ? 'border-red-500/50' : 'border-[rgba(197,160,89,0.25)]'}`}
                           aria-invalid={errors.email ? 'true' : 'false'}
                         />
-                        {errors.email && <span className="helper-text error" role="alert">{errors.email}</span>}
+                        {errors.email && <span className="text-xs text-red-400 mt-1 block" role="alert">{errors.email}</span>}
                       </div>
 
                       <div className="form-group">
-                        <label htmlFor="checkout-phone" className="form-label">Phone Number (for delivery updates)</label>
+                        <label htmlFor="checkout-phone" className="form-label text-accent text-xs uppercase tracking-wider">Phone Number (for delivery updates)</label>
                         <input
                           id="checkout-phone"
                           name="tel"
@@ -354,10 +358,10 @@ export function CheckoutPage() {
                           placeholder="9876543210"
                           value={formData.phone}
                           onChange={(e) => setField('phone', e.target.value)}
-                          className={`input-field ${errors.phone ? 'error' : ''}`}
+                          className={`w-full bg-[#12100E] border rounded-lg px-4 py-3 text-ivory placeholder:text-[#A39A8E]/60 focus:border-accent focus:outline-none transition-colors ${errors.phone ? 'border-red-500/50' : 'border-[rgba(197,160,89,0.25)]'}`}
                           aria-invalid={errors.phone ? 'true' : 'false'}
                         />
-                        {errors.phone && <span className="helper-text error" role="alert">{errors.phone}</span>}
+                        {errors.phone && <span className="text-xs text-red-400 mt-1 block" role="alert">{errors.phone}</span>}
                       </div>
                     </div>
                   </div>
@@ -366,10 +370,10 @@ export function CheckoutPage() {
                 {/* Step 1: Delivery Address */}
                 {step === 1 && (
                   <div>
-                    <h2 className="heading-md text-primary mb-6">Delivery Address</h2>
+                    <h2 className="heading-md text-ivory mb-6">Delivery Address</h2>
                     <div className="space-y-4">
                       <div className="form-group">
-                        <label htmlFor="checkout-address" className="form-label">Street Address & Landmark</label>
+                        <label htmlFor="checkout-address" className="form-label text-accent text-xs uppercase tracking-wider">Street Address & Landmark</label>
                         <input
                           id="checkout-address"
                           name="street-address"
@@ -378,14 +382,14 @@ export function CheckoutPage() {
                           placeholder="Flat 402, Lotus Enclave, 14th Main"
                           value={formData.address}
                           onChange={(e) => setField('address', e.target.value)}
-                          className={`input-field ${errors.address ? 'error' : ''}`}
+                          className={`w-full bg-[#12100E] border rounded-lg px-4 py-3 text-ivory placeholder:text-[#A39A8E]/60 focus:border-accent focus:outline-none transition-colors ${errors.address ? 'border-red-500/50' : 'border-[rgba(197,160,89,0.25)]'}`}
                         />
-                        {errors.address && <span className="helper-text error" role="alert">{errors.address}</span>}
+                        {errors.address && <span className="text-xs text-red-400 mt-1 block" role="alert">{errors.address}</span>}
                       </div>
 
                       <div className="grid grid-cols-2 gap-4">
                         <div className="form-group">
-                          <label htmlFor="checkout-city" className="form-label">City</label>
+                          <label htmlFor="checkout-city" className="form-label text-accent text-xs uppercase tracking-wider">City</label>
                           <input
                             id="checkout-city"
                             name="address-level2"
@@ -394,12 +398,12 @@ export function CheckoutPage() {
                             placeholder="Mumbai"
                             value={formData.city}
                             onChange={(e) => setField('city', e.target.value)}
-                            className={`input-field ${errors.city ? 'error' : ''}`}
+                            className={`w-full bg-[#12100E] border rounded-lg px-4 py-3 text-ivory placeholder:text-[#A39A8E]/60 focus:border-accent focus:outline-none transition-colors ${errors.city ? 'border-red-500/50' : 'border-[rgba(197,160,89,0.25)]'}`}
                           />
-                          {errors.city && <span className="helper-text error" role="alert">{errors.city}</span>}
+                          {errors.city && <span className="text-xs text-red-400 mt-1 block" role="alert">{errors.city}</span>}
                         </div>
                         <div className="form-group">
-                          <label htmlFor="checkout-pincode" className="form-label">PIN Code</label>
+                          <label htmlFor="checkout-pincode" className="form-label text-accent text-xs uppercase tracking-wider">PIN Code</label>
                           <input
                             id="checkout-pincode"
                             name="postal-code"
@@ -408,14 +412,14 @@ export function CheckoutPage() {
                             placeholder="400001"
                             value={formData.pincode}
                             onChange={(e) => setField('pincode', e.target.value)}
-                            className={`input-field ${errors.pincode ? 'error' : ''}`}
+                            className={`w-full bg-[#12100E] border rounded-lg px-4 py-3 text-ivory placeholder:text-[#A39A8E]/60 focus:border-accent focus:outline-none transition-colors ${errors.pincode ? 'border-red-500/50' : 'border-[rgba(197,160,89,0.25)]'}`}
                           />
-                          {errors.pincode && <span className="helper-text error" role="alert">{errors.pincode}</span>}
+                          {errors.pincode && <span className="text-xs text-red-400 mt-1 block" role="alert">{errors.pincode}</span>}
                         </div>
                       </div>
 
                       <div className="form-group">
-                        <label htmlFor="checkout-state" className="form-label">State</label>
+                        <label htmlFor="checkout-state" className="form-label text-accent text-xs uppercase tracking-wider">State</label>
                         <input
                           id="checkout-state"
                           name="address-level1"
@@ -424,9 +428,9 @@ export function CheckoutPage() {
                           placeholder="Maharashtra"
                           value={formData.state}
                           onChange={(e) => setField('state', e.target.value)}
-                          className={`input-field ${errors.state ? 'error' : ''}`}
+                          className={`w-full bg-[#12100E] border rounded-lg px-4 py-3 text-ivory placeholder:text-[#A39A8E]/60 focus:border-accent focus:outline-none transition-colors ${errors.state ? 'border-red-500/50' : 'border-[rgba(197,160,89,0.25)]'}`}
                         />
-                        {errors.state && <span className="helper-text error" role="alert">{errors.state}</span>}
+                        {errors.state && <span className="text-xs text-red-400 mt-1 block" role="alert">{errors.state}</span>}
                       </div>
                     </div>
                   </div>
@@ -435,7 +439,7 @@ export function CheckoutPage() {
                 {/* Step 2: Shipping Option */}
                 {step === 2 && (
                   <div>
-                    <h2 className="heading-md text-primary mb-6">Choose Shipping Speed</h2>
+                    <h2 className="heading-md text-ivory mb-6">Choose Shipping Speed</h2>
                     <div className="space-y-3">
                       {[
                         { id: 'standard', title: 'Standard Express Shipping', time: '2–4 Business Days', cost: subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : 99 },
@@ -445,8 +449,8 @@ export function CheckoutPage() {
                           key={opt.id}
                           className={`p-4 rounded-xl border flex items-center justify-between cursor-pointer transition-all ${
                             formData.shippingMethod === opt.id
-                              ? 'border-primary bg-accent-soft/30 shadow-xs'
-                              : 'border-border bg-surface-alt hover:border-accent'
+                              ? 'border-accent bg-accent/15 shadow-sm'
+                              : 'border-[rgba(197,160,89,0.2)] bg-[#12100E] hover:border-accent'
                           }`}
                         >
                           <div className="flex items-center gap-3">
@@ -458,12 +462,12 @@ export function CheckoutPage() {
                               className="accent-accent w-4 h-4"
                             />
                             <div>
-                              <p className="font-sans text-sm font-semibold text-primary">{opt.title}</p>
-                              <p className="font-sans text-xs text-muted">{opt.time}</p>
+                              <p className="font-sans text-sm font-semibold text-ivory">{opt.title}</p>
+                              <p className="font-sans text-xs text-[#A39A8E]">{opt.time}</p>
                             </div>
                           </div>
-                          <span className="font-sans text-sm font-bold text-primary">
-                            {opt.cost === 0 ? <span className="text-success">FREE</span> : formatPrice(opt.cost)}
+                          <span className="font-sans text-sm font-bold text-accent">
+                            {opt.cost === 0 ? <span className="text-emerald-400">FREE</span> : formatPrice(opt.cost)}
                           </span>
                         </label>
                       ))}
@@ -474,7 +478,7 @@ export function CheckoutPage() {
                 {/* Step 3: Payment Method */}
                 {step === 3 && (
                   <div>
-                    <h2 className="heading-md text-primary mb-6">Payment Method</h2>
+                    <h2 className="heading-md text-ivory mb-6">Payment Method</h2>
                     <div className="space-y-3">
                       {[
                         { id: 'upi', label: 'Instant UPI (Google Pay, PhonePe, Paytm)', desc: 'Fastest & zero transaction fees' },
@@ -486,8 +490,8 @@ export function CheckoutPage() {
                           key={m.id}
                           className={`p-4 rounded-xl border flex items-start gap-3 cursor-pointer transition-all ${
                             formData.paymentMethod === m.id
-                              ? 'border-primary bg-accent-soft/30 shadow-xs'
-                              : 'border-border bg-surface-alt hover:border-accent'
+                              ? 'border-accent bg-accent/15 shadow-sm'
+                              : 'border-[rgba(197,160,89,0.2)] bg-[#12100E] hover:border-accent'
                           }`}
                         >
                           <input
@@ -498,8 +502,8 @@ export function CheckoutPage() {
                             className="accent-accent w-4 h-4 mt-0.5"
                           />
                           <div>
-                            <p className="font-sans text-sm font-semibold text-primary">{m.label}</p>
-                            <p className="font-sans text-xs text-muted">{m.desc}</p>
+                            <p className="font-sans text-sm font-semibold text-ivory">{m.label}</p>
+                            <p className="font-sans text-xs text-[#A39A8E]">{m.desc}</p>
                           </div>
                         </label>
                       ))}
@@ -507,19 +511,19 @@ export function CheckoutPage() {
                   </div>
                 )}
 
-                {/* Submit error (real server message, not a fake success) */}
+                {/* Submit error */}
                 {submitError && (
                   <div
                     role="alert"
-                    className="mt-6 flex items-start gap-2.5 rounded-xl border border-error/30 bg-error/5 px-4 py-3"
+                    className="mt-6 flex items-start gap-2.5 rounded-xl border border-red-500/30 bg-red-950/40 px-4 py-3 text-red-300"
                   >
-                    <AlertCircle size={15} className="text-error flex-shrink-0 mt-0.5" />
-                    <p className="font-sans text-xs text-error leading-relaxed">{submitError}</p>
+                    <AlertCircle size={15} className="text-red-400 flex-shrink-0 mt-0.5" />
+                    <p className="font-sans text-xs leading-relaxed">{submitError}</p>
                   </div>
                 )}
 
                 {/* Navigation Buttons */}
-                <div className="flex items-center justify-between pt-6 mt-8 border-t border-border">
+                <div className="flex items-center justify-between pt-6 mt-8 border-t border-[rgba(197,160,89,0.18)]">
                   {step > 0 ? (
                     <button
                       onClick={handleBack}
@@ -533,7 +537,7 @@ export function CheckoutPage() {
                   <button
                     onClick={handleNext}
                     disabled={processing}
-                    className="btn-accent py-3 px-7 text-xs flex items-center gap-2"
+                    className="btn-primary py-3 px-7 text-xs flex items-center gap-2"
                   >
                     {processing ? (
                       'Securing Order...'
@@ -552,8 +556,8 @@ export function CheckoutPage() {
 
             {/* Right Column: Order Summary (5 cols) */}
             <div className="lg:col-span-5">
-              <div className="card-premium p-6 sticky top-28 space-y-4">
-                <h3 className="heading-sm text-primary pb-3 border-b border-border">
+              <div className="bg-[#181512] border border-[rgba(197,160,89,0.22)] rounded-2xl shadow-xl p-6 sticky top-28 space-y-4">
+                <h3 className="font-serif text-base font-light text-ivory pb-3 border-b border-[rgba(197,160,89,0.18)]">
                   Order Summary ({items.reduce((a, i) => a + i.qty, 0)} Items)
                 </h3>
 
@@ -564,13 +568,13 @@ export function CheckoutPage() {
                       <img
                         src={product.image}
                         alt={product.name}
-                        className="w-12 h-14 rounded-lg object-cover bg-surface-alt flex-shrink-0"
+                        className="w-12 h-14 rounded-lg object-cover bg-[#1F1A16] border border-[rgba(197,160,89,0.15)] flex-shrink-0"
                       />
                       <div className="flex-1 min-w-0">
-                        <p className="font-serif text-sm font-light text-primary truncate">{product.name}</p>
-                        <p className="font-sans text-xs text-muted">Qty: {qty} {variant ? `• ${variant}` : ''}</p>
+                        <p className="font-serif text-sm font-light text-ivory truncate">{product.name}</p>
+                        <p className="font-sans text-xs text-[#A39A8E]">Qty: {qty} {variant ? `• ${variant}` : ''}</p>
                       </div>
-                      <span className="font-sans text-xs font-semibold text-primary">
+                      <span className="font-sans text-xs font-semibold text-accent">
                         {formatPrice(product.price * qty)}
                       </span>
                     </div>
@@ -578,26 +582,26 @@ export function CheckoutPage() {
                 </div>
 
                 {/* Price Breakdown */}
-                <div className="pt-3 border-t border-border space-y-2 text-xs">
-                  <div className="flex justify-between text-muted">
+                <div className="pt-3 border-t border-[rgba(197,160,89,0.18)] space-y-2 text-xs">
+                  <div className="flex justify-between text-[#A39A8E]">
                     <span>Items Subtotal</span>
-                    <span>{formatPrice(subtotal)}</span>
+                    <span className="text-ivory">{formatPrice(subtotal)}</span>
                   </div>
-                  <div className="flex justify-between text-muted">
+                  <div className="flex justify-between text-[#A39A8E]">
                     <span>Packaging & Luxury Box</span>
-                    <span className="text-success font-semibold">FREE</span>
+                    <span className="text-accent font-semibold">FREE</span>
                   </div>
-                  <div className="flex justify-between text-muted">
+                  <div className="flex justify-between text-[#A39A8E]">
                     <span>Shipping Speed</span>
-                    <span>{shippingCost === 0 ? <span className="text-success">FREE</span> : formatPrice(shippingCost)}</span>
+                    <span>{shippingCost === 0 ? <span className="text-emerald-400 font-semibold">FREE</span> : <span className="text-ivory">{formatPrice(shippingCost)}</span>}</span>
                   </div>
-                  <div className="flex justify-between text-base font-bold text-primary pt-3 border-t border-border">
+                  <div className="flex justify-between text-base font-bold text-ivory pt-3 border-t border-[rgba(197,160,89,0.18)]">
                     <span>Grand Total</span>
-                    <span>{formatPrice(grandTotal)}</span>
+                    <span className="font-serif text-lg text-accent">{formatPrice(grandTotal)}</span>
                   </div>
                 </div>
 
-                <div className="pt-3 flex items-center justify-center gap-2 text-xs text-success">
+                <div className="pt-3 flex items-center justify-center gap-2 text-xs text-accent">
                   <ShieldCheck size={16} />
                   <span>256-Bit Bank Level Encryption Guarantee</span>
                 </div>

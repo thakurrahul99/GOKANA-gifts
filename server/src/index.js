@@ -92,13 +92,12 @@ app.use(errorHandler);
 // ─── Start ───
 const start = async () => {
   try {
-    await connectDB();
     app.listen(PORT, () => {
       console.log(`✦ GŌKANA Server running on http://localhost:${PORT}`);
     });
+    await connectDB();
   } catch (err) {
-    console.error("Failed to start server:", err);
-    process.exit(1);
+    console.error("Server startup error:", err);
   }
 };
 

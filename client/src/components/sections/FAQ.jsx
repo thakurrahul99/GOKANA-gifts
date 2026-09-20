@@ -26,7 +26,7 @@ const faqs = [
   },
   {
     q: 'Do you offer bulk, wedding, or corporate gifting?',
-    a: 'Absolutely. We curate bespoke corporate hampers, festive Diwali bulk gifting, and wedding favors with custom branding, ribbon colors, and bulk volume discounts. Contact our gifting concierge on WhatsApp for a custom catalog.',
+    a: 'Absolutely. We make custom corporate hampers, festive Diwali bulk gifts, and wedding favors with custom company branding, ribbon colors, and bulk volume discounts. Contact our team on WhatsApp for custom options.',
     category: 'Corporate',
   },
 ];
@@ -39,18 +39,18 @@ export function FAQ() {
   };
 
   return (
-    <section id="faq" className="section-py bg-surface-alt" aria-labelledby="faq-heading">
+    <section id="faq" className="section-py bg-[#12100E]" aria-labelledby="faq-heading">
       <div className="container-gokana max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-14">
           <ScrollReveal delay={0.1}>
             <p className="label-text text-accent mb-3">✦ Got Questions?</p>
           </ScrollReveal>
-          <AnimatedHeading id="faq-heading" className="heading-lg text-primary mb-4" delay={0.15}>
+          <AnimatedHeading id="faq-heading" className="heading-lg text-ivory mb-4" delay={0.15}>
             Frequently Asked Questions
           </AnimatedHeading>
           <ScrollReveal delay={0.25}>
-            <p className="font-sans text-base text-muted leading-relaxed max-w-lg mx-auto">
+            <p className="font-sans text-base text-[#A39A8E] leading-relaxed max-w-lg mx-auto">
               Everything you need to know about our luxury hampers, delivery promises, and custom notes.
             </p>
           </ScrollReveal>
@@ -63,7 +63,7 @@ export function FAQ() {
             return (
               <div
                 key={item.q}
-                className="rounded-xl border border-border bg-white overflow-hidden transition-all duration-200"
+                className="rounded-xl border border-[rgba(197,160,89,0.2)] bg-[#181512] overflow-hidden transition-all duration-200"
               >
                 <button
                   onClick={() => toggle(idx)}
@@ -71,13 +71,13 @@ export function FAQ() {
                   aria-expanded={isOpen}
                   aria-controls={`faq-answer-${idx}`}
                 >
-                  <span className="font-serif text-lg md:text-xl font-light text-primary pr-4">
+                  <span className="font-serif text-lg md:text-xl font-light text-ivory pr-4">
                     {item.q}
                   </span>
                   <motion.div
                     animate={{ rotate: isOpen ? 180 : 0 }}
                     transition={{ duration: 0.25 }}
-                    className="w-8 h-8 rounded-full bg-surface-alt flex items-center justify-center text-primary flex-shrink-0"
+                    className="w-8 h-8 rounded-full bg-[#1F1A16] border border-[rgba(197,160,89,0.25)] flex items-center justify-center text-accent flex-shrink-0"
                   >
                     <ChevronDown size={16} />
                   </motion.div>
@@ -92,7 +92,7 @@ export function FAQ() {
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                     >
-                      <div className="px-5 pb-5 md:px-6 md:pb-6 pt-1 text-sm font-sans text-muted leading-relaxed border-t border-border/40">
+                      <div className="px-5 pb-5 md:px-6 md:pb-6 pt-1 text-sm font-sans text-[#A39A8E] leading-relaxed border-t border-[rgba(197,160,89,0.15)]">
                         {item.a}
                       </div>
                     </motion.div>
@@ -103,13 +103,13 @@ export function FAQ() {
           })}
         </div>
 
-        {/* Concierge Help Callout */}
-        <div className="mt-12 text-center p-6 rounded-2xl bg-white border border-border flex flex-col sm:flex-row items-center justify-between gap-4">
+        {/* Support Help Callout */}
+        <div className="mt-12 text-center p-6 rounded-2xl bg-[#181512] border border-[rgba(197,160,89,0.22)] flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xl">
           <div className="text-left">
-            <h4 className="font-serif text-lg font-light text-primary">
-              Still have questions or need special curation?
+            <h4 className="font-serif text-lg font-light text-ivory">
+              Still have questions or need a custom gift box?
             </h4>
-            <p className="font-sans text-xs text-muted">
+            <p className="font-sans text-xs text-[#A39A8E]">
               Our gifting specialists are active 9am to 7pm on WhatsApp to assist you.
             </p>
           </div>
@@ -117,10 +117,10 @@ export function FAQ() {
             href="https://wa.me/919999999999?text=Hi%20GŌKANA!%20I%20have%20a%20question%20about%20your%20gifts."
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-accent py-2.5 px-5 text-xs whitespace-nowrap flex items-center gap-2"
+            className="btn-primary py-2.5 px-5 text-xs whitespace-nowrap flex items-center gap-2"
           >
             <MessageCircle size={16} />
-            Chat with Concierge
+            Chat on WhatsApp
           </a>
         </div>
       </div>

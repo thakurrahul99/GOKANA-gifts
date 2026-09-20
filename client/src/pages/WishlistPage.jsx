@@ -15,12 +15,12 @@ function WishlistItem({ product, onRemove, onAddToCart }) {
       variants={staggerItem}
       layout
       exit={{ opacity: 0, x: -20, transition: { duration: 0.3 } }}
-      className="group flex gap-5 py-6 border-b border-border last:border-0"
+      className="group flex gap-5 py-6 border-b border-[rgba(197,160,89,0.18)] last:border-0"
     >
       {/* Image */}
       <Link
         to={`/products/${product.slug}`}
-        className="flex-shrink-0 w-24 h-28 bg-bg overflow-hidden border border-border"
+        className="flex-shrink-0 w-24 h-28 bg-[#1F1A16] overflow-hidden rounded-lg border border-[rgba(197,160,89,0.2)] shadow-xs"
       >
         <img
           src={product.image}
@@ -32,19 +32,19 @@ function WishlistItem({ product, onRemove, onAddToCart }) {
       {/* Info */}
       <div className="flex-1 min-w-0">
         <Link to={`/products/${product.slug}`}>
-          <h3 className="font-serif text-lg font-light text-primary hover:text-accent transition-colors mb-1 leading-tight">
+          <h3 className="font-serif text-lg font-light text-ivory hover:text-accent transition-colors mb-1 leading-tight">
             {product.name}
           </h3>
         </Link>
-        <p className="font-sans text-xs text-muted mb-3 line-clamp-1">{product.tagline}</p>
+        <p className="font-sans text-xs text-[#A39A8E] mb-3 line-clamp-1 font-light">{product.tagline}</p>
 
         <div className="flex items-center gap-3 mb-4">
-          <span className="font-sans text-base font-semibold text-primary">{formatPrice(product.price)}</span>
+          <span className="font-sans text-base font-semibold text-accent">{formatPrice(product.price)}</span>
           {product.originalPrice && (
-            <span className="font-sans text-sm text-muted line-through">{formatPrice(product.originalPrice)}</span>
+            <span className="font-sans text-sm text-[#A39A8E]/60 line-through">{formatPrice(product.originalPrice)}</span>
           )}
           {discount && (
-            <span className="text-[11px] font-sans font-semibold bg-blush text-primary px-2.5 py-0.5 rounded-full">−{discount}%</span>
+            <span className="text-[11px] font-sans font-semibold bg-accent/15 text-accent border border-accent/30 px-2.5 py-0.5 rounded-full">−{discount}%</span>
           )}
         </div>
 
@@ -59,7 +59,7 @@ function WishlistItem({ product, onRemove, onAddToCart }) {
           </button>
           <button
             onClick={() => onRemove(product)}
-            className="p-3 min-h-[44px] min-w-[44px] flex items-center justify-center text-muted hover:text-error hover:bg-error/10 transition-colors duration-300 border border-border rounded-lg"
+            className="p-3 min-h-[44px] min-w-[44px] flex items-center justify-center text-[#A39A8E] hover:text-red-400 hover:bg-red-400/10 transition-colors duration-300 border border-[rgba(197,160,89,0.2)] rounded-lg"
             aria-label={`Remove ${product.name} from wishlist`}
           >
             <Trash2 size={16} strokeWidth={1.5} />
@@ -79,29 +79,29 @@ export function WishlistPage() {
   };
 
   return (
-    <main className="pt-24 min-h-screen bg-bg">
-      {/* Midnight Navy Header */}
-      <section className="bg-primary py-14 relative overflow-hidden">
+    <main className="pt-24 min-h-screen bg-[#12100E] text-ivory">
+      {/* Luxury Dark Espresso Header */}
+      <section className="bg-[#0E0C0A] border-b border-[rgba(197,160,89,0.2)] py-14 relative overflow-hidden">
         <div
           className="absolute inset-0 pointer-events-none opacity-30"
           style={{
-            backgroundImage: `radial-gradient(ellipse at 70% 30%, rgba(212,175,55,0.18) 0%, transparent 55%)`,
+            backgroundImage: `radial-gradient(ellipse at 70% 30%, rgba(197,160,89,0.18) 0%, transparent 55%)`,
           }}
         />
         <div className="container-gokana relative z-10">
           <ScrollReveal>
-            <p className="label-text text-accent mb-3 flex items-center gap-2">
+            <p className="label-text text-accent mb-3 flex items-center gap-2 tracking-[0.22em]">
               <Sparkles size={13} />
-              Saved Items
+              SAVED ITEMS
             </p>
           </ScrollReveal>
           <div className="flex items-end justify-between">
             <ScrollReveal delay={0.1}>
-              <h1 className="heading-xl text-surface">My Wishlist</h1>
+              <h1 className="heading-xl text-ivory font-serif">My Wishlist</h1>
             </ScrollReveal>
             {items.length > 0 && (
               <ScrollReveal delay={0.2}>
-                <span className="font-sans text-sm text-surface/50 bg-surface/10 px-3 py-1">
+                <span className="font-sans text-xs font-semibold text-accent bg-accent/15 border border-accent/30 px-3 py-1 uppercase tracking-wider rounded-full">
                   {items.length} item{items.length !== 1 ? 's' : ''}
                 </span>
               </ScrollReveal>
@@ -120,11 +120,11 @@ export function WishlistPage() {
               animate={{ opacity: 1, y: 0 }}
               className="flex flex-col items-center justify-center py-20 text-center max-w-sm mx-auto"
             >
-              <div className="w-20 h-20 border-2 border-border bg-surface flex items-center justify-center mb-7 shadow-sm">
-                <Heart size={32} strokeWidth={1} className="text-accent/60" />
+              <div className="w-20 h-20 border border-[rgba(197,160,89,0.3)] bg-[#181512] rounded-full flex items-center justify-center mb-7 shadow-lg">
+                <Heart size={32} strokeWidth={1} className="text-accent" />
               </div>
-              <h2 className="font-serif text-2xl font-light text-primary mb-3">Your wishlist is empty</h2>
-              <p className="font-sans text-sm text-muted mb-8 leading-relaxed">
+              <h2 className="font-serif text-2xl font-light text-ivory mb-3">Your wishlist is empty</h2>
+              <p className="font-sans text-sm text-[#A39A8E] mb-8 leading-relaxed font-light">
                 Tap the heart icon on any product to save it here. Come back any time to pick up where you left off.
               </p>
               <Link to="/shop" className="btn-primary">
@@ -138,7 +138,7 @@ export function WishlistPage() {
               className="grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-14"
             >
               {/* Wishlist items */}
-              <div className="lg:col-span-2 bg-surface border border-border p-6 sm:p-8 shadow-sm">
+              <div className="lg:col-span-2 bg-[#181512] border border-[rgba(197,160,89,0.2)] rounded-2xl p-6 sm:p-8 shadow-xl">
                 <AnimatePresence>
                   <StaggerReveal stagger={0.07}>
                     {items.map((product) => (
@@ -156,22 +156,22 @@ export function WishlistPage() {
               {/* Summary sidebar */}
               <div className="lg:col-span-1">
                 <ScrollReveal delay={0.2}>
-                  <div className="bg-surface border border-border p-7 sticky top-28 shadow-sm">
+                  <div className="bg-[#181512] border border-[rgba(197,160,89,0.2)] rounded-2xl p-7 sticky top-28 shadow-xl">
                     <div className="flex items-center gap-2 mb-6">
-                      <h3 className="font-serif text-xl font-light text-primary">Collection Summary</h3>
+                      <h3 className="font-serif text-xl font-light text-ivory">Collection Summary</h3>
                     </div>
                     <div className="space-y-3 mb-5">
                       {items.map((p) => (
                         <div key={p.id} className="flex justify-between items-baseline gap-2">
-                          <span className="font-sans text-sm text-muted truncate max-w-[160px]">{p.name}</span>
-                          <span className="font-sans text-sm font-semibold text-primary flex-shrink-0">{formatPrice(p.price)}</span>
+                          <span className="font-sans text-sm text-[#A39A8E] truncate max-w-[160px]">{p.name}</span>
+                          <span className="font-sans text-sm font-semibold text-accent flex-shrink-0">{formatPrice(p.price)}</span>
                         </div>
                       ))}
                     </div>
-                    <div className="border-t border-border pt-4 mb-6">
+                    <div className="border-t border-[rgba(197,160,89,0.2)] pt-4 mb-6">
                       <div className="flex justify-between items-center">
-                        <span className="font-serif text-base text-text">Total Value</span>
-                        <span className="font-serif text-lg font-medium text-primary">
+                        <span className="font-serif text-base text-ivory">Total Value</span>
+                        <span className="font-serif text-xl font-medium text-accent">
                           {formatPrice(items.reduce((s, p) => s + p.price, 0))}
                         </span>
                       </div>
@@ -185,7 +185,7 @@ export function WishlistPage() {
                     </button>
                     <Link
                       to="/shop"
-                      className="block text-center mt-4 font-sans text-xs text-muted hover:text-primary transition-colors py-2"
+                      className="block text-center mt-4 font-sans text-xs text-[#A39A8E] hover:text-accent transition-colors py-2"
                     >
                       Continue Shopping →
                     </Link>

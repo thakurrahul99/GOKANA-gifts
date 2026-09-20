@@ -1,6 +1,7 @@
 // Product & occasion data used throughout the app
 
 import heroImg from '../assets/images/hero.jpg';
+import heroLuxuryImg from '../assets/images/hero_luxury.jpg';
 import brandStoryImg from '../assets/images/brand_story.jpg';
 import birthdayImg from '../assets/images/occasion_birthday.jpg';
 import diwaliImg from '../assets/images/occasion_diwali.jpg';
@@ -11,17 +12,15 @@ import candlesImg from '../assets/images/product_candles.jpg';
 import hamperImg from '../assets/images/product_hamper.jpg';
 import skincareImg from '../assets/images/product_skincare.jpg';
 
-export { heroImg, brandStoryImg, birthdayImg, diwaliImg, anniversaryImg, weddingImg };
+export { heroImg, heroLuxuryImg, brandStoryImg, birthdayImg, diwaliImg, anniversaryImg, weddingImg };
 
 export const occasions = [
-  { id: 'birthday', label: 'Birthday', emoji: '🎂', image: birthdayImg, description: 'Make their day unforgettable' },
-  { id: 'anniversary', label: 'Anniversary', emoji: '💍', image: anniversaryImg, description: 'Celebrate love beautifully' },
-  { id: 'wedding', label: 'Wedding', emoji: '🌸', image: weddingImg, description: 'Bless their new journey' },
-  { id: 'diwali', label: 'Diwali', emoji: '🪔', image: diwaliImg, description: 'Light up the festive season' },
-  { id: 'valentine', label: "Valentine's Day", emoji: '❤️', image: anniversaryImg, description: 'Express what words cannot' },
-  { id: 'corporate', label: 'Corporate Gifting', emoji: '💼', image: hamperImg, description: 'Premium gifts that impress' },
-  { id: 'thankyou', label: 'Thank You', emoji: '🙏', image: candlesImg, description: 'Gratitude, beautifully given' },
-  { id: 'justbecause', label: 'Just Because', emoji: '✨', image: skincareImg, description: 'No reason needed' },
+  { id: 'birthday', label: 'Birthday', emoji: '🎂', image: birthdayImg, description: 'Celebrate their special day with joy' },
+  { id: 'anniversary', label: 'Anniversary', emoji: '💍', image: anniversaryImg, description: 'Timeless gifts of love & romance' },
+  { id: 'wedding', label: 'Wedding', emoji: '🌸', image: weddingImg, description: 'Blessings for a beautiful new beginning' },
+  { id: 'thankyou', label: 'Thank You', emoji: '🙏', image: candlesImg, description: 'Express heartfelt thanks & appreciation' },
+  { id: 'festive', label: 'Festive', emoji: '🪔', image: diwaliImg, description: 'Brighten celebrations with joyful gifts' },
+  { id: 'corporate', label: 'Corporate', emoji: '💼', image: hamperImg, description: 'Premium gift hampers for clients & teams' },
 ];
 
 export const products = [

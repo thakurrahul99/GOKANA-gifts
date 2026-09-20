@@ -5,6 +5,7 @@ import { Divider } from '../ui';
 import { ProductCard } from '../product/ProductCard';
 import { useEffect, useState } from 'react';
 import { API_BASE } from '../../lib/api';
+import { products as staticProducts } from '../../data';
 
 export function FeaturedCollection() {
   const [featured, setFeatured] = useState([]);
@@ -22,25 +23,27 @@ export function FeaturedCollection() {
           categories: (p.categories || []).map((cat) => typeof cat === 'string' ? cat : cat.slug).filter(Boolean),
           variants: (p.variants || []).map((v) => typeof v === 'string' ? v : v.label),
         }));
-        setFeatured(products);
+        setFeatured(products.length > 0 ? products : staticProducts.slice(0, 4));
       })
-      .catch(() => setFeatured([]));
+      .catch(() => setFeatured(staticProducts.slice(0, 4)));
   }, []);
 
+  const displayProducts = featured.length > 0 ? featured.slice(0, 4) : staticProducts.slice(0, 4);
+
   return (
-    <section className="section-py bg-surface-alt" aria-labelledby="featured-heading">
+    <section className="section-py bg-[#181512] text-ivory border-b border-[rgba(197,160,89,0.15)]" aria-labelledby="featured-heading">
       <div className="container-gokana">
         {/* Header */}
         <div className="text-center mb-14 max-w-xl mx-auto">
           <ScrollReveal delay={0.1}>
             <p className="label-text text-accent mb-3">✦ Hand-Selected Excellence</p>
           </ScrollReveal>
-          <AnimatedHeading id="featured-heading" className="heading-lg text-primary mb-4" delay={0.15}>
-            Featured Curations
+          <AnimatedHeading id="featured-heading" className="heading-lg text-ivory mb-4" delay={0.15}>
+            Signature Collection
           </AnimatedHeading>
           <ScrollReveal delay={0.25}>
-            <p className="font-sans text-base text-muted leading-relaxed">
-              Every hamper hand-assembled for its narrative, quality ingredients, and unboxing grandeur.
+            <p className="font-sans text-sm md:text-base text-[#A39A8E] leading-relaxed">
+              Every hamper hand-assembled for its narrative, finest artisanal ingredients, and memorable unboxing grandeur.
             </p>
           </ScrollReveal>
           <div className="flex justify-center mt-5">
@@ -50,7 +53,7 @@ export function FeaturedCollection() {
 
         {/* Product Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {featured.map((product, i) => (
+          {displayProducts.map((product, i) => (
             <ProductCard key={product.id} product={product} index={i} />
           ))}
         </div>

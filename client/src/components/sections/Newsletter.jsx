@@ -19,20 +19,20 @@ export function Newsletter() {
   };
 
   return (
-    <section className="section-py-sm bg-primary text-white" aria-labelledby="newsletter-heading">
+    <section className="section-py-sm bg-[#181512] text-ivory border-t border-[rgba(197,160,89,0.18)]" aria-labelledby="newsletter-heading">
       <div className="container-gokana">
         <div className="max-w-2xl mx-auto text-center">
           <ScrollReveal delay={0.1}>
             <p className="label-text text-accent mb-3">✦ Stay Inspired</p>
           </ScrollReveal>
 
-          <AnimatedHeading id="newsletter-heading" className="heading-lg text-white mb-4" delay={0.15}>
+          <AnimatedHeading id="newsletter-heading" className="heading-lg text-ivory mb-4" delay={0.15}>
             A Little Gifting Inspiration,<br />
-            <span className="italic text-accent-soft">delivered to your inbox.</span>
+            <span className="italic text-accent font-light">delivered to your inbox.</span>
           </AnimatedHeading>
 
           <ScrollReveal delay={0.25}>
-            <p className="font-sans text-sm md:text-base text-charcoal-200 mb-8 max-w-md mx-auto leading-relaxed">
+            <p className="font-sans text-sm md:text-base text-[#A39A8E] mb-8 max-w-md mx-auto leading-relaxed font-light">
               Be the first to explore seasonal festive curations, artisan collaborations, and exclusive member privileges.
             </p>
           </ScrollReveal>
@@ -57,20 +57,20 @@ export function Newsletter() {
                         if (error) setError('');
                       }}
                       placeholder="Enter your email address"
-                      className="flex-1 bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-white/40 font-sans text-sm focus:outline-none focus:border-accent transition-colors min-h-[44px]"
+                      className="flex-1 bg-[#12100E] border border-[rgba(197,160,89,0.25)] rounded-lg px-4 py-3 text-ivory placeholder:text-[#A39A8E]/60 font-sans text-sm focus:outline-none focus:border-accent transition-colors min-h-[44px]"
                       aria-label="Email address for newsletter"
                       required
                     />
                     <button
                       type="submit"
-                      className="btn-accent py-3 px-6 text-xs flex items-center justify-center gap-2 whitespace-nowrap min-h-[44px]"
+                      className="btn-primary py-3 px-6 text-xs flex items-center justify-center gap-2 whitespace-nowrap min-h-[44px]"
                     >
                       Join GŌKANA
                       <ArrowRight size={14} />
                     </button>
                   </div>
                   {error && (
-                    <p className="text-xs text-blush font-medium mt-2 text-left sm:text-center" role="alert">
+                    <p className="text-xs text-red-400 font-medium mt-2 text-left sm:text-center" role="alert">
                       {error}
                     </p>
                   )}
@@ -80,10 +80,10 @@ export function Newsletter() {
                   key="success"
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="inline-flex items-center gap-2 px-6 py-4 rounded-xl bg-white/10 border border-accent/40 text-accent"
+                  className="inline-flex items-center gap-2 px-6 py-4 rounded-xl bg-[#12100E] border border-accent/40 text-accent"
                 >
                   <CheckCircle2 size={18} />
-                  <span className="font-serif text-lg italic text-white">
+                  <span className="font-serif text-lg italic text-ivory">
                     Welcome to GŌKANA. Expect something beautiful soon.
                   </span>
                 </motion.div>

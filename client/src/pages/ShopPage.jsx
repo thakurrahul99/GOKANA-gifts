@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { SlidersHorizontal, X, Sparkles, Filter } from 'lucide-react';
 import { ProductCard } from '../components/product/ProductCard';
 import { ScrollReveal } from '../components/ui/ScrollReveal';
-import { occasions } from '../data';
+import { occasions, products as staticProducts } from '../data';
 import { API_BASE } from '../lib/api';
 
 const sortOptions = [
@@ -19,8 +19,8 @@ export function ShopPage() {
   const [activeOccasion, setActiveOccasion] = useState(searchParams.get('occasion') || 'all');
   const personalisedOnly = searchParams.get('personalised') === 'true';
   const [sortBy, setSortBy] = useState('recommended');
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [products, setProducts] = useState(staticProducts);
+  const [loading, setLoading] = useState(false);
 
   const normalizeProduct = (p) => ({
     ...p,
@@ -37,9 +37,11 @@ export function ShopPage() {
       try {
         const res = await fetch(`${API_BASE}/products?limit=100`);
         const data = await res.json();
-        setProducts((data.products || []).map(normalizeProduct));
+        if (data.products && data.products.length > 0) {
+          setProducts((data.products || []).map(normalizeProduct));
+        }
       } catch (error) {
-        console.error('Failed to load products:', error);
+        console.error('Failed to load products from API, using static catalog:', error);
       } finally {
         setLoading(false);
       }
@@ -67,35 +69,61 @@ export function ShopPage() {
     setSearchParams(searchParams);
   };
 
+  const currentOccasion = occasions.find((o) => o.id === activeOccasion);
+
+  const headerEyebrow = personalisedOnly
+    ? '✦ PERSONALISED GIFTS'
+    : currentOccasion
+    ? `✦ SPECIAL OCCASION · ${currentOccasion.label.toUpperCase()}`
+    : '✦ ALL GIFTS & HAMPERS';
+
+  const headerTitle = personalisedOnly
+    ? 'Personalised Gifts'
+    : currentOccasion
+    ? `${currentOccasion.label} Gifts`
+    : 'All Gifts & Hampers';
+
+  const headerDesc = personalisedOnly
+    ? 'Gifts you can make uniquely special with custom engraving, names, and handwritten note cards.'
+    : currentOccasion
+    ? `Thoughtfully assembled hampers, delicious chocolates, and luxury gifts tailored for ${currentOccasion.label.toLowerCase()} celebrations.`
+    : 'Thoughtfully selected and handcrafted gifts for every celebration, milestone, and special moment.';
+
   return (
-    <main className="pt-24 min-h-screen bg-bg">
-      {/* Page Header — Midnight Navy 30% primary */}
-      <section className="bg-primary text-surface py-16 sm:py-20 relative overflow-hidden">
+    <main className="pt-24 min-h-screen bg-[#12100E] text-ivory">
+      {/* Page Header — Luxury Dark Espresso with Champagne Gold Accent */}
+      <section className="bg-[#0E0C0A] text-ivory py-16 sm:py-20 relative overflow-hidden border-b border-[rgba(197,160,89,0.2)]">
         <div
           className="absolute inset-0 pointer-events-none opacity-40"
           style={{
-            backgroundImage: `radial-gradient(ellipse at 80% 20%, rgba(212,175,55,0.15) 0%, transparent 55%), radial-gradient(ellipse at 20% 80%, rgba(243,217,212,0.1) 0%, transparent 45%)`,
+            backgroundImage: `radial-gradient(ellipse at 80% 20%, rgba(197,160,89,0.18) 0%, transparent 55%), radial-gradient(ellipse at 20% 80%, rgba(197,160,89,0.08) 0%, transparent 45%)`,
           }}
         />
         <div className="container-gokana text-center relative z-10 max-w-2xl mx-auto">
-          <p className="label-text text-accent mb-3 flex items-center justify-center gap-2">
-            <Sparkles size={14} />
-            {personalisedOnly ? 'Personalisation Atelier' : 'The Complete Atelier'}
-          </p>
-          <h1 className="heading-xl text-surface">All Curated Gifts</h1>
-          <p className="body-text text-surface/70 mt-4 leading-relaxed">
-            {personalisedOnly ? 'Gifts you can make uniquely theirs with names, notes, and custom details.' : 'Thoughtfully selected and handcrafted gifts for every milestone, celebration, and heartfelt occasion.'}
-          </p>
+          <ScrollReveal>
+            <p className="label-text text-accent mb-3 flex items-center justify-center gap-2 tracking-[0.22em]">
+              <Sparkles size={14} />
+              {headerEyebrow}
+            </p>
+          </ScrollReveal>
+          <ScrollReveal delay={0.1}>
+            <h1 className="heading-xl text-ivory font-serif">{headerTitle}</h1>
+          </ScrollReveal>
+          <ScrollReveal delay={0.2}>
+            <p className="font-sans text-sm md:text-base text-[#A39A8E] mt-4 leading-relaxed font-light">
+              {headerDesc}
+            </p>
+          </ScrollReveal>
         </div>
       </section>
 
       <div className="container-gokana py-10 sm:py-14">
         {/* Filters and Sort Bar */}
-        <div className="bg-surface border border-border p-4 sm:p-5 mb-8 sm:mb-10 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div className="bg-[#181512] border border-[rgba(197,160,89,0.22)] rounded-2xl p-4 sm:p-5 mb-8 sm:mb-10 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4">
           {/* Occasion filter pills */}
           <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
-            <span className="text-xs font-semibold text-text uppercase tracking-wider flex items-center gap-1 mr-1 flex-shrink-0">
-              <Filter size={13} className="text-accent" />
+            <span className="text-xs font-semibold text-ivory uppercase tracking-wider flex items-center gap-1.5 mr-1 flex-shrink-0">
+              <Filter size={14} className="text-accent" />
               Occasion:
             </span>
             {[{ id: 'all', label: 'All Gifts' }, ...occasions].map((occ) => {
@@ -104,10 +132,10 @@ export function ShopPage() {
                 <button
                   key={occ.id}
                   onClick={() => handleOccasion(occ.id)}
-                  className={`flex-none px-4 py-2 text-xs font-medium tracking-[0.05em] uppercase transition-all duration-200 whitespace-nowrap min-h-[44px] flex items-center justify-center ${
+                  className={`flex-none px-4 py-2 text-xs font-medium tracking-[0.06em] uppercase transition-all duration-200 whitespace-nowrap min-h-[40px] flex items-center justify-center rounded-full ${
                     active
-                      ? 'bg-primary text-surface font-semibold shadow-sm'
-                      : 'bg-bg text-text border border-border hover:border-accent hover:text-primary'
+                      ? 'bg-accent text-[#12100E] font-semibold shadow-[0_2px_12px_rgba(197,160,89,0.25)] border border-accent'
+                      : 'bg-[#12100E] text-[#A39A8E] border border-[rgba(197,160,89,0.2)] hover:border-accent hover:text-ivory'
                   }`}
                   aria-pressed={active}
                 >
@@ -118,9 +146,9 @@ export function ShopPage() {
           </div>
 
           {/* Sort & Count */}
-          <div className="flex items-center justify-between md:justify-end gap-4 flex-shrink-0 pt-3 md:pt-0 border-t md:border-t-0 border-border">
-            <span className="font-sans text-xs text-muted font-medium">
-              Showing <strong className="text-text">{filtered.length}</strong> {filtered.length === 1 ? 'gift' : 'gifts'}
+          <div className="flex items-center justify-between md:justify-end gap-4 flex-shrink-0 pt-3 md:pt-0 border-t md:border-t-0 border-[rgba(197,160,89,0.15)]">
+            <span className="font-sans text-xs text-[#A39A8E] font-medium">
+              Showing <strong className="text-ivory font-semibold">{filtered.length}</strong> {filtered.length === 1 ? 'gift' : 'gifts'}
             </span>
             <div className="flex items-center gap-2">
               <label htmlFor="shop-sort" className="sr-only">Sort gifts</label>
@@ -128,10 +156,10 @@ export function ShopPage() {
                 id="shop-sort"
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="font-sans text-xs sm:text-sm text-text border border-border px-3 py-2.5 bg-surface focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/30 min-h-[44px] cursor-pointer"
+                className="font-sans text-xs sm:text-sm text-ivory border border-[rgba(197,160,89,0.25)] px-3.5 py-2 bg-[#12100E] focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/30 min-h-[40px] cursor-pointer rounded-lg"
               >
                 {sortOptions.map((o) => (
-                  <option key={o.value} value={o.value}>{o.label}</option>
+                  <option key={o.value} value={o.value} className="bg-[#12100E] text-ivory">{o.label}</option>
                 ))}
               </select>
             </div>
@@ -140,7 +168,16 @@ export function ShopPage() {
 
         {/* Product Grid or Friendly Empty State */}
         {loading ? (
-          <div className="py-20 text-center text-muted">Loading curated gifts…</div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-7">
+            {Array.from({ length: 8 }).map((_, i) => (
+              <div key={i} className="bg-[#181512] border border-[rgba(197,160,89,0.18)] rounded-xl p-4 space-y-3 animate-pulse shadow-md">
+                <div className="aspect-[4/5] bg-[#1F1A16] rounded-lg" />
+                <div className="h-4 bg-[#2A231C] rounded w-3/4" />
+                <div className="h-3 bg-[#2A231C] rounded w-1/2" />
+                <div className="h-9 bg-[#2A231C] rounded mt-2" />
+              </div>
+            ))}
+          </div>
         ) : (
         <AnimatePresence mode="wait">
           {filtered.length === 0 ? (
@@ -148,10 +185,13 @@ export function ShopPage() {
               key="empty"
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              className="text-center py-20 bg-surface border border-border p-10 max-w-lg mx-auto"
+              className="text-center py-20 bg-[#181512] border border-[rgba(197,160,89,0.22)] rounded-2xl p-10 max-w-lg mx-auto shadow-xl"
             >
-              <p className="font-serif text-2xl font-light text-primary mb-3">No gifts match this filter</p>
-              <p className="font-sans text-sm text-muted mb-6">
+              <div className="w-16 h-16 rounded-full bg-accent/15 border border-accent/30 flex items-center justify-center text-accent mx-auto mb-5">
+                <Sparkles size={26} />
+              </div>
+              <p className="font-serif text-2xl font-light text-ivory mb-2">No gifts match this filter</p>
+              <p className="font-sans text-sm text-[#A39A8E] mb-6 font-light">
                 Try selecting another occasion or clear all active filters to view the entire catalogue.
               </p>
               <button

@@ -17,6 +17,7 @@ import { WishlistPage } from './pages/WishlistPage';
 import { AccountPage } from './pages/AccountPage';
 import { LoginPage } from './pages/LoginPage';
 import { GiftFinderPage } from './pages/GiftFinderPage';
+import { ContactPage } from './pages/ContactPage';
 
 import { AdminLayout } from './pages/admin/AdminLayout';
 import { AdminDashboard } from './pages/admin/AdminDashboard';
@@ -24,6 +25,7 @@ import { AdminProducts } from './pages/admin/AdminProducts';
 import { AdminOrders } from './pages/admin/AdminOrders';
 import { AdminCoupons } from './pages/admin/AdminCoupons';
 import { FAB } from './components/ui/FAB';
+import { SmoothScroll } from './components/common/SmoothScroll';
 import { API_BASE } from './lib/api';
 import { useAuthStore } from './store';
 
@@ -70,49 +72,15 @@ function StorePage() {
   );
 }
 
-function ContactPage() {
-  return (
-    <main className="pt-28 min-h-screen bg-bg">
-      <div className="container-gokana section-py">
-        <div className="max-w-2xl">
-          <p className="label-text text-accent mb-5">✦ Get in Touch</p>
-          <h1 className="heading-xl text-primary mb-8">We'd love to<br />hear from you.</h1>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-12">
-            {[
-              { label: 'WhatsApp', value: '+91 99999 99999', href: 'https://wa.me/919999999999' },
-              { label: 'Email', value: 'hello@gokana.in', href: 'mailto:hello@gokana.in' },
-              { label: 'Instagram', value: '@gokana.in', href: '#' },
-              { label: 'Working Hours', value: 'Mon–Sat: 9am–7pm', href: null },
-            ].map((item) => (
-              <div key={item.label}>
-                <p className="label-text text-muted mb-2">{item.label}</p>
-                {item.href ? (
-                  <a href={item.href} className="font-serif text-xl text-primary hover:text-accent transition-colors">{item.value}</a>
-                ) : (
-                  <p className="font-serif text-xl text-primary">{item.value}</p>
-                )}
-              </div>
-            ))}
-          </div>
-          <div className="space-y-4 max-w-md">
-            <input placeholder="Your name" className="input-field" aria-label="Your name" />
-            <input placeholder="Email address" type="email" className="input-field" aria-label="Email address" />
-            <textarea placeholder="Your message" rows={4} className="input-field resize-none" aria-label="Your message" />
-            <button className="btn-primary">Send Message</button>
-          </div>
-        </div>
-      </div>
-    </main>
-  );
-}
+
 
 function NotFound() {
   return (
     <main className="pt-40 min-h-screen bg-bg flex items-center justify-center text-center px-4">
       <div>
-        <p className="font-serif text-8xl font-light text-primary/20 mb-4">404</p>
-        <h1 className="font-serif text-3xl font-light text-primary mb-4">Page not found</h1>
-        <p className="font-sans text-sm text-muted max-w-md mx-auto mb-8 leading-relaxed">
+        <p className="font-serif text-8xl font-light text-accent/20 mb-4">404</p>
+        <h1 className="font-serif text-3xl font-light text-ivory mb-4">Page not found</h1>
+        <p className="font-sans text-sm text-[#A39A8E] max-w-md mx-auto mb-8 leading-relaxed font-light">
           The curated gift or page you are seeking could not be found or may have moved.
         </p>
         <a href="/" className="btn-primary">Back to Home</a>
@@ -124,6 +92,7 @@ function NotFound() {
 export default function App() {
   return (
     <BrowserRouter>
+      <SmoothScroll />
       <Routes>
         {/* Admin routes */}
         <Route path="/admin" element={<AdminLayout />}>
@@ -171,42 +140,42 @@ function AdminCustomers() {
   }, [token, search]);
 
   return (
-    <section className="space-y-5 text-white">
+    <section className="space-y-5 text-ivory">
       <div>
-        <h2 className="text-2xl font-semibold text-white">Customers</h2>
-        <p className="text-sm text-white/70 mt-1">{customers.length} registered customers</p>
+        <h2 className="text-2xl font-semibold text-ivory font-serif">Customers</h2>
+        <p className="text-sm text-[#A39A8E] mt-1">{customers.length} registered customers</p>
       </div>
 
-      <div className="flex items-center gap-2 bg-primary border border-primary-2 rounded-xl px-4 py-3">
-        <Search size={17} className="text-white/60" />
+      <div className="flex items-center gap-2 bg-[#181512] border border-[rgba(197,160,89,0.2)] rounded-xl px-4 py-3">
+        <Search size={17} className="text-[#A39A8E]" />
         <input
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search name or email…"
-          className="flex-1 bg-transparent text-white placeholder:text-white/50 outline-none text-sm"
+          className="flex-1 bg-transparent text-ivory placeholder:text-[#A39A8E]/50 outline-none text-sm"
         />
       </div>
 
-      <div className="bg-primary border border-primary-2 rounded-xl overflow-hidden">
+      <div className="bg-[#181512] border border-[rgba(197,160,89,0.2)] rounded-xl overflow-hidden shadow-lg">
         {loading ? (
-          <div className="py-16 flex items-center justify-center text-white/70"><Loader2 className="animate-spin mr-2" size={18} /> Loading customers…</div>
+          <div className="py-16 flex items-center justify-center text-[#A39A8E]"><Loader2 className="animate-spin mr-2" size={18} /> Loading customers…</div>
         ) : error ? (
-          <div className="py-16 text-center text-red-300 text-sm">{error}</div>
+          <div className="py-16 text-center text-red-400 text-sm">{error}</div>
         ) : customers.length === 0 ? (
-          <div className="py-16 text-center text-white/70"><Users className="mx-auto mb-3 text-accent" size={28} />No customers found.</div>
+          <div className="py-16 text-center text-[#A39A8E]"><Users className="mx-auto mb-3 text-accent" size={28} />No customers found.</div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
-              <thead className="border-b border-white/10 text-white/60 text-xs uppercase">
+              <thead className="border-b border-[rgba(197,160,89,0.15)] bg-[#1F1A16] text-[#A39A8E] text-xs uppercase">
                 <tr><th className="text-left px-5 py-4">Customer</th><th className="text-left px-5 py-4">Email</th><th className="text-left px-5 py-4">Phone</th><th className="text-left px-5 py-4">Status</th></tr>
               </thead>
-              <tbody className="divide-y divide-white/10">
+              <tbody className="divide-y divide-[rgba(197,160,89,0.1)]">
                 {customers.map((customer) => (
-                  <tr key={customer._id} className="hover:bg-white/5">
-                    <td className="px-5 py-4 text-white font-medium">{customer.name}</td>
-                    <td className="px-5 py-4 text-white/80">{customer.email}</td>
-                    <td className="px-5 py-4 text-white/80">{customer.phone || '—'}</td>
-                    <td className="px-5 py-4"><span className="text-xs text-accent">{customer.isActive ? 'Active' : 'Inactive'}</span></td>
+                  <tr key={customer._id} className="hover:bg-white/5 transition-colors">
+                    <td className="px-5 py-4 text-ivory font-medium">{customer.name}</td>
+                    <td className="px-5 py-4 text-[#A39A8E]">{customer.email}</td>
+                    <td className="px-5 py-4 text-[#A39A8E]">{customer.phone || '—'}</td>
+                    <td className="px-5 py-4"><span className="text-xs text-accent px-2 py-0.5 rounded bg-accent/10 border border-accent/25">{customer.isActive ? 'Active' : 'Inactive'}</span></td>
                   </tr>
                 ))}
               </tbody>
@@ -254,44 +223,44 @@ function AdminSettings() {
     setSaved(false);
   };
 
-  const inputClass = 'w-full rounded-lg border border-[#E6DED2] bg-white px-3 py-2.5 text-sm text-[#121212] outline-none focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20';
+  const inputClass = 'w-full rounded-lg border border-[rgba(197,160,89,0.25)] bg-[#12100E] px-3.5 py-2.5 text-sm text-ivory outline-none focus:border-accent focus:ring-1 focus:ring-accent/30';
 
   return (
-    <section className="space-y-6">
+    <section className="space-y-6 text-ivory">
       <div>
-        <h2 className="text-2xl font-semibold text-[#121212]">Settings</h2>
-        <p className="text-sm text-[#5F6570] mt-1">Manage store preferences and admin notifications.</p>
+        <h2 className="text-2xl font-semibold text-ivory font-serif">Settings</h2>
+        <p className="text-sm text-[#A39A8E] mt-1">Manage store preferences and admin notifications.</p>
       </div>
 
-      <div className="bg-white border border-[#E6DED2] rounded-xl p-6 space-y-6 shadow-sm">
+      <div className="bg-[#181512] border border-[rgba(197,160,89,0.2)] rounded-xl p-6 space-y-6 shadow-lg">
         <div>
-          <h3 className="font-semibold text-[#121212]">Store Information</h3>
-          <p className="text-xs text-[#5F6570] mt-1">These preferences are saved for this admin browser.</p>
+          <h3 className="font-serif text-lg font-light text-ivory">Store Information</h3>
+          <p className="text-xs text-[#A39A8E] mt-1">These preferences are saved for this admin browser.</p>
         </div>
         <div className="grid md:grid-cols-2 gap-5">
-          <label className="space-y-2"><span className="text-sm font-medium text-[#121212]">Store name</span><input className={inputClass} value={settings.storeName} onChange={(e) => update('storeName', e.target.value)} /></label>
-          <label className="space-y-2"><span className="text-sm font-medium text-[#121212]">Support email</span><input type="email" className={inputClass} value={settings.supportEmail} onChange={(e) => update('supportEmail', e.target.value)} /></label>
-          <label className="space-y-2"><span className="text-sm font-medium text-[#121212]">Support phone</span><input className={inputClass} value={settings.supportPhone} onChange={(e) => update('supportPhone', e.target.value)} /></label>
-          <label className="space-y-2"><span className="text-sm font-medium text-[#121212]">Free shipping above (₹)</span><input type="number" min="0" className={inputClass} value={settings.freeShipping} onChange={(e) => update('freeShipping', e.target.value)} /></label>
-          <label className="space-y-2"><span className="text-sm font-medium text-[#121212]">Low-stock alert below</span><input type="number" min="0" className={inputClass} value={settings.lowStock} onChange={(e) => update('lowStock', e.target.value)} /></label>
+          <label className="space-y-2"><span className="text-sm font-medium text-ivory">Store name</span><input className={inputClass} value={settings.storeName} onChange={(e) => update('storeName', e.target.value)} /></label>
+          <label className="space-y-2"><span className="text-sm font-medium text-ivory">Support email</span><input type="email" className={inputClass} value={settings.supportEmail} onChange={(e) => update('supportEmail', e.target.value)} /></label>
+          <label className="space-y-2"><span className="text-sm font-medium text-ivory">Support phone</span><input className={inputClass} value={settings.supportPhone} onChange={(e) => update('supportPhone', e.target.value)} /></label>
+          <label className="space-y-2"><span className="text-sm font-medium text-ivory">Free shipping above (₹)</span><input type="number" min="0" className={inputClass} value={settings.freeShipping} onChange={(e) => update('freeShipping', e.target.value)} /></label>
+          <label className="space-y-2"><span className="text-sm font-medium text-ivory">Low-stock alert below</span><input type="number" min="0" className={inputClass} value={settings.lowStock} onChange={(e) => update('lowStock', e.target.value)} /></label>
         </div>
       </div>
 
-      <div className="bg-white border border-[#E6DED2] rounded-xl p-6 space-y-4 shadow-sm">
-        <div><h3 className="font-semibold text-[#121212]">Notifications</h3><p className="text-xs text-[#5F6570] mt-1">Control which admin alerts are enabled.</p></div>
+      <div className="bg-[#181512] border border-[rgba(197,160,89,0.2)] rounded-xl p-6 space-y-4 shadow-lg">
+        <div><h3 className="font-serif text-lg font-light text-ivory">Notifications</h3><p className="text-xs text-[#A39A8E] mt-1">Control which admin alerts are enabled.</p></div>
         {[
           ['orderNotifications', 'New order notifications', 'Show a notification preference for new orders.'],
           ['lowStockNotifications', 'Low-stock notifications', 'Enable low-stock alert preference.'],
         ].map(([key, title, description]) => (
-          <label key={key} className="flex items-center justify-between gap-4 rounded-lg border border-[#E6DED2] bg-[#F7F3EC] p-4 cursor-pointer">
-            <span><span className="block text-sm font-medium text-[#121212]">{title}</span><span className="block text-xs text-[#5F6570] mt-1">{description}</span></span>
-            <input type="checkbox" className="h-5 w-5 accent-[#D4AF37]" checked={settings[key]} onChange={(e) => update(key, e.target.checked)} />
+          <label key={key} className="flex items-center justify-between gap-4 rounded-lg border border-[rgba(197,160,89,0.18)] bg-[#1F1A16] p-4 cursor-pointer hover:border-accent/30 transition-colors">
+            <span><span className="block text-sm font-medium text-ivory">{title}</span><span className="block text-xs text-[#A39A8E] mt-1">{description}</span></span>
+            <input type="checkbox" className="h-5 w-5 accent-accent" checked={settings[key]} onChange={(e) => update(key, e.target.checked)} />
           </label>
         ))}
         <div className="flex flex-wrap gap-3 pt-2">
-          <button onClick={saveSettings} className="rounded-lg bg-[#D4AF37] px-5 py-2.5 text-sm font-semibold text-[#121212] hover:bg-[#B08D57] transition-colors">Save Settings</button>
-          <button onClick={resetSettings} className="rounded-lg border border-[#D4AF37] px-5 py-2.5 text-sm font-medium text-[#7A5E00] hover:bg-[#F3D9D4] transition-colors">Reset</button>
-          {saved && <span className="self-center text-sm font-medium text-[#7A5E00]">✓ Settings saved</span>}
+          <button onClick={saveSettings} className="btn-primary py-2.5 px-6 text-xs uppercase tracking-wider font-semibold">Save Settings</button>
+          <button onClick={resetSettings} className="btn-outline py-2.5 px-6 text-xs uppercase tracking-wider font-semibold">Reset</button>
+          {saved && <span className="self-center text-sm font-medium text-accent">✓ Settings saved</span>}
         </div>
       </div>
     </section>

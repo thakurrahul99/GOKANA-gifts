@@ -38,15 +38,15 @@ export function Rating({ value = 5, count, size = 'sm', className }) {
 
 export function Badge({ children, variant = 'default', className }) {
   const variantStyles = {
-    default: 'bg-primary text-white',
-    gold: 'bg-accent-soft text-primary border border-accent/30',
-    bestseller: 'bg-accent-soft text-primary border border-accent/30',
-    new: 'bg-blush text-primary',
-    sale: 'bg-blush text-primary',
-    limited: 'bg-blush text-primary',
-    champagne: 'bg-accent-soft text-primary',
-    personalisable: 'bg-accent-soft text-primary border border-accent/30',
-    outline: 'border border-primary text-primary bg-transparent',
+    default: 'bg-[#1F1A16] text-ivory border border-[rgba(197,160,89,0.3)]',
+    gold: 'bg-[rgba(197,160,89,0.18)] text-accent-light border border-[rgba(197,160,89,0.45)]',
+    bestseller: 'bg-[rgba(197,160,89,0.18)] text-accent-light border border-[rgba(197,160,89,0.45)]',
+    new: 'bg-[#1F1A16] text-accent border border-[rgba(197,160,89,0.3)]',
+    sale: 'bg-[#2D1B18] text-[#F3A59B] border border-[#8C3B32]/40',
+    limited: 'bg-[#2D1B18] text-[#F3A59B] border border-[#8C3B32]/40',
+    champagne: 'bg-[rgba(197,160,89,0.2)] text-accent-light border border-[rgba(197,160,89,0.4)]',
+    personalisable: 'bg-[rgba(197,160,89,0.15)] text-accent border border-[rgba(197,160,89,0.35)]',
+    outline: 'border border-[rgba(197,160,89,0.4)] text-accent bg-transparent',
   };
 
   return (

@@ -4,100 +4,96 @@ export default {
   theme: {
     extend: {
       colors: {
-        // ── Palette 2 Semantic Tokens ──
+        // ── Luxury Editorial Palette: Dark Espresso & Champagne Gold ──
         bg: {
-          DEFAULT: '#F7F3EC',
-          alt: '#FBF8F2',
+          DEFAULT: '#12100E', // Dark Espresso
+          alt: '#181512',     // Warm Charcoal
+          elevated: '#1F1A16', // Deep Warm Olive/Espresso
         },
         surface: {
-          DEFAULT: '#FFFFFF',
-          alt: '#FBF8F2',
-          tint: '#FFFDF8',
+          DEFAULT: '#191613',
+          alt: '#1F1A16',
+          tint: '#27221C',
         },
         border: {
-          DEFAULT: '#E8DFD3',
-          soft: '#F0E9DF',
+          DEFAULT: '#2E2721',
+          soft: 'rgba(197, 160, 89, 0.22)',
+          gold: '#C5A059',
         },
         primary: {
-          DEFAULT: '#0B1F3A',
-          2: '#1E3A5F',
-          dark: '#07172C',
-          soft: '#E7ECF3',
+          DEFAULT: '#12100E', // Deep Espresso
+          2: '#1C1814',
+          dark: '#0B0A09',
+          soft: '#25201A',
         },
         accent: {
-          DEFAULT: '#D4AF37',
-          dark: '#B08D57',
-          soft: '#F5E9C8',
-        },
-        blush: {
-          DEFAULT: '#F3D9D4',
-          dark: '#E8BFB8',
-        },
-        text: {
-          DEFAULT: '#121212',
-          strong: '#0B1F3A',
-        },
-        muted: {
-          DEFAULT: '#6B6B6B',
-          2: '#9A9A9A',
-        },
-        success: '#2E7D32',
-        warning: '#B7791F',
-        error: '#B3261E',
-        info: '#1E3A5F',
-
-        // ── Backward Compatible Aliases (Mapped to Palette 2) ──
-        charcoal: {
-          DEFAULT: '#0B1F3A',
-          50: '#F0E9DF',
-          100: '#E8DFD3',
-          200: '#C9D2DE',
-          300: '#9A9A9A',
-          400: '#6B6B6B',
-          500: '#3A4F6B',
-          600: '#1E3A5F',
-          700: '#0B1F3A',
-          800: '#07162A',
-          900: '#040C18',
+          DEFAULT: '#C5A059', // Warm Champagne Gold
+          dark: '#9E7B36',   // Deep Metallic Gold
+          light: '#E5C378',  // Radiant Champagne
+          soft: '#E8D5B5',   // Pale Gold / Muted Champagne
         },
         ivory: {
-          DEFAULT: '#F7F3EC',
-          50: '#FFFFFF',
-          100: '#FBF8F2',
-          200: '#F7F3EC',
-          300: '#F0E9DF',
-          400: '#E8DFD3',
-          500: '#D5CCC0',
+          DEFAULT: '#FAF8F5',
+          soft: '#F5F2EB',
+          muted: '#E6E0D5',
+        },
+        text: {
+          DEFAULT: '#FAF8F5',
+          strong: '#FAF8F5',
+          muted: '#A39A8E',
+        },
+        muted: {
+          DEFAULT: '#A39A8E',
+          2: '#6E665C',
+        },
+        success: '#2E7D32',
+        warning: '#C5A059',
+        error: '#B3261E',
+        info: '#C5A059',
+
+        // ── Backward Compatible Aliases (Mapped to Espresso & Champagne Gold) ──
+        charcoal: {
+          DEFAULT: '#181512',
+          50: '#FAF8F5',
+          100: '#E8D5B5',
+          200: '#2E2721',
+          300: '#6E665C',
+          400: '#A39A8E',
+          500: '#1F1A16',
+          600: '#191613',
+          700: '#181512',
+          800: '#12100E',
+          900: '#0B0A09',
         },
         champagne: {
-          DEFAULT: '#F5E9C8',
-          50: '#FCF8ED',
-          100: '#F9F2DD',
-          200: '#F5E9C8',
-          300: '#E6D39E',
-          400: '#D4AF37',
-          500: '#B08D57',
+          DEFAULT: '#C5A059',
+          50: '#FAF8F5',
+          100: '#F5F2EB',
+          200: '#E8D5B5',
+          300: '#E5C378',
+          400: '#C5A059',
+          500: '#9E7B36',
         },
         gold: {
-          DEFAULT: '#D4AF37',
-          50: '#FCF8ED',
-          100: '#F9F2DD',
-          200: '#F5E9C8',
-          300: '#E0C163',
-          400: '#D4AF37',
-          500: '#B08D57',
-          600: '#8C6E3D',
-          700: '#664F28',
-          800: '#423317',
-          900: '#211909',
+          DEFAULT: '#C5A059',
+          50: '#FAF8F5',
+          100: '#F5F2EB',
+          200: '#E8D5B5',
+          300: '#E5C378',
+          400: '#C5A059',
+          500: '#9E7B36',
+          600: '#8A6828',
+          700: '#6E521C',
+          800: '#523D14',
+          900: '#38290B',
         },
         beige: {
-          DEFAULT: '#FBF8F2',
-          100: '#FBF8F2',
-          200: '#F7F3EC',
-          300: '#F0E9DF',
-          400: '#E8DFD3',
-          500: '#D5CCC0',
+          DEFAULT: '#1F1A16',
+          100: '#FAF8F5',
+          200: '#F5F2EB',
+          300: '#E8D5B5',
+          400: '#2E2721',
+          500: '#1F1A16',
         },
       },
       fontFamily: {
@@ -172,15 +168,15 @@ export default {
           '50%': { transform: 'translateY(-10px)' },
         },
         pulseGold: {
-          '0%, 100%': { boxShadow: '0 0 0 0 rgba(212, 175, 55, 0.3)' },
-          '50%': { boxShadow: '0 0 0 10px rgba(212, 175, 55, 0)' },
+          '0%, 100%': { boxShadow: '0 0 0 0 rgba(196, 136, 96, 0.3)' },
+          '50%': { boxShadow: '0 0 0 10px rgba(196, 136, 96, 0)' },
         },
       },
       boxShadow: {
-        'premium': '0 2px 8px rgba(11, 31, 58, 0.04)',
-        'premium-lg': '0 8px 24px rgba(11, 31, 58, 0.08)',
-        'gold': '0 4px 14px rgba(212, 175, 55, 0.25)',
-        'gold-lg': '0 6px 18px rgba(212, 175, 55, 0.35)',
+        'premium': '0 2px 8px rgba(27, 77, 62, 0.04)',
+        'premium-lg': '0 8px 24px rgba(27, 77, 62, 0.08)',
+        'gold': '0 4px 14px rgba(196, 136, 96, 0.25)',
+        'gold-lg': '0 6px 18px rgba(196, 136, 96, 0.35)',
         'inset-top': 'inset 0 1px 0 rgba(255,255,255,0.1)',
       },
       screens: {

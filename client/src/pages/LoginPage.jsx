@@ -49,26 +49,29 @@ export function LoginPage() {
   const set = (key) => (e) => setForm((f) => ({ ...f, [key]: e.target.value }));
 
   return (
-    <main className="min-h-screen bg-bg flex">
-      {/* Left — Midnight Navy decorative hero */}
+    <main className="min-h-screen bg-[#12100E] text-ivory flex">
+      {/* Left — Editorial Luxury Branding Hero */}
       <div
-        className="hidden lg:flex lg:w-1/2 bg-primary relative overflow-hidden flex-col items-center justify-center p-16 text-center text-surface"
+        className="hidden lg:flex lg:w-1/2 bg-[#0E0C0A] relative overflow-hidden flex-col items-center justify-center p-16 text-center text-ivory border-r border-[rgba(197,160,89,0.2)]"
         style={{
-          backgroundImage: `radial-gradient(ellipse at 30% 20%, rgba(212,175,55,0.12) 0%, transparent 60%), radial-gradient(ellipse at 80% 80%, rgba(243,217,212,0.08) 0%, transparent 50%)`,
+          backgroundImage: `radial-gradient(ellipse at 40% 30%, rgba(197,160,89,0.18) 0%, transparent 65%), radial-gradient(ellipse at 80% 80%, rgba(197,160,89,0.08) 0%, transparent 50%)`,
         }}
       >
         <div className="relative z-10 max-w-md">
           <Link
             to="/"
-            className="inline-block font-serif text-4xl font-light tracking-[0.25em] uppercase text-surface mb-6 hover:text-accent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            className="inline-block font-serif text-4xl font-light tracking-[0.25em] uppercase text-ivory mb-2 hover:text-accent transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent"
           >
             GŌKANA
           </Link>
+          <p className="font-sans text-[9px] tracking-[0.28em] uppercase text-accent font-medium mb-6">
+            Gifts • Curated • With Love
+          </p>
           <div className="w-12 h-0.5 bg-accent mx-auto mb-8" />
-          <blockquote className="font-serif text-2xl font-light text-surface/80 leading-relaxed italic mb-8">
+          <blockquote className="font-serif text-2xl font-light text-ivory/90 leading-relaxed italic mb-8">
             "Every gift tells a story.<br />Make yours unforgettable."
           </blockquote>
-          <div className="flex items-center justify-center gap-6 text-xs text-surface/50 tracking-wider uppercase">
+          <div className="flex items-center justify-center gap-6 text-xs text-[#A39A8E] tracking-wider uppercase">
             <span>✦ Handcrafted</span>
             <span>✦ Artisanal</span>
             <span>✦ Pan-India Delivery</span>
@@ -79,8 +82,8 @@ export function LoginPage() {
         <div className="absolute -top-12 -left-12 w-64 h-64 border border-accent/15 rounded-full pointer-events-none" />
         <div className="absolute -bottom-20 -right-20 w-80 h-80 border border-accent/10 rounded-full pointer-events-none" />
         <div className="absolute bottom-8 left-0 right-0 text-center">
-          <p className="font-sans text-[11px] text-surface/40 tracking-[0.2em] uppercase">
-            Luxury Gifting Atelier · India
+          <p className="font-sans text-[11px] text-[#A39A8E]/60 tracking-[0.2em] uppercase">
+            Luxury Gift Studio · India
           </p>
         </div>
       </div>
@@ -92,28 +95,54 @@ export function LoginPage() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="w-full max-w-md bg-surface p-8 sm:p-10 border border-border shadow-sm"
+          className="w-full max-w-md bg-[#181512] p-8 sm:p-10 border border-[rgba(197,160,89,0.22)] rounded-2xl shadow-2xl"
         >
           {/* Logo on mobile */}
           <Link
             to="/"
-            className="lg:hidden block font-serif text-2xl font-light tracking-[0.18em] uppercase text-primary mb-8 text-center"
+            className="lg:hidden block font-serif text-2xl font-light tracking-[0.18em] uppercase text-ivory mb-8 text-center hover:text-accent transition-colors"
           >
             GŌKANA
           </Link>
 
           <div className="mb-8">
-            <span className="inline-block text-xs font-medium tracking-[0.15em] text-accent uppercase mb-2">
-              {mode === 'login' ? '✦ Welcome Back' : '✦ Create Account'}
+            <span className="inline-block text-xs font-semibold tracking-[0.18em] text-accent uppercase mb-2">
+              {mode === 'login' ? '✦ WELCOME BACK' : '✦ JOIN GŌKANA'}
             </span>
-            <h1 className="font-serif text-3xl font-normal text-primary mb-2">
-              {mode === 'login' ? 'Sign In' : 'Join GŌKANA'}
+            <h1 className="font-serif text-3xl font-light text-ivory mb-2">
+              {mode === 'login' ? 'Sign In' : 'Create Account'}
             </h1>
-            <p className="font-sans text-sm text-muted">
+            <p className="font-sans text-sm text-[#A39A8E] font-light">
               {mode === 'login'
                 ? 'Sign in to access your orders, saved addresses, and wishlist.'
                 : 'Create your account for personalized gifting and tracking.'}
             </p>
+          </div>
+
+          {/* Mode Switcher Tabs */}
+          <div className="flex rounded-lg bg-[#12100E] border border-[rgba(197,160,89,0.2)] p-1 mb-6">
+            <button
+              type="button"
+              onClick={() => { setMode('login'); setError(''); }}
+              className={`flex-1 py-2 text-xs font-semibold uppercase tracking-wider rounded-md transition-all ${
+                mode === 'login'
+                  ? 'bg-accent text-[#12100E] shadow-sm'
+                  : 'text-[#A39A8E] hover:text-ivory'
+              }`}
+            >
+              Sign In
+            </button>
+            <button
+              type="button"
+              onClick={() => { setMode('register'); setError(''); }}
+              className={`flex-1 py-2 text-xs font-semibold uppercase tracking-wider rounded-md transition-all ${
+                mode === 'register'
+                  ? 'bg-accent text-[#12100E] shadow-sm'
+                  : 'text-[#A39A8E] hover:text-ivory'
+              }`}
+            >
+              Register
+            </button>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-5" noValidate={false}>
@@ -121,7 +150,7 @@ export function LoginPage() {
               <div>
                 <label
                   htmlFor="reg-name"
-                  className="block font-sans text-xs font-semibold text-text mb-2 uppercase tracking-wider"
+                  className="block font-sans text-xs font-semibold text-ivory mb-2 uppercase tracking-wider"
                 >
                   Full Name <span className="text-accent">*</span>
                 </label>
@@ -133,7 +162,7 @@ export function LoginPage() {
                   required
                   autoComplete="name"
                   placeholder="Priya Menon"
-                  className="w-full px-4 py-3 bg-surface border border-border text-text text-sm focus:border-accent focus:ring-2 focus:ring-accent/30 outline-none transition-all placeholder:text-muted/60"
+                  className="w-full px-4 py-3 bg-[#12100E] border border-[rgba(197,160,89,0.25)] text-ivory text-sm rounded-lg focus:border-accent focus:ring-1 focus:ring-accent/30 outline-none transition-all placeholder:text-[#A39A8E]/50"
                 />
               </div>
             )}
@@ -141,7 +170,7 @@ export function LoginPage() {
             <div>
               <label
                 htmlFor="auth-email"
-                className="block font-sans text-xs font-semibold text-text mb-2 uppercase tracking-wider"
+                className="block font-sans text-xs font-semibold text-ivory mb-2 uppercase tracking-wider"
               >
                 Email Address <span className="text-accent">*</span>
               </label>
@@ -153,14 +182,14 @@ export function LoginPage() {
                 required
                 autoComplete="email"
                 placeholder="you@example.com"
-                className="w-full px-4 py-3 bg-surface border border-border text-text text-sm focus:border-accent focus:ring-2 focus:ring-accent/30 outline-none transition-all placeholder:text-muted/60"
+                className="w-full px-4 py-3 bg-[#12100E] border border-[rgba(197,160,89,0.25)] text-ivory text-sm rounded-lg focus:border-accent focus:ring-1 focus:ring-accent/30 outline-none transition-all placeholder:text-[#A39A8E]/50"
               />
             </div>
 
             <div>
               <label
                 htmlFor="auth-password"
-                className="block font-sans text-xs font-semibold text-text mb-2 uppercase tracking-wider"
+                className="block font-sans text-xs font-semibold text-ivory mb-2 uppercase tracking-wider"
               >
                 Password <span className="text-accent">*</span>
               </label>
@@ -174,12 +203,12 @@ export function LoginPage() {
                   minLength={6}
                   autoComplete={mode === 'login' ? 'current-password' : 'new-password'}
                   placeholder="Minimum 6 characters"
-                  className="w-full px-4 py-3 pr-12 bg-surface border border-border text-text text-sm focus:border-accent focus:ring-2 focus:ring-accent/30 outline-none transition-all placeholder:text-muted/60"
+                  className="w-full px-4 py-3 pr-12 bg-[#12100E] border border-[rgba(197,160,89,0.25)] text-ivory text-sm rounded-lg focus:border-accent focus:ring-1 focus:ring-accent/30 outline-none transition-all placeholder:text-[#A39A8E]/50"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPass(!showPass)}
-                  className="absolute right-0 top-0 bottom-0 px-3 flex items-center justify-center text-muted hover:text-primary transition-colors min-w-[44px] min-h-[44px]"
+                  className="absolute right-0 top-0 bottom-0 px-3 flex items-center justify-center text-[#A39A8E] hover:text-accent transition-colors min-w-[44px] min-h-[44px]"
                   aria-label={showPass ? 'Hide password' : 'Show password'}
                 >
                   {showPass ? <EyeOff size={18} /> : <Eye size={18} />}
@@ -191,10 +220,10 @@ export function LoginPage() {
               <motion.div
                 initial={{ opacity: 0, y: -6 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="flex items-start gap-2.5 bg-error/10 border border-error/30 text-error rounded-lg px-4 py-3 text-sm"
+                className="flex items-start gap-2.5 bg-red-950/40 border border-red-500/30 text-red-300 rounded-lg px-4 py-3 text-sm"
                 role="alert"
               >
-                <AlertCircle size={16} className="flex-shrink-0 mt-0.5 text-error" />
+                <AlertCircle size={16} className="flex-shrink-0 mt-0.5 text-red-400" />
                 <p className="font-sans text-xs leading-relaxed font-medium">{error}</p>
               </motion.div>
             )}
@@ -202,7 +231,7 @@ export function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="btn-primary w-full justify-center disabled:opacity-60 disabled:cursor-not-allowed min-h-[44px]"
+              className="btn-primary w-full justify-center disabled:opacity-60 disabled:cursor-not-allowed min-h-[46px] mt-2 font-semibold uppercase tracking-wider"
             >
               {loading ? (
                 <>
@@ -218,14 +247,14 @@ export function LoginPage() {
             </button>
           </form>
 
-          <div className="mt-6 text-center font-sans text-sm text-muted">
+          <div className="mt-6 text-center font-sans text-sm text-[#A39A8E]">
             {mode === 'login' ? (
               <p>
                 Don't have an account?{' '}
                 <button
                   type="button"
                   onClick={() => { setMode('register'); setError(''); }}
-                  className="text-primary font-semibold hover:text-accent underline underline-offset-4 transition-colors p-1"
+                  className="text-accent font-semibold hover:text-accent-light underline underline-offset-4 transition-colors p-1"
                 >
                   Register
                 </button>
@@ -236,7 +265,7 @@ export function LoginPage() {
                 <button
                   type="button"
                   onClick={() => { setMode('login'); setError(''); }}
-                  className="text-primary font-semibold hover:text-accent underline underline-offset-4 transition-colors p-1"
+                  className="text-accent font-semibold hover:text-accent-light underline underline-offset-4 transition-colors p-1"
                 >
                   Sign In
                 </button>
@@ -244,10 +273,10 @@ export function LoginPage() {
             )}
           </div>
 
-          <div className="mt-8 pt-6 border-t border-border text-center">
+          <div className="mt-8 pt-6 border-t border-[rgba(197,160,89,0.18)] text-center">
             <Link
               to="/"
-              className="inline-flex items-center gap-1 font-sans text-xs text-muted hover:text-primary transition-colors p-2"
+              className="inline-flex items-center gap-1 font-sans text-xs text-[#A39A8E] hover:text-accent transition-colors p-2"
             >
               ← Back to GŌKANA
             </Link>

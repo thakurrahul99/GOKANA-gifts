@@ -1,8 +1,8 @@
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowRight, ChevronDown, Star, Truck, ShieldCheck, RotateCcw, Sparkles } from 'lucide-react';
-import { heroImg } from '../../data';
+import { ArrowRight, ChevronDown, Star, Award, Gift, Sparkles, Truck } from 'lucide-react';
+import { heroLuxuryImg } from '../../data';
 
 export function Hero() {
   const containerRef = useRef(null);
@@ -11,180 +11,204 @@ export function Hero() {
     offset: ['start start', 'end start'],
   });
 
-  const imgY = useTransform(scrollYProgress, [0, 1], ['0%', '18%']);
-  const textY = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
-  const opacity = useTransform(scrollYProgress, [0, 0.65], [1, 0]);
+  const imgY = useTransform(scrollYProgress, [0, 1], ['0%', '16%']);
+  const textY = useTransform(scrollYProgress, [0, 1], ['0%', '24%']);
+  const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
 
   const scrollDown = () => {
-    window.scrollTo({ top: window.innerHeight - 30, behavior: 'smooth' });
+    if (window.lenis) {
+      window.lenis.scrollTo(window.innerHeight - 30, { duration: 1.2 });
+    } else {
+      window.scrollTo({ top: window.innerHeight - 30, behavior: 'smooth' });
+    }
   };
 
   return (
     <>
       <section
         ref={containerRef}
-        className="relative w-full min-h-[640px] h-screen max-h-[960px] overflow-hidden bg-primary"
+        className="relative w-full min-h-[720px] h-screen max-h-[1050px] overflow-hidden bg-[#12100E]"
         aria-label="Hero Introduction"
       >
-        {/* Parallax Image */}
+        {/* Parallax Cinematic Image */}
         <motion.div
           className="absolute inset-0 scale-105 origin-center"
           style={{ y: imgY }}
         >
           <img
-            src={heroImg}
-            alt="GŌKANA handcrafted luxury gift boxes and hampers"
-            className="w-full h-full object-cover"
+            src={heroLuxuryImg}
+            alt="GŌKANA luxury handcrafted gift boxes, chocolates, and candles"
+            className="w-full h-full object-cover object-right md:object-center"
             loading="eager"
             fetchPriority="high"
           />
-          {/* Gradients */}
-          <div className="absolute inset-0 bg-primary-dark/48" />
-          <div className="absolute inset-0 bg-gradient-to-t from-primary-dark via-primary/42 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-r from-primary-dark/72 via-primary/28 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-primary-dark/35" />
+          {/* Cinematic Contrast Overlays — Left 40% darker for crystal clear typography */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0E0C0A] via-[#12100E]/75 md:via-[#12100E]/55 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#12100E] via-transparent to-[#12100E]/60" />
+          <div className="absolute inset-0 bg-[#12100E]/20" />
         </motion.div>
 
-        {/* Content */}
+        {/* Content — Positioned around 8% from left edge, vertically centered at 40-50% hero height */}
         <motion.div
-          className="absolute inset-0 flex flex-col justify-end pb-20 md:pb-24"
+          className="absolute inset-0 flex flex-col justify-center pt-20 md:pt-16 pb-16 md:pb-20"
           style={{ y: textY, opacity }}
         >
-          <div className="container-gokana">
-            {/* Trust Badges Pill (Above the fold) */}
-            <motion.div
-              className="inline-flex flex-wrap items-center gap-3 px-4 py-2 rounded-full bg-primary-dark/70 backdrop-blur-lg border border-accent/45 shadow-[0_6px_24px_rgba(0,0,0,0.2)] text-white text-xs font-sans mb-7"
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              <div className="flex items-center gap-1 text-accent">
-                <Star size={13} className="fill-accent" />
-                <span className="font-semibold text-white">4.9/5 Rating</span>
+          <div className="w-full px-5 sm:px-8 md:px-12 lg:px-0 lg:pl-[8vw]">
+            <div className="w-full max-w-[650px] text-left flex flex-col items-start">
+              {/* Trust Badge */}
+              <motion.div
+                className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-[#1A1714]/85 backdrop-blur-md border border-[rgba(197,160,89,0.35)] shadow-[0_4px_20px_rgba(0,0,0,0.5)] text-ivory text-xs font-sans mb-6"
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                <div className="flex items-center gap-1.5 text-accent">
+                  <Star size={13} className="fill-accent text-accent" />
+                  <span className="font-semibold text-ivory">★ 4.9/5 Rating</span>
+                </div>
+                <span className="text-accent/40">•</span>
+                <span className="text-ivory/90 tracking-wide">50,000+ Gifts Delivered with Love</span>
+              </motion.div>
+
+              {/* Main Headline */}
+              <div className="overflow-hidden mb-4 w-full">
+                <motion.h1
+                  className="font-serif text-[clamp(2.6rem,5.4vw,5.6rem)] font-light text-ivory leading-[1.03] tracking-[-0.015em] drop-shadow-[0_8px_24px_rgba(0,0,0,0.6)] text-left"
+                  initial={{ y: '100%' }}
+                  animate={{ y: '0%' }}
+                  transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  <span className="block text-ivory">Gifts that become</span>
+                  <span className="block text-accent italic font-light">unforgettable.</span>
+                </motion.h1>
               </div>
-              <span className="text-white/30">•</span>
-              <span className="text-white/80">50,000+ Gifts Delivered with Love</span>
-            </motion.div>
 
-            {/* Main Headline */}
-            <div className="overflow-hidden mb-5 max-w-4xl">
-              <motion.h1
-                className="font-serif text-[clamp(3rem,7.2vw,6.8rem)] font-light text-surface-tint leading-[0.98] tracking-[-0.02em] drop-shadow-[0_8px_24px_rgba(0,0,0,0.24)]"
-                initial={{ y: '100%' }}
-                animate={{ y: '0%' }}
-                transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              {/* Eyebrow */}
+              <motion.p
+                className="font-sans text-[11px] md:text-xs font-semibold tracking-[0.24em] uppercase text-accent mb-3.5 text-left"
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.45 }}
               >
-                <span className="block whitespace-nowrap">Gifts that become</span>
-                <span className="block whitespace-nowrap text-accent italic font-normal">unforgettable.</span>
-              </motion.h1>
+                LUXURY HANDCRAFTED GIFTS &nbsp;|&nbsp; PERSONALISED WITH CARE
+              </motion.p>
+
+              {/* Description */}
+              <motion.p
+                className="font-sans text-[14px] md:text-[16px] text-[#D8D0C5] leading-[1.8] max-w-[580px] mb-8 font-light text-left"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.55 }}
+              >
+                Artisan chocolates, hand-poured soy candles, and personalized gifts. Hand-packed in luxury gift boxes with complimentary handwritten calligraphy cards.
+              </motion.p>
+
+              {/* CTA Buttons */}
+              <motion.div
+                className="hero-cta-stack flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-3.5 w-full sm:w-auto"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.65 }}
+              >
+                {/* Primary CTA */}
+                <Link
+                  to="/shop"
+                  className="btn-primary inline-flex items-center justify-center gap-2 text-xs py-3.5 px-7 rounded-[4px] uppercase tracking-[0.14em] font-semibold"
+                >
+                  EXPLORE COLLECTION →
+                </Link>
+
+                {/* Secondary CTA */}
+                <Link
+                  to="/gift-finder"
+                  className="btn-outline inline-flex items-center justify-center gap-2 text-xs py-3.5 px-6 rounded-[4px] uppercase tracking-[0.14em] font-semibold !text-accent border-accent hover:bg-accent/10 hover:border-accent-light"
+                >
+                  🎁 FIND THE PERFECT GIFT →
+                </Link>
+              </motion.div>
             </div>
-
-            {/* Supporting Subheadline */}
-            <motion.p
-              className="font-sans text-[15px] md:text-lg text-white/80 max-w-[590px] leading-[1.75] mb-9"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-            >
-              Artisan chocolates, hand-poured soy candles, and bespoke keepsakes. Hand-packed in luxury rigid boxes with complimentary handwritten calligraphy cards.
-            </motion.p>
-
-            {/* CTAs */}
-            <motion.div
-              className="hero-cta-stack flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.7 }}
-            >
-              <Link
-                to="/gift-finder"
-                className="btn-accent shadow-[0_8px_28px_rgba(212,175,55,0.18)] hover:shadow-[0_12px_32px_rgba(212,175,55,0.28)]"
-              >
-                ✦ Find the Perfect Gift
-                <ArrowRight size={16} />
-              </Link>
-              <Link
-                to="/shop"
-                className="btn-outline !text-white border-white/80 hover:bg-white/10 hover:border-white shadow-[0_6px_20px_rgba(0,0,0,0.12)]"
-              >
-                Explore Collection
-              </Link>
-            </motion.div>
           </div>
         </motion.div>
 
-        {/* Scroll Indicator */}
+        {/* Subtle SCROLL indicator */}
         <button
           onClick={scrollDown}
-          className="absolute bottom-5 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 text-white/50 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 rounded p-1"
+          className="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-ivory/60 hover:text-accent transition-colors focus-visible:outline-none rounded p-1 cursor-pointer"
           aria-label="Scroll down to content"
         >
-          <span className="font-sans text-[10px] tracking-[0.2em] uppercase text-accent">Scroll</span>
+          <span className="font-sans text-[10px] tracking-[0.25em] uppercase text-accent font-medium">SCROLL ↓</span>
           <motion.div
-            animate={{ y: [0, 5, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+            animate={{ y: [0, 4, 0] }}
+            transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
           >
-            <ChevronDown size={16} strokeWidth={2} />
+            <ChevronDown size={15} strokeWidth={1.8} className="text-accent" />
           </motion.div>
         </button>
       </section>
 
-      {/* ── Trust Strip Directly Below Hero (Section 4 CRO Requirement) ── */}
-      <aside className="bg-primary border-b border-primary-2 py-4 relative z-10 -mt-px" aria-label="Trust and Guarantees">
+      {/* ── TRUST / VALUE BAR (4 Pillars directly anchored below Hero) ── */}
+      <aside
+        className="bg-[#181512] border-y border-[rgba(197,160,89,0.25)] py-6 relative z-10 -mt-px shadow-lg"
+        aria-label="Trust and Guarantees"
+      >
         <div className="container-gokana">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 text-center md:text-left">
-            <div className="flex items-center justify-center md:justify-start gap-3">
-              <div className="w-9 h-9 rounded-full bg-blush flex items-center justify-center text-primary flex-shrink-0">
-                <Truck size={17} />
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-0 divide-y lg:divide-y-0 lg:divide-x divide-[rgba(197,160,89,0.18)]">
+            {/* 1. PREMIUM QUALITY */}
+            <div className="flex items-center gap-3.5 lg:px-6 first:lg:pl-0">
+              <div className="w-10 h-10 rounded-full border border-[rgba(197,160,89,0.35)] bg-[#1F1A16] flex items-center justify-center text-accent flex-shrink-0">
+                <Award size={19} strokeWidth={1.6} />
               </div>
               <div>
-                <p className="font-sans text-xs font-semibold uppercase tracking-wider text-white">
-                  Free Express Shipping
+                <p className="font-sans text-xs font-semibold uppercase tracking-[0.16em] text-ivory">
+                  1. PREMIUM QUALITY
                 </p>
-                <p className="font-sans text-[11px] text-white/65 hidden sm:block">
-                  On all orders above ₹999
+                <p className="font-sans text-xs text-muted mt-0.5">
+                  Only the finest ingredients
                 </p>
               </div>
             </div>
 
-            <div className="flex items-center justify-center md:justify-start gap-3">
-              <div className="w-9 h-9 rounded-full bg-accent-soft flex items-center justify-center text-primary flex-shrink-0">
-                <ShieldCheck size={17} />
+            {/* 2. BEAUTIFULLY PACKED */}
+            <div className="flex items-center gap-3.5 pt-4 lg:pt-0 lg:px-6">
+              <div className="w-10 h-10 rounded-full border border-[rgba(197,160,89,0.35)] bg-[#1F1A16] flex items-center justify-center text-accent flex-shrink-0">
+                <Gift size={19} strokeWidth={1.6} />
               </div>
               <div>
-                <p className="font-sans text-xs font-semibold uppercase tracking-wider text-white">
-                  100% Secure Payment
+                <p className="font-sans text-xs font-semibold uppercase tracking-[0.16em] text-ivory">
+                  2. BEAUTIFULLY PACKED
                 </p>
-                <p className="font-sans text-[11px] text-white/65 hidden sm:block">
-                  Encrypted UPI, Cards & NetBanking
+                <p className="font-sans text-xs text-muted mt-0.5">
+                  Ready to gift
                 </p>
               </div>
             </div>
 
-            <div className="flex items-center justify-center md:justify-start gap-3">
-              <div className="w-9 h-9 rounded-full bg-blush flex items-center justify-center text-primary flex-shrink-0">
-                <RotateCcw size={17} />
+            {/* 3. PERSONALISATION */}
+            <div className="flex items-center gap-3.5 pt-4 lg:pt-0 lg:px-6">
+              <div className="w-10 h-10 rounded-full border border-[rgba(197,160,89,0.35)] bg-[#1F1A16] flex items-center justify-center text-accent flex-shrink-0">
+                <Sparkles size={19} strokeWidth={1.6} />
               </div>
               <div>
-                <p className="font-sans text-xs font-semibold uppercase tracking-wider text-white">
-                  Easy 7-Day Returns
+                <p className="font-sans text-xs font-semibold uppercase tracking-[0.16em] text-ivory">
+                  3. PERSONALISATION
                 </p>
-                <p className="font-sans text-[11px] text-white/65 hidden sm:block">
-                  No questions asked guarantee
+                <p className="font-sans text-xs text-muted mt-0.5">
+                  Make it truly yours
                 </p>
               </div>
             </div>
 
-            <div className="flex items-center justify-center md:justify-start gap-3">
-              <div className="w-9 h-9 rounded-full bg-blush flex items-center justify-center text-primary flex-shrink-0">
-                <Sparkles size={17} />
+            {/* 4. FAST & RELIABLE */}
+            <div className="flex items-center gap-3.5 pt-4 lg:pt-0 lg:px-6 last:lg:pr-0">
+              <div className="w-10 h-10 rounded-full border border-[rgba(197,160,89,0.35)] bg-[#1F1A16] flex items-center justify-center text-accent flex-shrink-0">
+                <Truck size={19} strokeWidth={1.6} />
               </div>
               <div>
-                <p className="font-sans text-xs font-semibold uppercase tracking-wider text-white">
-                  Handcrafted Luxury
+                <p className="font-sans text-xs font-semibold uppercase tracking-[0.16em] text-ivory">
+                  4. FAST & RELIABLE
                 </p>
-                <p className="font-sans text-[11px] text-white/65 hidden sm:block">
-                  Signature rigid box packaging
+                <p className="font-sans text-xs text-muted mt-0.5">
+                  Pan India delivery
                 </p>
               </div>
             </div>

@@ -9,7 +9,7 @@ const values = [
   {
     num: '01',
     Icon: Sparkles,
-    title: 'Curation over Quantity',
+    title: 'Quality over Quantity',
     desc: "We'd rather have 20 perfect products than 200 ordinary ones. Every item in our collection is chosen for its story, quality, and the joy it brings.",
   },
   {
@@ -36,18 +36,18 @@ const metrics = [
 export function AboutPage() {
   return (
     <main className="bg-bg">
-      {/* Hero — Midnight Navy full-bleed */}
-      <div className="relative h-[72vh] min-h-[440px] overflow-hidden bg-primary flex items-center justify-center">
+      {/* Hero — Luxury Dark full-bleed */}
+      <div className="relative h-[72vh] min-h-[440px] overflow-hidden bg-[#12100E] flex items-center justify-center">
         <img
           src={brandStoryImg}
           alt="GŌKANA artisan gift workshop"
-          className="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-luminosity"
+          className="absolute inset-0 w-full h-full object-cover opacity-25 mix-blend-luminosity"
         />
-        {/* Ambient gold glow */}
+        {/* Ambient champagne gold glow */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            backgroundImage: `radial-gradient(ellipse at 50% 70%, rgba(212,175,55,0.18) 0%, transparent 60%)`,
+            backgroundImage: `radial-gradient(ellipse at 50% 70%, rgba(197,160,89,0.25) 0%, transparent 60%)`,
           }}
         />
 
@@ -63,7 +63,7 @@ export function AboutPage() {
           </motion.p>
           <div className="overflow-hidden">
             <motion.h1
-              className="font-serif text-5xl md:text-7xl font-light text-surface leading-tight"
+              className="font-serif text-5xl md:text-7xl font-light text-ivory leading-tight"
               initial={{ y: '100%' }}
               animate={{ y: 0 }}
               transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
@@ -72,7 +72,7 @@ export function AboutPage() {
             </motion.h1>
           </div>
           <motion.p
-            className="font-sans text-surface/60 mt-6 text-base leading-relaxed max-w-lg mx-auto"
+            className="font-sans text-[#A39A8E] mt-6 text-base leading-relaxed max-w-lg mx-auto"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.9 }}
@@ -83,9 +83,9 @@ export function AboutPage() {
       </div>
 
       {/* Metrics Strip */}
-      <div className="bg-surface border-b border-border">
+      <div className="bg-[#181512] border-b border-[rgba(197,160,89,0.18)]">
         <div className="container-gokana">
-          <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-border">
+          <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-[rgba(197,160,89,0.15)]">
             {metrics.map((m, i) => (
               <motion.div
                 key={m.label}
@@ -95,8 +95,8 @@ export function AboutPage() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, duration: 0.5 }}
               >
-                <p className="font-serif text-3xl font-light text-primary mb-1">{m.value}</p>
-                <p className="font-sans text-xs text-muted uppercase tracking-wider">{m.label}</p>
+                <p className="font-serif text-3xl font-light text-accent mb-1">{m.value}</p>
+                <p className="font-sans text-xs text-[#A39A8E] uppercase tracking-wider">{m.label}</p>
               </motion.div>
             ))}
           </div>
@@ -104,7 +104,7 @@ export function AboutPage() {
       </div>
 
       {/* Story */}
-      <section className="section-py">
+      <section className="section-py bg-[#12100E]">
         <div className="container-gokana max-w-3xl">
           <ScrollReveal>
             <p className="label-text text-accent mb-6 flex items-center gap-2">
@@ -112,13 +112,13 @@ export function AboutPage() {
               Our Story
             </p>
           </ScrollReveal>
-          <AnimatedHeading className="heading-lg text-primary mb-8" delay={0.1}>
+          <AnimatedHeading className="heading-lg text-ivory mb-8" delay={0.1}>
             It started with one bad gift.
           </AnimatedHeading>
           <ScrollReveal delay={0.3}>
             <Divider className="mb-8" />
           </ScrollReveal>
-          <ScrollReveal delay={0.35} className="space-y-5 body-text text-text leading-relaxed">
+          <ScrollReveal delay={0.35} className="space-y-5 body-text text-[#A39A8E] leading-relaxed">
             <p>
               Our founder had a habit: every birthday, anniversary, or festival, she'd spend hours searching for the perfect
               gift — and almost always settle for something generic that felt nothing like the person she was gifting.
@@ -136,12 +136,12 @@ export function AboutPage() {
         </div>
       </section>
 
-      {/* Values — Midnight Navy dark section */}
-      <section className="section-py bg-primary relative overflow-hidden">
+      {/* Values */}
+      <section className="section-py bg-[#181512] border-t border-[rgba(197,160,89,0.18)] relative overflow-hidden">
         <div
           className="absolute inset-0 pointer-events-none opacity-20"
           style={{
-            backgroundImage: `radial-gradient(ellipse at 80% 20%, rgba(212,175,55,0.25) 0%, transparent 50%)`,
+            backgroundImage: `radial-gradient(ellipse at 80% 20%, rgba(197,160,89,0.2) 0%, transparent 50%)`,
           }}
         />
         <div className="container-gokana relative z-10">
@@ -152,7 +152,7 @@ export function AboutPage() {
                 What We Believe
               </p>
             </ScrollReveal>
-            <AnimatedHeading className="heading-lg text-surface" delay={0.15}>
+            <AnimatedHeading className="heading-lg text-ivory" delay={0.15}>
               Our Values
             </AnimatedHeading>
           </div>
@@ -162,14 +162,14 @@ export function AboutPage() {
               <motion.div
                 key={num}
                 variants={staggerItem}
-                className="border border-surface/[0.1] p-8 bg-surface/[0.04] hover:bg-surface/[0.08] hover:border-accent/30 transition-all duration-300 group"
+                className="border border-[rgba(197,160,89,0.2)] p-8 bg-[#12100E] rounded-xl hover:border-accent/50 transition-all duration-300 group shadow-lg"
               >
                 <div className="flex items-start justify-between mb-5">
-                  <p className="font-serif text-5xl font-light text-accent/30">{num}</p>
+                  <p className="font-serif text-5xl font-light text-accent/40">{num}</p>
                   <Icon size={20} className="text-accent/60 group-hover:text-accent transition-colors mt-1" />
                 </div>
-                <h3 className="font-serif text-xl font-light text-surface mb-3">{title}</h3>
-                <p className="font-sans text-sm text-surface/55 leading-relaxed">{desc}</p>
+                <h3 className="font-serif text-xl font-light text-ivory mb-3">{title}</h3>
+                <p className="font-sans text-sm text-[#A39A8E] leading-relaxed">{desc}</p>
               </motion.div>
             ))}
           </StaggerReveal>
