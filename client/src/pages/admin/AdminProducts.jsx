@@ -129,8 +129,7 @@ export function AdminProducts() {
 
     setFormSaving(true);
     try {
-      let imageUrls = formData.images.split(/
-|,/).map(url => url.trim()).filter(Boolean);
+      let imageUrls = formData.images.split(/\n|,/).map(url => url.trim()).filter(Boolean);
 
       if (formData.imageFiles.length) {
         setUploadingImages(true);
