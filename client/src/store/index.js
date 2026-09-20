@@ -1,5 +1,7 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { persist, createJSONStorage } from 'zustand/middleware';
+
+const cartStorage = createJSONStorage(() => localStorage);
 
 export const useCartStore = create(
   persist(
@@ -49,7 +51,19 @@ export const useCartStore = create(
       getSubtotal: () =>
         get().items.reduce((acc, i) => acc + i.product.price * i.qty, 0),
     }),
-    { name: 'gokana-cart' }
+    {
+      name: 'gokana-cart',
+      storage: cartStorage,
+      partialize: (state) => ({
+        items: state.items,
+      }),
+      version: 1,
+      merge: (persistedState, currentState) => ({
+        ...currentState,
+        items: Array.isArray(persistedState?.items) ? persistedState.items : currentState.items,
+        isOpen: false,
+      }),
+    }
   )
 );
 
