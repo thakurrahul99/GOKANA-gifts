@@ -56,15 +56,27 @@ export function Navbar({ onSearchOpen }) {
       const element = document.getElementById(hash);
 
       if (element) {
-        const headerOffset = 76;
+        // Recalculate while Home finishes laying out so late-loading content
+        // cannot push the requested section away from the final position.
+        const header = document.querySelector("header");
+        const headerOffset = header?.getBoundingClientRect().height ?? 76;
         const top = element.getBoundingClientRect().top + window.scrollY - headerOffset;
-        window.scrollTo({ top, behavior: "smooth" });
+
+        window.scrollTo({
+          top,
+          behavior: attempts === 0 ? "smooth" : "auto",
+        });
+
+        attempts += 1;
+        if (attempts < 20) {
+          timer = window.setTimeout(scrollToSection, 100);
+        }
         return;
       }
 
       attempts += 1;
-      if (attempts < 40) {
-        timer = window.setTimeout(scrollToSection, 50);
+      if (attempts < 20) {
+        timer = window.setTimeout(scrollToSection, 100);
       }
     };
 
