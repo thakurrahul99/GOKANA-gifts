@@ -112,8 +112,7 @@ export function AdminProducts() {
       personalisationFields: product.personalisationFields?.length ? product.personalisationFields : EMPTY_FORM.personalisationFields,
       stock: product.stock ?? 0,
       thumbnail: product.thumbnail || '',
-      images: Array.isArray(product.images) ? product.images.join('
-') : '',
+      images: Array.isArray(product.images) ? product.images.join('\\n') : '',
       imageFiles: [],
     });
     setFormError('');
