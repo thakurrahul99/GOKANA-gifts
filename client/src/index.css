@@ -277,6 +277,9 @@ select:disabled {
     cursor: pointer;
     text-decoration: none !important;
   }
+  .btn-primary:visited {
+    color: #ffffff;
+  }
   .btn-primary:hover {
     background-color: var(--primary-2);
     color: #ffffff;
@@ -323,6 +326,9 @@ select:disabled {
     min-width: 44px;
     cursor: pointer;
     text-decoration: none !important;
+  }
+  .btn-accent:visited {
+    color: #121212;
   }
   .btn-accent:hover {
     background-color: var(--accent-dark);
