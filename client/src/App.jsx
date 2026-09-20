@@ -141,14 +141,14 @@ export default function App() {
 
 function AdminCustomers() {
   return (
-    <section className="space-y-5">
+    <section className="space-y-5 text-white">
       <div>
-        <h2 className="text-2xl font-semibold text-primary">Customers</h2>
-        <p className="text-sm text-muted mt-1">Customer management</p>
+        <h2 className="text-2xl font-semibold text-white">Customers</h2>
+        <p className="text-sm text-white/70 mt-1">Customer management</p>
       </div>
-      <div className="bg-surface border border-border p-8 text-center rounded-xl">
+      <div className="bg-primary border border-primary-2 p-8 text-center rounded-xl">
         <div className="mx-auto w-12 h-12 rounded-full bg-blush flex items-center justify-center text-primary"><Users size={22} /></div>
-        <p className="text-sm text-text mt-3">Customer management interface is ready for API integration.</p>
+        <p className="text-sm text-white mt-3">Customer management interface is ready for API integration.</p>
       </div>
     </section>
   );
@@ -156,16 +156,16 @@ function AdminCustomers() {
 
 function AdminSettings() {
   return (
-    <section className="space-y-5">
+    <section className="space-y-5 text-white">
       <div>
-        <h2 className="text-2xl font-semibold text-primary">Settings</h2>
-        <p className="text-sm text-muted mt-1">Store administration settings</p>
+        <h2 className="text-2xl font-semibold text-white">Settings</h2>
+        <p className="text-sm text-white/70 mt-1">Store administration settings</p>
       </div>
-      <div className="bg-surface border border-border rounded-xl p-6 space-y-5">
-        <div><h3 className="font-semibold text-primary">Store</h3><p className="text-sm text-muted mt-1">GŌKANA luxury gifting store</p></div>
+      <div className="bg-primary border border-primary-2 rounded-xl p-6 space-y-5">
+        <div><h3 className="font-semibold text-white">Store</h3><p className="text-sm text-white/70 mt-1">GŌKANA luxury gifting store</p></div>
         <div className="grid sm:grid-cols-2 gap-4">
-          <div className="border border-border rounded-lg p-4"><p className="text-xs text-muted uppercase tracking-wide">Environment</p><p className="text-sm text-text mt-1">Production</p></div>
-          <div className="border border-border rounded-lg p-4"><p className="text-xs text-muted uppercase tracking-wide">Access</p><p className="text-sm text-text mt-1">Administrator</p></div>
+          <div className="border border-white/15 rounded-lg p-4"><p className="text-xs text-white/60 uppercase tracking-wide">Environment</p><p className="text-sm text-white mt-1">Production</p></div>
+          <div className="border border-white/15 rounded-lg p-4"><p className="text-xs text-white/60 uppercase tracking-wide">Access</p><p className="text-sm text-white mt-1">Administrator</p></div>
         </div>
       </div>
     </section>
