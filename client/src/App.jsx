@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { useState } from 'react';
-import { Users } from 'lucide-react';
+import { Users, Search, Loader2 } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import { Navbar } from './components/layout/Navbar';
@@ -24,6 +24,8 @@ import { AdminProducts } from './pages/admin/AdminProducts';
 import { AdminOrders } from './pages/admin/AdminOrders';
 import { AdminCoupons } from './pages/admin/AdminCoupons';
 import { FAB } from './components/ui/FAB';
+import { API_BASE } from './lib/api';
+import { useAuthStore } from './store';
 
 function StorePage() {
   const location = useLocation();
@@ -140,15 +142,77 @@ export default function App() {
 }
 
 function AdminCustomers() {
+  const { token } = useAuthStore();
+  const [customers, setCustomers] = useState([]);
+  const [search, setSearch] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    const loadCustomers = async () => {
+      setLoading(true);
+      setError('');
+      try {
+        const query = search ? `?search=${encodeURIComponent(search)}&limit=100` : '?limit=100';
+        const res = await fetch(`${API_BASE}/admin/customers${query}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.message || 'Failed to load customers');
+        setCustomers(data.customers || []);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    const timer = setTimeout(loadCustomers, 250);
+    return () => clearTimeout(timer);
+  }, [token, search]);
+
   return (
     <section className="space-y-5 text-white">
       <div>
         <h2 className="text-2xl font-semibold text-white">Customers</h2>
-        <p className="text-sm text-white/70 mt-1">Customer management</p>
+        <p className="text-sm text-white/70 mt-1">{customers.length} registered customers</p>
       </div>
-      <div className="bg-primary border border-primary-2 p-8 text-center rounded-xl">
-        <div className="mx-auto w-12 h-12 rounded-full bg-blush flex items-center justify-center text-primary"><Users size={22} /></div>
-        <p className="text-sm text-white mt-3">Customer management interface is ready for API integration.</p>
+
+      <div className="flex items-center gap-2 bg-primary border border-primary-2 rounded-xl px-4 py-3">
+        <Search size={17} className="text-white/60" />
+        <input
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder="Search name or email…"
+          className="flex-1 bg-transparent text-white placeholder:text-white/50 outline-none text-sm"
+        />
+      </div>
+
+      <div className="bg-primary border border-primary-2 rounded-xl overflow-hidden">
+        {loading ? (
+          <div className="py-16 flex items-center justify-center text-white/70"><Loader2 className="animate-spin mr-2" size={18} /> Loading customers…</div>
+        ) : error ? (
+          <div className="py-16 text-center text-red-300 text-sm">{error}</div>
+        ) : customers.length === 0 ? (
+          <div className="py-16 text-center text-white/70"><Users className="mx-auto mb-3 text-accent" size={28} />No customers found.</div>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead className="border-b border-white/10 text-white/60 text-xs uppercase">
+                <tr><th className="text-left px-5 py-4">Customer</th><th className="text-left px-5 py-4">Email</th><th className="text-left px-5 py-4">Phone</th><th className="text-left px-5 py-4">Status</th></tr>
+              </thead>
+              <tbody className="divide-y divide-white/10">
+                {customers.map((customer) => (
+                  <tr key={customer._id} className="hover:bg-white/5">
+                    <td className="px-5 py-4 text-white font-medium">{customer.name}</td>
+                    <td className="px-5 py-4 text-white/80">{customer.email}</td>
+                    <td className="px-5 py-4 text-white/80">{customer.phone || '—'}</td>
+                    <td className="px-5 py-4"><span className="text-xs text-accent">{customer.isActive ? 'Active' : 'Inactive'}</span></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
     </section>
   );
