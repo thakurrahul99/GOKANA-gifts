@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Plus, Edit2, Trash2, Search, Loader2, AlertCircle, RefreshCw, X } from 'lucide-react';
+import { Plus, Edit2, Trash2, Search, Loader2, AlertCircle, RefreshCw, X, Upload, Image as ImageIcon } from 'lucide-react';
 import { useAuthStore } from '../../store';
 import { formatPrice } from '../../components/ui';
 import { API_BASE } from '../../lib/api';
@@ -19,6 +19,7 @@ const EMPTY_FORM = {
   stock: '0',
   thumbnail: '',
   images: '',
+  imageFiles: [],
 };
 
 function slugify(text) {
@@ -37,6 +38,7 @@ export function AdminProducts() {
   const [formError, setFormError] = useState('');
   const [formSaving, setFormSaving] = useState(false);
   const [deletingId, setDeletingId] = useState(null);
+  const [uploadingImages, setUploadingImages] = useState(false);
 
   const authHeader = { Authorization: `Bearer ${token}` };
 
@@ -86,6 +88,7 @@ export function AdminProducts() {
       stock: product.stock ?? 0,
       thumbnail: product.thumbnail || '',
       images: Array.isArray(product.images) ? product.images.join('\n') : '',
+      imageFiles: [],
     });
     setFormError('');
     setShowForm(true);
@@ -101,6 +104,25 @@ export function AdminProducts() {
 
     setFormSaving(true);
     try {
+      let imageUrls = formData.images.split(/\n|,/).map(url => url.trim()).filter(Boolean);
+
+      if (formData.imageFiles.length) {
+        setUploadingImages(true);
+        const uploadData = new FormData();
+        formData.imageFiles.forEach((file) => uploadData.append('images', file));
+
+        const uploadRes = await fetch(`${API}/admin/uploads/images`, {
+          method: 'POST',
+          headers: authHeader,
+          body: uploadData,
+        });
+        const uploadJson = await uploadRes.json();
+        if (!uploadRes.ok) throw new Error(uploadJson.message || 'Image upload failed');
+
+        imageUrls = [...imageUrls, ...(uploadJson.images || []).map((image) => image.url)];
+        setUploadingImages(false);
+      }
+
       const payload = {
         ...formData,
         slug: formData.slug || slugify(formData.name),
@@ -109,8 +131,8 @@ export function AdminProducts() {
         badge: formData.badge || null,
         stock: Number(formData.stock),
         inStock: Number(formData.stock) > 0 && formData.inStock,
-        thumbnail: formData.thumbnail.trim() || undefined,
-        images: formData.images.split(/\n|,/).map(url => url.trim()).filter(Boolean),
+        thumbnail: imageUrls[0] || formData.thumbnail.trim() || undefined,
+        images: imageUrls,
       };
 
       let res;
@@ -134,6 +156,7 @@ export function AdminProducts() {
       setShowForm(false);
       await fetchProducts();
     } catch (err) {
+      setUploadingImages(false);
       setFormError(err.message);
     } finally {
       setFormSaving(false);
@@ -408,9 +431,9 @@ export function AdminProducts() {
                   />
                 </div>
                 <div>
-                  <label className="block text-xs text-gray-500 mb-1.5 font-medium">Thumbnail URL</label>
+                  <label className="block text-xs text-gray-500 mb-1.5 font-medium">Thumbnail URL (optional)</label>
                   <input
-                    placeholder="https://..."
+                    placeholder="Auto-filled after upload"
                     type="url"
                     value={formData.thumbnail}
                     onChange={setF('thumbnail')}
@@ -419,16 +442,47 @@ export function AdminProducts() {
                 </div>
               </div>
 
+              <div className="border border-dashed border-accent/50 rounded-xl p-4 bg-bg">
+                <label className="flex items-center gap-2 text-xs text-primary font-semibold mb-2">
+                  <ImageIcon size={15} className="text-accent" />
+                  Product Images
+                </label>
+                <label className="flex items-center justify-center gap-2 min-h-[110px] border border-border rounded-lg bg-surface cursor-pointer hover:border-accent transition-colors">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    multiple
+                    className="sr-only"
+                    onChange={(e) => setFormData((f) => ({ ...f, imageFiles: Array.from(e.target.files || []) }))}
+                  />
+                  <span className="text-sm text-primary flex items-center gap-2">
+                    <Upload size={17} className="text-accent" />
+                    {formData.imageFiles.length
+                      ? `${formData.imageFiles.length} image(s) selected`
+                      : 'Select images from your device'}
+                  </span>
+                </label>
+                <p className="text-[11px] text-muted mt-2">JPG, PNG or WebP • up to 8 images • 8 MB each. Images are uploaded to Cloudinary when you save.</p>
+                {formData.imageFiles.length > 0 && (
+                  <div className="flex flex-wrap gap-2 mt-3">
+                    {formData.imageFiles.map((file) => (
+                      <span key={file.name + file.size} className="text-[11px] bg-blush text-primary px-2 py-1 rounded">
+                        {file.name}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+
               <div>
-                <label className="block text-xs text-gray-500 mb-1.5 font-medium">Product Image URLs</label>
+                <label className="block text-xs text-gray-500 mb-1.5 font-medium">Existing Image URLs</label>
                 <textarea
-                  placeholder="One image URL per line"
-                  rows={3}
+                  placeholder="Optional: one URL per line"
+                  rows={2}
                   value={formData.images}
                   onChange={setF('images')}
                   className="w-full border border-gray-200 px-3 py-2.5 text-sm focus:outline-none focus:border-gold resize-none"
                 />
-                <p className="text-[11px] text-gray-400 mt-1">Add direct image URLs, one per line. The first image is used when a thumbnail is not provided.</p>
               </div>
 
               <div>
@@ -475,7 +529,7 @@ export function AdminProducts() {
                 className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-charcoal text-ivory text-sm font-medium hover:bg-accent transition-colors disabled:opacity-60"
               >
                 {formSaving && <Loader2 size={14} className="animate-spin" />}
-                {formSaving ? 'Saving…' : editProduct ? 'Update Product' : 'Create Product'}
+                {uploadingImages ? 'Uploading images…' : formSaving ? 'Saving…' : editProduct ? 'Update Product' : 'Create Product'}
               </button>
               <button
                 onClick={() => setShowForm(false)}
