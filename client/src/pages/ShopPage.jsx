@@ -4,7 +4,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { SlidersHorizontal, X, Sparkles, Filter } from 'lucide-react';
 import { ProductCard } from '../components/product/ProductCard';
 import { ScrollReveal } from '../components/ui/ScrollReveal';
-import { products, occasions } from '../data';
+import { occasions } from '../data';
+import { API_BASE } from '../lib/api';
 
 const sortOptions = [
   { label: 'Recommended', value: 'recommended' },
@@ -17,6 +18,33 @@ export function ShopPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [activeOccasion, setActiveOccasion] = useState(searchParams.get('occasion') || 'all');
   const [sortBy, setSortBy] = useState('recommended');
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const normalizeProduct = (p) => ({
+    ...p,
+    id: p._id || p.id,
+    image: p.thumbnail || p.images?.[0],
+    image2: p.images?.[1] || p.thumbnail || p.images?.[0],
+    reviews: p.reviewCount ?? p.reviews ?? 0,
+    categories: (p.categories || []).map((c) => typeof c === 'string' ? c : c.slug).filter(Boolean),
+    variants: (p.variants || []).map((v) => typeof v === 'string' ? v : v.label),
+  });
+
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        const res = await fetch(`${API_BASE}/products?limit=100`);
+        const data = await res.json();
+        setProducts((data.products || []).map(normalizeProduct));
+      } catch (error) {
+        console.error('Failed to load products:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadProducts();
+  }, []);
 
   const filtered = products
     .filter((p) => activeOccasion === 'all' || p.categories.includes(activeOccasion))
@@ -110,6 +138,9 @@ export function ShopPage() {
         </div>
 
         {/* Product Grid or Friendly Empty State */}
+        {loading ? (
+          <div className="py-20 text-center text-muted">Loading curated gifts…</div>
+        ) : (
         <AnimatePresence mode="wait">
           {filtered.length === 0 ? (
             <motion.div
@@ -143,6 +174,7 @@ export function ShopPage() {
             </motion.div>
           )}
         </AnimatePresence>
+        )}
       </div>
     </main>
   );
