@@ -39,9 +39,9 @@ export function AdminLayout() {
           {navItems.map(({ icon: Icon, label, href }) => {
             const active = location.pathname === href;
             return (
-              <Link key={href} to={href} className={clsx('flex items-center gap-3 px-4 py-3 mx-2 rounded-sm transition-all duration-200 group min-h-[44px]', active ? 'bg-[#D4AF37]/20 text-[#D4AF37]' : 'text-[#F7F3EC] hover:text-[#D4AF37] hover:bg-white/10')}>
+              <Link key={href} to={href} className={clsx('flex items-center gap-3 px-4 py-3 mx-2 rounded-sm transition-all duration-200 group min-h-[44px]', active ? 'bg-[#D4AF37]/20 text-[#D4AF37]' : 'text-white hover:text-[#D4AF37] hover:bg-white/10')}>
                 <Icon size={18} strokeWidth={1.5} />
-                {sidebarOpen && <span className="text-sm font-medium">{label}</span>}
+                {sidebarOpen && <span className="text-sm font-medium text-white group-hover:text-[#D4AF37]">{label}</span>}
                 {sidebarOpen && active && <ChevronRight size={14} className="ml-auto" />}
               </Link>
             );
