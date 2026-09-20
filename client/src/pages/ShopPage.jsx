@@ -17,6 +17,7 @@ const sortOptions = [
 export function ShopPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [activeOccasion, setActiveOccasion] = useState(searchParams.get('occasion') || 'all');
+  const personalisedOnly = searchParams.get('personalised') === 'true';
   const [sortBy, setSortBy] = useState('recommended');
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -47,7 +48,7 @@ export function ShopPage() {
   }, []);
 
   const filtered = products
-    .filter((p) => activeOccasion === 'all' || p.categories.includes(activeOccasion))
+    .filter((p) => (!personalisedOnly || p.personalisable) && (activeOccasion === 'all' || p.categories.includes(activeOccasion)))
     .sort((a, b) => {
       if (sortBy === 'price-asc') return a.price - b.price;
       if (sortBy === 'price-desc') return b.price - a.price;
@@ -79,11 +80,11 @@ export function ShopPage() {
         <div className="container-gokana text-center relative z-10 max-w-2xl mx-auto">
           <p className="label-text text-accent mb-3 flex items-center justify-center gap-2">
             <Sparkles size={14} />
-            The Complete Atelier
+            {personalisedOnly ? 'Personalisation Atelier' : 'The Complete Atelier'}
           </p>
           <h1 className="heading-xl text-surface">All Curated Gifts</h1>
           <p className="body-text text-surface/70 mt-4 leading-relaxed">
-            Thoughtfully selected and handcrafted gifts for every milestone, celebration, and heartfelt occasion.
+            {personalisedOnly ? 'Gifts you can make uniquely theirs with names, notes, and custom details.' : 'Thoughtfully selected and handcrafted gifts for every milestone, celebration, and heartfelt occasion.'}
           </p>
         </div>
       </section>
