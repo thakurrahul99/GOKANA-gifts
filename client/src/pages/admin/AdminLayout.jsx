@@ -39,7 +39,7 @@ export function AdminLayout() {
           {navItems.map(({ icon: Icon, label, href }) => {
             const active = location.pathname === href;
             return (
-              <Link key={href} to={href} className={clsx('flex items-center gap-3 px-4 py-3 mx-2 rounded-sm transition-all duration-200 group min-h-[44px]', active ? 'bg-[#D4AF37]/20 text-[#D4AF37]' : 'text-white hover:text-[#D4AF37] hover:bg-white/10')}>
+              <Link key={href} to={href} className={clsx('flex items-center gap-3 px-4 py-3 mx-2 rounded-sm transition-all duration-200 group min-h-[44px]', active ? 'bg-[#D4AF37]/20 text-[#D4AF37]' : 'text-[#F7F3EC] hover:text-[#D4AF37] hover:bg-white/10')}>
                 <Icon size={18} strokeWidth={1.5} />
                 {sidebarOpen && <span className="text-sm font-medium">{label}</span>}
                 {sidebarOpen && active && <ChevronRight size={14} className="ml-auto" />}
@@ -54,7 +54,7 @@ export function AdminLayout() {
       </aside>
       <div className="flex-1 flex flex-col overflow-hidden">
         <header className="bg-[#0B1F3A] border-b border-[#1E3A5F] px-6 py-4 flex items-center gap-4 shadow-sm">
-          <button onClick={() => setSidebarOpen(!sidebarOpen)} className="text-white hover:text-[#D4AF37] transition-colors p-1 min-h-[40px] min-w-[40px] flex items-center justify-center" aria-label={sidebarOpen ? 'Collapse sidebar' : 'Expand sidebar'}>{sidebarOpen ? <X size={20} /> : <Menu size={20} />}</button>
+          <button onClick={() => setSidebarOpen(!sidebarOpen)} className="text-[#F7F3EC] hover:text-[#D4AF37] transition-colors p-1 min-h-[40px] min-w-[40px] flex items-center justify-center" aria-label={sidebarOpen ? 'Collapse sidebar' : 'Expand sidebar'}>{sidebarOpen ? <X size={20} /> : <Menu size={20} />}</button>
           <h1 className="font-sans text-sm font-semibold text-white">{navItems.find(n => n.href === location.pathname)?.label || 'Admin'}</h1>
           <div className="ml-auto flex items-center gap-3"><Link to="/" target="_blank" className="text-xs text-[#D4AF37] hover:underline font-medium">View Store ↗</Link></div>
         </header>
