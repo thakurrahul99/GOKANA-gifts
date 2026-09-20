@@ -1,14 +1,34 @@
-import { useRef } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { ScrollReveal, AnimatedHeading } from '../ui/ScrollReveal';
 import { ProductCard } from '../product/ProductCard';
-import { products } from '../../data';
+import { API_BASE } from '../../lib/api';
 
 export function Bestsellers() {
   const scrollRef = useRef(null);
-  const bestsellers = products.filter((p) => p.tags.includes('bestseller'));
-  const carouselItems = [...bestsellers, ...products.slice(0, 2)];
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    fetch(`${API_BASE}/products?limit=100`)
+      .then((res) => res.json())
+      .then((data) => {
+        const normalized = (data.products || []).map((p) => ({
+          ...p,
+          id: p._id || p.id,
+          image: p.thumbnail || p.images?.[0],
+          image2: p.images?.[1] || p.thumbnail || p.images?.[0],
+          tags: p.tags || [],
+          categories: (p.categories || []).map((cat) => typeof cat === 'string' ? cat : cat.slug).filter(Boolean),
+          variants: (p.variants || []).map((v) => typeof v === 'string' ? v : v.label),
+        }));
+        setProducts(normalized);
+      })
+      .catch(() => setProducts([]));
+  }, []);
+
+  const bestsellers = products.filter((p) => p.tags.includes('bestseller') || p.badge === 'Bestseller');
+  const carouselItems = [...bestsellers, ...products.filter((p) => !bestsellers.some((b) => b.id === p.id)).slice(0, 2)];
 
   const scroll = (dir) => {
     const container = scrollRef.current;
