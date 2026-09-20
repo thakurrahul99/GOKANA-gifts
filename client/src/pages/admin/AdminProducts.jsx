@@ -34,6 +34,7 @@ function slugify(text) {
 export function AdminProducts() {
   const { token } = useAuthStore();
   const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [search, setSearch] = useState('');
@@ -48,6 +49,16 @@ export function AdminProducts() {
   const authHeader = { Authorization: `Bearer ${token}` };
 
   // ── Fetch products from backend ─────────────────────────────────────────
+  const fetchCategories = async () => {
+    try {
+      const res = await fetch(`${API}/categories`);
+      const data = await res.json();
+      if (res.ok) setCategories(data.categories || []);
+    } catch (err) {
+      console.error('Failed to load categories', err);
+    }
+  };
+
   const fetchProducts = async () => {
     setLoading(true);
     setError('');
@@ -63,7 +74,10 @@ export function AdminProducts() {
     }
   };
 
-  useEffect(() => { fetchProducts(); }, []);
+  useEffect(() => {
+    fetchProducts();
+    fetchCategories();
+  }, []);
 
   // ── Filter ───────────────────────────────────────────────────────────────
   const filtered = products.filter(p =>
@@ -73,7 +87,7 @@ export function AdminProducts() {
   // ── Open form for Add / Edit ─────────────────────────────────────────────
   const openAdd = () => {
     setEditProduct(null);
-    setFormData(EMPTY_FORM);
+    setFormData({ ...EMPTY_FORM, categories: [] });
     setFormError('');
     setShowForm(true);
   };
@@ -88,6 +102,9 @@ export function AdminProducts() {
       price: product.price || '',
       originalPrice: product.originalPrice || '',
       badge: product.badge || '',
+      categories: Array.isArray(product.categories)
+        ? product.categories.map((category) => category?._id || category).filter(Boolean)
+        : [],
       inStock: product.inStock ?? true,
       isFeatured: product.isFeatured ?? false,
       personalisable: product.personalisable ?? false,
@@ -136,6 +153,7 @@ export function AdminProducts() {
         price: Number(formData.price),
         originalPrice: formData.originalPrice ? Number(formData.originalPrice) : undefined,
         badge: formData.badge || null,
+        categories: formData.categories || [],
         stock: Number(formData.stock),
         // The admin checkbox is the source of truth for availability.
         // If In Stock is checked while stock is 0, the UI handler keeps stock at 1.
@@ -496,6 +514,34 @@ export function AdminProducts() {
                   onChange={setF('images')}
                   className="w-full border border-gray-200 px-3 py-2.5 text-sm focus:outline-none focus:border-gold resize-none"
                 />
+              </div>
+
+              <div>
+                <label className="block text-xs text-gray-500 mb-1.5 font-medium">Gift Categories / Occasions</label>
+                <div className="grid grid-cols-2 gap-2 rounded-lg border border-gray-200 p-3 bg-white">
+                  {categories.length > 0 ? categories.map((category) => {
+                    const checked = formData.categories?.includes(category._id);
+                    return (
+                      <label key={category._id} className="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={checked}
+                          onChange={() => setFormData((f) => ({
+                            ...f,
+                            categories: checked
+                              ? f.categories.filter((id) => id !== category._id)
+                              : [...(f.categories || []), category._id],
+                          }))}
+                          className="w-4 h-4 accent-[#D4AF37]"
+                        />
+                        <span>{category.emoji ? category.emoji + ' ' : ''}{category.name}</span>
+                      </label>
+                    );
+                  }) : (
+                    <p className="col-span-2 text-xs text-muted">No active categories found.</p>
+                  )}
+                </div>
+                <p className="text-[11px] text-muted mt-1.5">Select all occasions that apply, such as Birthday, Anniversary, Wedding or Diwali.</p>
               </div>
 
               <div>
