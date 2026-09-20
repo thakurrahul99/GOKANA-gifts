@@ -1,71 +1,87 @@
 import { create } from 'zustand';
-import { persist, createJSONStorage } from 'zustand/middleware';
+import { persist } from 'zustand/middleware';
 
-const cartStorage = createJSONStorage(() => localStorage);
+const CART_STORAGE_KEY = 'gokana-cart-items';
 
-export const useCartStore = create(
-  persist(
-    (set, get) => ({
-      items: [],
-      isOpen: false,
+const loadCartItems = () => {
+  if (typeof window === 'undefined') return [];
+  try {
+    const raw = window.localStorage.getItem(CART_STORAGE_KEY);
+    const parsed = raw ? JSON.parse(raw) : [];
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+};
 
-      openCart: () => set({ isOpen: true }),
-      closeCart: () => set({ isOpen: false }),
-      toggleCart: () => set((s) => ({ isOpen: !s.isOpen })),
+const saveCartItems = (items) => {
+  if (typeof window === 'undefined') return;
+  try {
+    window.localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(items));
+  } catch {
+    // Ignore storage errors so cart actions still work in the current session.
+  }
+};
 
-      addItem: (product, variant = null, qty = 1, personalisation = null) => {
-        const { items } = get();
-        const key = `${product.id}-${variant}`;
-        const existing = items.find((i) => i.key === key);
-        if (existing) {
-          set({
-            items: items.map((i) =>
-              i.key === key ? { ...i, qty: i.qty + qty } : i
-            ),
-            isOpen: true,
-          });
-        } else {
-          set({
-            items: [...items, { key, product, variant, qty, personalisation }],
-            isOpen: true,
-          });
-        }
-      },
+export const useCartStore = create((set, get) => {
+  const setItems = (items, extra = {}) => {
+    saveCartItems(items);
+    set({ items, ...extra });
+  };
 
-      removeItem: (key) =>
-        set((s) => ({ items: s.items.filter((i) => i.key !== key) })),
+  return {
+    items: loadCartItems(),
+    isOpen: false,
 
-      updateQty: (key, qty) => {
-        if (qty < 1) return get().removeItem(key);
-        set((s) => ({
-          items: s.items.map((i) => (i.key === key ? { ...i, qty } : i)),
-        }));
-      },
+    openCart: () => set({ isOpen: true }),
+    closeCart: () => set({ isOpen: false }),
+    toggleCart: () => set((s) => ({ isOpen: !s.isOpen })),
 
-      clearCart: () => set({ items: [] }),
+    addItem: (product, variant = null, qty = 1, personalisation = null) => {
+      const { items } = get();
+      const key = String(product.id) + '-' + String(variant);
+      const existing = items.find((i) => i.key === key);
 
-      get itemCount() {
-        return get().items.reduce((acc, i) => acc + i.qty, 0);
-      },
+      if (existing) {
+        const nextItems = items.map((i) =>
+          i.key === key ? { ...i, qty: i.qty + qty } : i
+        );
+        setItems(nextItems, { isOpen: true });
+      } else {
+        setItems(
+          [...items, { key, product, variant, qty, personalisation }],
+          { isOpen: true }
+        );
+      }
+    },
 
-      getSubtotal: () =>
-        get().items.reduce((acc, i) => acc + i.product.price * i.qty, 0),
-    }),
-    {
-      name: 'gokana-cart',
-      storage: cartStorage,
-      partialize: (state) => ({
-        items: state.items,
-      }),
-      version: 1,
-      merge: (persistedState, currentState) => ({
-        ...currentState,
-        items: Array.isArray(persistedState?.items) ? persistedState.items : currentState.items,
-        isOpen: false,
-      }),
-    }
-  )
-);
+    removeItem: (key) => {
+      const nextItems = get().items.filter((i) => i.key !== key);
+      setItems(nextItems);
+    },
+
+    updateQty: (key, qty) => {
+      if (qty < 1) {
+        get().removeItem(key);
+        return;
+      }
+
+      const nextItems = get().items.map((i) =>
+        i.key === key ? { ...i, qty } : i
+      );
+      setItems(nextItems);
+    },
+
+    clearCart: () => setItems([]),
+
+    get itemCount() {
+      return get().items.reduce((acc, i) => acc + i.qty, 0);
+    },
+
+    getSubtotal: () =>
+      get().items.reduce((acc, i) => acc + i.product.price * i.qty, 0),
+  };
+});
 
 export const useWishlistStore = create(
   persist(
