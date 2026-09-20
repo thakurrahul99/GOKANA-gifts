@@ -15,9 +15,9 @@ import { formatPrice } from "../ui";
 import { products as allProducts } from "../../data";
 
 export function CartDrawer() {
-  const { isOpen, closeCart, items, updateQty, removeItem, subtotal } =
-    useCartStore();
+  const { isOpen, closeCart, items, updateQty, removeItem } = useCartStore();
   const drawerRef = useRef(null);
+  const subtotal = items.reduce((acc, item) => acc + item.product.price * item.qty, 0);
 
   const FREE_SHIPPING_THRESHOLD = 999;
   const shipping = subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : 99;
