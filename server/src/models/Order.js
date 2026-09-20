@@ -7,12 +7,7 @@ const orderItemSchema = new mongoose.Schema({
   price: { type: Number, required: true },
   qty: { type: Number, required: true, min: 1 },
   variant: String,
-  personalisation: {
-    name: String,
-    message: String,
-    photo: String,
-    note: String,
-  },
+  personalisation: { name: String, message: String, photo: String, note: String },
 });
 
 const statusHistorySchema = new mongoose.Schema({
@@ -23,13 +18,11 @@ const statusHistorySchema = new mongoose.Schema({
 });
 
 const orderSchema = new mongoose.Schema({
-  orderId: { type: String, unique: true }, // GKN-XXXXXX
+  orderId: { type: String, unique: true },
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   guestEmail: String,
   guestPhone: String,
-
   items: [orderItemSchema],
-
   shippingAddress: {
     name: { type: String, required: true },
     phone: { type: String, required: true },
@@ -39,7 +32,6 @@ const orderSchema = new mongoose.Schema({
     state: { type: String, required: true },
     pincode: { type: String, required: true },
   },
-
   billing: {
     subtotal: { type: Number, required: true },
     shippingCharge: { type: Number, default: 0 },
@@ -47,7 +39,6 @@ const orderSchema = new mongoose.Schema({
     total: { type: Number, required: true },
     couponCode: String,
   },
-
   payment: {
     method: { type: String, enum: ['online', 'cod', 'whatsapp'], default: 'online' },
     status: { type: String, enum: ['pending', 'paid', 'failed', 'refunded'], default: 'pending' },
@@ -56,37 +47,27 @@ const orderSchema = new mongoose.Schema({
     razorpaySignature: String,
     paidAt: Date,
   },
-
   status: {
     type: String,
     enum: ['PENDING', 'CONFIRMED', 'PROCESSING', 'PACKED', 'SHIPPED', 'OUT_FOR_DELIVERY', 'DELIVERED', 'CANCELLED', 'RETURNED'],
     default: 'PENDING',
   },
-
   statusHistory: [statusHistorySchema],
-
-  tracking: {
-    provider: String,
-    trackingNumber: String,
-    trackingUrl: String,
-  },
-
+  tracking: { provider: String, trackingNumber: String, trackingUrl: String },
   giftMessage: String,
   specialInstructions: String,
-
   expectedDelivery: Date,
   deliveredAt: Date,
   cancelledAt: Date,
   cancelReason: String,
 }, { timestamps: true });
 
-// Auto-generate order ID
-orderSchema.pre('save', async function (next) {
+// Async document middleware: use the promise-based form instead of the legacy next callback.
+orderSchema.pre('save', async function () {
   if (!this.orderId) {
     const random = Math.random().toString(36).slice(2, 8).toUpperCase();
     this.orderId = `GKN-${random}`;
   }
-  next();
 });
 
 orderSchema.index({ user: 1 });
