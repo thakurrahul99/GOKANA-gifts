@@ -1,16 +1,16 @@
 // Product & occasion data used throughout the app
 
-import heroImg from '../assets/images/hero.jpg';
-import heroLuxuryImg from '../assets/images/hero_luxury.jpg';
-import brandStoryImg from '../assets/images/brand_story.jpg';
-import birthdayImg from '../assets/images/occasion_birthday.jpg';
-import diwaliImg from '../assets/images/occasion_diwali.jpg';
-import anniversaryImg from '../assets/images/occasion_anniversary.jpg';
-import weddingImg from '../assets/images/occasion_wedding.jpg';
-import chocolatesImg from '../assets/images/product_chocolates.jpg';
-import candlesImg from '../assets/images/product_candles.jpg';
-import hamperImg from '../assets/images/product_hamper.jpg';
-import skincareImg from '../assets/images/product_skincare.jpg';
+import heroImg from '../assets/images/hero.webp';
+import heroLuxuryImg from '../assets/images/hero_luxury.webp';
+import brandStoryImg from '../assets/images/brand_story.webp';
+import birthdayImg from '../assets/images/occasion_birthday.webp';
+import diwaliImg from '../assets/images/occasion_diwali.webp';
+import anniversaryImg from '../assets/images/occasion_anniversary.webp';
+import weddingImg from '../assets/images/occasion_wedding.webp';
+import chocolatesImg from '../assets/images/product_chocolates.webp';
+import candlesImg from '../assets/images/product_candles.webp';
+import hamperImg from '../assets/images/product_hamper.webp';
+import skincareImg from '../assets/images/product_skincare.webp';
 
 export { heroImg, heroLuxuryImg, brandStoryImg, birthdayImg, diwaliImg, anniversaryImg, weddingImg };
 
