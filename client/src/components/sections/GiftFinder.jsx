@@ -318,6 +318,8 @@ export function GiftFinder() {
                                 src={product.image}
                                 alt={product.name}
                                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                                loading="lazy"
+                                decoding="async"
                               />
                             </Link>
                             <div className="p-4">

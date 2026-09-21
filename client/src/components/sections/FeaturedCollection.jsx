@@ -4,17 +4,16 @@ import { ScrollReveal, AnimatedHeading } from '../ui/ScrollReveal';
 import { Divider } from '../ui';
 import { ProductCard } from '../product/ProductCard';
 import { useEffect, useState } from 'react';
-import { API_BASE } from '../../lib/api';
+import { fetchProductsWithCache } from '../../lib/api';
 import { products as staticProducts } from '../../data';
 
 export function FeaturedCollection() {
   const [featured, setFeatured] = useState([]);
 
   useEffect(() => {
-    fetch(`${API_BASE}/products?limit=100&featured=true`)
-      .then((res) => res.json())
+    fetchProductsWithCache('featured-100', '?limit=100&featured=true')
       .then((data) => {
-        const products = (data.products || []).map((p) => ({
+        const products = (data?.products || []).map((p) => ({
           ...p,
           id: p._id || p.id,
           image: p.thumbnail || p.images?.[0],

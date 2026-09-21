@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Plus, Edit2, Trash2, Search, Loader2, AlertCircle, RefreshCw, X, Upload, Image as ImageIcon, ChevronDown, Check } from 'lucide-react';
 import { useAuthStore } from '../../store';
 import { formatPrice } from '../../components/ui';
-import { API_BASE } from '../../lib/api';
+import { API_BASE, invalidateProductCache } from '../../lib/api';
 
 const API = API_BASE;
 
@@ -183,6 +183,7 @@ export function AdminProducts() {
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || 'Save failed');
 
+      invalidateProductCache();
       setShowForm(false);
       await fetchProducts();
     } catch (err) {
@@ -204,6 +205,7 @@ export function AdminProducts() {
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || 'Delete failed');
+      invalidateProductCache();
       // Remove from local list
       setProducts(prev => prev.filter(p => p._id !== product._id));
     } catch (err) {
@@ -311,7 +313,7 @@ export function AdminProducts() {
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-3">
                         {product.thumbnail ? (
-                          <img src={product.thumbnail} alt="" className="w-10 h-10 object-cover rounded border border-[rgba(197,160,89,0.15)]" />
+                          <img src={product.thumbnail} alt="" className="w-10 h-10 object-cover rounded border border-[rgba(197,160,89,0.15)]" loading="lazy" decoding="async" />
                         ) : (
                           <div className="w-10 h-10 bg-[#12100E] border border-[rgba(197,160,89,0.2)] flex items-center justify-center text-[#A39A8E] text-xs rounded">IMG</div>
                         )}

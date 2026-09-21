@@ -35,6 +35,7 @@ function InstagramPost({ post, className }) {
         alt="GŌKANA luxury unboxing moment"
         className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-108"
         loading="lazy"
+        decoding="async"
       />
       {/* Overlay */}
       <div className="absolute inset-0 bg-[#12100E]/70 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">

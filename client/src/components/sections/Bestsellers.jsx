@@ -2,7 +2,7 @@ import { useRef, useEffect, useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { ScrollReveal, AnimatedHeading } from '../ui/ScrollReveal';
 import { ProductCard } from '../product/ProductCard';
-import { API_BASE } from '../../lib/api';
+import { fetchProductsWithCache } from '../../lib/api';
 import { products as defaultProducts } from '../../data';
 
 export function Bestsellers() {
@@ -14,10 +14,9 @@ export function Bestsellers() {
   const [draggedDistance, setDraggedDistance] = useState(0);
 
   useEffect(() => {
-    fetch(`${API_BASE}/products?limit=100`)
-      .then((res) => res.json())
+    fetchProductsWithCache('all-100', '?limit=100')
       .then((data) => {
-        if (data.products && data.products.length > 0) {
+        if (data?.products && data.products.length > 0) {
           const normalized = (data.products || []).map((p) => ({
             ...p,
             id: p._id || p.id,

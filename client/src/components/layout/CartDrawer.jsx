@@ -68,7 +68,7 @@ export function CartDrawer() {
                 <div className="space-y-4">
                   {items.map(({ key, product, variant, qty }) => (
                     <div key={key} className="flex gap-4 p-4 rounded-xl bg-[#181512] border border-[rgba(197,160,89,0.2)] shadow-sm">
-                      <Link to={`/products/${product.slug}`} onClick={closeCart} className="w-20 h-24 rounded-lg overflow-hidden bg-[#1F1A16] border border-[rgba(197,160,89,0.15)] flex-shrink-0"><img src={product.image} alt={product.name} className="w-full h-full object-cover" /></Link>
+                      <Link to={`/products/${product.slug}`} onClick={closeCart} className="w-20 h-24 rounded-lg overflow-hidden bg-[#1F1A16] border border-[rgba(197,160,89,0.15)] flex-shrink-0"><img src={product.image} alt={product.name} className="w-full h-full object-cover" loading="lazy" decoding="async" /></Link>
                       <div className="flex-1 flex flex-col justify-between">
                         <div>
                           <div className="flex items-start justify-between gap-2">

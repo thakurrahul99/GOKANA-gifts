@@ -82,3 +82,43 @@ export const api = {
   put:  (path, body, opts) => apiFetch(path, { ...opts, method: 'PUT', body }),
   del:  (path, opts) => apiFetch(path, { ...opts, method: 'DELETE' }),
 };
+
+// ── In-memory cache for public product queries (deduplication & short TTL) ──
+const productCache = new Map();
+const CACHE_TTL_MS = 60 * 1000;
+
+/**
+ * Shared fetcher for storefront product queries.
+ * Deduplicates in-flight requests and caches responses for 60s.
+ */
+export async function fetchProductsWithCache(queryKey = 'all-100', queryParams = '?limit=100') {
+  const now = Date.now();
+  const cached = productCache.get(queryKey);
+  if (cached?.data && now - cached.timestamp < CACHE_TTL_MS) {
+    return cached.data;
+  }
+  if (cached?.promise) {
+    return cached.promise;
+  }
+
+  const promise = (async () => {
+    try {
+      const data = await api.get(`/products${queryParams}`);
+      productCache.set(queryKey, { data, timestamp: Date.now() });
+      return data;
+    } catch (err) {
+      productCache.delete(queryKey);
+      throw err;
+    }
+  })();
+
+  productCache.set(queryKey, { promise, timestamp: now });
+  return promise;
+}
+
+/**
+ * Invalidate the shared product cache when admin creates, edits, or deletes products.
+ */
+export function invalidateProductCache() {
+  productCache.clear();
+}

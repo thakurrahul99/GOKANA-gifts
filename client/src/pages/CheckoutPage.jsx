@@ -569,6 +569,8 @@ export function CheckoutPage() {
                         src={product.image}
                         alt={product.name}
                         className="w-12 h-14 rounded-lg object-cover bg-[#1F1A16] border border-[rgba(197,160,89,0.15)] flex-shrink-0"
+                        loading="lazy"
+                        decoding="async"
                       />
                       <div className="flex-1 min-w-0">
                         <p className="font-serif text-sm font-light text-ivory truncate">{product.name}</p>

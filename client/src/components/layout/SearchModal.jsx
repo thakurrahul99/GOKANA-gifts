@@ -103,6 +103,8 @@ export function SearchModal({ isOpen, onClose }) {
                             src={product.image}
                             alt={product.name}
                             className="w-14 h-14 rounded-lg object-cover flex-shrink-0 border border-[rgba(197,160,89,0.15)]"
+                            loading="lazy"
+                            decoding="async"
                           />
                           <div className="flex-1 min-w-0">
                             <h4 className="font-serif text-base font-light text-ivory group-hover:text-accent transition-colors truncate">

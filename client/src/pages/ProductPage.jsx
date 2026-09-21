@@ -26,13 +26,13 @@ function ImageGallery({ images, productName }) {
       <div className="flex sm:flex-col gap-3 overflow-x-auto no-scrollbar sm:w-20 flex-shrink-0">
         {images.map((img, i) => (
           <button key={i} onClick={() => setActive(i)} aria-label={`View image ${i + 1} of ${productName}`} className={clsx('w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden border-2 transition-all duration-200 flex-shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent', active === i ? 'border-accent shadow-sm' : 'border-[rgba(197,160,89,0.25)] bg-[#181512] opacity-75 hover:opacity-100')}>
-            <img src={img} alt="" className="w-full h-full object-cover" />
+            <img src={img} alt="" className="w-full h-full object-cover" loading="lazy" decoding="async" />
           </button>
         ))}
       </div>
       <div className="flex-1 relative overflow-hidden rounded-2xl bg-[#181512] border border-[rgba(197,160,89,0.25)] aspect-[4/5] shadow-xl">
         <AnimatePresence mode="wait">
-          <motion.img key={active} src={images[active]} alt={productName} className="w-full h-full object-cover" initial={{ opacity: 0, scale: 1.02 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.35 }} />
+          <motion.img key={active} src={images[active]} alt={productName} className="w-full h-full object-cover" loading="eager" decoding="async" initial={{ opacity: 0, scale: 1.02 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.35 }} />
         </AnimatePresence>
       </div>
     </div>

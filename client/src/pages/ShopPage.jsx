@@ -5,7 +5,7 @@ import { SlidersHorizontal, X, Sparkles, Filter } from 'lucide-react';
 import { ProductCard } from '../components/product/ProductCard';
 import { ScrollReveal } from '../components/ui/ScrollReveal';
 import { occasions, products as staticProducts } from '../data';
-import { API_BASE } from '../lib/api';
+import { fetchProductsWithCache } from '../lib/api';
 
 const sortOptions = [
   { label: 'Recommended', value: 'recommended' },
@@ -35,9 +35,8 @@ export function ShopPage() {
   useEffect(() => {
     const loadProducts = async () => {
       try {
-        const res = await fetch(`${API_BASE}/products?limit=100`);
-        const data = await res.json();
-        if (data.products && data.products.length > 0) {
+        const data = await fetchProductsWithCache('all-100', '?limit=100');
+        if (data?.products && data.products.length > 0) {
           setProducts((data.products || []).map(normalizeProduct));
         }
       } catch (error) {

@@ -18,6 +18,7 @@ function OccasionCard({ occasion, index }) {
           alt={occasion.label}
           className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
           loading="lazy"
+          decoding="async"
         />
 
         {/* Cinematic Vignette Overlay */}

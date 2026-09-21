@@ -42,6 +42,8 @@ export function AboutPage() {
           src={brandStoryImg}
           alt="GŌKANA artisan gift workshop"
           className="absolute inset-0 w-full h-full object-cover opacity-25 mix-blend-luminosity"
+          loading="lazy"
+          decoding="async"
         />
         {/* Ambient champagne gold glow */}
         <div

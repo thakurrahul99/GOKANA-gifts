@@ -7,6 +7,7 @@ import { useCartStore, useWishlistStore } from '../../store';
 
 export function ProductCard({ product, index = 0 }) {
   const [hovered, setHovered] = useState(false);
+  const [hasHovered, setHasHovered] = useState(false);
   const [added, setAdded] = useState(false);
   const { addItem } = useCartStore();
   const { toggle, has } = useWishlistStore();
@@ -30,6 +31,11 @@ export function ProductCard({ product, index = 0 }) {
     toggle(product);
   };
 
+  const handleMouseEnter = () => {
+    setHovered(true);
+    if (!hasHovered) setHasHovered(true);
+  };
+
   return (
     <motion.article
       className="card-premium group relative flex flex-col justify-between"
@@ -37,7 +43,7 @@ export function ProductCard({ product, index = 0 }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.15 }}
       transition={{ duration: 0.5, delay: (index % 4) * 0.08, ease: [0.16, 1, 0.3, 1] }}
-      onMouseEnter={() => setHovered(true)}
+      onMouseEnter={handleMouseEnter}
       onMouseLeave={() => setHovered(false)}
     >
       <div>
@@ -53,10 +59,11 @@ export function ProductCard({ product, index = 0 }) {
             alt={product.name}
             className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
             loading="lazy"
+            decoding="async"
           />
 
-          {/* Secondary hover image if available */}
-          {product.image2 && (
+          {/* Secondary hover image if available (lazy mounted on first hover to save mobile bandwidth) */}
+          {product.image2 && hasHovered && (
             <img
               src={product.image2}
               alt={`${product.name} alternate view`}
@@ -64,6 +71,7 @@ export function ProductCard({ product, index = 0 }) {
                 hovered ? 'opacity-100' : 'opacity-0'
               }`}
               loading="lazy"
+              decoding="async"
               aria-hidden="true"
             />
           )}
@@ -95,7 +103,7 @@ export function ProductCard({ product, index = 0 }) {
           <button
             onClick={handleWishlist}
             aria-label={isWished ? `Remove ${product.name} from wishlist` : `Save ${product.name} to wishlist`}
-            className="absolute top-3 right-3 w-10 h-10 rounded-full bg-[#12100E]/80 backdrop-blur-xs border border-[rgba(197,160,89,0.3)] flex items-center justify-center text-ivory hover:text-accent hover:border-accent transition-all z-10 min-w-[40px] min-h-[40px] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent cursor-pointer"
+            className="absolute top-3 right-3 w-11 h-11 rounded-full bg-[#12100E]/80 backdrop-blur-xs border border-[rgba(197,160,89,0.3)] flex items-center justify-center text-ivory hover:text-accent hover:border-accent transition-all z-10 min-w-[44px] min-h-[44px] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent cursor-pointer"
           >
             <Heart
               size={17}
