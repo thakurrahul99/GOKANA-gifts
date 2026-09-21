@@ -14,10 +14,14 @@
     "moduleDetection": "force",
     "noEmit": true,
 
+    /* JS / JSX support */
+    "allowJs": true,
+    "jsx": "react-jsx",
+
     /* Linting */
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "erasableSyntaxOnly": true,
+    "erasableSyntaxOnly": false,
     "noFallthroughCasesInSwitch": true
   },
   "include": ["src"]
