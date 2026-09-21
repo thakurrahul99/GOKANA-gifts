@@ -103,7 +103,7 @@ export function ProductCard({ product, index = 0 }) {
           <button
             onClick={handleWishlist}
             aria-label={isWished ? `Remove ${product.name} from wishlist` : `Save ${product.name} to wishlist`}
-            className="absolute top-3 right-3 w-11 h-11 rounded-full bg-[#12100E]/80 backdrop-blur-xs border border-[rgba(197,160,89,0.3)] flex items-center justify-center text-ivory hover:text-accent hover:border-accent transition-all z-10 min-w-[44px] min-h-[44px] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent cursor-pointer"
+            className="absolute top-3 right-3 w-11 h-11 rounded-full bg-bg/80 backdrop-blur-xs border border-[rgba(197,160,89,0.3)] flex items-center justify-center text-ivory hover:text-accent hover:border-accent transition-all z-10 min-w-[44px] min-h-[44px] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent cursor-pointer"
           >
             <Heart
               size={17}
@@ -130,7 +130,7 @@ export function ProductCard({ product, index = 0 }) {
           </h3>
 
           {/* Short USP line */}
-          <p className="font-sans text-xs text-[#A39A8E] line-clamp-1 font-light">
+          <p className="font-sans text-xs text-muted line-clamp-1 font-light">
             {product.tagline || 'Handcrafted luxury gift hamper'}
           </p>
 
@@ -140,7 +140,7 @@ export function ProductCard({ product, index = 0 }) {
               {formatPrice(product.price)}
             </span>
             {product.originalPrice && (
-              <span className="font-sans text-xs text-[#6E665C] line-through">
+              <span className="font-sans text-xs text-muted-2 line-through">
                 {formatPrice(product.originalPrice)}
               </span>
             )}
@@ -154,8 +154,8 @@ export function ProductCard({ product, index = 0 }) {
         aria-label={`Add ${product.name} to bag`}
         className={`w-full py-2.5 px-4 rounded-[4px] font-sans text-[11px] font-semibold uppercase tracking-[0.14em] transition-all duration-200 flex items-center justify-center gap-2 min-h-[44px] cursor-pointer ${
           added
-            ? 'bg-accent-light text-[#12100E]'
-            : 'bg-accent text-[#12100E] hover:bg-accent-light active:scale-[0.98] shadow-xs'
+            ? 'bg-accent-light text-bg'
+            : 'bg-accent text-bg hover:bg-accent-light active:scale-[0.98] shadow-xs'
         }`}
       >
         {added ? (

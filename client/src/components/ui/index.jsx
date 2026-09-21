@@ -38,10 +38,10 @@ export function Rating({ value = 5, count, size = 'sm', className }) {
 
 export function Badge({ children, variant = 'default', className }) {
   const variantStyles = {
-    default: 'bg-[#1F1A16] text-ivory border border-[rgba(197,160,89,0.3)]',
+    default: 'bg-surface-alt text-ivory border border-[rgba(197,160,89,0.3)]',
     gold: 'bg-[rgba(197,160,89,0.18)] text-accent-light border border-[rgba(197,160,89,0.45)]',
     bestseller: 'bg-[rgba(197,160,89,0.18)] text-accent-light border border-[rgba(197,160,89,0.45)]',
-    new: 'bg-[#1F1A16] text-accent border border-[rgba(197,160,89,0.3)]',
+    new: 'bg-surface-alt text-accent border border-[rgba(197,160,89,0.3)]',
     sale: 'bg-[#2D1B18] text-[#F3A59B] border border-[#8C3B32]/40',
     limited: 'bg-[#2D1B18] text-[#F3A59B] border border-[#8C3B32]/40',
     champagne: 'bg-[rgba(197,160,89,0.2)] text-accent-light border border-[rgba(197,160,89,0.4)]',

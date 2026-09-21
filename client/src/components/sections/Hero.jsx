@@ -27,7 +27,7 @@ export function Hero() {
     <>
       <section
         ref={containerRef}
-        className="relative w-full min-h-[720px] h-screen max-h-[1050px] overflow-hidden bg-[#12100E]"
+        className="relative w-full min-h-[720px] h-screen max-h-[1050px] overflow-hidden bg-bg"
         aria-label="Hero Introduction"
       >
         {/* Parallax Cinematic Image */}
@@ -45,7 +45,7 @@ export function Hero() {
           {/* Cinematic Contrast Overlays — Left 40% darker for crystal clear typography */}
           <div className="absolute inset-0 bg-gradient-to-r from-[#0E0C0A] via-[#12100E]/75 md:via-[#12100E]/55 to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#12100E] via-transparent to-[#12100E]/60" />
-          <div className="absolute inset-0 bg-[#12100E]/20" />
+          <div className="absolute inset-0 bg-bg/20" />
         </motion.div>
 
         {/* Content — Positioned around 8% from left edge, vertically centered at 40-50% hero height */}
@@ -57,7 +57,7 @@ export function Hero() {
             <div className="w-full max-w-[650px] text-left flex flex-col items-start">
               {/* Trust Badge */}
               <motion.div
-                className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-[#1A1714]/85 backdrop-blur-md border border-[rgba(197,160,89,0.35)] shadow-[0_4px_20px_rgba(0,0,0,0.5)] text-ivory text-xs font-sans mb-6"
+                className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-primary-2/85 backdrop-blur-md border border-[rgba(197,160,89,0.35)] shadow-[0_4px_20px_rgba(0,0,0,0.5)] text-ivory text-xs font-sans mb-6"
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
@@ -148,14 +148,14 @@ export function Hero() {
 
       {/* ── TRUST / VALUE BAR (4 Pillars directly anchored below Hero) ── */}
       <aside
-        className="bg-[#181512] border-y border-[rgba(197,160,89,0.25)] py-6 relative z-10 -mt-px shadow-lg"
+        className="bg-bg-alt border-y border-[rgba(197,160,89,0.25)] py-6 relative z-10 -mt-px shadow-lg"
         aria-label="Trust and Guarantees"
       >
         <div className="container-gokana">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-0 divide-y lg:divide-y-0 lg:divide-x divide-[rgba(197,160,89,0.18)]">
             {/* 1. PREMIUM QUALITY */}
             <div className="flex items-center gap-3.5 lg:px-6 first:lg:pl-0">
-              <div className="w-10 h-10 rounded-full border border-[rgba(197,160,89,0.35)] bg-[#1F1A16] flex items-center justify-center text-accent flex-shrink-0">
+              <div className="w-10 h-10 rounded-full border border-[rgba(197,160,89,0.35)] bg-surface-alt flex items-center justify-center text-accent flex-shrink-0">
                 <Award size={19} strokeWidth={1.6} />
               </div>
               <div>
@@ -170,7 +170,7 @@ export function Hero() {
 
             {/* 2. BEAUTIFULLY PACKED */}
             <div className="flex items-center gap-3.5 pt-4 lg:pt-0 lg:px-6">
-              <div className="w-10 h-10 rounded-full border border-[rgba(197,160,89,0.35)] bg-[#1F1A16] flex items-center justify-center text-accent flex-shrink-0">
+              <div className="w-10 h-10 rounded-full border border-[rgba(197,160,89,0.35)] bg-surface-alt flex items-center justify-center text-accent flex-shrink-0">
                 <Gift size={19} strokeWidth={1.6} />
               </div>
               <div>
@@ -185,7 +185,7 @@ export function Hero() {
 
             {/* 3. PERSONALISATION */}
             <div className="flex items-center gap-3.5 pt-4 lg:pt-0 lg:px-6">
-              <div className="w-10 h-10 rounded-full border border-[rgba(197,160,89,0.35)] bg-[#1F1A16] flex items-center justify-center text-accent flex-shrink-0">
+              <div className="w-10 h-10 rounded-full border border-[rgba(197,160,89,0.35)] bg-surface-alt flex items-center justify-center text-accent flex-shrink-0">
                 <Sparkles size={19} strokeWidth={1.6} />
               </div>
               <div>
@@ -200,7 +200,7 @@ export function Hero() {
 
             {/* 4. FAST & RELIABLE */}
             <div className="flex items-center gap-3.5 pt-4 lg:pt-0 lg:px-6 last:lg:pr-0">
-              <div className="w-10 h-10 rounded-full border border-[rgba(197,160,89,0.35)] bg-[#1F1A16] flex items-center justify-center text-accent flex-shrink-0">
+              <div className="w-10 h-10 rounded-full border border-[rgba(197,160,89,0.35)] bg-surface-alt flex items-center justify-center text-accent flex-shrink-0">
                 <Truck size={19} strokeWidth={1.6} />
               </div>
               <div>

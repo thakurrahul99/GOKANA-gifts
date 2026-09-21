@@ -19,7 +19,7 @@ export function Newsletter() {
   };
 
   return (
-    <section className="section-py-sm bg-[#181512] text-ivory border-t border-[rgba(197,160,89,0.18)]" aria-labelledby="newsletter-heading">
+    <section className="section-py-sm bg-bg-alt text-ivory border-t border-[rgba(197,160,89,0.18)]" aria-labelledby="newsletter-heading">
       <div className="container-gokana">
         <div className="max-w-2xl mx-auto text-center">
           <ScrollReveal delay={0.1}>
@@ -32,7 +32,7 @@ export function Newsletter() {
           </AnimatedHeading>
 
           <ScrollReveal delay={0.25}>
-            <p className="font-sans text-sm md:text-base text-[#A39A8E] mb-8 max-w-md mx-auto leading-relaxed font-light">
+            <p className="font-sans text-sm md:text-base text-muted mb-8 max-w-md mx-auto leading-relaxed font-light">
               Be the first to explore seasonal festive curations, artisan collaborations, and exclusive member privileges.
             </p>
           </ScrollReveal>
@@ -57,7 +57,7 @@ export function Newsletter() {
                         if (error) setError('');
                       }}
                       placeholder="Enter your email address"
-                      className="flex-1 bg-[#12100E] border border-[rgba(197,160,89,0.25)] rounded-lg px-4 py-3 text-ivory placeholder:text-[#A39A8E]/60 font-sans text-sm focus:outline-none focus:border-accent transition-colors min-h-[44px]"
+                      className="flex-1 bg-bg border border-[rgba(197,160,89,0.25)] rounded-lg px-4 py-3 text-ivory placeholder:text-muted/60 font-sans text-sm focus:outline-none focus:border-accent transition-colors min-h-[44px]"
                       aria-label="Email address for newsletter"
                       required
                     />
@@ -80,7 +80,7 @@ export function Newsletter() {
                   key="success"
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="inline-flex items-center gap-2 px-6 py-4 rounded-xl bg-[#12100E] border border-accent/40 text-accent"
+                  className="inline-flex items-center gap-2 px-6 py-4 rounded-xl bg-bg border border-accent/40 text-accent"
                 >
                   <CheckCircle2 size={18} />
                   <span className="font-serif text-lg italic text-ivory">

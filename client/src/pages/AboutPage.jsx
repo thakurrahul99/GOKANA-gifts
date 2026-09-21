@@ -37,7 +37,7 @@ export function AboutPage() {
   return (
     <main className="bg-bg">
       {/* Hero — Luxury Dark full-bleed */}
-      <div className="relative h-[72vh] min-h-[440px] overflow-hidden bg-[#12100E] flex items-center justify-center">
+      <div className="relative h-[72vh] min-h-[440px] overflow-hidden bg-bg flex items-center justify-center">
         <img
           src={brandStoryImg}
           alt="GŌKANA artisan gift workshop"
@@ -74,7 +74,7 @@ export function AboutPage() {
             </motion.h1>
           </div>
           <motion.p
-            className="font-sans text-[#A39A8E] mt-6 text-base leading-relaxed max-w-lg mx-auto"
+            className="font-sans text-muted mt-6 text-base leading-relaxed max-w-lg mx-auto"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.9 }}
@@ -85,7 +85,7 @@ export function AboutPage() {
       </div>
 
       {/* Metrics Strip */}
-      <div className="bg-[#181512] border-b border-[rgba(197,160,89,0.18)]">
+      <div className="bg-bg-alt border-b border-[rgba(197,160,89,0.18)]">
         <div className="container-gokana">
           <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-[rgba(197,160,89,0.15)]">
             {metrics.map((m, i) => (
@@ -98,7 +98,7 @@ export function AboutPage() {
                 transition={{ delay: i * 0.1, duration: 0.5 }}
               >
                 <p className="font-serif text-3xl font-light text-accent mb-1">{m.value}</p>
-                <p className="font-sans text-xs text-[#A39A8E] uppercase tracking-wider">{m.label}</p>
+                <p className="font-sans text-xs text-muted uppercase tracking-wider">{m.label}</p>
               </motion.div>
             ))}
           </div>
@@ -106,7 +106,7 @@ export function AboutPage() {
       </div>
 
       {/* Story */}
-      <section className="section-py bg-[#12100E]">
+      <section className="section-py bg-bg">
         <div className="container-gokana max-w-3xl">
           <ScrollReveal>
             <p className="label-text text-accent mb-6 flex items-center gap-2">
@@ -120,7 +120,7 @@ export function AboutPage() {
           <ScrollReveal delay={0.3}>
             <Divider className="mb-8" />
           </ScrollReveal>
-          <ScrollReveal delay={0.35} className="space-y-5 body-text text-[#A39A8E] leading-relaxed">
+          <ScrollReveal delay={0.35} className="space-y-5 body-text text-muted leading-relaxed">
             <p>
               Our founder, Deepti Agarwal, had a habit: every birthday, anniversary, or festival, she'd spend hours searching for the perfect
               gift — and almost always settle for something generic that felt nothing like the person she was gifting.
@@ -139,7 +139,7 @@ export function AboutPage() {
       </section>
 
       {/* Values */}
-      <section className="section-py bg-[#181512] border-t border-[rgba(197,160,89,0.18)] relative overflow-hidden">
+      <section className="section-py bg-bg-alt border-t border-[rgba(197,160,89,0.18)] relative overflow-hidden">
         <div
           className="absolute inset-0 pointer-events-none opacity-20"
           style={{
@@ -164,14 +164,14 @@ export function AboutPage() {
               <motion.div
                 key={num}
                 variants={staggerItem}
-                className="border border-[rgba(197,160,89,0.2)] p-8 bg-[#12100E] rounded-xl hover:border-accent/50 transition-all duration-300 group shadow-lg"
+                className="border border-[rgba(197,160,89,0.2)] p-8 bg-bg rounded-xl hover:border-accent/50 transition-all duration-300 group shadow-lg"
               >
                 <div className="flex items-start justify-between mb-5">
                   <p className="font-serif text-5xl font-light text-accent/40">{num}</p>
                   <Icon size={20} className="text-accent/60 group-hover:text-accent transition-colors mt-1" />
                 </div>
                 <h3 className="font-serif text-xl font-light text-ivory mb-3">{title}</h3>
-                <p className="font-sans text-sm text-[#A39A8E] leading-relaxed">{desc}</p>
+                <p className="font-sans text-sm text-muted leading-relaxed">{desc}</p>
               </motion.div>
             ))}
           </StaggerReveal>

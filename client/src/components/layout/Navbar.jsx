@@ -107,7 +107,7 @@ export function Navbar({ onSearchOpen }) {
 
   // Header transitions from transparent overlay to dark espresso on scroll
   const navClasses = scrolled || !isHomePage
-    ? "bg-[#12100E]/95 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.6)] border-b border-[rgba(197,160,89,0.2)]"
+    ? "bg-bg/95 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.6)] border-b border-[rgba(197,160,89,0.2)]"
     : "bg-transparent border-b border-transparent";
 
   const transparentHomeTop = isHomePage && !scrolled;
@@ -196,7 +196,7 @@ export function Navbar({ onSearchOpen }) {
               onClick={onSearchOpen}
               aria-label="Open search dialog"
               className={clsx(
-                "min-w-[40px] min-h-[40px] flex items-center justify-center rounded-full transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent hover:bg-white/5 hover:!text-accent",
+                "min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent hover:bg-white/5 hover:!text-accent",
                 textColor,
               )}
             >
@@ -208,7 +208,7 @@ export function Navbar({ onSearchOpen }) {
               to={user ? "/account" : "/login"}
               aria-label={user ? "My Account" : "Sign in to account"}
               className={clsx(
-                "min-w-[40px] min-h-[40px] flex items-center justify-center rounded-full transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent hover:bg-white/5 hover:!text-accent",
+                "min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent hover:bg-white/5 hover:!text-accent",
                 textColor,
               )}
             >
@@ -220,13 +220,13 @@ export function Navbar({ onSearchOpen }) {
               to="/wishlist"
               aria-label={`Wishlist, ${wishCount} items`}
               className={clsx(
-                "relative min-w-[40px] min-h-[40px] flex items-center justify-center rounded-full transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent hover:bg-white/5 hover:!text-accent",
+                "relative min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent hover:bg-white/5 hover:!text-accent",
                 textColor,
               )}
             >
               <Heart size={18} strokeWidth={1.8} />
               {wishCount > 0 && (
-                <span className="absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-accent text-[#12100E] text-[9px] font-bold font-sans flex items-center justify-center">
+                <span className="absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-accent text-bg text-[9px] font-bold font-sans flex items-center justify-center">
                   {wishCount > 9 ? "9+" : wishCount}
                 </span>
               )}
@@ -237,7 +237,7 @@ export function Navbar({ onSearchOpen }) {
               onClick={openCart}
               aria-label={`Open shopping cart, ${cartCount} items`}
               className={clsx(
-                "relative min-w-[40px] min-h-[40px] flex items-center justify-center rounded-full transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent hover:bg-white/5 hover:!text-accent",
+                "relative min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent hover:bg-white/5 hover:!text-accent",
                 textColor,
               )}
             >
@@ -247,7 +247,7 @@ export function Navbar({ onSearchOpen }) {
                   key={cartCount}
                   initial={{ scale: 0.6 }}
                   animate={{ scale: 1 }}
-                  className="absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-accent text-[#12100E] text-[9px] font-bold font-sans flex items-center justify-center shadow-xs"
+                  className="absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-accent text-bg text-[9px] font-bold font-sans flex items-center justify-center shadow-xs"
                 >
                   {cartCount > 9 ? "9+" : cartCount}
                 </motion.span>
@@ -296,20 +296,20 @@ export function Navbar({ onSearchOpen }) {
                 ease: [0.25, 0.1, 0.25, 1],
               }}
             >
-              <div className="flex items-center justify-between px-6 py-5 border-b border-[rgba(197,160,89,0.2)] bg-[#181512]">
+              <div className="flex items-center justify-between px-6 py-5 border-b border-[rgba(197,160,89,0.2)] bg-bg-alt">
                 <span className="font-serif text-2xl font-light tracking-[0.15em] uppercase text-ivory">
                   GŌKANA
                 </span>
                 <button
                   onClick={() => setMobileOpen(false)}
                   aria-label="Close navigation menu"
-                  className="min-w-[44px] min-h-[44px] flex items-center justify-center text-[#A39A8E] hover:text-accent rounded-lg transition-colors"
+                  className="min-w-[44px] min-h-[44px] flex items-center justify-center text-muted hover:text-accent rounded-lg transition-colors"
                 >
                   <X size={24} strokeWidth={1.8} />
                 </button>
               </div>
 
-              <nav className="flex-1 overflow-y-auto px-6 py-8 space-y-4 bg-[#12100E]">
+              <nav className="flex-1 overflow-y-auto px-6 py-8 space-y-4 bg-bg">
                 {navLinks.map((link) => (
                   <Link
                     key={link.label}
@@ -332,8 +332,8 @@ export function Navbar({ onSearchOpen }) {
                 )}
               </nav>
 
-              <div className="p-6 border-t border-[rgba(197,160,89,0.2)] bg-[#181512]">
-                <div className="text-center text-xs font-medium tracking-wide text-[#A39A8E]">
+              <div className="p-6 border-t border-[rgba(197,160,89,0.2)] bg-bg-alt">
+                <div className="text-center text-xs font-medium tracking-wide text-muted">
                   Handcrafted & Delivered Across India
                 </div>
               </div>

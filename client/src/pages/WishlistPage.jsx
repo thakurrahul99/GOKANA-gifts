@@ -20,7 +20,7 @@ function WishlistItem({ product, onRemove, onAddToCart }) {
       {/* Image */}
       <Link
         to={`/products/${product.slug}`}
-        className="flex-shrink-0 w-24 h-28 bg-[#1F1A16] overflow-hidden rounded-lg border border-[rgba(197,160,89,0.2)] shadow-xs"
+        className="flex-shrink-0 w-24 h-28 bg-surface-alt overflow-hidden rounded-lg border border-[rgba(197,160,89,0.2)] shadow-xs"
       >
         <img
           src={product.image}
@@ -38,12 +38,12 @@ function WishlistItem({ product, onRemove, onAddToCart }) {
             {product.name}
           </h3>
         </Link>
-        <p className="font-sans text-xs text-[#A39A8E] mb-3 line-clamp-1 font-light">{product.tagline}</p>
+        <p className="font-sans text-xs text-muted mb-3 line-clamp-1 font-light">{product.tagline}</p>
 
         <div className="flex items-center gap-3 mb-4">
           <span className="font-sans text-base font-semibold text-accent">{formatPrice(product.price)}</span>
           {product.originalPrice && (
-            <span className="font-sans text-sm text-[#A39A8E]/60 line-through">{formatPrice(product.originalPrice)}</span>
+            <span className="font-sans text-sm text-muted/60 line-through">{formatPrice(product.originalPrice)}</span>
           )}
           {discount && (
             <span className="text-[11px] font-sans font-semibold bg-accent/15 text-accent border border-accent/30 px-2.5 py-0.5 rounded-full">−{discount}%</span>
@@ -61,7 +61,7 @@ function WishlistItem({ product, onRemove, onAddToCart }) {
           </button>
           <button
             onClick={() => onRemove(product)}
-            className="p-3 min-h-[44px] min-w-[44px] flex items-center justify-center text-[#A39A8E] hover:text-red-400 hover:bg-red-400/10 transition-colors duration-300 border border-[rgba(197,160,89,0.2)] rounded-lg"
+            className="p-3 min-h-[44px] min-w-[44px] flex items-center justify-center text-muted hover:text-red-400 hover:bg-red-400/10 transition-colors duration-300 border border-[rgba(197,160,89,0.2)] rounded-lg"
             aria-label={`Remove ${product.name} from wishlist`}
           >
             <Trash2 size={16} strokeWidth={1.5} />
@@ -81,9 +81,9 @@ export function WishlistPage() {
   };
 
   return (
-    <main className="pt-24 min-h-screen bg-[#12100E] text-ivory">
+    <main className="pt-24 min-h-screen bg-bg text-ivory">
       {/* Luxury Dark Espresso Header */}
-      <section className="bg-[#0E0C0A] border-b border-[rgba(197,160,89,0.2)] py-14 relative overflow-hidden">
+      <section className="bg-bg-banner border-b border-[rgba(197,160,89,0.2)] py-14 relative overflow-hidden">
         <div
           className="absolute inset-0 pointer-events-none opacity-30"
           style={{
@@ -122,11 +122,11 @@ export function WishlistPage() {
               animate={{ opacity: 1, y: 0 }}
               className="flex flex-col items-center justify-center py-20 text-center max-w-sm mx-auto"
             >
-              <div className="w-20 h-20 border border-[rgba(197,160,89,0.3)] bg-[#181512] rounded-full flex items-center justify-center mb-7 shadow-lg">
+              <div className="w-20 h-20 border border-[rgba(197,160,89,0.3)] bg-bg-alt rounded-full flex items-center justify-center mb-7 shadow-lg">
                 <Heart size={32} strokeWidth={1} className="text-accent" />
               </div>
               <h2 className="font-serif text-2xl font-light text-ivory mb-3">Your wishlist is empty</h2>
-              <p className="font-sans text-sm text-[#A39A8E] mb-8 leading-relaxed font-light">
+              <p className="font-sans text-sm text-muted mb-8 leading-relaxed font-light">
                 Tap the heart icon on any product to save it here. Come back any time to pick up where you left off.
               </p>
               <Link to="/shop" className="btn-primary">
@@ -140,7 +140,7 @@ export function WishlistPage() {
               className="grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-14"
             >
               {/* Wishlist items */}
-              <div className="lg:col-span-2 bg-[#181512] border border-[rgba(197,160,89,0.2)] rounded-2xl p-6 sm:p-8 shadow-xl">
+              <div className="lg:col-span-2 bg-bg-alt border border-[rgba(197,160,89,0.2)] rounded-2xl p-6 sm:p-8 shadow-xl">
                 <AnimatePresence>
                   <StaggerReveal stagger={0.07}>
                     {items.map((product) => (
@@ -158,14 +158,14 @@ export function WishlistPage() {
               {/* Summary sidebar */}
               <div className="lg:col-span-1">
                 <ScrollReveal delay={0.2}>
-                  <div className="bg-[#181512] border border-[rgba(197,160,89,0.2)] rounded-2xl p-7 sticky top-28 shadow-xl">
+                  <div className="bg-bg-alt border border-[rgba(197,160,89,0.2)] rounded-2xl p-7 sticky top-28 shadow-xl">
                     <div className="flex items-center gap-2 mb-6">
                       <h3 className="font-serif text-xl font-light text-ivory">Collection Summary</h3>
                     </div>
                     <div className="space-y-3 mb-5">
                       {items.map((p) => (
                         <div key={p.id} className="flex justify-between items-baseline gap-2">
-                          <span className="font-sans text-sm text-[#A39A8E] truncate max-w-[160px]">{p.name}</span>
+                          <span className="font-sans text-sm text-muted truncate max-w-[160px]">{p.name}</span>
                           <span className="font-sans text-sm font-semibold text-accent flex-shrink-0">{formatPrice(p.price)}</span>
                         </div>
                       ))}
@@ -187,7 +187,7 @@ export function WishlistPage() {
                     </button>
                     <Link
                       to="/shop"
-                      className="block text-center mt-4 font-sans text-xs text-[#A39A8E] hover:text-accent transition-colors py-2"
+                      className="block text-center mt-4 font-sans text-xs text-muted hover:text-accent transition-colors py-2"
                     >
                       Continue Shopping →
                     </Link>

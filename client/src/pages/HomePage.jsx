@@ -35,7 +35,7 @@ export function HomePage() {
   return (
     <>
       {showIntro && <IntroReveal onComplete={handleIntroComplete} />}
-      <main id="main-content" className="bg-[#12100E]">
+      <main id="main-content" className="bg-bg">
         {/* 1. Hero with Trust / Value Bar */}
         <Hero />
 

@@ -67,7 +67,7 @@ export function Footer() {
   };
 
   return (
-    <footer className="bg-[#0B0A09] text-ivory border-t border-[rgba(197,160,89,0.2)]" aria-label="Site Footer">
+    <footer className="bg-primary-dark text-ivory border-t border-[rgba(197,160,89,0.2)]" aria-label="Site Footer">
       {/* Delicate Gold Gradient Hairline */}
       <div className="h-[1px] bg-gradient-to-r from-transparent via-accent to-transparent opacity-50" />
 
@@ -84,7 +84,7 @@ export function Footer() {
               </span>
             </Link>
 
-            <p className="font-sans text-xs text-[#A39A8E] leading-relaxed max-w-sm mb-6 font-light">
+            <p className="font-sans text-xs text-muted leading-relaxed max-w-sm mb-6 font-light">
               Thoughtfully chosen. Beautifully wrapped. Meaningfully remembered. Luxury gift hampers, handmade chocolates, and personalized gifts for every special occasion.
             </p>
 
@@ -93,7 +93,7 @@ export function Footer() {
               <p className="font-sans text-[11px] font-semibold tracking-[0.18em] uppercase text-accent mb-1.5">
                 Join the GŌKANA Circle
               </p>
-              <p className="font-sans text-xs text-[#A39A8E] mb-3 font-light">
+              <p className="font-sans text-xs text-muted mb-3 font-light">
                 Receive private collection previews, gifting reminders, and festive privileges.
               </p>
 
@@ -105,13 +105,13 @@ export function Footer() {
                       value={email}
                       onChange={(e) => { setEmail(e.target.value); if (error) setError(""); }}
                       placeholder="Enter your email address"
-                      className="flex-1 bg-[#181512] px-4 py-2.5 text-xs text-ivory placeholder-[#6E665C] focus:outline-none min-h-[44px]"
+                      className="flex-1 bg-bg-alt px-4 py-2.5 text-xs text-ivory placeholder-[#6E665C] focus:outline-none min-h-[44px]"
                       aria-label="Email for newsletter"
                       required
                     />
                     <button
                       type="submit"
-                      className="px-5 bg-accent text-[#12100E] font-sans text-xs font-semibold uppercase tracking-[0.14em] hover:bg-accent-light transition-colors flex items-center gap-1.5 min-h-[44px] cursor-pointer"
+                      className="px-5 bg-accent text-bg font-sans text-xs font-semibold uppercase tracking-[0.14em] hover:bg-accent-light transition-colors flex items-center gap-1.5 min-h-[44px] cursor-pointer"
                       aria-label="Subscribe to newsletter"
                     >
                       Join <ArrowRight size={13} />
@@ -120,7 +120,7 @@ export function Footer() {
                   {error && <p className="text-xs text-[#E5C378] font-medium mt-1" role="alert">{error}</p>}
                 </form>
               ) : (
-                <div className="flex items-center gap-2 p-3 rounded-[4px] bg-[#181512] border border-accent/40 text-accent text-xs" role="status" aria-live="polite">
+                <div className="flex items-center gap-2 p-3 rounded-[4px] bg-bg-alt border border-accent/40 text-accent text-xs" role="status" aria-live="polite">
                   <CheckCircle2 size={15} />
                   <span>Welcome to GŌKANA. You're on our private list.</span>
                 </div>
@@ -136,7 +136,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="w-10 h-10 rounded-full border border-[rgba(197,160,89,0.25)] bg-[#181512] flex items-center justify-center text-accent hover:text-[#12100E] hover:bg-accent hover:border-accent transition-all cursor-pointer"
+                  className="w-10 h-10 rounded-full border border-[rgba(197,160,89,0.25)] bg-bg-alt flex items-center justify-center text-accent hover:text-bg hover:bg-accent hover:border-accent transition-all cursor-pointer"
                 >
                   <Icon size={17} />
                 </a>
@@ -158,14 +158,14 @@ export function Footer() {
                         href={item.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-[#A39A8E] hover:text-accent transition-colors font-light"
+                        className="text-muted hover:text-accent transition-colors font-light"
                       >
                         {item.label}
                       </a>
                     ) : (
                       <Link
                         to={item.href}
-                        className="text-[#A39A8E] hover:text-accent transition-colors font-light"
+                        className="text-muted hover:text-accent transition-colors font-light"
                       >
                         {item.label}
                       </Link>
@@ -178,7 +178,7 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar: Copyright & Craft Statement */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#6E665C]">
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted-2">
           <p>© {new Date().getFullYear()} GŌKANA Luxury Gifts. All rights reserved.</p>
           <p className="font-serif italic text-accent/80 font-light">
             Crafted with love & reverence in India.

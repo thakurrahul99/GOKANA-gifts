@@ -80,7 +80,7 @@ function NotFound() {
       <div>
         <p className="font-serif text-8xl font-light text-accent/20 mb-4">404</p>
         <h1 className="font-serif text-3xl font-light text-ivory mb-4">Page not found</h1>
-        <p className="font-sans text-sm text-[#A39A8E] max-w-md mx-auto mb-8 leading-relaxed font-light">
+        <p className="font-sans text-sm text-muted max-w-md mx-auto mb-8 leading-relaxed font-light">
           The curated gift or page you are seeking could not be found or may have moved.
         </p>
         <a href="/" className="btn-primary">Back to Home</a>
@@ -143,38 +143,38 @@ function AdminCustomers() {
     <section className="space-y-5 text-ivory">
       <div>
         <h2 className="text-2xl font-semibold text-ivory font-serif">Customers</h2>
-        <p className="text-sm text-[#A39A8E] mt-1">{customers.length} registered customers</p>
+        <p className="text-sm text-muted mt-1">{customers.length} registered customers</p>
       </div>
 
-      <div className="flex items-center gap-2 bg-[#181512] border border-[rgba(197,160,89,0.2)] rounded-xl px-4 py-3">
-        <Search size={17} className="text-[#A39A8E]" />
+      <div className="flex items-center gap-2 bg-bg-alt border border-[rgba(197,160,89,0.2)] rounded-xl px-4 py-3">
+        <Search size={17} className="text-muted" />
         <input
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search name or email…"
-          className="flex-1 bg-transparent text-ivory placeholder:text-[#A39A8E]/50 outline-none text-sm"
+          className="flex-1 bg-transparent text-ivory placeholder:text-muted/50 outline-none text-sm"
         />
       </div>
 
-      <div className="bg-[#181512] border border-[rgba(197,160,89,0.2)] rounded-xl overflow-hidden shadow-lg">
+      <div className="bg-bg-alt border border-[rgba(197,160,89,0.2)] rounded-xl overflow-hidden shadow-lg">
         {loading ? (
-          <div className="py-16 flex items-center justify-center text-[#A39A8E]"><Loader2 className="animate-spin mr-2" size={18} /> Loading customers…</div>
+          <div className="py-16 flex items-center justify-center text-muted"><Loader2 className="animate-spin mr-2" size={18} /> Loading customers…</div>
         ) : error ? (
           <div className="py-16 text-center text-red-400 text-sm">{error}</div>
         ) : customers.length === 0 ? (
-          <div className="py-16 text-center text-[#A39A8E]"><Users className="mx-auto mb-3 text-accent" size={28} />No customers found.</div>
+          <div className="py-16 text-center text-muted"><Users className="mx-auto mb-3 text-accent" size={28} />No customers found.</div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
-              <thead className="border-b border-[rgba(197,160,89,0.15)] bg-[#1F1A16] text-[#A39A8E] text-xs uppercase">
+              <thead className="border-b border-[rgba(197,160,89,0.15)] bg-surface-alt text-muted text-xs uppercase">
                 <tr><th className="text-left px-5 py-4">Customer</th><th className="text-left px-5 py-4">Email</th><th className="text-left px-5 py-4">Phone</th><th className="text-left px-5 py-4">Status</th></tr>
               </thead>
               <tbody className="divide-y divide-[rgba(197,160,89,0.1)]">
                 {customers.map((customer) => (
                   <tr key={customer._id} className="hover:bg-white/5 transition-colors">
                     <td className="px-5 py-4 text-ivory font-medium">{customer.name}</td>
-                    <td className="px-5 py-4 text-[#A39A8E]">{customer.email}</td>
-                    <td className="px-5 py-4 text-[#A39A8E]">{customer.phone || '—'}</td>
+                    <td className="px-5 py-4 text-muted">{customer.email}</td>
+                    <td className="px-5 py-4 text-muted">{customer.phone || '—'}</td>
                     <td className="px-5 py-4"><span className="text-xs text-accent px-2 py-0.5 rounded bg-accent/10 border border-accent/25">{customer.isActive ? 'Active' : 'Inactive'}</span></td>
                   </tr>
                 ))}
@@ -223,19 +223,19 @@ function AdminSettings() {
     setSaved(false);
   };
 
-  const inputClass = 'w-full rounded-lg border border-[rgba(197,160,89,0.25)] bg-[#12100E] px-3.5 py-2.5 text-sm text-ivory outline-none focus:border-accent focus:ring-1 focus:ring-accent/30';
+  const inputClass = 'w-full rounded-lg border border-[rgba(197,160,89,0.25)] bg-bg px-3.5 py-2.5 text-sm text-ivory outline-none focus:border-accent focus:ring-1 focus:ring-accent/30';
 
   return (
     <section className="space-y-6 text-ivory">
       <div>
         <h2 className="text-2xl font-semibold text-ivory font-serif">Settings</h2>
-        <p className="text-sm text-[#A39A8E] mt-1">Manage store preferences and admin notifications.</p>
+        <p className="text-sm text-muted mt-1">Manage store preferences and admin notifications.</p>
       </div>
 
-      <div className="bg-[#181512] border border-[rgba(197,160,89,0.2)] rounded-xl p-6 space-y-6 shadow-lg">
+      <div className="bg-bg-alt border border-[rgba(197,160,89,0.2)] rounded-xl p-6 space-y-6 shadow-lg">
         <div>
           <h3 className="font-serif text-lg font-light text-ivory">Store Information</h3>
-          <p className="text-xs text-[#A39A8E] mt-1">These preferences are saved for this admin browser.</p>
+          <p className="text-xs text-muted mt-1">These preferences are saved for this admin browser.</p>
         </div>
         <div className="grid md:grid-cols-2 gap-5">
           <label className="space-y-2"><span className="text-sm font-medium text-ivory">Store name</span><input className={inputClass} value={settings.storeName} onChange={(e) => update('storeName', e.target.value)} /></label>
@@ -246,14 +246,14 @@ function AdminSettings() {
         </div>
       </div>
 
-      <div className="bg-[#181512] border border-[rgba(197,160,89,0.2)] rounded-xl p-6 space-y-4 shadow-lg">
-        <div><h3 className="font-serif text-lg font-light text-ivory">Notifications</h3><p className="text-xs text-[#A39A8E] mt-1">Control which admin alerts are enabled.</p></div>
+      <div className="bg-bg-alt border border-[rgba(197,160,89,0.2)] rounded-xl p-6 space-y-4 shadow-lg">
+        <div><h3 className="font-serif text-lg font-light text-ivory">Notifications</h3><p className="text-xs text-muted mt-1">Control which admin alerts are enabled.</p></div>
         {[
           ['orderNotifications', 'New order notifications', 'Show a notification preference for new orders.'],
           ['lowStockNotifications', 'Low-stock notifications', 'Enable low-stock alert preference.'],
         ].map(([key, title, description]) => (
-          <label key={key} className="flex items-center justify-between gap-4 rounded-lg border border-[rgba(197,160,89,0.18)] bg-[#1F1A16] p-4 cursor-pointer hover:border-accent/30 transition-colors">
-            <span><span className="block text-sm font-medium text-ivory">{title}</span><span className="block text-xs text-[#A39A8E] mt-1">{description}</span></span>
+          <label key={key} className="flex items-center justify-between gap-4 rounded-lg border border-[rgba(197,160,89,0.18)] bg-surface-alt p-4 cursor-pointer hover:border-accent/30 transition-colors">
+            <span><span className="block text-sm font-medium text-ivory">{title}</span><span className="block text-xs text-muted mt-1">{description}</span></span>
             <input type="checkbox" className="h-5 w-5 accent-accent" checked={settings[key]} onChange={(e) => update(key, e.target.checked)} />
           </label>
         ))}

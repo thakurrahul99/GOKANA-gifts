@@ -12,14 +12,14 @@ const ORDER_STATUSES = [
 
 const STATUS_BADGE = {
   PENDING:          'bg-accent/15 text-accent border border-accent/30',
-  CONFIRMED:        'bg-accent text-[#12100E] font-semibold',
-  PROCESSING:       'bg-[#1F1A16] text-ivory border border-[rgba(197,160,89,0.25)]',
+  CONFIRMED:        'bg-accent text-bg font-semibold',
+  PROCESSING:       'bg-surface-alt text-ivory border border-[rgba(197,160,89,0.25)]',
   PACKED:           'bg-accent/20 text-accent border border-accent/30',
   SHIPPED:          'bg-accent/25 text-accent-light border border-accent/35',
   OUT_FOR_DELIVERY: 'bg-accent/30 text-ivory border border-accent/40',
   DELIVERED:        'bg-emerald-950/60 text-emerald-300 border border-emerald-500/30',
   CANCELLED:        'bg-red-950/60 text-red-300 border border-red-500/30',
-  RETURNED:         'bg-[#1F1A16] text-[#A39A8E] border border-[rgba(197,160,89,0.2)]',
+  RETURNED:         'bg-surface-alt text-muted border border-[rgba(197,160,89,0.2)]',
 };
 
 const dateFmt = new Intl.DateTimeFormat('en-IN', {
@@ -129,7 +129,7 @@ export function AdminOrders() {
     <div>
       <div className="mb-6">
         <h2 className="text-2xl font-semibold text-ivory font-serif">Orders</h2>
-        <p className="text-sm text-[#A39A8E] mt-0.5">
+        <p className="text-sm text-muted mt-0.5">
           {loading ? 'Loading…' : `${total} total orders`}
         </p>
       </div>
@@ -137,26 +137,26 @@ export function AdminOrders() {
       {/* Filters */}
       <div className="flex flex-col md:flex-row gap-3 mb-5">
         <div className="relative flex-1">
-          <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#A39A8E]" />
+          <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted" />
           <input
             id="orders-search"
             placeholder="Search by order ID or customer…"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-10 pr-4 py-2.5 border border-[rgba(197,160,89,0.25)] bg-[#181512] text-ivory placeholder:text-[#A39A8E]/50 text-sm focus:outline-none focus:border-accent rounded-lg"
+            className="w-full pl-10 pr-4 py-2.5 border border-[rgba(197,160,89,0.25)] bg-bg-alt text-ivory placeholder:text-muted/50 text-sm focus:outline-none focus:border-accent rounded-lg"
           />
         </div>
         <select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
-          className="border border-[rgba(197,160,89,0.25)] px-3.5 py-2.5 text-sm text-ivory bg-[#181512] focus:outline-none focus:border-accent rounded-lg cursor-pointer"
+          className="border border-[rgba(197,160,89,0.25)] px-3.5 py-2.5 text-sm text-ivory bg-bg-alt focus:outline-none focus:border-accent rounded-lg cursor-pointer"
         >
           <option value="ALL">All Statuses</option>
           {ORDER_STATUSES.map((s) => <option key={s} value={s}>{s.replace(/_/g, ' ')}</option>)}
         </select>
         <button
           onClick={fetchOrders}
-          className="flex items-center justify-center gap-2 border border-[rgba(197,160,89,0.25)] bg-[#181512] px-4 py-2.5 text-sm text-ivory hover:border-accent hover:text-accent transition-colors rounded-lg"
+          className="flex items-center justify-center gap-2 border border-[rgba(197,160,89,0.25)] bg-bg-alt px-4 py-2.5 text-sm text-ivory hover:border-accent hover:text-accent transition-colors rounded-lg"
         >
           <RefreshCw size={14} className={loading ? 'animate-spin text-accent' : 'text-accent'} />
           Refresh
@@ -180,9 +180,9 @@ export function AdminOrders() {
 
       {/* Loading */}
       {loading && (
-        <div className="bg-[#181512] border border-[rgba(197,160,89,0.2)] text-center py-16 rounded-xl shadow-lg">
+        <div className="bg-bg-alt border border-[rgba(197,160,89,0.2)] text-center py-16 rounded-xl shadow-lg">
           <Loader2 size={26} className="mx-auto text-accent animate-spin mb-3" />
-          <p className="text-sm text-[#A39A8E]">Loading orders…</p>
+          <p className="text-sm text-muted">Loading orders…</p>
         </div>
       )}
 
@@ -190,7 +190,7 @@ export function AdminOrders() {
       {!loading && !error && (
         <div className="space-y-3">
           {orders.length === 0 ? (
-            <div className="bg-[#181512] border border-[rgba(197,160,89,0.2)] text-center py-14 text-[#A39A8E] text-sm rounded-xl">
+            <div className="bg-bg-alt border border-[rgba(197,160,89,0.2)] text-center py-14 text-muted text-sm rounded-xl">
               No orders match your search.
             </div>
           ) : orders.map((order) => {
@@ -201,17 +201,17 @@ export function AdminOrders() {
               draft.trackingNumber !== (order.tracking?.trackingNumber || '');
 
             return (
-              <div key={order._id} className="bg-[#181512] border border-[rgba(197,160,89,0.2)] hover:border-accent/40 rounded-xl overflow-hidden shadow-sm transition-all">
+              <div key={order._id} className="bg-bg-alt border border-[rgba(197,160,89,0.2)] hover:border-accent/40 rounded-xl overflow-hidden shadow-sm transition-all">
                 {/* Order row */}
                 <button
                   className="w-full flex items-center gap-4 px-5 py-4 cursor-pointer hover:bg-white/5 transition-colors text-left"
                   onClick={() => setExpandedOrder(expanded ? null : order._id)}
                   aria-expanded={expanded}
                 >
-                  <span className="font-mono text-xs text-[#A39A8E] w-24 flex-shrink-0 truncate">{order.orderId}</span>
+                  <span className="font-mono text-xs text-muted w-24 flex-shrink-0 truncate">{order.orderId}</span>
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-semibold text-ivory truncate">{customerName(order)}</p>
-                    <p className="text-xs text-[#A39A8E] hidden md:block truncate">{itemSummary(order)}</p>
+                    <p className="text-xs text-muted hidden md:block truncate">{itemSummary(order)}</p>
                   </div>
                   <span className="font-semibold text-sm text-accent hidden sm:block">
                     {formatPrice(order.billing?.total ?? 0)}
@@ -219,23 +219,23 @@ export function AdminOrders() {
                   <span className={`text-[10px] px-2.5 py-1 font-semibold rounded hidden sm:block flex-shrink-0 ${STATUS_BADGE[order.status] || STATUS_BADGE.PENDING}`}>
                     {(order.status || 'PENDING').replace(/_/g, ' ')}
                   </span>
-                  <span className="text-xs text-[#A39A8E] hidden md:block flex-shrink-0">
+                  <span className="text-xs text-muted hidden md:block flex-shrink-0">
                     {order.createdAt ? dateFmt.format(new Date(order.createdAt)) : ''}
                   </span>
                   {expanded
                     ? <ChevronUp size={15} className="text-accent flex-shrink-0" />
-                    : <ChevronDown size={15} className="text-[#A39A8E] flex-shrink-0" />}
+                    : <ChevronDown size={15} className="text-muted flex-shrink-0" />}
                 </button>
 
                 {/* Expanded detail */}
                 {expanded && (
-                  <div className="border-t border-[rgba(197,160,89,0.15)] px-5 py-5 bg-[#12100E]">
+                  <div className="border-t border-[rgba(197,160,89,0.15)] px-5 py-5 bg-bg">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-5">
                       <div>
                         <p className="text-xs font-semibold text-accent uppercase tracking-wider mb-1.5">Customer</p>
                         <p className="text-sm font-medium text-ivory">{customerName(order)}</p>
-                        <p className="text-xs text-[#A39A8E]">{order.user?.email || order.guestEmail || '—'}</p>
-                        <p className="text-xs text-[#A39A8E]">{order.shippingAddress?.phone || order.guestPhone || ''}</p>
+                        <p className="text-xs text-muted">{order.user?.email || order.guestEmail || '—'}</p>
+                        <p className="text-xs text-muted">{order.shippingAddress?.phone || order.guestPhone || ''}</p>
                       </div>
                       <div>
                         <p className="text-xs font-semibold text-accent uppercase tracking-wider mb-1.5">Address</p>
@@ -254,12 +254,12 @@ export function AdminOrders() {
                         <p className="text-sm text-ivory">
                           {order.payment?.method === 'cod' ? 'Cash on Delivery' : order.payment?.method || '—'}
                         </p>
-                        <p className="text-xs text-[#A39A8E] capitalize">{order.payment?.status || ''}</p>
+                        <p className="text-xs text-muted capitalize">{order.payment?.status || ''}</p>
                       </div>
                     </div>
 
                     {/* Line items */}
-                    <div className="mb-5 border border-[rgba(197,160,89,0.2)] bg-[#181512] divide-y divide-[rgba(197,160,89,0.1)] rounded-lg overflow-hidden">
+                    <div className="mb-5 border border-[rgba(197,160,89,0.2)] bg-bg-alt divide-y divide-[rgba(197,160,89,0.1)] rounded-lg overflow-hidden">
                       {(order.items || []).map((item, i) => (
                         <div key={i} className="flex items-center justify-between px-4 py-2.5 text-xs">
                           <span className="text-ivory truncate">
@@ -270,8 +270,8 @@ export function AdminOrders() {
                           </span>
                         </div>
                       ))}
-                      <div className="flex items-center justify-between px-4 py-2.5 text-xs bg-[#1F1A16] border-t border-[rgba(197,160,89,0.15)]">
-                        <span className="text-[#A39A8E]">
+                      <div className="flex items-center justify-between px-4 py-2.5 text-xs bg-surface-alt border-t border-[rgba(197,160,89,0.15)]">
+                        <span className="text-muted">
                           Subtotal {formatPrice(order.billing?.subtotal ?? 0)}
                           {order.billing?.discount ? ` · Discount −${formatPrice(order.billing.discount)}` : ''}
                           {order.billing?.shippingCharge ? ` · Shipping ${formatPrice(order.billing.shippingCharge)}` : ''}
@@ -282,11 +282,11 @@ export function AdminOrders() {
 
                     {/* Status editor */}
                     <div className="flex items-center gap-2 flex-wrap pt-1">
-                      <p className="text-xs font-semibold text-[#A39A8E] uppercase tracking-wider">Update Status:</p>
+                      <p className="text-xs font-semibold text-muted uppercase tracking-wider">Update Status:</p>
                       <select
                         value={draft.status}
                         onChange={(e) => setDraft(order._id, { status: e.target.value })}
-                        className="border border-[rgba(197,160,89,0.25)] bg-[#181512] px-3 py-2 text-xs text-ivory focus:outline-none focus:border-accent rounded min-h-[36px]"
+                        className="border border-[rgba(197,160,89,0.25)] bg-bg-alt px-3 py-2 text-xs text-ivory focus:outline-none focus:border-accent rounded min-h-[36px]"
                       >
                         {ORDER_STATUSES.map((s) => <option key={s} value={s}>{s.replace(/_/g, ' ')}</option>)}
                       </select>
@@ -294,12 +294,12 @@ export function AdminOrders() {
                         placeholder="Add tracking number…"
                         value={draft.trackingNumber}
                         onChange={(e) => setDraft(order._id, { trackingNumber: e.target.value })}
-                        className="flex-1 min-w-[140px] border border-[rgba(197,160,89,0.25)] bg-[#181512] px-3 py-2 text-xs text-ivory placeholder:text-[#A39A8E]/50 focus:outline-none focus:border-accent rounded min-h-[36px]"
+                        className="flex-1 min-w-[140px] border border-[rgba(197,160,89,0.25)] bg-bg-alt px-3 py-2 text-xs text-ivory placeholder:text-muted/50 focus:outline-none focus:border-accent rounded min-h-[36px]"
                       />
                       <button
                         onClick={() => saveOrder(order)}
                         disabled={savingId === order._id || !dirty}
-                        className="px-4 py-2 bg-accent text-[#12100E] text-xs font-semibold uppercase tracking-wider hover:bg-accent-light transition-colors min-h-[36px] rounded-sm disabled:opacity-40 disabled:cursor-not-allowed inline-flex items-center gap-1.5"
+                        className="px-4 py-2 bg-accent text-bg text-xs font-semibold uppercase tracking-wider hover:bg-accent-light transition-colors min-h-[36px] rounded-sm disabled:opacity-40 disabled:cursor-not-allowed inline-flex items-center gap-1.5"
                       >
                         {savingId === order._id
                           ? <><Loader2 size={12} className="animate-spin" /> Saving…</>

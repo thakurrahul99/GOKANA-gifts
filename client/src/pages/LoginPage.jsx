@@ -49,10 +49,10 @@ export function LoginPage() {
   const set = (key) => (e) => setForm((f) => ({ ...f, [key]: e.target.value }));
 
   return (
-    <main className="min-h-screen bg-[#12100E] text-ivory flex">
+    <main className="min-h-screen bg-bg text-ivory flex">
       {/* Left — Editorial Luxury Branding Hero */}
       <div
-        className="hidden lg:flex lg:w-1/2 bg-[#0E0C0A] relative overflow-hidden flex-col items-center justify-center p-16 text-center text-ivory border-r border-[rgba(197,160,89,0.2)]"
+        className="hidden lg:flex lg:w-1/2 bg-bg-banner relative overflow-hidden flex-col items-center justify-center p-16 text-center text-ivory border-r border-[rgba(197,160,89,0.2)]"
         style={{
           backgroundImage: `radial-gradient(ellipse at 40% 30%, rgba(197,160,89,0.18) 0%, transparent 65%), radial-gradient(ellipse at 80% 80%, rgba(197,160,89,0.08) 0%, transparent 50%)`,
         }}
@@ -71,7 +71,7 @@ export function LoginPage() {
           <blockquote className="font-serif text-2xl font-light text-ivory/90 leading-relaxed italic mb-8">
             "Every gift tells a story.<br />Make yours unforgettable."
           </blockquote>
-          <div className="flex items-center justify-center gap-6 text-xs text-[#A39A8E] tracking-wider uppercase">
+          <div className="flex items-center justify-center gap-6 text-xs text-muted tracking-wider uppercase">
             <span>✦ Handcrafted</span>
             <span>✦ Artisanal</span>
             <span>✦ Pan-India Delivery</span>
@@ -82,7 +82,7 @@ export function LoginPage() {
         <div className="absolute -top-12 -left-12 w-64 h-64 border border-accent/15 rounded-full pointer-events-none" />
         <div className="absolute -bottom-20 -right-20 w-80 h-80 border border-accent/10 rounded-full pointer-events-none" />
         <div className="absolute bottom-8 left-0 right-0 text-center">
-          <p className="font-sans text-[11px] text-[#A39A8E]/60 tracking-[0.2em] uppercase">
+          <p className="font-sans text-[11px] text-muted/60 tracking-[0.2em] uppercase">
             Luxury Gift Studio · India
           </p>
         </div>
@@ -95,7 +95,7 @@ export function LoginPage() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="w-full max-w-md bg-[#181512] p-8 sm:p-10 border border-[rgba(197,160,89,0.22)] rounded-2xl shadow-2xl"
+          className="w-full max-w-md bg-bg-alt p-8 sm:p-10 border border-[rgba(197,160,89,0.22)] rounded-2xl shadow-2xl"
         >
           {/* Logo on mobile */}
           <Link
@@ -112,7 +112,7 @@ export function LoginPage() {
             <h1 className="font-serif text-3xl font-light text-ivory mb-2">
               {mode === 'login' ? 'Sign In' : 'Create Account'}
             </h1>
-            <p className="font-sans text-sm text-[#A39A8E] font-light">
+            <p className="font-sans text-sm text-muted font-light">
               {mode === 'login'
                 ? 'Sign in to access your orders, saved addresses, and wishlist.'
                 : 'Create your account for personalized gifting and tracking.'}
@@ -120,14 +120,14 @@ export function LoginPage() {
           </div>
 
           {/* Mode Switcher Tabs */}
-          <div className="flex rounded-lg bg-[#12100E] border border-[rgba(197,160,89,0.2)] p-1 mb-6">
+          <div className="flex rounded-lg bg-bg border border-[rgba(197,160,89,0.2)] p-1 mb-6">
             <button
               type="button"
               onClick={() => { setMode('login'); setError(''); }}
               className={`flex-1 py-2 text-xs font-semibold uppercase tracking-wider rounded-md transition-all ${
                 mode === 'login'
-                  ? 'bg-accent text-[#12100E] shadow-sm'
-                  : 'text-[#A39A8E] hover:text-ivory'
+                  ? 'bg-accent text-bg shadow-sm'
+                  : 'text-muted hover:text-ivory'
               }`}
             >
               Sign In
@@ -137,8 +137,8 @@ export function LoginPage() {
               onClick={() => { setMode('register'); setError(''); }}
               className={`flex-1 py-2 text-xs font-semibold uppercase tracking-wider rounded-md transition-all ${
                 mode === 'register'
-                  ? 'bg-accent text-[#12100E] shadow-sm'
-                  : 'text-[#A39A8E] hover:text-ivory'
+                  ? 'bg-accent text-bg shadow-sm'
+                  : 'text-muted hover:text-ivory'
               }`}
             >
               Register
@@ -162,7 +162,7 @@ export function LoginPage() {
                   required
                   autoComplete="name"
                   placeholder="Deepti Agarwal"
-                  className="w-full px-4 py-3 bg-[#12100E] border border-[rgba(197,160,89,0.25)] text-ivory text-sm rounded-lg focus:border-accent focus:ring-1 focus:ring-accent/30 outline-none transition-all placeholder:text-[#A39A8E]/50"
+                  className="w-full px-4 py-3 bg-bg border border-[rgba(197,160,89,0.25)] text-ivory text-sm rounded-lg focus:border-accent focus:ring-1 focus:ring-accent/30 outline-none transition-all placeholder:text-muted/50"
                 />
               </div>
             )}
@@ -182,7 +182,7 @@ export function LoginPage() {
                 required
                 autoComplete="email"
                 placeholder="you@example.com"
-                className="w-full px-4 py-3 bg-[#12100E] border border-[rgba(197,160,89,0.25)] text-ivory text-sm rounded-lg focus:border-accent focus:ring-1 focus:ring-accent/30 outline-none transition-all placeholder:text-[#A39A8E]/50"
+                className="w-full px-4 py-3 bg-bg border border-[rgba(197,160,89,0.25)] text-ivory text-sm rounded-lg focus:border-accent focus:ring-1 focus:ring-accent/30 outline-none transition-all placeholder:text-muted/50"
               />
             </div>
 
@@ -203,12 +203,12 @@ export function LoginPage() {
                   minLength={6}
                   autoComplete={mode === 'login' ? 'current-password' : 'new-password'}
                   placeholder="Minimum 6 characters"
-                  className="w-full px-4 py-3 pr-12 bg-[#12100E] border border-[rgba(197,160,89,0.25)] text-ivory text-sm rounded-lg focus:border-accent focus:ring-1 focus:ring-accent/30 outline-none transition-all placeholder:text-[#A39A8E]/50"
+                  className="w-full px-4 py-3 pr-12 bg-bg border border-[rgba(197,160,89,0.25)] text-ivory text-sm rounded-lg focus:border-accent focus:ring-1 focus:ring-accent/30 outline-none transition-all placeholder:text-muted/50"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPass(!showPass)}
-                  className="absolute right-0 top-0 bottom-0 px-3 flex items-center justify-center text-[#A39A8E] hover:text-accent transition-colors min-w-[44px] min-h-[44px]"
+                  className="absolute right-0 top-0 bottom-0 px-3 flex items-center justify-center text-muted hover:text-accent transition-colors min-w-[44px] min-h-[44px]"
                   aria-label={showPass ? 'Hide password' : 'Show password'}
                 >
                   {showPass ? <EyeOff size={18} /> : <Eye size={18} />}
@@ -247,7 +247,7 @@ export function LoginPage() {
             </button>
           </form>
 
-          <div className="mt-6 text-center font-sans text-sm text-[#A39A8E]">
+          <div className="mt-6 text-center font-sans text-sm text-muted">
             {mode === 'login' ? (
               <p>
                 Don't have an account?{' '}
@@ -276,7 +276,7 @@ export function LoginPage() {
           <div className="mt-8 pt-6 border-t border-[rgba(197,160,89,0.18)] text-center">
             <Link
               to="/"
-              className="inline-flex items-center gap-1 font-sans text-xs text-[#A39A8E] hover:text-accent transition-colors p-2"
+              className="inline-flex items-center gap-1 font-sans text-xs text-muted hover:text-accent transition-colors p-2"
             >
               ← Back to GŌKANA
             </Link>

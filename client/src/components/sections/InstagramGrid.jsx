@@ -25,7 +25,7 @@ function InstagramPost({ post, className }) {
       href="https://instagram.com"
       target="_blank"
       rel="noopener noreferrer"
-      className={`block relative overflow-hidden rounded-xl bg-[#181512] border border-[rgba(197,160,89,0.2)] hover:border-accent/50 shadow-md group ${className}`}
+      className={`block relative overflow-hidden rounded-xl bg-bg-alt border border-[rgba(197,160,89,0.2)] hover:border-accent/50 shadow-md group ${className}`}
       whileHover={{ scale: 1.015 }}
       transition={{ duration: 0.3 }}
       aria-label="View GŌKANA moments on Instagram"
@@ -38,15 +38,15 @@ function InstagramPost({ post, className }) {
         decoding="async"
       />
       {/* Overlay */}
-      <div className="absolute inset-0 bg-[#12100E]/70 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+      <div className="absolute inset-0 bg-bg/70 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
         <div className="flex flex-col items-center gap-2 text-ivory">
-          <div className="w-11 h-11 rounded-full bg-[#1F1A16] border border-accent/40 flex items-center justify-center text-accent shadow-lg group-hover:scale-110 transition-transform">
+          <div className="w-11 h-11 rounded-full bg-surface-alt border border-accent/40 flex items-center justify-center text-accent shadow-lg group-hover:scale-110 transition-transform">
             <SvgInstagram size={22} className="text-accent" />
           </div>
           <span className="font-sans text-xs tracking-wider uppercase font-semibold text-accent">
             ♥ {post.likes}
           </span>
-          <span className="font-sans text-[11px] text-[#A39A8E] tracking-wider uppercase">
+          <span className="font-sans text-[11px] text-muted tracking-wider uppercase">
             View on Instagram
           </span>
         </div>
@@ -69,7 +69,7 @@ export function InstagramGrid() {
   const [p1, p2, p3, p4, p5, p6] = posts;
 
   return (
-    <section className="section-py bg-[#12100E] overflow-hidden border-b border-[rgba(197,160,89,0.15)]" aria-labelledby="instagram-heading">
+    <section className="section-py bg-bg overflow-hidden border-b border-[rgba(197,160,89,0.15)]" aria-labelledby="instagram-heading">
       <div className="container-gokana">
         {/* Header */}
         <div className="text-center mb-12">
@@ -80,7 +80,7 @@ export function InstagramGrid() {
             Moments from @gokana.in
           </AnimatedHeading>
           <ScrollReveal delay={0.25}>
-            <p className="font-sans text-xs text-[#A39A8E]">
+            <p className="font-sans text-xs text-muted">
               Tag us to be featured on our Instagram page
             </p>
           </ScrollReveal>

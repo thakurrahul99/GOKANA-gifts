@@ -17,7 +17,7 @@ const dateFmt = new Intl.DateTimeFormat('en-IN', {
 const STATUS_STYLES = {
   DELIVERED:  'bg-emerald-950/60 text-emerald-300 border border-emerald-500/30',
   SHIPPED:    'bg-accent/20 text-accent-light border border-accent/30',
-  PROCESSING: 'bg-[#1F1A16] text-ivory border border-[rgba(197,160,89,0.25)]',
+  PROCESSING: 'bg-surface-alt text-ivory border border-[rgba(197,160,89,0.25)]',
   PENDING:    'bg-accent/15 text-accent border border-accent/30',
   CANCELLED:  'bg-red-950/60 text-red-300 border border-red-500/30',
 };
@@ -115,9 +115,9 @@ export function AccountPage() {
   if (!user) return null;
 
   return (
-    <main className="pt-24 min-h-screen bg-[#12100E] text-ivory">
+    <main className="pt-24 min-h-screen bg-bg text-ivory">
       {/* Luxury Dark Top Bar */}
-      <section className="bg-[#0E0C0A] relative overflow-hidden border-b border-[rgba(197,160,89,0.2)]">
+      <section className="bg-bg-banner relative overflow-hidden border-b border-[rgba(197,160,89,0.2)]">
         <div
           className="absolute inset-0 pointer-events-none opacity-30"
           style={{
@@ -141,7 +141,7 @@ export function AccountPage() {
             <ScrollReveal delay={0.15}>
               <div>
                 <h1 className="font-serif text-2xl font-light text-ivory">{profileForm.name || 'Guest'}</h1>
-                <p className="font-sans text-sm text-[#A39A8E]">{profileForm.email}</p>
+                <p className="font-sans text-sm text-muted">{profileForm.email}</p>
               </div>
             </ScrollReveal>
           </div>
@@ -154,7 +154,7 @@ export function AccountPage() {
           {/* Sidebar nav */}
           <div className="lg:col-span-1">
             <ScrollReveal>
-              <nav className="bg-[#181512] border border-[rgba(197,160,89,0.2)] rounded-2xl overflow-hidden shadow-xl">
+              <nav className="bg-bg-alt border border-[rgba(197,160,89,0.2)] rounded-2xl overflow-hidden shadow-xl">
                 {TABS.map(({ id, label, Icon }) => (
                   <button
                     key={id}
@@ -162,7 +162,7 @@ export function AccountPage() {
                     className={`w-full flex items-center gap-3 px-5 py-4 font-sans text-sm transition-all duration-200 border-b border-[rgba(197,160,89,0.15)] last:border-0 min-h-[52px] ${
                       activeTab === id
                         ? 'bg-accent/15 text-accent font-semibold border-l-2 border-accent'
-                        : 'text-[#A39A8E] hover:bg-white/5 hover:text-ivory'
+                        : 'text-muted hover:bg-white/5 hover:text-ivory'
                     }`}
                     aria-current={activeTab === id ? 'page' : undefined}
                   >
@@ -191,7 +191,7 @@ export function AccountPage() {
 
               {/* ── Profile Tab ── */}
               {activeTab === 'profile' && (
-                <div className="bg-[#181512] border border-[rgba(197,160,89,0.2)] rounded-2xl p-8 shadow-xl">
+                <div className="bg-bg-alt border border-[rgba(197,160,89,0.2)] rounded-2xl p-8 shadow-xl">
                   <div className="flex items-center justify-between mb-8">
                     <h2 className="font-serif text-2xl font-light text-ivory">Profile Details</h2>
                     <button
@@ -234,7 +234,7 @@ export function AccountPage() {
                       <div key={key} className="border-b border-[rgba(197,160,89,0.15)] pb-5 last:border-0">
                         <label
                           htmlFor={`profile-${key}`}
-                          className="block font-sans text-xs font-semibold text-[#A39A8E] uppercase tracking-wider mb-2"
+                          className="block font-sans text-xs font-semibold text-muted uppercase tracking-wider mb-2"
                         >
                           {label}
                         </label>
@@ -245,14 +245,14 @@ export function AccountPage() {
                             value={profileForm[key]}
                             onChange={(e) => setProfileForm({ ...profileForm, [key]: e.target.value })}
                             autoComplete={autocomplete}
-                            className="w-full px-4 py-3 bg-[#12100E] border border-[rgba(197,160,89,0.25)] rounded-lg text-ivory text-sm focus:border-accent focus:ring-1 focus:ring-accent/30 outline-none transition-all placeholder:text-[#A39A8E]/50"
+                            className="w-full px-4 py-3 bg-bg border border-[rgba(197,160,89,0.25)] rounded-lg text-ivory text-sm focus:border-accent focus:ring-1 focus:ring-accent/30 outline-none transition-all placeholder:text-muted/50"
                             placeholder={`Enter your ${label.toLowerCase()}`}
                           />
                         ) : (
                           <p className="font-sans text-base text-ivory">
-                            {profileForm[key] || <span className="text-[#A39A8E] italic text-sm">Not added yet</span>}
+                            {profileForm[key] || <span className="text-muted italic text-sm">Not added yet</span>}
                             {key === 'email' && editMode && (
-                              <span className="ml-2 text-xs text-[#A39A8E]">(email cannot be changed)</span>
+                              <span className="ml-2 text-xs text-muted">(email cannot be changed)</span>
                             )}
                           </p>
                         )}
@@ -263,7 +263,7 @@ export function AccountPage() {
                   {editMode && (
                     <button
                       onClick={() => { setEditMode(false); setSaveMsg(''); }}
-                      className="mt-5 font-sans text-xs text-[#A39A8E] hover:text-accent transition-colors py-2"
+                      className="mt-5 font-sans text-xs text-muted hover:text-accent transition-colors py-2"
                     >
                       Cancel
                     </button>
@@ -282,21 +282,21 @@ export function AccountPage() {
                   </div>
 
                   {ordersLoading ? (
-                    <div className="bg-[#181512] border border-[rgba(197,160,89,0.2)] rounded-2xl p-14 text-center shadow-xl">
+                    <div className="bg-bg-alt border border-[rgba(197,160,89,0.2)] rounded-2xl p-14 text-center shadow-xl">
                       <Loader2 size={28} className="mx-auto text-accent animate-spin mb-3" />
-                      <p className="font-sans text-sm text-[#A39A8E]">Fetching your orders…</p>
+                      <p className="font-sans text-sm text-muted">Fetching your orders…</p>
                     </div>
                   ) : ordersError ? (
-                    <div className="bg-[#181512] border border-red-500/30 rounded-2xl p-10 text-center shadow-xl">
+                    <div className="bg-bg-alt border border-red-500/30 rounded-2xl p-10 text-center shadow-xl">
                       <AlertCircle size={30} strokeWidth={1.5} className="mx-auto text-red-400 mb-3" />
                       <p className="font-sans text-sm text-red-300 mb-4">{ordersError}</p>
                       <button onClick={fetchOrders} className="btn-primary">Try Again</button>
                     </div>
                   ) : orders.length === 0 ? (
-                    <div className="bg-[#181512] border border-[rgba(197,160,89,0.2)] rounded-2xl p-14 text-center shadow-xl">
+                    <div className="bg-bg-alt border border-[rgba(197,160,89,0.2)] rounded-2xl p-14 text-center shadow-xl">
                       <Package size={36} strokeWidth={1} className="mx-auto text-accent/50 mb-4" />
                       <h3 className="font-serif text-xl font-light text-ivory mb-2">No orders yet</h3>
-                      <p className="font-sans text-sm text-[#A39A8E] mb-6 font-light">Your order history will appear here once you place your first order.</p>
+                      <p className="font-sans text-sm text-muted mb-6 font-light">Your order history will appear here once you place your first order.</p>
                       <Link to="/shop" className="btn-primary">Start Shopping</Link>
                     </div>
                   ) : (
@@ -306,12 +306,12 @@ export function AccountPage() {
                           key={order._id}
                           initial={{ opacity: 0, y: 10 }}
                           animate={{ opacity: 1, y: 0 }}
-                          className="bg-[#181512] border border-[rgba(197,160,89,0.2)] rounded-2xl p-6 hover:border-accent/40 transition-colors shadow-lg"
+                          className="bg-bg-alt border border-[rgba(197,160,89,0.2)] rounded-2xl p-6 hover:border-accent/40 transition-colors shadow-lg"
                         >
                           <div className="flex items-start justify-between mb-4">
                             <div>
                               <p className="font-mono text-sm font-semibold text-ivory">{order.orderId}</p>
-                              <p className="font-sans text-xs text-[#A39A8E] mt-0.5">
+                              <p className="font-sans text-xs text-muted mt-0.5">
                                 {order.createdAt ? dateFmt.format(new Date(order.createdAt)) : ''}
                               </p>
                             </div>
@@ -332,7 +332,7 @@ export function AccountPage() {
                               <p className="font-serif text-lg text-accent">
                                 {formatPrice(order.billing?.total ?? 0)}
                               </p>
-                              <p className="font-sans text-xs text-[#A39A8E]">
+                              <p className="font-sans text-xs text-muted">
                                 {order.payment?.method === 'cod' ? 'Cash on Delivery' : 'Online'}
                                 {order.payment?.status ? ` • ${order.payment.status}` : ''}
                               </p>
@@ -340,7 +340,7 @@ export function AccountPage() {
                           </div>
 
                           {order.tracking?.trackingNumber && (
-                            <div className="border-t border-[rgba(197,160,89,0.15)] mt-4 pt-3 font-sans text-xs text-[#A39A8E]">
+                            <div className="border-t border-[rgba(197,160,89,0.15)] mt-4 pt-3 font-sans text-xs text-muted">
                               Tracking: <span className="text-ivory font-medium">{order.tracking.trackingNumber}</span>
                               {order.tracking.trackingUrl && (
                                 <a
@@ -374,17 +374,17 @@ export function AccountPage() {
                   </div>
 
                   {wishlist.length === 0 ? (
-                    <div className="bg-[#181512] border border-[rgba(197,160,89,0.2)] rounded-2xl p-14 text-center shadow-xl">
+                    <div className="bg-bg-alt border border-[rgba(197,160,89,0.2)] rounded-2xl p-14 text-center shadow-xl">
                       <Heart size={36} strokeWidth={1} className="mx-auto text-accent/50 mb-4" />
                       <h3 className="font-serif text-xl font-light text-ivory mb-2">No saved items</h3>
-                      <p className="font-sans text-sm text-[#A39A8E] mb-6 font-light">Heart any product to save it here for later.</p>
+                      <p className="font-sans text-sm text-muted mb-6 font-light">Heart any product to save it here for later.</p>
                       <Link to="/shop" className="btn-primary">Explore Collection</Link>
                     </div>
                   ) : (
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                       {wishlist.map((product) => (
-                        <div key={product.id} className="bg-[#181512] border border-[rgba(197,160,89,0.2)] rounded-xl overflow-hidden group shadow-md hover:border-accent/40 transition-colors">
-                          <Link to={`/products/${product.slug}`} className="block aspect-[4/5] overflow-hidden bg-[#12100E]">
+                        <div key={product.id} className="bg-bg-alt border border-[rgba(197,160,89,0.2)] rounded-xl overflow-hidden group shadow-md hover:border-accent/40 transition-colors">
+                          <Link to={`/products/${product.slug}`} className="block aspect-[4/5] overflow-hidden bg-bg">
                             <img
                               src={product.image}
                               alt={product.name}
@@ -405,7 +405,7 @@ export function AccountPage() {
                               </button>
                               <button
                                 onClick={() => toggle(product)}
-                                className="px-2.5 min-w-[38px] flex items-center justify-center border border-[rgba(197,160,89,0.25)] rounded text-[#A39A8E] hover:text-red-400 hover:border-red-400/50 hover:bg-red-950/20 transition-colors"
+                                className="px-2.5 min-w-[38px] flex items-center justify-center border border-[rgba(197,160,89,0.25)] rounded text-muted hover:text-red-400 hover:border-red-400/50 hover:bg-red-950/20 transition-colors"
                                 title={`Remove ${product.name} from wishlist`}
                                 aria-label={`Remove ${product.name} from wishlist`}
                               >
@@ -422,12 +422,12 @@ export function AccountPage() {
 
               {/* ── Address Tab ── */}
               {activeTab === 'address' && (
-                <div className="bg-[#181512] border border-[rgba(197,160,89,0.2)] rounded-2xl p-8 shadow-xl">
+                <div className="bg-bg-alt border border-[rgba(197,160,89,0.2)] rounded-2xl p-8 shadow-xl">
                   <h2 className="font-serif text-2xl font-light text-ivory mb-8">Saved Addresses</h2>
-                  <div className="border-2 border-dashed border-[rgba(197,160,89,0.25)] rounded-xl p-10 text-center bg-[#12100E]">
+                  <div className="border-2 border-dashed border-[rgba(197,160,89,0.25)] rounded-xl p-10 text-center bg-bg">
                     <MapPin size={32} strokeWidth={1} className="mx-auto text-accent mb-4" />
                     <p className="font-sans text-sm text-ivory mb-2 font-medium">No saved addresses yet</p>
-                    <p className="font-sans text-xs text-[#A39A8E] leading-relaxed font-light">
+                    <p className="font-sans text-xs text-muted leading-relaxed font-light">
                       Delivery addresses are automatically saved when you place an order, so you never have to re-enter them.
                     </p>
                   </div>

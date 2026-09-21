@@ -79,7 +79,7 @@ export function Bestsellers() {
   };
 
   return (
-    <section id="bestsellers" className="section-py bg-[#12100E] overflow-hidden" aria-labelledby="bestsellers-heading">
+    <section id="bestsellers" className="section-py bg-bg overflow-hidden" aria-labelledby="bestsellers-heading">
       <div className="container-gokana">
         {/* Header with Navigation Controls */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
@@ -95,14 +95,14 @@ export function Bestsellers() {
           <ScrollReveal delay={0.2} className="flex items-center gap-2">
             <button
               onClick={() => scroll('left')}
-              className="min-w-[44px] min-h-[44px] rounded-full border border-[rgba(197,160,89,0.3)] flex items-center justify-center text-ivory hover:text-[#12100E] hover:bg-accent hover:border-accent transition-all active:scale-95 cursor-pointer"
+              className="min-w-[44px] min-h-[44px] rounded-full border border-[rgba(197,160,89,0.3)] flex items-center justify-center text-ivory hover:text-bg hover:bg-accent hover:border-accent transition-all active:scale-95 cursor-pointer"
               aria-label="Scroll bestsellers left"
             >
               <ChevronLeft size={18} strokeWidth={2} />
             </button>
             <button
               onClick={() => scroll('right')}
-              className="min-w-[44px] min-h-[44px] rounded-full border border-[rgba(197,160,89,0.3)] flex items-center justify-center text-ivory hover:text-[#12100E] hover:bg-accent hover:border-accent transition-all active:scale-95 cursor-pointer"
+              className="min-w-[44px] min-h-[44px] rounded-full border border-[rgba(197,160,89,0.3)] flex items-center justify-center text-ivory hover:text-bg hover:bg-accent hover:border-accent transition-all active:scale-95 cursor-pointer"
               aria-label="Scroll bestsellers right"
             >
               <ChevronRight size={18} strokeWidth={2} />

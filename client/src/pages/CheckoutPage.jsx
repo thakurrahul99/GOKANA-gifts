@@ -232,10 +232,10 @@ export function CheckoutPage() {
 
   if (items.length === 0 && step !== 4) {
     return (
-      <main id="main-content" className="pt-32 min-h-screen bg-[#12100E] text-ivory flex items-center justify-center text-center p-6">
-        <div className="bg-[#181512] border border-[rgba(197,160,89,0.22)] rounded-2xl shadow-2xl max-w-md p-8">
+      <main id="main-content" className="pt-32 min-h-screen bg-bg text-ivory flex items-center justify-center text-center p-6">
+        <div className="bg-bg-alt border border-[rgba(197,160,89,0.22)] rounded-2xl shadow-2xl max-w-md p-8">
           <h1 className="font-serif text-3xl font-light text-ivory mb-3">Your Cart is Empty</h1>
-          <p className="font-sans text-sm text-[#A39A8E] mb-6">
+          <p className="font-sans text-sm text-muted mb-6">
             Add items to your cart before proceeding to checkout.
           </p>
           <Link to="/shop" className="btn-primary">Explore Curated Gifts</Link>
@@ -245,7 +245,7 @@ export function CheckoutPage() {
   }
 
   return (
-    <main id="main-content" className="pt-28 min-h-screen bg-[#12100E] text-ivory pb-20">
+    <main id="main-content" className="pt-28 min-h-screen bg-bg text-ivory pb-20">
       <div className="container-gokana max-w-5xl py-8">
         {/* Multi-Step Progress Tracker */}
         <div className="mb-10" aria-label="Checkout Progress">
@@ -256,15 +256,15 @@ export function CheckoutPage() {
                   <div
                     className={`w-9 h-9 rounded-full flex items-center justify-center font-sans text-xs font-bold transition-all ${
                       idx < step
-                        ? 'bg-accent text-[#12100E]'
+                        ? 'bg-accent text-bg'
                         : idx === step
-                        ? 'bg-accent text-[#12100E] ring-4 ring-accent/30'
-                        : 'bg-[#1F1A16] border border-[rgba(197,160,89,0.25)] text-[#A39A8E]'
+                        ? 'bg-accent text-bg ring-4 ring-accent/30'
+                        : 'bg-surface-alt border border-[rgba(197,160,89,0.25)] text-muted'
                     }`}
                   >
                     {idx < step ? <Check size={16} /> : idx + 1}
                   </div>
-                  <span className={`font-sans text-[11px] font-semibold mt-2 hidden sm:block ${idx <= step ? 'text-ivory' : 'text-[#A39A8E]'}`}>
+                  <span className={`font-sans text-[11px] font-semibold mt-2 hidden sm:block ${idx <= step ? 'text-ivory' : 'text-muted'}`}>
                     {s}
                   </span>
                 </div>
@@ -282,23 +282,23 @@ export function CheckoutPage() {
 
         {/* Confirmation Screen */}
         {step === 4 ? (
-          <div className="bg-[#181512] border border-[rgba(197,160,89,0.22)] rounded-2xl shadow-2xl max-w-xl mx-auto text-center p-8 md:p-12">
+          <div className="bg-bg-alt border border-[rgba(197,160,89,0.22)] rounded-2xl shadow-2xl max-w-xl mx-auto text-center p-8 md:p-12">
             <div className="w-16 h-16 rounded-full bg-accent/15 border border-accent/30 text-accent flex items-center justify-center mx-auto mb-6">
               <PackageCheck size={32} />
             </div>
             <span className="label-text text-accent mb-2 block">Order Placed Successfully</span>
             <h1 className="heading-lg text-ivory mb-3">Thank You for Your Order!</h1>
-            <p className="font-sans text-sm text-[#A39A8E] mb-6 leading-relaxed">
+            <p className="font-sans text-sm text-muted mb-6 leading-relaxed">
               We have received your gift order <b className="text-accent">#{orderId}</b>. A confirmation email and SMS with live tracking details has been sent to <b className="text-ivory">{formData.email}</b>.
             </p>
 
-            <div className="p-5 rounded-xl bg-[#12100E] border border-[rgba(197,160,89,0.2)] text-left mb-8 text-xs text-ivory space-y-2">
-              <p><b className="text-[#A39A8E]">Recipient:</b> {formData.name}</p>
-              <p><b className="text-[#A39A8E]">Address:</b> {formData.address}, {formData.city}, {formData.state} - {formData.pincode}</p>
+            <div className="p-5 rounded-xl bg-bg border border-[rgba(197,160,89,0.2)] text-left mb-8 text-xs text-ivory space-y-2">
+              <p><b className="text-muted">Recipient:</b> {formData.name}</p>
+              <p><b className="text-muted">Address:</b> {formData.address}, {formData.city}, {formData.state} - {formData.pincode}</p>
               {placedOrder?.billing?.total != null && (
-                <p><b className="text-[#A39A8E]">Amount:</b> <span className="text-accent font-semibold">{formatPrice(placedOrder.billing.total)}</span> ({placedOrder.payment?.method === 'cod' ? 'Cash on Delivery' : 'Paid online'})</p>
+                <p><b className="text-muted">Amount:</b> <span className="text-accent font-semibold">{formatPrice(placedOrder.billing.total)}</span> ({placedOrder.payment?.method === 'cod' ? 'Cash on Delivery' : 'Paid online'})</p>
               )}
-              <p><b className="text-[#A39A8E]">Estimated Delivery:</b> <span className="text-accent">2–4 Business Days</span></p>
+              <p><b className="text-muted">Estimated Delivery:</b> <span className="text-accent">2–4 Business Days</span></p>
             </div>
 
             <Link to="/" className="btn-primary w-full justify-center">
@@ -310,7 +310,7 @@ export function CheckoutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
             {/* Form Steps (7 cols) */}
             <div className="lg:col-span-7">
-              <div className="bg-[#181512] border border-[rgba(197,160,89,0.22)] rounded-2xl shadow-xl p-6 md:p-8">
+              <div className="bg-bg-alt border border-[rgba(197,160,89,0.22)] rounded-2xl shadow-xl p-6 md:p-8">
                 {/* Step 0: Contact Info */}
                 {step === 0 && (
                   <div>
@@ -326,7 +326,7 @@ export function CheckoutPage() {
                           placeholder="e.g. Deepti Agarwal"
                           value={formData.name}
                           onChange={(e) => setField('name', e.target.value)}
-                          className={`w-full bg-[#12100E] border rounded-lg px-4 py-3 text-ivory placeholder:text-[#A39A8E]/60 focus:border-accent focus:outline-none transition-colors ${errors.name ? 'border-red-500/50' : 'border-[rgba(197,160,89,0.25)]'}`}
+                          className={`w-full bg-bg border rounded-lg px-4 py-3 text-ivory placeholder:text-muted/60 focus:border-accent focus:outline-none transition-colors ${errors.name ? 'border-red-500/50' : 'border-[rgba(197,160,89,0.25)]'}`}
                           aria-invalid={errors.name ? 'true' : 'false'}
                         />
                         {errors.name && <span className="text-xs text-red-400 mt-1 block" role="alert">{errors.name}</span>}
@@ -342,7 +342,7 @@ export function CheckoutPage() {
                           placeholder="deepti@example.com"
                           value={formData.email}
                           onChange={(e) => setField('email', e.target.value)}
-                          className={`w-full bg-[#12100E] border rounded-lg px-4 py-3 text-ivory placeholder:text-[#A39A8E]/60 focus:border-accent focus:outline-none transition-colors ${errors.email ? 'border-red-500/50' : 'border-[rgba(197,160,89,0.25)]'}`}
+                          className={`w-full bg-bg border rounded-lg px-4 py-3 text-ivory placeholder:text-muted/60 focus:border-accent focus:outline-none transition-colors ${errors.email ? 'border-red-500/50' : 'border-[rgba(197,160,89,0.25)]'}`}
                           aria-invalid={errors.email ? 'true' : 'false'}
                         />
                         {errors.email && <span className="text-xs text-red-400 mt-1 block" role="alert">{errors.email}</span>}
@@ -358,7 +358,7 @@ export function CheckoutPage() {
                           placeholder="9876543210"
                           value={formData.phone}
                           onChange={(e) => setField('phone', e.target.value)}
-                          className={`w-full bg-[#12100E] border rounded-lg px-4 py-3 text-ivory placeholder:text-[#A39A8E]/60 focus:border-accent focus:outline-none transition-colors ${errors.phone ? 'border-red-500/50' : 'border-[rgba(197,160,89,0.25)]'}`}
+                          className={`w-full bg-bg border rounded-lg px-4 py-3 text-ivory placeholder:text-muted/60 focus:border-accent focus:outline-none transition-colors ${errors.phone ? 'border-red-500/50' : 'border-[rgba(197,160,89,0.25)]'}`}
                           aria-invalid={errors.phone ? 'true' : 'false'}
                         />
                         {errors.phone && <span className="text-xs text-red-400 mt-1 block" role="alert">{errors.phone}</span>}
@@ -382,7 +382,7 @@ export function CheckoutPage() {
                           placeholder="Flat 402, Lotus Enclave, 14th Main"
                           value={formData.address}
                           onChange={(e) => setField('address', e.target.value)}
-                          className={`w-full bg-[#12100E] border rounded-lg px-4 py-3 text-ivory placeholder:text-[#A39A8E]/60 focus:border-accent focus:outline-none transition-colors ${errors.address ? 'border-red-500/50' : 'border-[rgba(197,160,89,0.25)]'}`}
+                          className={`w-full bg-bg border rounded-lg px-4 py-3 text-ivory placeholder:text-muted/60 focus:border-accent focus:outline-none transition-colors ${errors.address ? 'border-red-500/50' : 'border-[rgba(197,160,89,0.25)]'}`}
                         />
                         {errors.address && <span className="text-xs text-red-400 mt-1 block" role="alert">{errors.address}</span>}
                       </div>
@@ -398,7 +398,7 @@ export function CheckoutPage() {
                             placeholder="Mumbai"
                             value={formData.city}
                             onChange={(e) => setField('city', e.target.value)}
-                            className={`w-full bg-[#12100E] border rounded-lg px-4 py-3 text-ivory placeholder:text-[#A39A8E]/60 focus:border-accent focus:outline-none transition-colors ${errors.city ? 'border-red-500/50' : 'border-[rgba(197,160,89,0.25)]'}`}
+                            className={`w-full bg-bg border rounded-lg px-4 py-3 text-ivory placeholder:text-muted/60 focus:border-accent focus:outline-none transition-colors ${errors.city ? 'border-red-500/50' : 'border-[rgba(197,160,89,0.25)]'}`}
                           />
                           {errors.city && <span className="text-xs text-red-400 mt-1 block" role="alert">{errors.city}</span>}
                         </div>
@@ -412,7 +412,7 @@ export function CheckoutPage() {
                             placeholder="400001"
                             value={formData.pincode}
                             onChange={(e) => setField('pincode', e.target.value)}
-                            className={`w-full bg-[#12100E] border rounded-lg px-4 py-3 text-ivory placeholder:text-[#A39A8E]/60 focus:border-accent focus:outline-none transition-colors ${errors.pincode ? 'border-red-500/50' : 'border-[rgba(197,160,89,0.25)]'}`}
+                            className={`w-full bg-bg border rounded-lg px-4 py-3 text-ivory placeholder:text-muted/60 focus:border-accent focus:outline-none transition-colors ${errors.pincode ? 'border-red-500/50' : 'border-[rgba(197,160,89,0.25)]'}`}
                           />
                           {errors.pincode && <span className="text-xs text-red-400 mt-1 block" role="alert">{errors.pincode}</span>}
                         </div>
@@ -428,7 +428,7 @@ export function CheckoutPage() {
                           placeholder="Maharashtra"
                           value={formData.state}
                           onChange={(e) => setField('state', e.target.value)}
-                          className={`w-full bg-[#12100E] border rounded-lg px-4 py-3 text-ivory placeholder:text-[#A39A8E]/60 focus:border-accent focus:outline-none transition-colors ${errors.state ? 'border-red-500/50' : 'border-[rgba(197,160,89,0.25)]'}`}
+                          className={`w-full bg-bg border rounded-lg px-4 py-3 text-ivory placeholder:text-muted/60 focus:border-accent focus:outline-none transition-colors ${errors.state ? 'border-red-500/50' : 'border-[rgba(197,160,89,0.25)]'}`}
                         />
                         {errors.state && <span className="text-xs text-red-400 mt-1 block" role="alert">{errors.state}</span>}
                       </div>
@@ -450,7 +450,7 @@ export function CheckoutPage() {
                           className={`p-4 rounded-xl border flex items-center justify-between cursor-pointer transition-all ${
                             formData.shippingMethod === opt.id
                               ? 'border-accent bg-accent/15 shadow-sm'
-                              : 'border-[rgba(197,160,89,0.2)] bg-[#12100E] hover:border-accent'
+                              : 'border-[rgba(197,160,89,0.2)] bg-bg hover:border-accent'
                           }`}
                         >
                           <div className="flex items-center gap-3">
@@ -463,7 +463,7 @@ export function CheckoutPage() {
                             />
                             <div>
                               <p className="font-sans text-sm font-semibold text-ivory">{opt.title}</p>
-                              <p className="font-sans text-xs text-[#A39A8E]">{opt.time}</p>
+                              <p className="font-sans text-xs text-muted">{opt.time}</p>
                             </div>
                           </div>
                           <span className="font-sans text-sm font-bold text-accent">
@@ -491,7 +491,7 @@ export function CheckoutPage() {
                           className={`p-4 rounded-xl border flex items-start gap-3 cursor-pointer transition-all ${
                             formData.paymentMethod === m.id
                               ? 'border-accent bg-accent/15 shadow-sm'
-                              : 'border-[rgba(197,160,89,0.2)] bg-[#12100E] hover:border-accent'
+                              : 'border-[rgba(197,160,89,0.2)] bg-bg hover:border-accent'
                           }`}
                         >
                           <input
@@ -503,7 +503,7 @@ export function CheckoutPage() {
                           />
                           <div>
                             <p className="font-sans text-sm font-semibold text-ivory">{m.label}</p>
-                            <p className="font-sans text-xs text-[#A39A8E]">{m.desc}</p>
+                            <p className="font-sans text-xs text-muted">{m.desc}</p>
                           </div>
                         </label>
                       ))}
@@ -556,7 +556,7 @@ export function CheckoutPage() {
 
             {/* Right Column: Order Summary (5 cols) */}
             <div className="lg:col-span-5">
-              <div className="bg-[#181512] border border-[rgba(197,160,89,0.22)] rounded-2xl shadow-xl p-6 sticky top-28 space-y-4">
+              <div className="bg-bg-alt border border-[rgba(197,160,89,0.22)] rounded-2xl shadow-xl p-6 sticky top-28 space-y-4">
                 <h3 className="font-serif text-base font-light text-ivory pb-3 border-b border-[rgba(197,160,89,0.18)]">
                   Order Summary ({items.reduce((a, i) => a + i.qty, 0)} Items)
                 </h3>
@@ -568,13 +568,13 @@ export function CheckoutPage() {
                       <img
                         src={product.image}
                         alt={product.name}
-                        className="w-12 h-14 rounded-lg object-cover bg-[#1F1A16] border border-[rgba(197,160,89,0.15)] flex-shrink-0"
+                        className="w-12 h-14 rounded-lg object-cover bg-surface-alt border border-[rgba(197,160,89,0.15)] flex-shrink-0"
                         loading="lazy"
                         decoding="async"
                       />
                       <div className="flex-1 min-w-0">
                         <p className="font-serif text-sm font-light text-ivory truncate">{product.name}</p>
-                        <p className="font-sans text-xs text-[#A39A8E]">Qty: {qty} {variant ? `• ${variant}` : ''}</p>
+                        <p className="font-sans text-xs text-muted">Qty: {qty} {variant ? `• ${variant}` : ''}</p>
                       </div>
                       <span className="font-sans text-xs font-semibold text-accent">
                         {formatPrice(product.price * qty)}
@@ -585,15 +585,15 @@ export function CheckoutPage() {
 
                 {/* Price Breakdown */}
                 <div className="pt-3 border-t border-[rgba(197,160,89,0.18)] space-y-2 text-xs">
-                  <div className="flex justify-between text-[#A39A8E]">
+                  <div className="flex justify-between text-muted">
                     <span>Items Subtotal</span>
                     <span className="text-ivory">{formatPrice(subtotal)}</span>
                   </div>
-                  <div className="flex justify-between text-[#A39A8E]">
+                  <div className="flex justify-between text-muted">
                     <span>Packaging & Luxury Box</span>
                     <span className="text-accent font-semibold">FREE</span>
                   </div>
-                  <div className="flex justify-between text-[#A39A8E]">
+                  <div className="flex justify-between text-muted">
                     <span>Shipping Speed</span>
                     <span>{shippingCost === 0 ? <span className="text-emerald-400 font-semibold">FREE</span> : <span className="text-ivory">{formatPrice(shippingCost)}</span>}</span>
                   </div>

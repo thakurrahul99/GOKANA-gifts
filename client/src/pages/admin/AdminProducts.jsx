@@ -232,19 +232,19 @@ export function AdminProducts() {
       <div className="flex items-center justify-between mb-6">
         <div>
           <h2 className="text-xl font-semibold text-ivory">Products</h2>
-          <p className="text-sm text-[#A39A8E]">{products.length} total products</p>
+          <p className="text-sm text-muted">{products.length} total products</p>
         </div>
         <div className="flex items-center gap-3">
           <button
             onClick={fetchProducts}
-            className="p-2 text-[#A39A8E] hover:text-ivory transition-colors"
+            className="p-2 text-muted hover:text-ivory transition-colors"
             title="Refresh"
           >
             <RefreshCw size={16} />
           </button>
           <button
             onClick={openAdd}
-            className="flex items-center gap-2 px-4 py-2.5 bg-accent text-[#12100E] text-xs font-semibold uppercase tracking-wider hover:bg-accent-light transition-colors rounded-sm shadow-sm"
+            className="flex items-center gap-2 px-4 py-2.5 bg-accent text-bg text-xs font-semibold uppercase tracking-wider hover:bg-accent-light transition-colors rounded-sm shadow-sm"
           >
             <Plus size={16} />
             Add Product
@@ -254,19 +254,19 @@ export function AdminProducts() {
 
       {/* Search */}
       <div className="relative mb-5">
-        <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#A39A8E]" />
+        <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted" />
         <input
           type="text"
           placeholder="Search products…"
           value={search}
           onChange={e => setSearch(e.target.value)}
-          className="w-full pl-10 pr-4 py-2.5 border border-[rgba(197,160,89,0.25)] bg-[#181512] text-ivory placeholder:text-[#A39A8E]/50 text-sm focus:outline-none focus:border-accent rounded-lg"
+          className="w-full pl-10 pr-4 py-2.5 border border-[rgba(197,160,89,0.25)] bg-bg-alt text-ivory placeholder:text-muted/50 text-sm focus:outline-none focus:border-accent rounded-lg"
         />
       </div>
 
       {/* Loading */}
       {loading && (
-        <div className="flex items-center justify-center py-20 text-[#A39A8E]">
+        <div className="flex items-center justify-center py-20 text-muted">
           <Loader2 size={24} className="animate-spin mr-3 text-accent" />
           <span className="text-sm">Loading products…</span>
         </div>
@@ -289,16 +289,16 @@ export function AdminProducts() {
 
       {/* Table */}
       {!loading && !error && (
-        <div className="bg-[#181512] border border-[rgba(197,160,89,0.2)] rounded-xl overflow-hidden shadow-lg overflow-x-auto">
+        <div className="bg-bg-alt border border-[rgba(197,160,89,0.2)] rounded-xl overflow-hidden shadow-lg overflow-x-auto">
           {filtered.length === 0 ? (
-            <div className="text-center py-16 text-[#A39A8E]">
+            <div className="text-center py-16 text-muted">
               <p className="text-sm">No products found.</p>
               <button onClick={openAdd} className="mt-4 text-xs text-accent hover:underline">Add your first product</button>
             </div>
           ) : (
             <table className="w-full text-sm">
               <thead>
-                <tr className="text-xs text-[#A39A8E] font-semibold border-b border-[rgba(197,160,89,0.15)] bg-[#1F1A16]">
+                <tr className="text-xs text-muted font-semibold border-b border-[rgba(197,160,89,0.15)] bg-surface-alt">
                   <th className="text-left px-4 py-3.5">Product</th>
                   <th className="text-left px-4 py-3.5 hidden md:table-cell">Price</th>
                   <th className="text-left px-4 py-3.5 hidden md:table-cell">Stock</th>
@@ -315,11 +315,11 @@ export function AdminProducts() {
                         {product.thumbnail ? (
                           <img src={product.thumbnail} alt="" className="w-10 h-10 object-cover rounded border border-[rgba(197,160,89,0.15)]" loading="lazy" decoding="async" />
                         ) : (
-                          <div className="w-10 h-10 bg-[#12100E] border border-[rgba(197,160,89,0.2)] flex items-center justify-center text-[#A39A8E] text-xs rounded">IMG</div>
+                          <div className="w-10 h-10 bg-bg border border-[rgba(197,160,89,0.2)] flex items-center justify-center text-muted text-xs rounded">IMG</div>
                         )}
                         <div>
                           <p className="font-semibold text-ivory">{product.name}</p>
-                          <p className="text-xs text-[#A39A8E] hidden md:block font-mono">{product.slug}</p>
+                          <p className="text-xs text-muted hidden md:block font-mono">{product.slug}</p>
                         </div>
                       </div>
                     </td>
@@ -329,9 +329,9 @@ export function AdminProducts() {
                         {product.inStock ? `${product.stock ?? 0} in stock` : 'Out of Stock'}
                       </span>
                     </td>
-                    <td className="px-4 py-3 hidden md:table-cell text-xs text-[#A39A8E]">{product.badge || '—'}</td>
+                    <td className="px-4 py-3 hidden md:table-cell text-xs text-muted">{product.badge || '—'}</td>
                     <td className="px-4 py-3 hidden md:table-cell">
-                      <span className={`text-[10px] px-2 py-1 font-semibold rounded border ${product.isFeatured ? 'bg-accent/15 text-accent border-accent/30' : 'bg-[#1F1A16] text-[#A39A8E] border-[rgba(197,160,89,0.2)]'}`}>
+                      <span className={`text-[10px] px-2 py-1 font-semibold rounded border ${product.isFeatured ? 'bg-accent/15 text-accent border-accent/30' : 'bg-surface-alt text-muted border-[rgba(197,160,89,0.2)]'}`}>
                         {product.isFeatured ? 'Yes' : 'No'}
                       </span>
                     </td>
@@ -339,16 +339,16 @@ export function AdminProducts() {
                       <div className="flex items-center justify-end gap-2">
                         <button
                           onClick={() => openEdit(product)}
-                          className="p-2 text-[#A39A8E] hover:text-accent hover:bg-white/5 rounded transition-colors min-h-[36px] min-w-[36px] flex items-center justify-center"
+                          className="p-2 text-ivory hover:text-accent hover:bg-white/5 rounded transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
                           title="Edit product"
                           aria-label="Edit product"
                         >
-                          <Edit2 size={14} />
+                          <Edit2 size={15} />
                         </button>
                         <button
                           onClick={() => handleDelete(product)}
                           disabled={deletingId === product._id}
-                          className="p-2 text-[#A39A8E] hover:text-red-400 hover:bg-red-400/10 rounded transition-colors disabled:opacity-50 min-h-[36px] min-w-[36px] flex items-center justify-center"
+                          className="p-2 text-muted hover:text-red-400 hover:bg-red-400/10 rounded transition-colors disabled:opacity-50 min-h-[44px] min-w-[44px] flex items-center justify-center"
                           title="Delete product"
                           aria-label="Delete product"
                         >
@@ -369,13 +369,13 @@ export function AdminProducts() {
       {/* Product Form Modal */}
       {showForm && (
         <div data-lenis-prevent className="fixed inset-0 bg-black/75 backdrop-blur-xs z-50 flex items-center justify-center p-4">
-          <div data-lenis-prevent className="bg-[#181512] text-ivory w-full max-w-lg max-h-[90vh] overflow-y-auto border border-[rgba(197,160,89,0.25)] shadow-2xl rounded-xl overscroll-contain">
+          <div data-lenis-prevent className="bg-bg-alt text-ivory w-full max-w-lg max-h-[90vh] overflow-y-auto border border-[rgba(197,160,89,0.25)] shadow-2xl rounded-xl overscroll-contain">
             {/* Header */}
-            <div className="flex items-center justify-between px-6 py-5 border-b border-[rgba(197,160,89,0.18)] bg-[#1F1A16]">
+            <div className="flex items-center justify-between px-6 py-5 border-b border-[rgba(197,160,89,0.18)] bg-surface-alt">
               <h3 className="text-lg font-serif font-light text-ivory">
                 {editProduct ? 'Edit Product' : 'Add New Product'}
               </h3>
-              <button onClick={() => setShowForm(false)} className="text-[#A39A8E] hover:text-accent p-2" aria-label="Close modal">
+              <button onClick={() => setShowForm(false)} className="text-muted hover:text-accent p-2" aria-label="Close modal">
                 <X size={20} />
               </button>
             </div>
@@ -476,12 +476,12 @@ export function AdminProducts() {
                 </div>
               </div>
 
-              <div className="border border-dashed border-accent/40 rounded-xl p-4 bg-[#12100E]">
+              <div className="border border-dashed border-accent/40 rounded-xl p-4 bg-bg">
                 <label className="flex items-center gap-2 text-xs text-ivory font-semibold mb-2">
                   <ImageIcon size={15} className="text-accent" />
                   Product Images
                 </label>
-                <label className="flex items-center justify-center gap-2 min-h-[110px] border border-[rgba(197,160,89,0.25)] rounded-lg bg-[#181512] cursor-pointer hover:border-accent transition-colors">
+                <label className="flex items-center justify-center gap-2 min-h-[110px] border border-[rgba(197,160,89,0.25)] rounded-lg bg-bg-alt cursor-pointer hover:border-accent transition-colors">
                   <input
                     type="file"
                     accept="image/*"
@@ -496,7 +496,7 @@ export function AdminProducts() {
                       : 'Select images from your device'}
                   </span>
                 </label>
-                <p className="text-[11px] text-[#A39A8E] mt-2">JPG, PNG or WebP • up to 8 images • 8 MB each. Images are uploaded to Cloudinary when you save.</p>
+                <p className="text-[11px] text-muted mt-2">JPG, PNG or WebP • up to 8 images • 8 MB each. Images are uploaded to Cloudinary when you save.</p>
                 {formData.imageFiles.length > 0 && (
                   <div className="flex flex-wrap gap-2 mt-3">
                     {formData.imageFiles.map((file) => (
@@ -509,23 +509,23 @@ export function AdminProducts() {
               </div>
 
               <div>
-                <label className="block text-xs text-[#A39A8E] mb-1.5 font-medium">Existing Image URLs</label>
+                <label className="block text-xs text-muted mb-1.5 font-medium">Existing Image URLs</label>
                 <textarea
                   placeholder="Optional: one URL per line"
                   rows={2}
                   value={formData.images}
                   onChange={setF('images')}
-                  className="w-full border border-[rgba(197,160,89,0.25)] bg-[#12100E] text-ivory rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-accent resize-none"
+                  className="w-full border border-[rgba(197,160,89,0.25)] bg-bg text-ivory rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-accent resize-none"
                 />
               </div>
 
               <div>
-                <label className="block text-xs text-[#A39A8E] mb-1.5 font-medium">Gift Categories / Occasions</label>
+                <label className="block text-xs text-muted mb-1.5 font-medium">Gift Categories / Occasions</label>
                 <div className="relative">
                   <button
                     type="button"
                     onClick={() => setCategoryDropdownOpen((open) => !open)}
-                    className="w-full min-h-[44px] border border-[rgba(197,160,89,0.25)] bg-[#12100E] text-ivory rounded-lg px-3 py-2.5 text-sm flex items-center justify-between gap-3 text-left focus:outline-none focus:border-accent"
+                    className="w-full min-h-[44px] border border-[rgba(197,160,89,0.25)] bg-bg text-ivory rounded-lg px-3 py-2.5 text-sm flex items-center justify-between gap-3 text-left focus:outline-none focus:border-accent"
                   >
                     <div className="flex flex-wrap gap-1.5">
                       {formData.categories?.length ? formData.categories.map((id) => {
@@ -535,13 +535,13 @@ export function AdminProducts() {
                             {category.emoji ? category.emoji + ' ' : ''}{category.name}
                           </span>
                         ) : null;
-                      }) : <span className="text-[#A39A8E]">Select gift categories…</span>}
+                      }) : <span className="text-muted">Select gift categories…</span>}
                     </div>
                     <ChevronDown size={17} className={categoryDropdownOpen ? 'rotate-180 transition-transform' : 'transition-transform'} />
                   </button>
 
                   {categoryDropdownOpen && (
-                    <div className="absolute z-20 mt-1 w-full max-h-64 overflow-y-auto rounded-lg border border-[rgba(197,160,89,0.25)] bg-[#181512] shadow-2xl">
+                    <div className="absolute z-20 mt-1 w-full max-h-64 overflow-y-auto rounded-lg border border-[rgba(197,160,89,0.25)] bg-bg-alt shadow-2xl">
                       {categories.length > 0 ? categories.map((category) => {
                         const checked = formData.categories?.includes(category._id);
                         return (
@@ -561,20 +561,20 @@ export function AdminProducts() {
                           </button>
                         );
                       }) : (
-                        <p className="px-3 py-3 text-xs text-[#A39A8E]">No active categories found.</p>
+                        <p className="px-3 py-3 text-xs text-muted">No active categories found.</p>
                       )}
                     </div>
                   )}
                 </div>
-                <p className="text-[11px] text-[#A39A8E] mt-1.5">Dropdown se multiple occasions select kar sakte ho — Birthday, Anniversary, Wedding, New Baby, Housewarming, Graduation, etc.</p>
+                <p className="text-[11px] text-muted mt-1.5">Dropdown se multiple occasions select kar sakte ho — Birthday, Anniversary, Wedding, New Baby, Housewarming, Graduation, etc.</p>
               </div>
 
               <div>
-                <label className="block text-xs text-[#A39A8E] mb-1.5 font-medium">Badge</label>
+                <label className="block text-xs text-muted mb-1.5 font-medium">Badge</label>
                 <select
                   value={formData.badge}
                   onChange={setF('badge')}
-                  className="w-full border border-[rgba(197,160,89,0.25)] bg-[#12100E] text-ivory rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-accent"
+                  className="w-full border border-[rgba(197,160,89,0.25)] bg-bg text-ivory rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-accent"
                 >
                   <option value="">No badge</option>
                   <option value="Bestseller">Bestseller</option>
@@ -583,7 +583,7 @@ export function AdminProducts() {
                 </select>
               </div>
 
-              <div className="rounded-xl border border-[rgba(197,160,89,0.25)] bg-[#12100E] p-4 space-y-3">
+              <div className="rounded-xl border border-[rgba(197,160,89,0.25)] bg-bg p-4 space-y-3">
                 <label className="flex items-center gap-2 text-sm text-ivory font-semibold cursor-pointer">
                   <input type="checkbox" checked={formData.personalisable} onChange={setF('personalisable')} className="w-4 h-4 accent-accent" />
                   Enable Personalisation
@@ -593,20 +593,20 @@ export function AdminProducts() {
                     {formData.personalisationFields.map((field, index) => (
                       <div key={index} className="grid grid-cols-[1fr_120px_32px] gap-2 items-end">
                         <div>
-                          <label className="block text-[11px] text-[#A39A8E] mb-1">Field label</label>
-                          <input value={field.label} onChange={(e) => setFormData((f) => ({ ...f, personalisationFields: f.personalisationFields.map((x, i) => i === index ? { ...x, label: e.target.value } : x) }))} className="w-full border border-[rgba(197,160,89,0.25)] bg-[#181512] text-ivory rounded px-3 py-2 text-sm focus:outline-none focus:border-accent" />
+                          <label className="block text-[11px] text-muted mb-1">Field label</label>
+                          <input value={field.label} onChange={(e) => setFormData((f) => ({ ...f, personalisationFields: f.personalisationFields.map((x, i) => i === index ? { ...x, label: e.target.value } : x) }))} className="w-full border border-[rgba(197,160,89,0.25)] bg-bg-alt text-ivory rounded px-3 py-2 text-sm focus:outline-none focus:border-accent" />
                         </div>
                         <div>
-                          <label className="block text-[11px] text-[#A39A8E] mb-1">Type</label>
-                          <select value={field.type} onChange={(e) => setFormData((f) => ({ ...f, personalisationFields: f.personalisationFields.map((x, i) => i === index ? { ...x, type: e.target.value } : x) }))} className="w-full border border-[rgba(197,160,89,0.25)] bg-[#181512] text-ivory rounded px-2 py-2 text-sm focus:outline-none focus:border-accent">
+                          <label className="block text-[11px] text-muted mb-1">Type</label>
+                          <select value={field.type} onChange={(e) => setFormData((f) => ({ ...f, personalisationFields: f.personalisationFields.map((x, i) => i === index ? { ...x, type: e.target.value } : x) }))} className="w-full border border-[rgba(197,160,89,0.25)] bg-bg-alt text-ivory rounded px-2 py-2 text-sm focus:outline-none focus:border-accent">
                             <option value="text">Text</option><option value="textarea">Message</option><option value="select">Select</option>
                           </select>
                         </div>
-                        <button type="button" onClick={() => setFormData((f) => ({ ...f, personalisationFields: f.personalisationFields.filter((_, i) => i !== index) }))} className="h-9 border border-[rgba(197,160,89,0.25)] text-[#A39A8E] hover:text-ivory rounded">×</button>
+                        <button type="button" onClick={() => setFormData((f) => ({ ...f, personalisationFields: f.personalisationFields.filter((_, i) => i !== index) }))} className="h-9 border border-[rgba(197,160,89,0.25)] text-muted hover:text-ivory rounded">×</button>
                       </div>
                     ))}
                     <button type="button" onClick={() => setFormData((f) => ({ ...f, personalisationFields: [...f.personalisationFields, { type: 'text', label: 'Custom Detail', placeholder: '', required: false, options: [] }] }))} className="text-xs font-semibold text-accent hover:text-accent-light">+ Add personalisation field</button>
-                    <p className="text-[11px] text-[#A39A8E]">These fields appear on the product page and are saved with the cart/order.</p>
+                    <p className="text-[11px] text-muted">These fields appear on the product page and are saved with the cart/order.</p>
                   </div>
                 )}
               </div>
@@ -638,7 +638,7 @@ export function AdminProducts() {
               <button
                 onClick={handleSave}
                 disabled={formSaving}
-                className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-accent text-[#12100E] text-xs font-semibold uppercase tracking-wider hover:bg-accent-light transition-colors rounded-sm disabled:opacity-60"
+                className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-accent text-bg text-xs font-semibold uppercase tracking-wider hover:bg-accent-light transition-colors rounded-sm disabled:opacity-60"
               >
                 {formSaving && <Loader2 size={14} className="animate-spin" />}
                 {uploadingImages ? 'Uploading images…' : formSaving ? 'Saving…' : editProduct ? 'Update Product' : 'Create Product'}

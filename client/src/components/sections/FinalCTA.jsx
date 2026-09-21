@@ -4,7 +4,7 @@ import { ScrollReveal, AnimatedHeading } from '../ui/ScrollReveal';
 
 export function FinalCTA() {
   return (
-    <section className="relative py-24 md:py-32 bg-[#12100E] text-ivory overflow-hidden border-b border-[rgba(197,160,89,0.2)]" aria-labelledby="final-cta-heading">
+    <section className="relative py-24 md:py-32 bg-bg text-ivory overflow-hidden border-b border-[rgba(197,160,89,0.2)]" aria-labelledby="final-cta-heading">
       {/* Subtle Ambient Radial Glow */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(197,160,89,0.12)_0%,transparent_65%)] pointer-events-none" />
 
@@ -27,7 +27,7 @@ export function FinalCTA() {
         </AnimatedHeading>
 
         <ScrollReveal delay={0.25}>
-          <p className="font-sans text-sm md:text-base text-[#A39A8E] leading-relaxed max-w-xl mx-auto mb-10 font-light">
+          <p className="font-sans text-sm md:text-base text-muted leading-relaxed max-w-xl mx-auto mb-10 font-light">
             Whether celebrating a special occasion or sending a heartfelt surprise, create a personalized gift that leaves an unforgettable impression.
           </p>
         </ScrollReveal>

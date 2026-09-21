@@ -9,16 +9,23 @@ export default {
           DEFAULT: '#12100E', // Dark Espresso
           alt: '#181512',     // Warm Charcoal
           elevated: '#1F1A16', // Deep Warm Olive/Espresso
+          banner: '#0E0C0A',  // Deep Obsidian for Hero/Headers
         },
         surface: {
           DEFAULT: '#191613',
           alt: '#1F1A16',
           tint: '#27221C',
+          skeleton: '#2A231C',
         },
         border: {
           DEFAULT: '#2E2721',
           soft: 'rgba(197, 160, 89, 0.22)',
           gold: '#C5A059',
+        },
+        badge: {
+          'sale-bg': '#2D1B18',
+          'sale-text': '#F3A59B',
+          'sale-border': '#8C3B32',
         },
         primary: {
           DEFAULT: '#12100E', // Deep Espresso
