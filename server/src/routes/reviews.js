@@ -11,7 +11,7 @@ router.get('/', async (req, res, next) => {
   try {
     const filter = { isApproved: true };
     if (req.query.product) filter.product = req.query.product;
-    const reviews = await Review.find(filter).sort('-createdAt').populate('user', 'name');
+    const reviews = await Review.find(filter).sort('-createdAt').populate('user', 'name').lean();
     res.json({ success: true, reviews });
   } catch (err) { next(err); }
 });

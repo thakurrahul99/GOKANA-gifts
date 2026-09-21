@@ -3,6 +3,7 @@ import cors from "cors";
 import morgan from "morgan";
 import dotenv from "dotenv";
 import helmet from "helmet";
+import compression from "compression";
 import rateLimit from "express-rate-limit";
 import { connectDB } from "./config/db.js";
 
@@ -26,6 +27,7 @@ const PORT = process.env.PORT || 5000;
 
 // ─── Middleware ───
 app.use(helmet());
+app.use(compression());
 
 // Basic global rate limit — a tighter one is applied to auth routes below.
 const apiLimiter = rateLimit({

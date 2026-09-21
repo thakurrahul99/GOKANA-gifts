@@ -27,7 +27,8 @@ router.get('/stats', async (req, res, next) => {
       Product.countDocuments({ isActive: true }),
       Order.find().sort('-createdAt').limit(10)
         .populate('user', 'name email')
-        .populate('items.product', 'name thumbnail'),
+        .populate('items.product', 'name thumbnail')
+        .lean(),
       Order.countDocuments({ status: 'PENDING' }),
     ]);
 
@@ -63,7 +64,8 @@ router.get('/orders', async (req, res, next) => {
     const skip = (Number(page) - 1) * Number(limit);
     const [orders, total] = await Promise.all([
       Order.find(filter).sort('-createdAt').skip(skip).limit(Number(limit))
-        .populate('user', 'name email'),
+        .populate('user', 'name email')
+        .lean(),
       Order.countDocuments(filter),
     ]);
     res.json({ success: true, orders, pagination: { total, page: Number(page), pages: Math.ceil(total / limit) } });
@@ -111,7 +113,7 @@ router.get('/customers', async (req, res, next) => {
     }
     const skip = (Number(page) - 1) * Number(limit);
     const [customers, total] = await Promise.all([
-      User.find(filter).sort('-createdAt').skip(skip).limit(Number(limit)).select('-password'),
+      User.find(filter).sort('-createdAt').skip(skip).limit(Number(limit)).select('-password').lean(),
       User.countDocuments(filter),
     ]);
     res.json({ success: true, customers, pagination: { total, page: Number(page), pages: Math.ceil(total / limit) } });

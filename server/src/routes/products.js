@@ -32,10 +32,11 @@ router.get('/', async (req, res, next) => {
 
     const skip = (Number(page) - 1) * Number(limit);
     const [products, total] = await Promise.all([
-      Product.find(filter).sort(sort).skip(skip).limit(Number(limit)).populate('categories', 'name slug'),
+      Product.find(filter).sort(sort).skip(skip).limit(Number(limit)).populate('categories', 'name slug').lean(),
       Product.countDocuments(filter),
     ]);
 
+    res.set('Cache-Control', 'public, max-age=60, stale-while-revalidate=300');
     res.json({
       success: true,
       products,
@@ -50,8 +51,10 @@ router.get('/', async (req, res, next) => {
 router.get('/:slug', async (req, res, next) => {
   try {
     const product = await Product.findOne({ slug: req.params.slug, isActive: true })
-      .populate('categories', 'name slug');
+      .populate('categories', 'name slug')
+      .lean();
     if (!product) throw new AppError('Product not found', 404);
+    res.set('Cache-Control', 'public, max-age=60, stale-while-revalidate=300');
     res.json({ success: true, product });
   } catch (err) {
     next(err);

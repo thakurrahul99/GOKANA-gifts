@@ -36,7 +36,8 @@ router.get('/', async (req, res, next) => {
         { upsert: true }
       )
     ));
-    const categories = await Category.find({ isActive: true }).sort('sortOrder');
+    const categories = await Category.find({ isActive: true }).sort('sortOrder').lean();
+    res.set('Cache-Control', 'public, max-age=60, stale-while-revalidate=300');
     res.json({ success: true, categories });
   } catch (err) { next(err); }
 });
