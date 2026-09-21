@@ -67,12 +67,12 @@ export function Footer() {
   };
 
   return (
-    <footer className="bg-primary-dark text-ivory border-t border-[rgba(197,160,89,0.2)]" aria-label="Site Footer">
+    <footer className="bg-primary-dark text-ivory border-t border-border" aria-label="Site Footer">
       {/* Delicate Gold Gradient Hairline */}
       <div className="h-[1px] bg-gradient-to-r from-transparent via-accent to-transparent opacity-50" />
 
       <div className="container-gokana pt-16 pb-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 pb-14 border-b border-[rgba(197,160,89,0.15)]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 pb-14 border-b border-border">
           {/* Brand & Newsletter Column */}
           <div className="lg:col-span-4">
             <Link to="/" className="flex flex-col group mb-4">
@@ -99,7 +99,7 @@ export function Footer() {
 
               {!subscribed ? (
                 <form onSubmit={handleSubscribe} className="space-y-2" noValidate>
-                  <div className="flex rounded-[4px] overflow-hidden border border-[rgba(197,160,89,0.3)] focus-within:border-accent transition-colors">
+                  <div className="flex rounded-[4px] overflow-hidden border border-border-light focus-within:border-accent transition-colors">
                     <input
                       type="email"
                       value={email}
@@ -136,7 +136,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="w-10 h-10 rounded-full border border-[rgba(197,160,89,0.25)] bg-bg-alt flex items-center justify-center text-accent hover:text-bg hover:bg-accent hover:border-accent transition-all cursor-pointer"
+                  className="w-10 h-10 rounded-full border border-border bg-bg-alt flex items-center justify-center text-accent hover:text-bg hover:bg-accent hover:border-accent transition-all cursor-pointer"
                 >
                   <Icon size={17} />
                 </a>

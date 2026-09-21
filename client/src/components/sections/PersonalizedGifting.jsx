@@ -28,14 +28,14 @@ const personalizationOptions = [
 
 export function PersonalizedGifting() {
   return (
-    <section id="personalisation" className="section-py bg-bg text-ivory overflow-hidden border-b border-[rgba(197,160,89,0.15)]" aria-labelledby="personalisation-heading">
+    <section id="personalisation" className="section-py bg-bg text-ivory overflow-hidden border-b border-border" aria-labelledby="personalisation-heading">
       <div className="container-gokana">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Left — Visually Rich Calligraphy Keepsake Simulation */}
           <ScrollReveal direction="scale" className="relative">
-            <div className="relative aspect-square max-w-md mx-auto bg-bg-alt rounded-[8px] p-8 md:p-12 border border-[rgba(197,160,89,0.3)] shadow-[0_12px_40px_rgba(0,0,0,0.7)] flex flex-col items-center justify-center text-center">
+            <div className="relative aspect-square max-w-md mx-auto bg-bg-alt rounded-[8px] p-8 md:p-12 border border-border-light shadow-[0_12px_40px_rgba(0,0,0,0.7)] flex flex-col items-center justify-center text-center">
               {/* Subtle Gold Ornamental Stamp */}
-              <div className="w-12 h-12 rounded-full border border-[rgba(197,160,89,0.4)] bg-surface-alt flex items-center justify-center text-accent mb-6">
+              <div className="w-12 h-12 rounded-full border border-border bg-surface-alt flex items-center justify-center text-accent mb-6">
                 <Sparkles size={20} className="text-accent" />
               </div>
 
@@ -50,13 +50,13 @@ export function PersonalizedGifting() {
                 "May this milestone bring you quiet joy, unforgettable celebrations, and dreams realized."
               </p>
 
-              <div className="pt-4 border-t border-[rgba(197,160,89,0.2)] w-full flex items-center justify-between text-xs text-muted font-sans">
+              <div className="pt-4 border-t border-border w-full flex items-center justify-between text-xs text-muted font-sans">
                 <span className="font-medium tracking-wider">Wax Sealed • 300 GSM</span>
                 <span className="font-semibold text-accent uppercase tracking-wider">Complimentary</span>
               </div>
 
               {/* Floating Tag */}
-              <div className="absolute -top-3 -right-3 bg-surface-alt border border-[rgba(197,160,89,0.4)] text-accent px-4 py-1.5 rounded-full text-[11px] font-semibold tracking-[0.14em] uppercase shadow-lg flex items-center gap-1.5">
+              <div className="absolute -top-3 -right-3 bg-surface-alt border border-border text-accent px-4 py-1.5 rounded-full text-[11px] font-semibold tracking-[0.14em] uppercase shadow-lg flex items-center gap-1.5">
                 <Sparkles size={12} className="text-accent" />
                 100% Personalised
               </div>
@@ -83,7 +83,7 @@ export function PersonalizedGifting() {
                 <motion.div
                   key={title}
                   variants={staggerItem}
-                  className="p-4 rounded-[6px] bg-bg-alt border border-[rgba(197,160,89,0.2)] hover:border-[rgba(197,160,89,0.45)] transition-colors"
+                  className="p-4 rounded-[6px] bg-bg-alt border border-border hover:border-border transition-colors"
                 >
                   <div className="flex items-center gap-2.5 mb-1.5 text-accent">
                     <Icon size={16} strokeWidth={1.8} className="text-accent" />

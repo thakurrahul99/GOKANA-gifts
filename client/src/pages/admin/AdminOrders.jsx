@@ -13,13 +13,13 @@ const ORDER_STATUSES = [
 const STATUS_BADGE = {
   PENDING:          'bg-accent/15 text-accent border border-accent/30',
   CONFIRMED:        'bg-accent text-bg font-semibold',
-  PROCESSING:       'bg-surface-alt text-ivory border border-[rgba(197,160,89,0.25)]',
+  PROCESSING:       'bg-surface-alt text-ivory border border-border',
   PACKED:           'bg-accent/20 text-accent border border-accent/30',
   SHIPPED:          'bg-accent/25 text-accent-light border border-accent/35',
   OUT_FOR_DELIVERY: 'bg-accent/30 text-ivory border border-accent/40',
   DELIVERED:        'bg-emerald-950/60 text-emerald-300 border border-emerald-500/30',
   CANCELLED:        'bg-red-950/60 text-red-300 border border-red-500/30',
-  RETURNED:         'bg-surface-alt text-muted border border-[rgba(197,160,89,0.2)]',
+  RETURNED:         'bg-surface-alt text-muted border border-border',
 };
 
 const dateFmt = new Intl.DateTimeFormat('en-IN', {
@@ -143,20 +143,20 @@ export function AdminOrders() {
             placeholder="Search by order ID or customer…"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-10 pr-4 py-2.5 border border-[rgba(197,160,89,0.25)] bg-bg-alt text-ivory placeholder:text-muted/50 text-sm focus:outline-none focus:border-accent rounded-lg"
+            className="w-full pl-10 pr-4 py-2.5 border border-border bg-bg-alt text-ivory placeholder:text-muted/50 text-sm focus:outline-none focus:border-accent rounded-lg"
           />
         </div>
         <select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
-          className="border border-[rgba(197,160,89,0.25)] px-3.5 py-2.5 text-sm text-ivory bg-bg-alt focus:outline-none focus:border-accent rounded-lg cursor-pointer"
+          className="border border-border px-3.5 py-2.5 text-sm text-ivory bg-bg-alt focus:outline-none focus:border-accent rounded-lg cursor-pointer"
         >
           <option value="ALL">All Statuses</option>
           {ORDER_STATUSES.map((s) => <option key={s} value={s}>{s.replace(/_/g, ' ')}</option>)}
         </select>
         <button
           onClick={fetchOrders}
-          className="flex items-center justify-center gap-2 border border-[rgba(197,160,89,0.25)] bg-bg-alt px-4 py-2.5 text-sm text-ivory hover:border-accent hover:text-accent transition-colors rounded-lg"
+          className="flex items-center justify-center gap-2 border border-border bg-bg-alt px-4 py-2.5 text-sm text-ivory hover:border-accent hover:text-accent transition-colors rounded-lg"
         >
           <RefreshCw size={14} className={loading ? 'animate-spin text-accent' : 'text-accent'} />
           Refresh
@@ -180,7 +180,7 @@ export function AdminOrders() {
 
       {/* Loading */}
       {loading && (
-        <div className="bg-bg-alt border border-[rgba(197,160,89,0.2)] text-center py-16 rounded-xl shadow-lg">
+        <div className="bg-bg-alt border border-border text-center py-16 rounded-xl shadow-lg">
           <Loader2 size={26} className="mx-auto text-accent animate-spin mb-3" />
           <p className="text-sm text-muted">Loading orders…</p>
         </div>
@@ -190,7 +190,7 @@ export function AdminOrders() {
       {!loading && !error && (
         <div className="space-y-3">
           {orders.length === 0 ? (
-            <div className="bg-bg-alt border border-[rgba(197,160,89,0.2)] text-center py-14 text-muted text-sm rounded-xl">
+            <div className="bg-bg-alt border border-border text-center py-14 text-muted text-sm rounded-xl">
               No orders match your search.
             </div>
           ) : orders.map((order) => {
@@ -201,7 +201,7 @@ export function AdminOrders() {
               draft.trackingNumber !== (order.tracking?.trackingNumber || '');
 
             return (
-              <div key={order._id} className="bg-bg-alt border border-[rgba(197,160,89,0.2)] hover:border-accent/40 rounded-xl overflow-hidden shadow-sm transition-all">
+              <div key={order._id} className="bg-bg-alt border border-border hover:border-accent/40 rounded-xl overflow-hidden shadow-sm transition-all">
                 {/* Order row */}
                 <button
                   className="w-full flex items-center gap-4 px-5 py-4 cursor-pointer hover:bg-white/5 transition-colors text-left"
@@ -229,7 +229,7 @@ export function AdminOrders() {
 
                 {/* Expanded detail */}
                 {expanded && (
-                  <div className="border-t border-[rgba(197,160,89,0.15)] px-5 py-5 bg-bg">
+                  <div className="border-t border-border px-5 py-5 bg-bg">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-5">
                       <div>
                         <p className="text-xs font-semibold text-accent uppercase tracking-wider mb-1.5">Customer</p>
@@ -259,7 +259,7 @@ export function AdminOrders() {
                     </div>
 
                     {/* Line items */}
-                    <div className="mb-5 border border-[rgba(197,160,89,0.2)] bg-bg-alt divide-y divide-[rgba(197,160,89,0.1)] rounded-lg overflow-hidden">
+                    <div className="mb-5 border border-border bg-bg-alt divide-y divide-border/50 rounded-lg overflow-hidden">
                       {(order.items || []).map((item, i) => (
                         <div key={i} className="flex items-center justify-between px-4 py-2.5 text-xs">
                           <span className="text-ivory truncate">
@@ -270,7 +270,7 @@ export function AdminOrders() {
                           </span>
                         </div>
                       ))}
-                      <div className="flex items-center justify-between px-4 py-2.5 text-xs bg-surface-alt border-t border-[rgba(197,160,89,0.15)]">
+                      <div className="flex items-center justify-between px-4 py-2.5 text-xs bg-surface-alt border-t border-border">
                         <span className="text-muted">
                           Subtotal {formatPrice(order.billing?.subtotal ?? 0)}
                           {order.billing?.discount ? ` · Discount −${formatPrice(order.billing.discount)}` : ''}
@@ -286,7 +286,7 @@ export function AdminOrders() {
                       <select
                         value={draft.status}
                         onChange={(e) => setDraft(order._id, { status: e.target.value })}
-                        className="border border-[rgba(197,160,89,0.25)] bg-bg-alt px-3 py-2 text-xs text-ivory focus:outline-none focus:border-accent rounded min-h-[36px]"
+                        className="border border-border bg-bg-alt px-3 py-2 text-xs text-ivory focus:outline-none focus:border-accent rounded min-h-[36px]"
                       >
                         {ORDER_STATUSES.map((s) => <option key={s} value={s}>{s.replace(/_/g, ' ')}</option>)}
                       </select>
@@ -294,7 +294,7 @@ export function AdminOrders() {
                         placeholder="Add tracking number…"
                         value={draft.trackingNumber}
                         onChange={(e) => setDraft(order._id, { trackingNumber: e.target.value })}
-                        className="flex-1 min-w-[140px] border border-[rgba(197,160,89,0.25)] bg-bg-alt px-3 py-2 text-xs text-ivory placeholder:text-muted/50 focus:outline-none focus:border-accent rounded min-h-[36px]"
+                        className="flex-1 min-w-[140px] border border-border bg-bg-alt px-3 py-2 text-xs text-ivory placeholder:text-muted/50 focus:outline-none focus:border-accent rounded min-h-[36px]"
                       />
                       <button
                         onClick={() => saveOrder(order)}

@@ -157,7 +157,7 @@ export function AdminCoupons() {
 
       {/* Loading */}
       {loading && (
-        <div className="bg-bg-alt border border-[rgba(197,160,89,0.2)] text-center py-16 rounded-xl shadow-lg">
+        <div className="bg-bg-alt border border-border text-center py-16 rounded-xl shadow-lg">
           <Loader2 size={24} className="mx-auto text-accent animate-spin mb-2" />
           <p className="text-sm text-muted">Loading coupons…</p>
         </div>
@@ -166,8 +166,8 @@ export function AdminCoupons() {
       {/* Form Modal */}
       {showForm && (
         <div data-lenis-prevent className="fixed inset-0 bg-black/75 backdrop-blur-xs flex items-center justify-center z-50 p-4">
-          <div data-lenis-prevent className="bg-bg-alt text-ivory border border-[rgba(197,160,89,0.25)] rounded-xl max-w-lg w-full max-h-[90vh] overflow-y-auto p-6 shadow-2xl overscroll-contain">
-            <div className="flex items-center justify-between mb-4 pb-3 border-b border-[rgba(197,160,89,0.18)]">
+          <div data-lenis-prevent className="bg-bg-alt text-ivory border border-border rounded-xl max-w-lg w-full max-h-[90vh] overflow-y-auto p-6 shadow-2xl overscroll-contain">
+            <div className="flex items-center justify-between mb-4 pb-3 border-b border-border">
               <h3 className="text-lg font-serif font-light text-ivory">
                 {editCoupon ? 'Edit Coupon' : 'Create Coupon'}
               </h3>
@@ -195,7 +195,7 @@ export function AdminCoupons() {
                   value={formData.code}
                   onChange={(e) => setFormData({ ...formData, code: e.target.value })}
                   placeholder="e.g. WELCOME10"
-                  className="w-full mt-1 px-3.5 py-2.5 border border-[rgba(197,160,89,0.25)] bg-bg text-ivory text-sm focus:border-accent outline-none rounded-lg"
+                  className="w-full mt-1 px-3.5 py-2.5 border border-border bg-bg text-ivory text-sm focus:border-accent outline-none rounded-lg"
                 />
               </div>
 
@@ -205,7 +205,7 @@ export function AdminCoupons() {
                   <select
                     value={formData.type}
                     onChange={(e) => setFormData({ ...formData, type: e.target.value })}
-                    className="w-full mt-1 px-3.5 py-2.5 border border-[rgba(197,160,89,0.25)] bg-bg text-ivory text-sm focus:border-accent rounded-lg cursor-pointer"
+                    className="w-full mt-1 px-3.5 py-2.5 border border-border bg-bg text-ivory text-sm focus:border-accent rounded-lg cursor-pointer"
                   >
                     <option value="percentage">Percentage %</option>
                     <option value="fixed">Fixed ₹</option>
@@ -218,7 +218,7 @@ export function AdminCoupons() {
                     value={formData.value}
                     onChange={(e) => setFormData({ ...formData, value: e.target.value })}
                     placeholder="e.g. 10"
-                    className="w-full mt-1 px-3.5 py-2.5 border border-[rgba(197,160,89,0.25)] bg-bg text-ivory text-sm focus:border-accent outline-none rounded-lg"
+                    className="w-full mt-1 px-3.5 py-2.5 border border-border bg-bg text-ivory text-sm focus:border-accent outline-none rounded-lg"
                   />
                 </div>
               </div>
@@ -230,7 +230,7 @@ export function AdminCoupons() {
                   value={formData.minOrderAmount}
                   onChange={(e) => setFormData({ ...formData, minOrderAmount: e.target.value })}
                   placeholder="e.g. 500"
-                  className="w-full mt-1 px-3.5 py-2.5 border border-[rgba(197,160,89,0.25)] bg-bg text-ivory text-sm focus:border-accent outline-none rounded-lg"
+                  className="w-full mt-1 px-3.5 py-2.5 border border-border bg-bg text-ivory text-sm focus:border-accent outline-none rounded-lg"
                 />
               </div>
 
@@ -242,7 +242,7 @@ export function AdminCoupons() {
                     value={formData.maxDiscount}
                     onChange={(e) => setFormData({ ...formData, maxDiscount: e.target.value })}
                     placeholder="e.g. 300"
-                    className="w-full mt-1 px-3.5 py-2.5 border border-[rgba(197,160,89,0.25)] bg-bg text-ivory text-sm focus:border-accent outline-none rounded-lg"
+                    className="w-full mt-1 px-3.5 py-2.5 border border-border bg-bg text-ivory text-sm focus:border-accent outline-none rounded-lg"
                   />
                 </div>
               )}
@@ -254,7 +254,7 @@ export function AdminCoupons() {
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                   placeholder="e.g. Welcome discount for new users"
-                  className="w-full mt-1 px-3.5 py-2.5 border border-[rgba(197,160,89,0.25)] bg-bg text-ivory text-sm focus:border-accent outline-none rounded-lg"
+                  className="w-full mt-1 px-3.5 py-2.5 border border-border bg-bg text-ivory text-sm focus:border-accent outline-none rounded-lg"
                 />
               </div>
 
@@ -269,7 +269,7 @@ export function AdminCoupons() {
               </label>
             </div>
 
-            <div className="flex items-center justify-end gap-2 mt-5 pt-4 border-t border-[rgba(197,160,89,0.18)]">
+            <div className="flex items-center justify-end gap-2 mt-5 pt-4 border-t border-border">
               <button
                 onClick={() => setShowForm(false)}
                 className="px-4 py-2 text-xs font-semibold text-muted hover:text-ivory transition-colors"
@@ -290,7 +290,7 @@ export function AdminCoupons() {
 
       {/* Table */}
       {!loading && !error && (
-        <div className="bg-bg-alt border border-[rgba(197,160,89,0.2)] rounded-xl overflow-hidden shadow-lg overflow-x-auto">
+        <div className="bg-bg-alt border border-border rounded-xl overflow-hidden shadow-lg overflow-x-auto">
           {filtered.length === 0 ? (
             <div className="text-center py-10 text-muted text-sm">
               {coupons.length === 0 ? 'No coupons yet. Create one to get started.' : 'No coupons match your search.'}
@@ -298,7 +298,7 @@ export function AdminCoupons() {
           ) : (
             <table className="w-full text-sm">
               <thead>
-                <tr className="text-xs text-muted border-b border-[rgba(197,160,89,0.15)] bg-surface-alt">
+                <tr className="text-xs text-muted border-b border-border bg-surface-alt">
                   <th className="text-left px-4 py-3.5 font-semibold">Code</th>
                   <th className="text-left px-4 py-3.5 font-semibold">Discount</th>
                   <th className="text-left px-4 py-3.5 font-semibold">Min Order</th>
@@ -306,7 +306,7 @@ export function AdminCoupons() {
                   <th className="text-center px-4 py-3.5 font-semibold">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[rgba(197,160,89,0.1)]">
+              <tbody className="divide-y divide-border/50">
                 {filtered.map((coupon) => (
                   <tr key={coupon._id} className="hover:bg-white/5 transition-colors">
                     <td className="px-4 py-3.5">
@@ -326,7 +326,7 @@ export function AdminCoupons() {
                       <span className={`text-xs font-semibold px-2.5 py-1 rounded inline-block ${
                         coupon.isActive
                           ? 'bg-accent/15 text-accent border border-accent/30'
-                          : 'bg-surface-alt text-muted border border-[rgba(197,160,89,0.2)]'
+                          : 'bg-surface-alt text-muted border border-border'
                       }`}>
                         {coupon.isActive ? 'Active' : 'Inactive'}
                       </span>

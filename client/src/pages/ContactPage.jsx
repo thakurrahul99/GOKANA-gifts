@@ -35,12 +35,12 @@ export function ContactPage() {
   };
 
   const inputClass =
-    'w-full px-4 py-3.5 bg-bg border border-[rgba(197,160,89,0.25)] rounded-lg text-ivory text-sm placeholder:text-muted/50 focus:border-accent focus:ring-1 focus:ring-accent/30 outline-none transition-all';
+    'w-full px-4 py-3.5 bg-bg border border-border rounded-lg text-ivory text-sm placeholder:text-muted/50 focus:border-accent focus:ring-1 focus:ring-accent/30 outline-none transition-all';
 
   return (
     <main className="pt-24 min-h-screen bg-bg text-ivory">
       {/* Editorial Luxury Header */}
-      <section className="bg-bg-banner text-ivory py-16 sm:py-20 relative overflow-hidden border-b border-[rgba(197,160,89,0.2)]">
+      <section className="bg-bg-banner text-ivory py-16 sm:py-20 relative overflow-hidden border-b border-border">
         <div
           className="absolute inset-0 pointer-events-none opacity-30"
           style={{
@@ -71,7 +71,7 @@ export function ContactPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
           {/* Left Column: Direct Support Touchpoints */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="bg-bg-alt border border-[rgba(197,160,89,0.22)] rounded-2xl p-7 shadow-xl">
+            <div className="bg-bg-alt border border-border rounded-2xl p-7 shadow-xl">
               <h2 className="font-serif text-2xl font-light text-ivory mb-2">Direct Contact</h2>
               <p className="font-sans text-xs text-muted mb-6 font-light leading-relaxed">
                 Connect directly with our team for quick help, recommendations, or custom gifting advice.
@@ -83,7 +83,7 @@ export function ContactPage() {
                   href="https://wa.me/919999999999?text=Hi%20GŌKANA,%20I%20would%20like%20to%20inquire%20about%20curated%20gifting"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-start gap-4 p-4 rounded-xl bg-bg border border-[rgba(197,160,89,0.18)] hover:border-accent hover:bg-surface transition-all group"
+                  className="flex items-start gap-4 p-4 rounded-xl bg-bg border border-border hover:border-accent hover:bg-surface transition-all group"
                 >
                   <div className="w-10 h-10 rounded-full bg-accent/15 border border-accent/30 flex items-center justify-center text-accent flex-shrink-0 group-hover:scale-105 transition-transform">
                     <MessageSquare size={18} />
@@ -100,7 +100,7 @@ export function ContactPage() {
                 {/* Email */}
                 <a
                   href="mailto:hello@gokana.in"
-                  className="flex items-start gap-4 p-4 rounded-xl bg-bg border border-[rgba(197,160,89,0.18)] hover:border-accent hover:bg-surface transition-all group"
+                  className="flex items-start gap-4 p-4 rounded-xl bg-bg border border-border hover:border-accent hover:bg-surface transition-all group"
                 >
                   <div className="w-10 h-10 rounded-full bg-accent/15 border border-accent/30 flex items-center justify-center text-accent flex-shrink-0 group-hover:scale-105 transition-transform">
                     <Mail size={18} />
@@ -114,7 +114,7 @@ export function ContactPage() {
                 {/* Phone */}
                 <a
                   href="tel:+919999999999"
-                  className="flex items-start gap-4 p-4 rounded-xl bg-bg border border-[rgba(197,160,89,0.18)] hover:border-accent hover:bg-surface transition-all group"
+                  className="flex items-start gap-4 p-4 rounded-xl bg-bg border border-border hover:border-accent hover:bg-surface transition-all group"
                 >
                   <div className="w-10 h-10 rounded-full bg-accent/15 border border-accent/30 flex items-center justify-center text-accent flex-shrink-0 group-hover:scale-105 transition-transform">
                     <Phone size={18} />
@@ -126,7 +126,7 @@ export function ContactPage() {
                 </a>
 
                 {/* Operating Hours */}
-                <div className="flex items-start gap-4 p-4 rounded-xl bg-bg border border-[rgba(197,160,89,0.18)]">
+                <div className="flex items-start gap-4 p-4 rounded-xl bg-bg border border-border">
                   <div className="w-10 h-10 rounded-full bg-accent/15 border border-accent/30 flex items-center justify-center text-accent flex-shrink-0">
                     <Clock size={18} />
                   </div>
@@ -140,7 +140,7 @@ export function ContactPage() {
             </div>
 
             {/* Corporate Highlight */}
-            <div className="bg-bg-alt border border-[rgba(197,160,89,0.22)] rounded-2xl p-6 shadow-xl relative overflow-hidden">
+            <div className="bg-bg-alt border border-border rounded-2xl p-6 shadow-xl relative overflow-hidden">
               <div className="flex items-center gap-3 mb-3">
                 <Building2 size={20} className="text-accent" />
                 <h3 className="font-serif text-lg font-light text-ivory">Corporate & Bulk Orders</h3>
@@ -157,7 +157,7 @@ export function ContactPage() {
 
           {/* Right Column: Inquiry Form */}
           <div className="lg:col-span-7">
-            <div className="bg-bg-alt border border-[rgba(197,160,89,0.22)] rounded-2xl p-8 sm:p-10 shadow-2xl">
+            <div className="bg-bg-alt border border-border rounded-2xl p-8 sm:p-10 shadow-2xl">
               <div className="mb-8">
                 <span className="inline-block text-xs font-semibold tracking-[0.18em] text-accent uppercase mb-2">
                   ✦ GET IN TOUCH

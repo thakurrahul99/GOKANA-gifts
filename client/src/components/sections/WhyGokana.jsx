@@ -35,7 +35,7 @@ const journeySteps = [
 
 export function WhyGokana() {
   return (
-    <section className="section-py bg-bg-alt text-ivory border-b border-[rgba(197,160,89,0.15)]" aria-labelledby="experience-heading">
+    <section className="section-py bg-bg-alt text-ivory border-b border-border" aria-labelledby="experience-heading">
       <div className="container-gokana">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
@@ -47,7 +47,7 @@ export function WhyGokana() {
           </AnimatedHeading>
           <ScrollReveal delay={0.25}>
             {/* Journey Flow Indicator */}
-            <div className="inline-flex flex-wrap items-center justify-center gap-2 md:gap-3 py-2 px-5 rounded-full bg-surface-alt border border-[rgba(197,160,89,0.25)] text-accent font-sans text-xs font-semibold tracking-[0.18em] uppercase">
+            <div className="inline-flex flex-wrap items-center justify-center gap-2 md:gap-3 py-2 px-5 rounded-full bg-surface-alt border border-border text-accent font-sans text-xs font-semibold tracking-[0.18em] uppercase">
               <span>Choose</span>
               <span className="text-ivory/30">→</span>
               <span>Personalise</span>
@@ -69,7 +69,7 @@ export function WhyGokana() {
             <motion.div
               key={step}
               variants={staggerItem}
-              className="card-premium group relative flex flex-col justify-between p-6 md:p-7 bg-surface border border-[rgba(197,160,89,0.2)] hover:border-[rgba(197,160,89,0.5)] transition-all duration-300"
+              className="card-premium group relative flex flex-col justify-between p-6 md:p-7 bg-surface border border-border hover:border-border transition-all duration-300"
             >
               <div>
                 {/* Step Marker & Icon */}
@@ -77,7 +77,7 @@ export function WhyGokana() {
                   <span className="font-serif text-3xl font-light text-accent/60 tracking-wider">
                     {step}
                   </span>
-                  <div className="w-10 h-10 rounded-full border border-[rgba(197,160,89,0.3)] bg-surface-alt flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-bg group-hover:border-accent transition-all duration-300">
+                  <div className="w-10 h-10 rounded-full border border-border-light bg-surface-alt flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-bg group-hover:border-accent transition-all duration-300">
                     <Icon size={18} strokeWidth={1.7} />
                   </div>
                 </div>

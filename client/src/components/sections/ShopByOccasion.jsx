@@ -9,7 +9,7 @@ function OccasionCard({ occasion, index }) {
     <motion.div variants={staggerItem} className="group">
       <Link
         to={`/shop?occasion=${occasion.id}`}
-        className="block relative overflow-hidden aspect-[4/5] rounded-[6px] bg-bg-alt border border-[rgba(197,160,89,0.2)] hover:border-[rgba(197,160,89,0.5)] transition-colors duration-300"
+        className="block relative overflow-hidden aspect-[4/5] rounded-[6px] bg-bg-alt border border-border hover:border-border transition-colors duration-300"
         aria-label={`Shop ${occasion.label} gifts`}
       >
         {/* Image with subtle hover zoom */}
@@ -34,7 +34,7 @@ function OccasionCard({ occasion, index }) {
             <h3 className="font-serif text-2xl md:text-3xl font-light text-ivory leading-tight group-hover:text-accent transition-colors duration-300">
               {occasion.label}
             </h3>
-            <div className="w-10 h-10 rounded-full border border-[rgba(197,160,89,0.35)] bg-bg/70 backdrop-blur-xs flex items-center justify-center text-accent transition-all duration-300 group-hover:bg-accent group-hover:text-bg group-hover:border-accent flex-shrink-0">
+            <div className="w-10 h-10 rounded-full border border-border-light bg-bg/70 backdrop-blur-xs flex items-center justify-center text-accent transition-all duration-300 group-hover:bg-accent group-hover:text-bg group-hover:border-accent flex-shrink-0">
               <ArrowRight size={16} />
             </div>
           </div>
@@ -53,7 +53,7 @@ export function ShopByOccasion() {
   const coreOccasions = occasions.slice(0, 6);
 
   return (
-    <section className="section-py bg-bg text-ivory overflow-hidden border-b border-[rgba(197,160,89,0.15)]" aria-labelledby="occasions-heading">
+    <section className="section-py bg-bg text-ivory overflow-hidden border-b border-border" aria-labelledby="occasions-heading">
       <div className="container-gokana">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">

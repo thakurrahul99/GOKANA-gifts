@@ -30,8 +30,8 @@ export function AdminLayout() {
 
   return (
     <div data-lenis-prevent className="flex h-screen bg-bg font-sans text-ivory overflow-hidden">
-      <aside data-lenis-prevent className={clsx('flex flex-col bg-bg-alt border-r border-[rgba(197,160,89,0.2)] transition-all duration-300 flex-shrink-0 shadow-xl overflow-y-auto', sidebarOpen ? 'w-60' : 'w-16')}>
-        <div className="flex items-center gap-3 px-4 py-5 border-b border-[rgba(197,160,89,0.18)]">
+      <aside data-lenis-prevent className={clsx('flex flex-col bg-bg-alt border-r border-border transition-all duration-300 flex-shrink-0 shadow-xl overflow-y-auto', sidebarOpen ? 'w-60' : 'w-16')}>
+        <div className="flex items-center gap-3 px-4 py-5 border-b border-border">
           <span className={clsx('font-serif tracking-[0.15em] uppercase text-ivory transition-all', sidebarOpen ? 'text-xl' : 'text-sm')}>{sidebarOpen ? 'GŌKANA' : 'G'}</span>
           {sidebarOpen && <span className="text-[10px] text-accent font-sans font-semibold tracking-widest uppercase bg-accent/10 border border-accent/30 px-1.5 py-0.5 rounded">Admin</span>}
         </div>
@@ -47,7 +47,7 @@ export function AdminLayout() {
             );
           })}
         </nav>
-        <div className="p-4 border-t border-[rgba(197,160,89,0.15)]">
+        <div className="p-4 border-t border-border">
           {sidebarOpen && (
             <div className="flex items-center gap-2.5 mb-3">
               <div className="w-8 h-8 bg-accent/20 rounded-full flex items-center justify-center border border-accent/30">
@@ -63,7 +63,7 @@ export function AdminLayout() {
         </div>
       </aside>
       <div className="flex-1 flex flex-col overflow-hidden">
-        <header className="bg-bg-alt border-b border-[rgba(197,160,89,0.2)] px-6 py-4 flex items-center gap-4 shadow-sm flex-shrink-0">
+        <header className="bg-bg-alt border-b border-border px-6 py-4 flex items-center gap-4 shadow-sm flex-shrink-0">
           <button onClick={() => setSidebarOpen(!sidebarOpen)} className="text-ivory hover:text-accent transition-colors p-1.5 min-h-[40px] min-w-[40px] flex items-center justify-center rounded hover:bg-white/5" aria-label={sidebarOpen ? 'Collapse sidebar' : 'Expand sidebar'}>{sidebarOpen ? <X size={20} /> : <Menu size={20} />}</button>
           <h1 className="font-sans text-sm font-semibold text-ivory tracking-wide uppercase">{navItems.find(n => n.href === location.pathname)?.label || 'Admin'}</h1>
           <div className="ml-auto flex items-center gap-3"><Link to="/" target="_blank" className="text-xs text-accent hover:text-accent-light font-medium flex items-center gap-1">View Store ↗</Link></div>

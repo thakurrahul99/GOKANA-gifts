@@ -91,7 +91,7 @@ export function ShopPage() {
   return (
     <main className="pt-24 min-h-screen bg-bg text-ivory">
       {/* Page Header — Luxury Dark Espresso with Champagne Gold Accent */}
-      <section className="bg-bg-banner text-ivory py-16 sm:py-20 relative overflow-hidden border-b border-[rgba(197,160,89,0.2)]">
+      <section className="bg-bg-banner text-ivory py-16 sm:py-20 relative overflow-hidden border-b border-border">
         <div
           className="absolute inset-0 pointer-events-none opacity-40"
           style={{
@@ -118,7 +118,7 @@ export function ShopPage() {
 
       <div className="container-gokana py-10 sm:py-14">
         {/* Filters and Sort Bar */}
-        <div className="bg-bg-alt border border-[rgba(197,160,89,0.22)] rounded-2xl p-4 sm:p-5 mb-8 sm:mb-10 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div className="bg-bg-alt border border-border rounded-2xl p-4 sm:p-5 mb-8 sm:mb-10 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4">
           {/* Occasion filter pills */}
           <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
             <span className="text-xs font-semibold text-ivory uppercase tracking-wider flex items-center gap-1.5 mr-1 flex-shrink-0">
@@ -134,7 +134,7 @@ export function ShopPage() {
                   className={`flex-none px-4 py-2 text-xs font-medium tracking-[0.06em] uppercase transition-all duration-200 whitespace-nowrap min-h-[40px] flex items-center justify-center rounded-full ${
                     active
                       ? 'bg-accent text-bg font-semibold shadow-[0_2px_12px_rgba(197,160,89,0.25)] border border-accent'
-                      : 'bg-bg text-muted border border-[rgba(197,160,89,0.2)] hover:border-accent hover:text-ivory'
+                      : 'bg-bg text-muted border border-border hover:border-accent hover:text-ivory'
                   }`}
                   aria-pressed={active}
                 >
@@ -145,7 +145,7 @@ export function ShopPage() {
           </div>
 
           {/* Sort & Count */}
-          <div className="flex items-center justify-between md:justify-end gap-4 flex-shrink-0 pt-3 md:pt-0 border-t md:border-t-0 border-[rgba(197,160,89,0.15)]">
+          <div className="flex items-center justify-between md:justify-end gap-4 flex-shrink-0 pt-3 md:pt-0 border-t md:border-t-0 border-border">
             <span className="font-sans text-xs text-muted font-medium">
               Showing <strong className="text-ivory font-semibold">{filtered.length}</strong> {filtered.length === 1 ? 'gift' : 'gifts'}
             </span>
@@ -155,7 +155,7 @@ export function ShopPage() {
                 id="shop-sort"
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="font-sans text-xs sm:text-sm text-ivory border border-[rgba(197,160,89,0.25)] px-3.5 py-2 bg-bg focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/30 min-h-[40px] cursor-pointer rounded-lg"
+                className="font-sans text-xs sm:text-sm text-ivory border border-border px-3.5 py-2 bg-bg focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/30 min-h-[40px] cursor-pointer rounded-lg"
               >
                 {sortOptions.map((o) => (
                   <option key={o.value} value={o.value} className="bg-bg text-ivory">{o.label}</option>
@@ -169,7 +169,7 @@ export function ShopPage() {
         {loading ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-7">
             {Array.from({ length: 8 }).map((_, i) => (
-              <div key={i} className="bg-bg-alt border border-[rgba(197,160,89,0.18)] rounded-xl p-4 space-y-3 animate-pulse shadow-md">
+              <div key={i} className="bg-bg-alt border border-border rounded-xl p-4 space-y-3 animate-pulse shadow-md">
                 <div className="aspect-[4/5] bg-surface-alt rounded-lg" />
                 <div className="h-4 bg-surface-skeleton rounded w-3/4" />
                 <div className="h-3 bg-surface-skeleton rounded w-1/2" />
@@ -184,7 +184,7 @@ export function ShopPage() {
               key="empty"
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              className="text-center py-20 bg-bg-alt border border-[rgba(197,160,89,0.22)] rounded-2xl p-10 max-w-lg mx-auto shadow-xl"
+              className="text-center py-20 bg-bg-alt border border-border rounded-2xl p-10 max-w-lg mx-auto shadow-xl"
             >
               <div className="w-16 h-16 rounded-full bg-accent/15 border border-accent/30 flex items-center justify-center text-accent mx-auto mb-5">
                 <Sparkles size={26} />

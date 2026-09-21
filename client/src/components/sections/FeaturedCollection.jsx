@@ -30,7 +30,7 @@ export function FeaturedCollection() {
   const displayProducts = featured.length > 0 ? featured.slice(0, 4) : staticProducts.slice(0, 4);
 
   return (
-    <section className="section-py bg-bg-alt text-ivory border-b border-[rgba(197,160,89,0.15)]" aria-labelledby="featured-heading">
+    <section className="section-py bg-bg-alt text-ivory border-b border-border" aria-labelledby="featured-heading">
       <div className="container-gokana">
         {/* Header */}
         <div className="text-center mb-14 max-w-xl mx-auto">

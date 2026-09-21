@@ -175,7 +175,7 @@ export function GiftFinderPage() {
   return (
     <main id="main-content" className="min-h-screen pt-24 md:pt-28 bg-bg text-ivory">
       {/* ── Page Hero ── */}
-      <section className="relative py-16 md:py-20 bg-bg text-ivory overflow-hidden border-b border-[rgba(197,160,89,0.18)]">
+      <section className="relative py-16 md:py-20 bg-bg text-ivory overflow-hidden border-b border-border">
         <div
           className="absolute inset-0 pointer-events-none opacity-40"
           style={{
@@ -207,9 +207,9 @@ export function GiftFinderPage() {
       {/* ── Stepper Quiz Section ── */}
       <section className="section-py bg-bg">
         <div className="container-gokana max-w-4xl mx-auto">
-          <div className="p-6 md:p-12 rounded-2xl bg-bg-alt border border-[rgba(197,160,89,0.22)] shadow-2xl">
+          <div className="p-6 md:p-12 rounded-2xl bg-bg-alt border border-border shadow-2xl">
             {/* Header / Progress bar */}
-            <div className="flex items-center justify-between gap-4 mb-8 pb-6 border-b border-[rgba(197,160,89,0.18)]">
+            <div className="flex items-center justify-between gap-4 mb-8 pb-6 border-b border-border">
               <div className="flex items-center gap-3">
                 <span className="w-8 h-8 rounded-full flex items-center justify-center font-sans text-sm font-bold bg-accent text-bg">
                   {showResults ? '5' : currentStep + 1}
@@ -227,7 +227,7 @@ export function GiftFinderPage() {
               {(showResults || currentStep > 0) && (
                 <button
                   onClick={handleReset}
-                  className="flex items-center gap-2 font-sans text-xs font-medium text-muted hover:text-ivory px-3 py-1.5 rounded-lg border border-[rgba(197,160,89,0.25)] hover:bg-white/5 transition-colors"
+                  className="flex items-center gap-2 font-sans text-xs font-medium text-muted hover:text-ivory px-3 py-1.5 rounded-lg border border-border hover:bg-white/5 transition-colors"
                 >
                   <RotateCcw size={13} />
                   Reset Quiz
@@ -279,11 +279,11 @@ export function GiftFinderPage() {
                           className={`p-5 rounded-xl border text-left transition-all duration-200 flex flex-col justify-between focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
                             isSelected
                               ? 'border-accent bg-accent/15 text-ivory shadow-lg shadow-accent/10'
-                              : 'border-[rgba(197,160,89,0.2)] bg-bg text-ivory hover:border-accent hover:bg-surface'
+                              : 'border-border bg-bg text-ivory hover:border-accent hover:bg-surface'
                           }`}
                         >
                           <div className="flex items-center justify-between mb-3">
-                            <span className="text-3xl p-2 rounded-lg bg-surface-alt border border-[rgba(197,160,89,0.2)]" aria-hidden="true">
+                            <span className="text-3xl p-2 rounded-lg bg-surface-alt border border-border" aria-hidden="true">
                               {opt.emoji}
                             </span>
                             {isSelected && <CheckCircle2 size={20} className="text-accent" />}
@@ -302,7 +302,7 @@ export function GiftFinderPage() {
                   </div>
 
                   {/* Nav Controls */}
-                  <div className="flex items-center justify-between pt-4 border-t border-[rgba(197,160,89,0.18)]">
+                  <div className="flex items-center justify-between pt-4 border-t border-border">
                     {currentStep > 0 ? (
                       <button
                         onClick={() => setCurrentStep((s) => s - 1)}
@@ -330,23 +330,23 @@ export function GiftFinderPage() {
                   transition={{ duration: 0.4 }}
                 >
                   {/* Active Criteria Chips */}
-                  <div className="flex flex-wrap items-center gap-2 mb-8 p-4 rounded-xl bg-bg border border-[rgba(197,160,89,0.2)]">
+                  <div className="flex flex-wrap items-center gap-2 mb-8 p-4 rounded-xl bg-bg border border-border">
                     <span className="font-sans text-xs font-semibold uppercase tracking-wider text-ivory mr-2 flex items-center gap-1.5">
                       <SlidersHorizontal size={14} className="text-accent" />
                       Your Matches:
                     </span>
                     {selections.occasion && (
-                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-bg-alt border border-[rgba(197,160,89,0.25)] text-ivory">
+                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-bg-alt border border-border text-ivory">
                         Occasion: <b className="text-accent">{STEPS[0].options.find((o) => o.id === selections.occasion)?.label}</b>
                       </span>
                     )}
                     {selections.recipient && (
-                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-bg-alt border border-[rgba(197,160,89,0.25)] text-ivory">
+                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-bg-alt border border-border text-ivory">
                         Recipient: <b className="text-accent">{STEPS[1].options.find((o) => o.id === selections.recipient)?.label}</b>
                       </span>
                     )}
                     {selections.budget && (
-                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-bg-alt border border-[rgba(197,160,89,0.25)] text-ivory">
+                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-bg-alt border border-border text-ivory">
                         Budget: <b className="text-accent">{STEPS[2].options.find((o) => o.id === selections.budget)?.label}</b>
                       </span>
                     )}
@@ -381,7 +381,7 @@ export function GiftFinderPage() {
                     ))}
                   </div>
 
-                  <div className="text-center pt-6 border-t border-[rgba(197,160,89,0.18)]">
+                  <div className="text-center pt-6 border-t border-border">
                     <button
                       onClick={handleReset}
                       className="btn-ghost text-xs inline-flex items-center gap-2 text-accent hover:text-accent-light"
@@ -398,9 +398,9 @@ export function GiftFinderPage() {
       </section>
 
       {/* ── Concierge Support ── */}
-      <section className="py-16 bg-bg border-t border-[rgba(197,160,89,0.18)]">
+      <section className="py-16 bg-bg border-t border-border">
         <div className="container-gokana max-w-4xl">
-          <div className="p-8 md:p-10 rounded-2xl bg-bg-alt border border-[rgba(197,160,89,0.22)] flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xl">
+          <div className="p-8 md:p-10 rounded-2xl bg-bg-alt border border-border flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xl">
             <div className="max-w-lg">
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase mb-3 bg-accent/15 text-accent border border-accent/30">
                 <MessageCircle size={13} />

@@ -53,14 +53,14 @@ export function SearchModal({ isOpen, onClose }) {
             onClick={(e) => e.target === e.currentTarget && onClose()}
           >
             <motion.div
-              className="w-full max-w-2xl bg-bg-alt rounded-2xl shadow-2xl border border-[rgba(197,160,89,0.25)] overflow-hidden"
+              className="w-full max-w-2xl bg-bg-alt rounded-2xl shadow-2xl border border-border overflow-hidden"
               initial={{ y: -20, opacity: 0, scale: 0.98 }}
               animate={{ y: 0, opacity: 1, scale: 1 }}
               exit={{ y: -10, opacity: 0 }}
               transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
             >
               {/* Search Bar Input */}
-              <div className="flex items-center gap-4 px-6 py-4 border-b border-[rgba(197,160,89,0.18)] bg-surface-alt">
+              <div className="flex items-center gap-4 px-6 py-4 border-b border-border bg-surface-alt">
                 <Search
                   size={20}
                   strokeWidth={1.8}
@@ -97,12 +97,12 @@ export function SearchModal({ isOpen, onClose }) {
                           key={product.id}
                           to={`/products/${product.slug}`}
                           onClick={onClose}
-                          className="flex items-center gap-4 p-3.5 rounded-xl bg-bg border border-[rgba(197,160,89,0.2)] hover:border-accent hover:bg-surface transition-all group shadow-xs"
+                          className="flex items-center gap-4 p-3.5 rounded-xl bg-bg border border-border hover:border-accent hover:bg-surface transition-all group shadow-xs"
                         >
                           <img
                             src={product.image}
                             alt={product.name}
-                            className="w-14 h-14 rounded-lg object-cover flex-shrink-0 border border-[rgba(197,160,89,0.15)]"
+                            className="w-14 h-14 rounded-lg object-cover flex-shrink-0 border border-border"
                             loading="lazy"
                             decoding="async"
                           />
@@ -147,7 +147,7 @@ export function SearchModal({ isOpen, onClose }) {
                         <button
                           key={tag}
                           onClick={() => setQuery(tag)}
-                          className="px-4 py-2 rounded-full text-xs font-medium bg-bg border border-[rgba(197,160,89,0.22)] text-ivory hover:border-accent hover:text-accent hover:bg-accent/10 transition-all min-h-[38px]"
+                          className="px-4 py-2 rounded-full text-xs font-medium bg-bg border border-border text-ivory hover:border-accent hover:text-accent hover:bg-accent/10 transition-all min-h-[38px]"
                         >
                           {tag}
                         </button>

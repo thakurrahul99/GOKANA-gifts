@@ -7,7 +7,7 @@ function TestimonialCard({ testimonial }) {
   return (
     <motion.div
       variants={staggerItem}
-      className="card-premium flex flex-col justify-between bg-bg-alt border border-[rgba(197,160,89,0.2)] hover:border-[rgba(197,160,89,0.45)] transition-all p-7"
+      className="card-premium flex flex-col justify-between bg-bg-alt border border-border hover:border-border transition-all p-7"
     >
       <div>
         {/* Rating Stars + Verified Tag */}
@@ -17,7 +17,7 @@ function TestimonialCard({ testimonial }) {
               <Star key={i} size={15} className="text-accent fill-accent" />
             ))}
           </div>
-          <span className="inline-flex items-center gap-1 text-[10px] font-sans font-semibold tracking-wider uppercase text-accent bg-surface-alt border border-[rgba(197,160,89,0.25)] px-2.5 py-0.5 rounded-full">
+          <span className="inline-flex items-center gap-1 text-[10px] font-sans font-semibold tracking-wider uppercase text-accent bg-surface-alt border border-border px-2.5 py-0.5 rounded-full">
             <CheckCircle size={11} className="text-accent" />
             Verified Buyer
           </span>
@@ -30,8 +30,8 @@ function TestimonialCard({ testimonial }) {
       </div>
 
       {/* Author & Product */}
-      <div className="pt-5 border-t border-[rgba(197,160,89,0.18)] flex items-center gap-3">
-        <div className="w-10 h-10 rounded-full bg-surface-alt border border-[rgba(197,160,89,0.3)] text-accent font-serif font-light text-base flex items-center justify-center flex-shrink-0">
+      <div className="pt-5 border-t border-border flex items-center gap-3">
+        <div className="w-10 h-10 rounded-full bg-surface-alt border border-border-light text-accent font-serif font-light text-base flex items-center justify-center flex-shrink-0">
           {testimonial.initials}
         </div>
         <div className="min-w-0">
@@ -49,7 +49,7 @@ function TestimonialCard({ testimonial }) {
 
 export function Testimonials() {
   return (
-    <section id="reviews" className="section-py bg-bg text-ivory border-b border-[rgba(197,160,89,0.15)]" aria-labelledby="reviews-heading">
+    <section id="reviews" className="section-py bg-bg text-ivory border-b border-border" aria-labelledby="reviews-heading">
       <div className="container-gokana">
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
@@ -62,7 +62,7 @@ export function Testimonials() {
 
           {/* Aggregate Rating Banner */}
           <ScrollReveal delay={0.25}>
-            <div className="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-bg-alt border border-[rgba(197,160,89,0.3)] shadow-md">
+            <div className="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-bg-alt border border-border-light shadow-md">
               <div className="flex gap-1 text-accent">
                 {Array.from({ length: 5 }).map((_, i) => (
                   <Star key={i} size={15} className="text-accent fill-accent" />

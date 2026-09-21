@@ -146,7 +146,7 @@ function AdminCustomers() {
         <p className="text-sm text-muted mt-1">{customers.length} registered customers</p>
       </div>
 
-      <div className="flex items-center gap-2 bg-bg-alt border border-[rgba(197,160,89,0.2)] rounded-xl px-4 py-3">
+      <div className="flex items-center gap-2 bg-bg-alt border border-border rounded-xl px-4 py-3">
         <Search size={17} className="text-muted" />
         <input
           value={search}
@@ -156,7 +156,7 @@ function AdminCustomers() {
         />
       </div>
 
-      <div className="bg-bg-alt border border-[rgba(197,160,89,0.2)] rounded-xl overflow-hidden shadow-lg">
+      <div className="bg-bg-alt border border-border rounded-xl overflow-hidden shadow-lg">
         {loading ? (
           <div className="py-16 flex items-center justify-center text-muted"><Loader2 className="animate-spin mr-2" size={18} /> Loading customers…</div>
         ) : error ? (
@@ -166,10 +166,10 @@ function AdminCustomers() {
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
-              <thead className="border-b border-[rgba(197,160,89,0.15)] bg-surface-alt text-muted text-xs uppercase">
+              <thead className="border-b border-border bg-surface-alt text-muted text-xs uppercase">
                 <tr><th className="text-left px-5 py-4">Customer</th><th className="text-left px-5 py-4">Email</th><th className="text-left px-5 py-4">Phone</th><th className="text-left px-5 py-4">Status</th></tr>
               </thead>
-              <tbody className="divide-y divide-[rgba(197,160,89,0.1)]">
+              <tbody className="divide-y divide-border/50">
                 {customers.map((customer) => (
                   <tr key={customer._id} className="hover:bg-white/5 transition-colors">
                     <td className="px-5 py-4 text-ivory font-medium">{customer.name}</td>
@@ -223,7 +223,7 @@ function AdminSettings() {
     setSaved(false);
   };
 
-  const inputClass = 'w-full rounded-lg border border-[rgba(197,160,89,0.25)] bg-bg px-3.5 py-2.5 text-sm text-ivory outline-none focus:border-accent focus:ring-1 focus:ring-accent/30';
+  const inputClass = 'w-full rounded-lg border border-border bg-bg px-3.5 py-2.5 text-sm text-ivory outline-none focus:border-accent focus:ring-1 focus:ring-accent/30';
 
   return (
     <section className="space-y-6 text-ivory">
@@ -232,7 +232,7 @@ function AdminSettings() {
         <p className="text-sm text-muted mt-1">Manage store preferences and admin notifications.</p>
       </div>
 
-      <div className="bg-bg-alt border border-[rgba(197,160,89,0.2)] rounded-xl p-6 space-y-6 shadow-lg">
+      <div className="bg-bg-alt border border-border rounded-xl p-6 space-y-6 shadow-lg">
         <div>
           <h3 className="font-serif text-lg font-light text-ivory">Store Information</h3>
           <p className="text-xs text-muted mt-1">These preferences are saved for this admin browser.</p>
@@ -246,13 +246,13 @@ function AdminSettings() {
         </div>
       </div>
 
-      <div className="bg-bg-alt border border-[rgba(197,160,89,0.2)] rounded-xl p-6 space-y-4 shadow-lg">
+      <div className="bg-bg-alt border border-border rounded-xl p-6 space-y-4 shadow-lg">
         <div><h3 className="font-serif text-lg font-light text-ivory">Notifications</h3><p className="text-xs text-muted mt-1">Control which admin alerts are enabled.</p></div>
         {[
           ['orderNotifications', 'New order notifications', 'Show a notification preference for new orders.'],
           ['lowStockNotifications', 'Low-stock notifications', 'Enable low-stock alert preference.'],
         ].map(([key, title, description]) => (
-          <label key={key} className="flex items-center justify-between gap-4 rounded-lg border border-[rgba(197,160,89,0.18)] bg-surface-alt p-4 cursor-pointer hover:border-accent/30 transition-colors">
+          <label key={key} className="flex items-center justify-between gap-4 rounded-lg border border-border bg-surface-alt p-4 cursor-pointer hover:border-accent/30 transition-colors">
             <span><span className="block text-sm font-medium text-ivory">{title}</span><span className="block text-xs text-muted mt-1">{description}</span></span>
             <input type="checkbox" className="h-5 w-5 accent-accent" checked={settings[key]} onChange={(e) => update(key, e.target.checked)} />
           </label>

@@ -260,7 +260,7 @@ export function AdminProducts() {
           placeholder="Search products…"
           value={search}
           onChange={e => setSearch(e.target.value)}
-          className="w-full pl-10 pr-4 py-2.5 border border-[rgba(197,160,89,0.25)] bg-bg-alt text-ivory placeholder:text-muted/50 text-sm focus:outline-none focus:border-accent rounded-lg"
+          className="w-full pl-10 pr-4 py-2.5 border border-border bg-bg-alt text-ivory placeholder:text-muted/50 text-sm focus:outline-none focus:border-accent rounded-lg"
         />
       </div>
 
@@ -289,7 +289,7 @@ export function AdminProducts() {
 
       {/* Table */}
       {!loading && !error && (
-        <div className="bg-bg-alt border border-[rgba(197,160,89,0.2)] rounded-xl overflow-hidden shadow-lg overflow-x-auto">
+        <div className="bg-bg-alt border border-border rounded-xl overflow-hidden shadow-lg overflow-x-auto">
           {filtered.length === 0 ? (
             <div className="text-center py-16 text-muted">
               <p className="text-sm">No products found.</p>
@@ -298,7 +298,7 @@ export function AdminProducts() {
           ) : (
             <table className="w-full text-sm">
               <thead>
-                <tr className="text-xs text-muted font-semibold border-b border-[rgba(197,160,89,0.15)] bg-surface-alt">
+                <tr className="text-xs text-muted font-semibold border-b border-border bg-surface-alt">
                   <th className="text-left px-4 py-3.5">Product</th>
                   <th className="text-left px-4 py-3.5 hidden md:table-cell">Price</th>
                   <th className="text-left px-4 py-3.5 hidden md:table-cell">Stock</th>
@@ -307,15 +307,15 @@ export function AdminProducts() {
                   <th className="text-right px-4 py-3.5">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[rgba(197,160,89,0.1)]">
+              <tbody className="divide-y divide-border/50">
                 {filtered.map(product => (
                   <tr key={product._id} className="hover:bg-white/5 transition-colors">
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-3">
                         {product.thumbnail ? (
-                          <img src={product.thumbnail} alt="" className="w-10 h-10 object-cover rounded border border-[rgba(197,160,89,0.15)]" loading="lazy" decoding="async" />
+                          <img src={product.thumbnail} alt="" className="w-10 h-10 object-cover rounded border border-border" loading="lazy" decoding="async" />
                         ) : (
-                          <div className="w-10 h-10 bg-bg border border-[rgba(197,160,89,0.2)] flex items-center justify-center text-muted text-xs rounded">IMG</div>
+                          <div className="w-10 h-10 bg-bg border border-border flex items-center justify-center text-muted text-xs rounded">IMG</div>
                         )}
                         <div>
                           <p className="font-semibold text-ivory">{product.name}</p>
@@ -331,7 +331,7 @@ export function AdminProducts() {
                     </td>
                     <td className="px-4 py-3 hidden md:table-cell text-xs text-muted">{product.badge || '—'}</td>
                     <td className="px-4 py-3 hidden md:table-cell">
-                      <span className={`text-[10px] px-2 py-1 font-semibold rounded border ${product.isFeatured ? 'bg-accent/15 text-accent border-accent/30' : 'bg-surface-alt text-muted border-[rgba(197,160,89,0.2)]'}`}>
+                      <span className={`text-[10px] px-2 py-1 font-semibold rounded border ${product.isFeatured ? 'bg-accent/15 text-accent border-accent/30' : 'bg-surface-alt text-muted border-border'}`}>
                         {product.isFeatured ? 'Yes' : 'No'}
                       </span>
                     </td>
@@ -369,9 +369,9 @@ export function AdminProducts() {
       {/* Product Form Modal */}
       {showForm && (
         <div data-lenis-prevent className="fixed inset-0 bg-black/75 backdrop-blur-xs z-50 flex items-center justify-center p-4">
-          <div data-lenis-prevent className="bg-bg-alt text-ivory w-full max-w-lg max-h-[90vh] overflow-y-auto border border-[rgba(197,160,89,0.25)] shadow-2xl rounded-xl overscroll-contain">
+          <div data-lenis-prevent className="bg-bg-alt text-ivory w-full max-w-lg max-h-[90vh] overflow-y-auto border border-border shadow-2xl rounded-xl overscroll-contain">
             {/* Header */}
-            <div className="flex items-center justify-between px-6 py-5 border-b border-[rgba(197,160,89,0.18)] bg-surface-alt">
+            <div className="flex items-center justify-between px-6 py-5 border-b border-border bg-surface-alt">
               <h3 className="text-lg font-serif font-light text-ivory">
                 {editProduct ? 'Edit Product' : 'Add New Product'}
               </h3>
@@ -481,7 +481,7 @@ export function AdminProducts() {
                   <ImageIcon size={15} className="text-accent" />
                   Product Images
                 </label>
-                <label className="flex items-center justify-center gap-2 min-h-[110px] border border-[rgba(197,160,89,0.25)] rounded-lg bg-bg-alt cursor-pointer hover:border-accent transition-colors">
+                <label className="flex items-center justify-center gap-2 min-h-[110px] border border-border rounded-lg bg-bg-alt cursor-pointer hover:border-accent transition-colors">
                   <input
                     type="file"
                     accept="image/*"
@@ -515,7 +515,7 @@ export function AdminProducts() {
                   rows={2}
                   value={formData.images}
                   onChange={setF('images')}
-                  className="w-full border border-[rgba(197,160,89,0.25)] bg-bg text-ivory rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-accent resize-none"
+                  className="w-full border border-border bg-bg text-ivory rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-accent resize-none"
                 />
               </div>
 
@@ -525,7 +525,7 @@ export function AdminProducts() {
                   <button
                     type="button"
                     onClick={() => setCategoryDropdownOpen((open) => !open)}
-                    className="w-full min-h-[44px] border border-[rgba(197,160,89,0.25)] bg-bg text-ivory rounded-lg px-3 py-2.5 text-sm flex items-center justify-between gap-3 text-left focus:outline-none focus:border-accent"
+                    className="w-full min-h-[44px] border border-border bg-bg text-ivory rounded-lg px-3 py-2.5 text-sm flex items-center justify-between gap-3 text-left focus:outline-none focus:border-accent"
                   >
                     <div className="flex flex-wrap gap-1.5">
                       {formData.categories?.length ? formData.categories.map((id) => {
@@ -541,7 +541,7 @@ export function AdminProducts() {
                   </button>
 
                   {categoryDropdownOpen && (
-                    <div className="absolute z-20 mt-1 w-full max-h-64 overflow-y-auto rounded-lg border border-[rgba(197,160,89,0.25)] bg-bg-alt shadow-2xl">
+                    <div className="absolute z-20 mt-1 w-full max-h-64 overflow-y-auto rounded-lg border border-border bg-bg-alt shadow-2xl">
                       {categories.length > 0 ? categories.map((category) => {
                         const checked = formData.categories?.includes(category._id);
                         return (
@@ -574,7 +574,7 @@ export function AdminProducts() {
                 <select
                   value={formData.badge}
                   onChange={setF('badge')}
-                  className="w-full border border-[rgba(197,160,89,0.25)] bg-bg text-ivory rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-accent"
+                  className="w-full border border-border bg-bg text-ivory rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-accent"
                 >
                   <option value="">No badge</option>
                   <option value="Bestseller">Bestseller</option>
@@ -583,7 +583,7 @@ export function AdminProducts() {
                 </select>
               </div>
 
-              <div className="rounded-xl border border-[rgba(197,160,89,0.25)] bg-bg p-4 space-y-3">
+              <div className="rounded-xl border border-border bg-bg p-4 space-y-3">
                 <label className="flex items-center gap-2 text-sm text-ivory font-semibold cursor-pointer">
                   <input type="checkbox" checked={formData.personalisable} onChange={setF('personalisable')} className="w-4 h-4 accent-accent" />
                   Enable Personalisation
@@ -594,15 +594,15 @@ export function AdminProducts() {
                       <div key={index} className="grid grid-cols-[1fr_120px_32px] gap-2 items-end">
                         <div>
                           <label className="block text-[11px] text-muted mb-1">Field label</label>
-                          <input value={field.label} onChange={(e) => setFormData((f) => ({ ...f, personalisationFields: f.personalisationFields.map((x, i) => i === index ? { ...x, label: e.target.value } : x) }))} className="w-full border border-[rgba(197,160,89,0.25)] bg-bg-alt text-ivory rounded px-3 py-2 text-sm focus:outline-none focus:border-accent" />
+                          <input value={field.label} onChange={(e) => setFormData((f) => ({ ...f, personalisationFields: f.personalisationFields.map((x, i) => i === index ? { ...x, label: e.target.value } : x) }))} className="w-full border border-border bg-bg-alt text-ivory rounded px-3 py-2 text-sm focus:outline-none focus:border-accent" />
                         </div>
                         <div>
                           <label className="block text-[11px] text-muted mb-1">Type</label>
-                          <select value={field.type} onChange={(e) => setFormData((f) => ({ ...f, personalisationFields: f.personalisationFields.map((x, i) => i === index ? { ...x, type: e.target.value } : x) }))} className="w-full border border-[rgba(197,160,89,0.25)] bg-bg-alt text-ivory rounded px-2 py-2 text-sm focus:outline-none focus:border-accent">
+                          <select value={field.type} onChange={(e) => setFormData((f) => ({ ...f, personalisationFields: f.personalisationFields.map((x, i) => i === index ? { ...x, type: e.target.value } : x) }))} className="w-full border border-border bg-bg-alt text-ivory rounded px-2 py-2 text-sm focus:outline-none focus:border-accent">
                             <option value="text">Text</option><option value="textarea">Message</option><option value="select">Select</option>
                           </select>
                         </div>
-                        <button type="button" onClick={() => setFormData((f) => ({ ...f, personalisationFields: f.personalisationFields.filter((_, i) => i !== index) }))} className="h-9 border border-[rgba(197,160,89,0.25)] text-muted hover:text-ivory rounded">×</button>
+                        <button type="button" onClick={() => setFormData((f) => ({ ...f, personalisationFields: f.personalisationFields.filter((_, i) => i !== index) }))} className="h-9 border border-border text-muted hover:text-ivory rounded">×</button>
                       </div>
                     ))}
                     <button type="button" onClick={() => setFormData((f) => ({ ...f, personalisationFields: [...f.personalisationFields, { type: 'text', label: 'Custom Detail', placeholder: '', required: false, options: [] }] }))} className="text-xs font-semibold text-accent hover:text-accent-light">+ Add personalisation field</button>
@@ -645,7 +645,7 @@ export function AdminProducts() {
               </button>
               <button
                 onClick={() => setShowForm(false)}
-                className="flex-1 py-2.5 border border-[rgba(197,160,89,0.3)] text-ivory text-xs uppercase tracking-wider hover:bg-white/5 transition-colors rounded-sm"
+                className="flex-1 py-2.5 border border-border-light text-ivory text-xs uppercase tracking-wider hover:bg-white/5 transition-colors rounded-sm"
               >
                 Cancel
               </button>

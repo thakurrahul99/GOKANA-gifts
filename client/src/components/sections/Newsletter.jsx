@@ -19,7 +19,7 @@ export function Newsletter() {
   };
 
   return (
-    <section className="section-py-sm bg-bg-alt text-ivory border-t border-[rgba(197,160,89,0.18)]" aria-labelledby="newsletter-heading">
+    <section className="section-py-sm bg-bg-alt text-ivory border-t border-border" aria-labelledby="newsletter-heading">
       <div className="container-gokana">
         <div className="max-w-2xl mx-auto text-center">
           <ScrollReveal delay={0.1}>
@@ -57,7 +57,7 @@ export function Newsletter() {
                         if (error) setError('');
                       }}
                       placeholder="Enter your email address"
-                      className="flex-1 bg-bg border border-[rgba(197,160,89,0.25)] rounded-lg px-4 py-3 text-ivory placeholder:text-muted/60 font-sans text-sm focus:outline-none focus:border-accent transition-colors min-h-[44px]"
+                      className="flex-1 bg-bg border border-border rounded-lg px-4 py-3 text-ivory placeholder:text-muted/60 font-sans text-sm focus:outline-none focus:border-accent transition-colors min-h-[44px]"
                       aria-label="Email address for newsletter"
                       required
                     />

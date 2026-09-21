@@ -85,9 +85,9 @@ export function AboutPage() {
       </div>
 
       {/* Metrics Strip */}
-      <div className="bg-bg-alt border-b border-[rgba(197,160,89,0.18)]">
+      <div className="bg-bg-alt border-b border-border">
         <div className="container-gokana">
-          <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-[rgba(197,160,89,0.15)]">
+          <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-border/50">
             {metrics.map((m, i) => (
               <motion.div
                 key={m.label}
@@ -139,7 +139,7 @@ export function AboutPage() {
       </section>
 
       {/* Values */}
-      <section className="section-py bg-bg-alt border-t border-[rgba(197,160,89,0.18)] relative overflow-hidden">
+      <section className="section-py bg-bg-alt border-t border-border relative overflow-hidden">
         <div
           className="absolute inset-0 pointer-events-none opacity-20"
           style={{
@@ -164,7 +164,7 @@ export function AboutPage() {
               <motion.div
                 key={num}
                 variants={staggerItem}
-                className="border border-[rgba(197,160,89,0.2)] p-8 bg-bg rounded-xl hover:border-accent/50 transition-all duration-300 group shadow-lg"
+                className="border border-border p-8 bg-bg rounded-xl hover:border-accent/50 transition-all duration-300 group shadow-lg"
               >
                 <div className="flex items-start justify-between mb-5">
                   <p className="font-serif text-5xl font-light text-accent/40">{num}</p>

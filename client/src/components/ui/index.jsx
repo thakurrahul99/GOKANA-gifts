@@ -38,15 +38,15 @@ export function Rating({ value = 5, count, size = 'sm', className }) {
 
 export function Badge({ children, variant = 'default', className }) {
   const variantStyles = {
-    default: 'bg-surface-alt text-ivory border border-[rgba(197,160,89,0.3)]',
-    gold: 'bg-[rgba(197,160,89,0.18)] text-accent-light border border-[rgba(197,160,89,0.45)]',
-    bestseller: 'bg-[rgba(197,160,89,0.18)] text-accent-light border border-[rgba(197,160,89,0.45)]',
-    new: 'bg-surface-alt text-accent border border-[rgba(197,160,89,0.3)]',
-    sale: 'bg-[#2D1B18] text-[#F3A59B] border border-[#8C3B32]/40',
-    limited: 'bg-[#2D1B18] text-[#F3A59B] border border-[#8C3B32]/40',
-    champagne: 'bg-[rgba(197,160,89,0.2)] text-accent-light border border-[rgba(197,160,89,0.4)]',
-    personalisable: 'bg-[rgba(197,160,89,0.15)] text-accent border border-[rgba(197,160,89,0.35)]',
-    outline: 'border border-[rgba(197,160,89,0.4)] text-accent bg-transparent',
+    default: 'bg-surface-alt text-ivory border border-border-light',
+    gold: 'bg-accent/20 text-accent-light border border-border',
+    bestseller: 'bg-accent/20 text-accent-light border border-border',
+    new: 'bg-surface-alt text-accent border border-border-light',
+    sale: 'bg-badge-sale-bg text-badge-sale-text border border-badge-sale-border',
+    limited: 'bg-badge-sale-bg text-badge-sale-text border border-badge-sale-border',
+    champagne: 'bg-accent/20 text-accent-light border border-border',
+    personalisable: 'bg-accent/15 text-accent border border-border-light',
+    outline: 'border border-border text-accent bg-transparent',
   };
 
   return (

@@ -107,7 +107,7 @@ export function Navbar({ onSearchOpen }) {
 
   // Header transitions from transparent overlay to dark espresso on scroll
   const navClasses = scrolled || !isHomePage
-    ? "bg-bg/95 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.6)] border-b border-[rgba(197,160,89,0.2)]"
+    ? "bg-bg/95 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.6)] border-b border-border"
     : "bg-transparent border-b border-transparent";
 
   const transparentHomeTop = isHomePage && !scrolled;
@@ -296,7 +296,7 @@ export function Navbar({ onSearchOpen }) {
                 ease: [0.25, 0.1, 0.25, 1],
               }}
             >
-              <div className="flex items-center justify-between px-6 py-5 border-b border-[rgba(197,160,89,0.2)] bg-bg-alt">
+              <div className="flex items-center justify-between px-6 py-5 border-b border-border bg-bg-alt">
                 <span className="font-serif text-2xl font-light tracking-[0.15em] uppercase text-ivory">
                   GŌKANA
                 </span>
@@ -315,7 +315,7 @@ export function Navbar({ onSearchOpen }) {
                     key={link.label}
                     to={link.href}
                     onClick={(e) => handleNavClick(link, e)}
-                    className="block py-4 px-2 font-serif text-2xl font-light text-ivory hover:text-accent transition-colors border-b border-[rgba(197,160,89,0.15)]"
+                    className="block py-4 px-2 font-serif text-2xl font-light text-ivory hover:text-accent transition-colors border-b border-border"
                   >
                     {link.label}
                   </Link>
@@ -325,14 +325,14 @@ export function Navbar({ onSearchOpen }) {
                   <Link
                     to="/admin"
                     onClick={() => setMobileOpen(false)}
-                    className="block py-3 font-sans text-sm font-semibold tracking-wider uppercase text-accent border-b border-[rgba(197,160,89,0.15)]"
+                    className="block py-3 font-sans text-sm font-semibold tracking-wider uppercase text-accent border-b border-border"
                   >
                     Admin Dashboard
                   </Link>
                 )}
               </nav>
 
-              <div className="p-6 border-t border-[rgba(197,160,89,0.2)] bg-bg-alt">
+              <div className="p-6 border-t border-border bg-bg-alt">
                 <div className="text-center text-xs font-medium tracking-wide text-muted">
                   Handcrafted & Delivered Across India
                 </div>

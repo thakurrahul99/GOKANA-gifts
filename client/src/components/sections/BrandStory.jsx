@@ -15,7 +15,7 @@ export function BrandStory() {
   const imageY = useTransform(scrollYProgress, [0, 1], ['-6%', '6%']);
 
   return (
-    <section className="section-py bg-bg-alt text-ivory overflow-hidden border-b border-[rgba(197,160,89,0.15)]" aria-labelledby="brand-philosophy-heading">
+    <section className="section-py bg-bg-alt text-ivory overflow-hidden border-b border-border" aria-labelledby="brand-philosophy-heading">
       <div className="container-gokana">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Left Column — Philosophy Text */}
@@ -59,7 +59,7 @@ export function BrandStory() {
 
             {/* Impact & Quality Metrics */}
             <ScrollReveal delay={0.6}>
-              <div className="grid grid-cols-3 gap-6 mt-12 pt-8 border-t border-[rgba(197,160,89,0.2)]">
+              <div className="grid grid-cols-3 gap-6 mt-12 pt-8 border-t border-border">
                 <div>
                   <p className="font-serif text-3xl font-light text-accent">50K+</p>
                   <p className="font-sans text-[11px] text-muted uppercase tracking-wider mt-1">Gifts Delivered</p>
@@ -77,7 +77,7 @@ export function BrandStory() {
           </div>
 
           {/* Right Column — Imagery with Parallax & Gold Border */}
-          <div ref={imageRef} className="order-1 lg:order-2 overflow-hidden rounded-[8px] border border-[rgba(197,160,89,0.3)] shadow-[0_12px_40px_rgba(0,0,0,0.7)] aspect-square bg-bg">
+          <div ref={imageRef} className="order-1 lg:order-2 overflow-hidden rounded-[8px] border border-border-light shadow-[0_12px_40px_rgba(0,0,0,0.7)] aspect-square bg-bg">
             <motion.img
               src={brandStoryImg}
               alt="Artisan handcrafting GŌKANA luxury gift hamper"

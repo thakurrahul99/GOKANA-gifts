@@ -15,12 +15,12 @@ function WishlistItem({ product, onRemove, onAddToCart }) {
       variants={staggerItem}
       layout
       exit={{ opacity: 0, x: -20, transition: { duration: 0.3 } }}
-      className="group flex gap-5 py-6 border-b border-[rgba(197,160,89,0.18)] last:border-0"
+      className="group flex gap-5 py-6 border-b border-border last:border-0"
     >
       {/* Image */}
       <Link
         to={`/products/${product.slug}`}
-        className="flex-shrink-0 w-24 h-28 bg-surface-alt overflow-hidden rounded-lg border border-[rgba(197,160,89,0.2)] shadow-xs"
+        className="flex-shrink-0 w-24 h-28 bg-surface-alt overflow-hidden rounded-lg border border-border shadow-xs"
       >
         <img
           src={product.image}
@@ -61,7 +61,7 @@ function WishlistItem({ product, onRemove, onAddToCart }) {
           </button>
           <button
             onClick={() => onRemove(product)}
-            className="p-3 min-h-[44px] min-w-[44px] flex items-center justify-center text-muted hover:text-red-400 hover:bg-red-400/10 transition-colors duration-300 border border-[rgba(197,160,89,0.2)] rounded-lg"
+            className="p-3 min-h-[44px] min-w-[44px] flex items-center justify-center text-muted hover:text-red-400 hover:bg-red-400/10 transition-colors duration-300 border border-border rounded-lg"
             aria-label={`Remove ${product.name} from wishlist`}
           >
             <Trash2 size={16} strokeWidth={1.5} />
@@ -83,7 +83,7 @@ export function WishlistPage() {
   return (
     <main className="pt-24 min-h-screen bg-bg text-ivory">
       {/* Luxury Dark Espresso Header */}
-      <section className="bg-bg-banner border-b border-[rgba(197,160,89,0.2)] py-14 relative overflow-hidden">
+      <section className="bg-bg-banner border-b border-border py-14 relative overflow-hidden">
         <div
           className="absolute inset-0 pointer-events-none opacity-30"
           style={{
@@ -122,7 +122,7 @@ export function WishlistPage() {
               animate={{ opacity: 1, y: 0 }}
               className="flex flex-col items-center justify-center py-20 text-center max-w-sm mx-auto"
             >
-              <div className="w-20 h-20 border border-[rgba(197,160,89,0.3)] bg-bg-alt rounded-full flex items-center justify-center mb-7 shadow-lg">
+              <div className="w-20 h-20 border border-border-light bg-bg-alt rounded-full flex items-center justify-center mb-7 shadow-lg">
                 <Heart size={32} strokeWidth={1} className="text-accent" />
               </div>
               <h2 className="font-serif text-2xl font-light text-ivory mb-3">Your wishlist is empty</h2>
@@ -140,7 +140,7 @@ export function WishlistPage() {
               className="grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-14"
             >
               {/* Wishlist items */}
-              <div className="lg:col-span-2 bg-bg-alt border border-[rgba(197,160,89,0.2)] rounded-2xl p-6 sm:p-8 shadow-xl">
+              <div className="lg:col-span-2 bg-bg-alt border border-border rounded-2xl p-6 sm:p-8 shadow-xl">
                 <AnimatePresence>
                   <StaggerReveal stagger={0.07}>
                     {items.map((product) => (
@@ -158,7 +158,7 @@ export function WishlistPage() {
               {/* Summary sidebar */}
               <div className="lg:col-span-1">
                 <ScrollReveal delay={0.2}>
-                  <div className="bg-bg-alt border border-[rgba(197,160,89,0.2)] rounded-2xl p-7 sticky top-28 shadow-xl">
+                  <div className="bg-bg-alt border border-border rounded-2xl p-7 sticky top-28 shadow-xl">
                     <div className="flex items-center gap-2 mb-6">
                       <h3 className="font-serif text-xl font-light text-ivory">Collection Summary</h3>
                     </div>
@@ -170,7 +170,7 @@ export function WishlistPage() {
                         </div>
                       ))}
                     </div>
-                    <div className="border-t border-[rgba(197,160,89,0.2)] pt-4 mb-6">
+                    <div className="border-t border-border pt-4 mb-6">
                       <div className="flex justify-between items-center">
                         <span className="font-serif text-base text-ivory">Total Value</span>
                         <span className="font-serif text-xl font-medium text-accent">

@@ -8,7 +8,7 @@ const API = API_BASE;
 const STATUS_COLOR = {
   PENDING: 'bg-accent/15 text-accent border border-accent/30',
   CONFIRMED: 'bg-accent text-bg font-semibold',
-  PROCESSING: 'bg-surface-alt text-ivory border border-[rgba(197,160,89,0.25)]',
+  PROCESSING: 'bg-surface-alt text-ivory border border-border',
   PACKED: 'bg-accent/20 text-accent border border-accent/30',
   SHIPPED: 'bg-accent/25 text-accent-light border border-accent/35',
   DELIVERED: 'bg-emerald-950/60 text-emerald-300 border border-emerald-500/30',
@@ -51,7 +51,7 @@ export function AdminDashboard() {
         <>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
             {stats.map((s) => (
-              <div key={s.label} className="bg-bg-alt border border-[rgba(197,160,89,0.2)] p-5 shadow-lg rounded-xl">
+              <div key={s.label} className="bg-bg-alt border border-border p-5 shadow-lg rounded-xl">
                 <div className="flex items-start justify-between mb-4">
                   <div className={`p-2.5 ${s.bg} rounded-lg`}><s.icon size={18} className={s.color} /></div>
                   {data?.stats.pendingOrders > 0 && s.label === 'Total Orders' && <span className="text-xs text-accent font-semibold bg-accent/15 border border-accent/30 px-2 py-0.5 rounded">{data.stats.pendingOrders} pending</span>}
@@ -62,8 +62,8 @@ export function AdminDashboard() {
             ))}
           </div>
 
-          <div className="bg-bg-alt border border-[rgba(197,160,89,0.2)] rounded-xl shadow-lg overflow-hidden">
-            <div className="flex items-center justify-between px-6 py-4 border-b border-[rgba(197,160,89,0.18)]">
+          <div className="bg-bg-alt border border-border rounded-xl shadow-lg overflow-hidden">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-border">
               <h3 className="font-serif text-base font-light text-ivory">Recent Orders</h3>
               <a href="/admin/orders" className="text-xs text-accent hover:text-accent-light font-medium">View all →</a>
             </div>
@@ -73,7 +73,7 @@ export function AdminDashboard() {
               ) : (
                 <table className="w-full text-sm">
                   <thead>
-                    <tr className="text-xs text-muted font-semibold border-b border-[rgba(197,160,89,0.15)] bg-surface-alt">
+                    <tr className="text-xs text-muted font-semibold border-b border-border bg-surface-alt">
                       <th className="text-left px-6 py-3.5">Order</th>
                       <th className="text-left px-6 py-3.5">Customer</th>
                       <th className="text-left px-6 py-3.5 hidden md:table-cell">Amount</th>
@@ -81,7 +81,7 @@ export function AdminDashboard() {
                       <th className="text-left px-6 py-3.5 hidden md:table-cell">Date</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-[rgba(197,160,89,0.1)]">
+                  <tbody className="divide-y divide-border/50">
                     {data.recentOrders.map((order) => (
                       <tr key={order._id} className="hover:bg-white/5 transition-colors">
                         <td className="px-6 py-4 font-mono text-xs text-muted">{order.orderId || order._id?.slice(-8)}</td>

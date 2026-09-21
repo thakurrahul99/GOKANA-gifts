@@ -35,9 +35,9 @@ export function CartDrawer() {
       {isOpen && (
         <div role="dialog" aria-modal="true" aria-label="Shopping Cart">
           <motion.div className="drawer-overlay" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }} onClick={closeCart} />
-          <motion.div ref={drawerRef} data-lenis-prevent className="fixed top-0 right-0 bottom-0 z-50 w-full max-w-md bg-bg text-ivory flex flex-col shadow-2xl border-l border-[rgba(197,160,89,0.2)]" initial={{ x: "100%" }} animate={{ x: 0 }} exit={{ x: "100%" }} transition={{ type: "tween", duration: 0.35, ease: [0.25, 0.1, 0.25, 1] }}>
+          <motion.div ref={drawerRef} data-lenis-prevent className="fixed top-0 right-0 bottom-0 z-50 w-full max-w-md bg-bg text-ivory flex flex-col shadow-2xl border-l border-border" initial={{ x: "100%" }} animate={{ x: 0 }} exit={{ x: "100%" }} transition={{ type: "tween", duration: 0.35, ease: [0.25, 0.1, 0.25, 1] }}>
             {/* Header */}
-            <div className="flex items-center justify-between px-6 py-5 border-b border-[rgba(197,160,89,0.2)] bg-bg-alt">
+            <div className="flex items-center justify-between px-6 py-5 border-b border-border bg-bg-alt">
               <div className="flex items-center gap-3">
                 <ShoppingBag size={20} strokeWidth={1.8} className="text-accent" />
                 <h2 className="font-serif text-2xl font-light text-ivory">Your Cart</h2>
@@ -47,7 +47,7 @@ export function CartDrawer() {
             </div>
 
             {/* Shipping Progress */}
-            <div className="bg-primary-2 px-6 py-3.5 border-b border-[rgba(197,160,89,0.18)]">
+            <div className="bg-primary-2 px-6 py-3.5 border-b border-border">
               <div className="flex items-center gap-2 mb-2 text-xs font-medium text-ivory">
                 <Truck size={15} className="text-accent" />
                 {subtotal >= FREE_SHIPPING_THRESHOLD ? <span className="text-accent font-semibold">🎉 You unlocked FREE express delivery!</span> : <span>Add <b className="text-accent">{formatPrice(diffToFree)}</b> more to unlock <b className="text-ivory">FREE shipping</b></span>}
@@ -67,8 +67,8 @@ export function CartDrawer() {
               ) : (
                 <div className="space-y-4">
                   {items.map(({ key, product, variant, qty }) => (
-                    <div key={key} className="flex gap-4 p-4 rounded-xl bg-bg-alt border border-[rgba(197,160,89,0.2)] shadow-sm">
-                      <Link to={`/products/${product.slug}`} onClick={closeCart} className="w-20 h-24 rounded-lg overflow-hidden bg-surface-alt border border-[rgba(197,160,89,0.15)] flex-shrink-0"><img src={product.image} alt={product.name} className="w-full h-full object-cover" loading="lazy" decoding="async" /></Link>
+                    <div key={key} className="flex gap-4 p-4 rounded-xl bg-bg-alt border border-border shadow-sm">
+                      <Link to={`/products/${product.slug}`} onClick={closeCart} className="w-20 h-24 rounded-lg overflow-hidden bg-surface-alt border border-border flex-shrink-0"><img src={product.image} alt={product.name} className="w-full h-full object-cover" loading="lazy" decoding="async" /></Link>
                       <div className="flex-1 flex flex-col justify-between">
                         <div>
                           <div className="flex items-start justify-between gap-2">
@@ -77,8 +77,8 @@ export function CartDrawer() {
                           </div>
                           {variant && <p className="font-sans text-xs text-muted mt-0.5">Variant: {variant}</p>}
                         </div>
-                        <div className="flex items-center justify-between mt-3 pt-2 border-t border-[rgba(197,160,89,0.15)]">
-                          <div className="flex items-center border border-[rgba(197,160,89,0.25)] rounded-lg bg-surface-alt">
+                        <div className="flex items-center justify-between mt-3 pt-2 border-t border-border">
+                          <div className="flex items-center border border-border rounded-lg bg-surface-alt">
                             <button onClick={() => updateQty(key, qty - 1)} aria-label={`Decrease quantity of ${product.name}`} className="min-w-[36px] min-h-[36px] flex items-center justify-center text-ivory hover:text-accent hover:bg-white/5 rounded-l-lg transition-colors"><Minus size={12} /></button>
                             <span className="w-8 text-center font-sans text-xs font-semibold text-ivory">{qty}</span>
                             <button onClick={() => updateQty(key, qty + 1)} aria-label={`Increase quantity of ${product.name}`} className="min-w-[36px] min-h-[36px] flex items-center justify-center text-ivory hover:text-accent hover:bg-white/5 rounded-r-lg transition-colors"><Plus size={12} /></button>
@@ -94,10 +94,10 @@ export function CartDrawer() {
 
             {/* Footer Summary */}
             {items.length > 0 && (
-              <div className="p-6 bg-bg-alt border-t border-[rgba(197,160,89,0.2)] space-y-3">
+              <div className="p-6 bg-bg-alt border-t border-border space-y-3">
                 <div className="flex justify-between text-xs text-muted"><span>Subtotal</span><span className="text-ivory font-medium">{formatPrice(subtotal)}</span></div>
                 <div className="flex justify-between text-xs text-muted"><span>Estimated Shipping</span><span className="text-ivory font-medium">{shipping === 0 ? <span className="text-accent font-semibold">FREE</span> : formatPrice(shipping)}</span></div>
-                <div className="flex justify-between text-base font-semibold text-ivory pt-2 border-t border-[rgba(197,160,89,0.18)]"><span>Total</span><span className="font-serif text-lg text-accent">{formatPrice(total)}</span></div>
+                <div className="flex justify-between text-base font-semibold text-ivory pt-2 border-t border-border"><span>Total</span><span className="font-serif text-lg text-accent">{formatPrice(total)}</span></div>
                 <Link to="/checkout" onClick={closeCart} className="btn-primary w-full flex items-center justify-center gap-2 mt-4 font-semibold uppercase tracking-[0.12em]">Proceed to Secure Checkout <ArrowRight size={16} /></Link>
                 <p className="text-center text-[11px] text-muted opacity-80 pt-1">✦ 100% Satisfaction Guarantee • Handcrafted Keepsake Packaging</p>
               </div>

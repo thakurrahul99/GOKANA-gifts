@@ -52,7 +52,7 @@ export function LoginPage() {
     <main className="min-h-screen bg-bg text-ivory flex">
       {/* Left — Editorial Luxury Branding Hero */}
       <div
-        className="hidden lg:flex lg:w-1/2 bg-bg-banner relative overflow-hidden flex-col items-center justify-center p-16 text-center text-ivory border-r border-[rgba(197,160,89,0.2)]"
+        className="hidden lg:flex lg:w-1/2 bg-bg-banner relative overflow-hidden flex-col items-center justify-center p-16 text-center text-ivory border-r border-border"
         style={{
           backgroundImage: `radial-gradient(ellipse at 40% 30%, rgba(197,160,89,0.18) 0%, transparent 65%), radial-gradient(ellipse at 80% 80%, rgba(197,160,89,0.08) 0%, transparent 50%)`,
         }}
@@ -95,7 +95,7 @@ export function LoginPage() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="w-full max-w-md bg-bg-alt p-8 sm:p-10 border border-[rgba(197,160,89,0.22)] rounded-2xl shadow-2xl"
+          className="w-full max-w-md bg-bg-alt p-8 sm:p-10 border border-border rounded-2xl shadow-2xl"
         >
           {/* Logo on mobile */}
           <Link
@@ -120,7 +120,7 @@ export function LoginPage() {
           </div>
 
           {/* Mode Switcher Tabs */}
-          <div className="flex rounded-lg bg-bg border border-[rgba(197,160,89,0.2)] p-1 mb-6">
+          <div className="flex rounded-lg bg-bg border border-border p-1 mb-6">
             <button
               type="button"
               onClick={() => { setMode('login'); setError(''); }}
@@ -162,7 +162,7 @@ export function LoginPage() {
                   required
                   autoComplete="name"
                   placeholder="Deepti Agarwal"
-                  className="w-full px-4 py-3 bg-bg border border-[rgba(197,160,89,0.25)] text-ivory text-sm rounded-lg focus:border-accent focus:ring-1 focus:ring-accent/30 outline-none transition-all placeholder:text-muted/50"
+                  className="w-full px-4 py-3 bg-bg border border-border text-ivory text-sm rounded-lg focus:border-accent focus:ring-1 focus:ring-accent/30 outline-none transition-all placeholder:text-muted/50"
                 />
               </div>
             )}
@@ -182,7 +182,7 @@ export function LoginPage() {
                 required
                 autoComplete="email"
                 placeholder="you@example.com"
-                className="w-full px-4 py-3 bg-bg border border-[rgba(197,160,89,0.25)] text-ivory text-sm rounded-lg focus:border-accent focus:ring-1 focus:ring-accent/30 outline-none transition-all placeholder:text-muted/50"
+                className="w-full px-4 py-3 bg-bg border border-border text-ivory text-sm rounded-lg focus:border-accent focus:ring-1 focus:ring-accent/30 outline-none transition-all placeholder:text-muted/50"
               />
             </div>
 
@@ -203,7 +203,7 @@ export function LoginPage() {
                   minLength={6}
                   autoComplete={mode === 'login' ? 'current-password' : 'new-password'}
                   placeholder="Minimum 6 characters"
-                  className="w-full px-4 py-3 pr-12 bg-bg border border-[rgba(197,160,89,0.25)] text-ivory text-sm rounded-lg focus:border-accent focus:ring-1 focus:ring-accent/30 outline-none transition-all placeholder:text-muted/50"
+                  className="w-full px-4 py-3 pr-12 bg-bg border border-border text-ivory text-sm rounded-lg focus:border-accent focus:ring-1 focus:ring-accent/30 outline-none transition-all placeholder:text-muted/50"
                 />
                 <button
                   type="button"
@@ -273,7 +273,7 @@ export function LoginPage() {
             )}
           </div>
 
-          <div className="mt-8 pt-6 border-t border-[rgba(197,160,89,0.18)] text-center">
+          <div className="mt-8 pt-6 border-t border-border text-center">
             <Link
               to="/"
               className="inline-flex items-center gap-1 font-sans text-xs text-muted hover:text-accent transition-colors p-2"

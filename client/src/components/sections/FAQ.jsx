@@ -63,7 +63,7 @@ export function FAQ() {
             return (
               <div
                 key={item.q}
-                className="rounded-xl border border-[rgba(197,160,89,0.2)] bg-bg-alt overflow-hidden transition-all duration-200"
+                className="rounded-xl border border-border bg-bg-alt overflow-hidden transition-all duration-200"
               >
                 <button
                   onClick={() => toggle(idx)}
@@ -77,7 +77,7 @@ export function FAQ() {
                   <motion.div
                     animate={{ rotate: isOpen ? 180 : 0 }}
                     transition={{ duration: 0.25 }}
-                    className="w-8 h-8 rounded-full bg-surface-alt border border-[rgba(197,160,89,0.25)] flex items-center justify-center text-accent flex-shrink-0"
+                    className="w-8 h-8 rounded-full bg-surface-alt border border-border flex items-center justify-center text-accent flex-shrink-0"
                   >
                     <ChevronDown size={16} />
                   </motion.div>
@@ -92,7 +92,7 @@ export function FAQ() {
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                     >
-                      <div className="px-5 pb-5 md:px-6 md:pb-6 pt-1 text-sm font-sans text-muted leading-relaxed border-t border-[rgba(197,160,89,0.15)]">
+                      <div className="px-5 pb-5 md:px-6 md:pb-6 pt-1 text-sm font-sans text-muted leading-relaxed border-t border-border">
                         {item.a}
                       </div>
                     </motion.div>
@@ -104,7 +104,7 @@ export function FAQ() {
         </div>
 
         {/* Support Help Callout */}
-        <div className="mt-12 text-center p-6 rounded-2xl bg-bg-alt border border-[rgba(197,160,89,0.22)] flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xl">
+        <div className="mt-12 text-center p-6 rounded-2xl bg-bg-alt border border-border flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xl">
           <div className="text-left">
             <h4 className="font-serif text-lg font-light text-ivory">
               Still have questions or need a custom gift box?

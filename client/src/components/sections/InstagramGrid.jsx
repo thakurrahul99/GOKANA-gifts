@@ -25,7 +25,7 @@ function InstagramPost({ post, className }) {
       href="https://instagram.com"
       target="_blank"
       rel="noopener noreferrer"
-      className={`block relative overflow-hidden rounded-xl bg-bg-alt border border-[rgba(197,160,89,0.2)] hover:border-accent/50 shadow-md group ${className}`}
+      className={`block relative overflow-hidden rounded-xl bg-bg-alt border border-border hover:border-accent/50 shadow-md group ${className}`}
       whileHover={{ scale: 1.015 }}
       transition={{ duration: 0.3 }}
       aria-label="View GŌKANA moments on Instagram"
@@ -69,7 +69,7 @@ export function InstagramGrid() {
   const [p1, p2, p3, p4, p5, p6] = posts;
 
   return (
-    <section className="section-py bg-bg overflow-hidden border-b border-[rgba(197,160,89,0.15)]" aria-labelledby="instagram-heading">
+    <section className="section-py bg-bg overflow-hidden border-b border-border" aria-labelledby="instagram-heading">
       <div className="container-gokana">
         {/* Header */}
         <div className="text-center mb-12">

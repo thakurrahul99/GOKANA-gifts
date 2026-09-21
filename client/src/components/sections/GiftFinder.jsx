@@ -176,7 +176,7 @@ export function GiftFinder() {
   const currentStepData = STEPS[currentStep];
 
   return (
-    <section id="gift-finder" className="section-py overflow-hidden bg-bg text-ivory border-t border-[rgba(197,160,89,0.15)]" aria-labelledby="gift-finder-heading">
+    <section id="gift-finder" className="section-py overflow-hidden bg-bg text-ivory border-t border-border" aria-labelledby="gift-finder-heading">
       <div className="container-gokana">
         <div className="max-w-3xl mx-auto">
           {/* Header */}
@@ -195,9 +195,9 @@ export function GiftFinder() {
           </div>
 
           <ScrollReveal delay={0.3}>
-            <div className="p-6 md:p-10 rounded-2xl bg-bg-alt border border-[rgba(197,160,89,0.22)] shadow-2xl">
+            <div className="p-6 md:p-10 rounded-2xl bg-bg-alt border border-border shadow-2xl">
               {/* Progress Indicator (Step X of 4) */}
-              <div className="flex items-center justify-between gap-4 mb-8 pb-4 border-b border-[rgba(197,160,89,0.18)]">
+              <div className="flex items-center justify-between gap-4 mb-8 pb-4 border-b border-border">
                 <div className="flex items-center gap-2.5">
                   <span className="w-7 h-7 rounded-full bg-accent text-bg font-sans text-xs font-bold flex items-center justify-center">
                     {showResults ? '4' : currentStep + 1}
@@ -246,7 +246,7 @@ export function GiftFinder() {
                             className={`p-4 rounded-xl border text-left transition-all duration-200 flex flex-col justify-between min-h-[84px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
                               isSelected
                                 ? 'border-accent bg-accent/15 text-accent shadow-sm'
-                                : 'border-[rgba(197,160,89,0.2)] bg-bg text-ivory hover:border-accent hover:bg-surface'
+                                : 'border-border bg-bg text-ivory hover:border-accent hover:bg-surface'
                             }`}
                           >
                             <span className="text-2xl mb-2" aria-hidden="true">{opt.emoji}</span>
@@ -259,7 +259,7 @@ export function GiftFinder() {
                     </div>
 
                     {/* Navigation Buttons: Back & Skip */}
-                    <div className="flex items-center justify-between pt-4 border-t border-[rgba(197,160,89,0.18)]">
+                    <div className="flex items-center justify-between pt-4 border-t border-border">
                       {currentStep > 0 ? (
                         <button
                           onClick={() => setCurrentStep((s) => s - 1)}
@@ -309,7 +309,7 @@ export function GiftFinder() {
                       {results.map((product) => (
                         <div
                           key={product.id}
-                          className="rounded-xl overflow-hidden bg-bg border border-[rgba(197,160,89,0.2)] flex flex-col justify-between shadow-lg"
+                          className="rounded-xl overflow-hidden bg-bg border border-border flex flex-col justify-between shadow-lg"
                         >
                           <div>
                             <Link to={`/products/${product.slug}`} className="block aspect-square overflow-hidden bg-surface-alt">

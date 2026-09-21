@@ -95,14 +95,14 @@ export function Bestsellers() {
           <ScrollReveal delay={0.2} className="flex items-center gap-2">
             <button
               onClick={() => scroll('left')}
-              className="min-w-[44px] min-h-[44px] rounded-full border border-[rgba(197,160,89,0.3)] flex items-center justify-center text-ivory hover:text-bg hover:bg-accent hover:border-accent transition-all active:scale-95 cursor-pointer"
+              className="min-w-[44px] min-h-[44px] rounded-full border border-border-light flex items-center justify-center text-ivory hover:text-bg hover:bg-accent hover:border-accent transition-all active:scale-95 cursor-pointer"
               aria-label="Scroll bestsellers left"
             >
               <ChevronLeft size={18} strokeWidth={2} />
             </button>
             <button
               onClick={() => scroll('right')}
-              className="min-w-[44px] min-h-[44px] rounded-full border border-[rgba(197,160,89,0.3)] flex items-center justify-center text-ivory hover:text-bg hover:bg-accent hover:border-accent transition-all active:scale-95 cursor-pointer"
+              className="min-w-[44px] min-h-[44px] rounded-full border border-border-light flex items-center justify-center text-ivory hover:text-bg hover:bg-accent hover:border-accent transition-all active:scale-95 cursor-pointer"
               aria-label="Scroll bestsellers right"
             >
               <ChevronRight size={18} strokeWidth={2} />
