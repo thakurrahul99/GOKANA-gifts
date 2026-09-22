@@ -50,9 +50,14 @@ app.use(
       ) {
         return callback(null, true);
       }
-      // In production, check against CLIENT_URL
-      const allowed = process.env.CLIENT_URL || 'http://localhost:5173';
-      if (origin === allowed) return callback(null, true);
+      // In production, check against CLIENT_URL (supports comma-separated list and trailing slashes)
+      const allowedList = (process.env.CLIENT_URL || 'http://localhost:5173')
+        .split(',')
+        .map(url => url.trim().replace(/\/$/, ''));
+      const cleanOrigin = origin.replace(/\/$/, '');
+      if (allowedList.includes(cleanOrigin) || allowedList.includes('*')) {
+        return callback(null, true);
+      }
       callback(new Error(`CORS: ${origin} not allowed`));
     },
     credentials: true,
