@@ -25,6 +25,9 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// Enable trust proxy for Render / Vercel reverse proxy and rate limiting
+app.set("trust proxy", 1);
+
 // ─── Middleware ───
 app.use(helmet());
 app.use(compression());
@@ -45,17 +48,22 @@ app.use(
       if (!origin) return callback(null, true);
       // In development, allow any localhost origin
       if (
-        process.env.NODE_ENV !== 'production' &&
+        process.env.NODE_ENV !== "production" &&
         /^https?:\/\/localhost(:\d+)?$/.test(origin)
       ) {
         return callback(null, true);
       }
-      // In production, check against CLIENT_URL (supports comma-separated list and trailing slashes)
-      const allowedList = (process.env.CLIENT_URL || 'http://localhost:5173')
-        .split(',')
-        .map(url => url.trim().replace(/\/$/, ''));
-      const cleanOrigin = origin.replace(/\/$/, '');
-      if (allowedList.includes(cleanOrigin) || allowedList.includes('*')) {
+      // In production, check against CLIENT_URL list or any .vercel.app domain
+      const allowedList = (process.env.CLIENT_URL || "http://localhost:5173")
+        .split(",")
+        .map((url) => url.trim().replace(/\/$/, ""));
+      const cleanOrigin = origin.replace(/\/$/, "");
+
+      if (
+        allowedList.includes(cleanOrigin) ||
+        allowedList.includes("*") ||
+        cleanOrigin.endsWith(".vercel.app")
+      ) {
         return callback(null, true);
       }
       callback(new Error(`CORS: ${origin} not allowed`));
@@ -89,7 +97,13 @@ app.use("/api/admin/uploads", uploadRoutes);
 app.use("/api/webhooks", webhookRoutes);
 
 // ─── Health check ───
+app.get("/", (req, res) =>
+  res.json({ message: "GŌKANA Gifts API is running", status: "ok" }),
+);
 app.get("/health", (req, res) =>
+  res.json({ status: "ok", timestamp: new Date() }),
+);
+app.get("/api/health", (req, res) =>
   res.json({ status: "ok", timestamp: new Date() }),
 );
 
