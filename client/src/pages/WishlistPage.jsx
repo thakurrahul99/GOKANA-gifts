@@ -15,12 +15,12 @@ function WishlistItem({ product, onRemove, onAddToCart }) {
       variants={staggerItem}
       layout
       exit={{ opacity: 0, x: -20, transition: { duration: 0.3 } }}
-      className="group flex gap-5 py-6 border-b border-border last:border-0"
+      className="group flex gap-3.5 sm:gap-5 py-4 sm:py-6 border-b border-border last:border-0"
     >
       {/* Image */}
       <Link
         to={`/products/${product.slug}`}
-        className="flex-shrink-0 w-24 h-28 bg-surface-alt overflow-hidden rounded-lg border border-border shadow-xs"
+        className="flex-shrink-0 w-20 h-24 sm:w-24 sm:h-28 bg-surface-alt overflow-hidden rounded-lg border border-border shadow-xs"
       >
         <img
           src={product.image}
@@ -34,19 +34,19 @@ function WishlistItem({ product, onRemove, onAddToCart }) {
       {/* Info */}
       <div className="flex-1 min-w-0">
         <Link to={`/products/${product.slug}`}>
-          <h3 className="font-serif text-lg font-light text-ivory hover:text-accent transition-colors mb-1 leading-tight">
+          <h3 className="font-serif text-base sm:text-lg font-light text-ivory hover:text-accent transition-colors mb-1 leading-tight line-clamp-1">
             {product.name}
           </h3>
         </Link>
-        <p className="font-sans text-xs text-muted mb-3 line-clamp-1 font-light">{product.tagline}</p>
+        <p className="font-sans text-xs text-muted mb-2 sm:mb-3 line-clamp-1 font-light">{product.tagline}</p>
 
-        <div className="flex items-center gap-3 mb-4">
-          <span className="font-sans text-base font-semibold text-accent">{formatPrice(product.price)}</span>
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+          <span className="font-sans text-sm sm:text-base font-semibold text-accent">{formatPrice(product.price)}</span>
           {product.originalPrice && (
-            <span className="font-sans text-sm text-muted/60 line-through">{formatPrice(product.originalPrice)}</span>
+            <span className="font-sans text-xs sm:text-sm text-muted/60 line-through">{formatPrice(product.originalPrice)}</span>
           )}
           {discount && (
-            <span className="text-[11px] font-sans font-semibold bg-accent/15 text-accent border border-accent/30 px-2.5 py-0.5 rounded-full">−{discount}%</span>
+            <span className="text-[10px] sm:text-[11px] font-sans font-semibold bg-accent/15 text-accent border border-accent/30 px-2 py-0.5 rounded-full">−{discount}%</span>
           )}
         </div>
 
@@ -54,17 +54,17 @@ function WishlistItem({ product, onRemove, onAddToCart }) {
         <div className="flex items-center gap-2">
           <button
             onClick={() => onAddToCart(product)}
-            className="btn-primary py-2.5 px-4 text-xs font-semibold uppercase tracking-wider"
+            className="btn-primary py-2 px-3 sm:py-2.5 sm:px-4 text-[11px] sm:text-xs font-semibold uppercase tracking-wider"
           >
-            <ShoppingBag size={14} strokeWidth={2} />
+            <ShoppingBag size={13} strokeWidth={2} />
             Move to Cart
           </button>
           <button
             onClick={() => onRemove(product)}
-            className="p-3 min-h-[44px] min-w-[44px] flex items-center justify-center text-muted hover:text-red-400 hover:bg-red-400/10 transition-colors duration-300 border border-border rounded-lg"
+            className="p-2.5 sm:p-3 min-h-[40px] min-w-[40px] sm:min-h-[44px] sm:min-w-[44px] flex items-center justify-center text-muted hover:text-red-400 hover:bg-red-400/10 transition-colors duration-300 border border-border rounded-lg"
             aria-label={`Remove ${product.name} from wishlist`}
           >
-            <Trash2 size={16} strokeWidth={1.5} />
+            <Trash2 size={15} strokeWidth={1.5} />
           </button>
         </div>
       </div>
@@ -140,7 +140,7 @@ export function WishlistPage() {
               className="grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-14"
             >
               {/* Wishlist items */}
-              <div className="lg:col-span-2 bg-bg-alt border border-border rounded-2xl p-6 sm:p-8 shadow-xl">
+              <div className="lg:col-span-2 bg-bg-alt border border-border rounded-2xl p-4 sm:p-6 md:p-8 shadow-xl">
                 <AnimatePresence>
                   <StaggerReveal stagger={0.07}>
                     {items.map((product) => (

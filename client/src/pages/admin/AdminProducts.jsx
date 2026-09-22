@@ -229,22 +229,22 @@ export function AdminProducts() {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
         <div>
           <h2 className="text-xl font-semibold text-ivory">Products</h2>
-          <p className="text-sm text-muted">{products.length} total products</p>
+          <p className="text-xs sm:text-sm text-muted">{products.length} total products</p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2.5 w-full sm:w-auto">
           <button
             onClick={fetchProducts}
-            className="p-2 text-muted hover:text-ivory transition-colors"
+            className="p-2.5 text-muted hover:text-ivory transition-colors border border-border rounded-lg min-h-[44px] min-w-[44px] flex items-center justify-center"
             title="Refresh"
           >
             <RefreshCw size={16} />
           </button>
           <button
             onClick={openAdd}
-            className="flex items-center gap-2 px-4 py-2.5 bg-accent text-bg text-xs font-semibold uppercase tracking-wider hover:bg-accent-light transition-colors rounded-sm shadow-sm"
+            className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2.5 bg-accent text-bg text-xs font-semibold uppercase tracking-wider hover:bg-accent-light transition-colors rounded-lg shadow-sm min-h-[44px]"
           >
             <Plus size={16} />
             Add Product
@@ -429,7 +429,7 @@ export function AdminProducts() {
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="block text-xs text-muted mb-1.5 font-medium">Price (₹) *</label>
                   <input
@@ -437,7 +437,7 @@ export function AdminProducts() {
                     type="number"
                     value={formData.price}
                     onChange={setF('price')}
-                    className="w-full border border-border bg-surface text-text rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-accent"
+                    className="w-full border border-border bg-surface text-text rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-accent min-h-[44px]"
                   />
                 </div>
                 <div>
@@ -447,12 +447,12 @@ export function AdminProducts() {
                     type="number"
                     value={formData.originalPrice}
                     onChange={setF('originalPrice')}
-                    className="w-full border border-border bg-surface text-text rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-accent"
+                    className="w-full border border-border bg-surface text-text rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-accent min-h-[44px]"
                   />
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="block text-xs text-muted mb-1.5 font-medium">Stock *</label>
                   <input
@@ -461,7 +461,7 @@ export function AdminProducts() {
                     min="0"
                     value={formData.stock}
                     onChange={setF('stock')}
-                    className="w-full border border-border bg-surface text-text rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-accent"
+                    className="w-full border border-border bg-surface text-text rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-accent min-h-[44px]"
                   />
                 </div>
                 <div>
@@ -471,7 +471,7 @@ export function AdminProducts() {
                     type="url"
                     value={formData.thumbnail}
                     onChange={setF('thumbnail')}
-                    className="w-full border border-border bg-surface text-text rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-accent"
+                    className="w-full border border-border bg-surface text-text rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-accent min-h-[44px]"
                   />
                 </div>
               </div>

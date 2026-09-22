@@ -154,32 +154,32 @@ export function AccountPage() {
           {/* Sidebar nav */}
           <div className="lg:col-span-1">
             <ScrollReveal>
-              <nav className="bg-bg-alt border border-border rounded-2xl overflow-hidden shadow-xl">
+              <nav className="bg-bg-alt border border-border rounded-2xl overflow-x-auto no-scrollbar flex lg:flex-col shadow-xl -mx-1 px-1 lg:mx-0 lg:px-0">
                 {TABS.map(({ id, label, Icon }) => (
                   <button
                     key={id}
                     onClick={() => setActiveTab(id)}
-                    className={`w-full flex items-center gap-3 px-5 py-4 font-sans text-sm transition-all duration-200 border-b border-border last:border-0 min-h-[52px] ${
+                    className={`flex-1 lg:flex-none lg:w-full flex items-center justify-center lg:justify-start gap-2.5 sm:gap-3 px-4 py-3 sm:px-5 sm:py-4 font-sans text-xs sm:text-sm transition-all duration-200 border-b-2 lg:border-b lg:border-l-2 whitespace-nowrap min-h-[48px] sm:min-h-[52px] ${
                       activeTab === id
-                        ? 'bg-accent/15 text-accent font-semibold border-l-2 border-accent'
-                        : 'text-muted hover:bg-white/5 hover:text-ivory'
+                        ? 'bg-accent/15 text-accent font-semibold border-accent'
+                        : 'border-transparent text-muted hover:bg-white/5 hover:text-ivory lg:border-border'
                     }`}
                     aria-current={activeTab === id ? 'page' : undefined}
                   >
-                    <Icon size={16} strokeWidth={1.5} />
-                    {label}
+                    <Icon size={16} strokeWidth={1.5} className="flex-shrink-0" />
+                    <span>{label}</span>
                     <ChevronRight
                       size={14}
-                      className={`ml-auto transition-opacity ${activeTab === id ? 'opacity-80 text-accent' : 'opacity-30'}`}
+                      className={`hidden lg:block ml-auto transition-opacity ${activeTab === id ? 'opacity-80 text-accent' : 'opacity-30'}`}
                     />
                   </button>
                 ))}
                 <button
                   onClick={handleLogout}
-                  className="w-full flex items-center gap-3 px-5 py-4 font-sans text-sm text-red-400 hover:bg-red-950/25 transition-colors duration-200 min-h-[52px]"
+                  className="flex-1 lg:flex-none lg:w-full flex items-center justify-center lg:justify-start gap-2.5 sm:gap-3 px-4 py-3 sm:px-5 sm:py-4 font-sans text-xs sm:text-sm text-red-400 hover:bg-red-950/25 transition-colors duration-200 min-h-[48px] sm:min-h-[52px] whitespace-nowrap"
                 >
-                  <LogOut size={16} strokeWidth={1.5} />
-                  Sign Out
+                  <LogOut size={16} strokeWidth={1.5} className="flex-shrink-0" />
+                  <span>Sign Out</span>
                 </button>
               </nav>
             </ScrollReveal>
@@ -191,16 +191,16 @@ export function AccountPage() {
 
               {/* ── Profile Tab ── */}
               {activeTab === 'profile' && (
-                <div className="bg-bg-alt border border-border rounded-2xl p-8 shadow-xl">
-                  <div className="flex items-center justify-between mb-8">
-                    <h2 className="font-serif text-2xl font-light text-ivory">Profile Details</h2>
+                <div className="bg-bg-alt border border-border rounded-2xl p-5 sm:p-8 shadow-xl">
+                  <div className="flex items-center justify-between mb-6 sm:mb-8">
+                    <h2 className="font-serif text-xl sm:text-2xl font-light text-ivory">Profile Details</h2>
                     <button
                       onClick={() => {
                         if (editMode) handleSaveProfile();
                         else setEditMode(true);
                       }}
                       disabled={saving}
-                      className="flex items-center gap-2 px-4 py-2 font-sans text-xs font-semibold text-accent border border-border-light hover:bg-accent/15 rounded-lg transition-colors disabled:opacity-50 min-h-[40px]"
+                      className="flex items-center gap-2 px-3.5 py-1.5 sm:px-4 sm:py-2 font-sans text-xs font-semibold text-accent border border-border-light hover:bg-accent/15 rounded-lg transition-colors disabled:opacity-50 min-h-[40px]"
                     >
                       {saving
                         ? <Loader2 size={14} className="animate-spin" />
@@ -225,16 +225,16 @@ export function AccountPage() {
                     </motion.div>
                   )}
 
-                  <div className="space-y-6">
+                  <div className="space-y-5 sm:space-y-6">
                     {[
                       { label: 'Full Name', key: 'name', type: 'text', editable: true, autocomplete: 'name' },
                       { label: 'Email Address', key: 'email', type: 'email', editable: false, autocomplete: 'email' },
                       { label: 'Phone Number', key: 'phone', type: 'tel', editable: true, autocomplete: 'tel' },
                     ].map(({ label, key, type, editable, autocomplete }) => (
-                      <div key={key} className="border-b border-border pb-5 last:border-0">
+                      <div key={key} className="border-b border-border pb-4 sm:pb-5 last:border-0">
                         <label
                           htmlFor={`profile-${key}`}
-                          className="block font-sans text-xs font-semibold text-muted uppercase tracking-wider mb-2"
+                          className="block font-sans text-xs font-semibold text-muted uppercase tracking-wider mb-1.5 sm:mb-2"
                         >
                           {label}
                         </label>
@@ -245,11 +245,11 @@ export function AccountPage() {
                             value={profileForm[key]}
                             onChange={(e) => setProfileForm({ ...profileForm, [key]: e.target.value })}
                             autoComplete={autocomplete}
-                            className="w-full px-4 py-3 bg-bg border border-border rounded-lg text-ivory text-sm focus:border-accent focus:ring-1 focus:ring-accent/30 outline-none transition-all placeholder:text-muted/50"
+                            className="w-full px-4 py-2.5 sm:py-3 bg-bg border border-border rounded-lg text-ivory text-sm focus:border-accent focus:ring-1 focus:ring-accent/30 outline-none transition-all placeholder:text-muted/50 min-h-[44px]"
                             placeholder={`Enter your ${label.toLowerCase()}`}
                           />
                         ) : (
-                          <p className="font-sans text-base text-ivory">
+                          <p className="font-sans text-sm sm:text-base text-ivory">
                             {profileForm[key] || <span className="text-muted italic text-sm">Not added yet</span>}
                             {key === 'email' && editMode && (
                               <span className="ml-2 text-xs text-muted">(email cannot be changed)</span>
@@ -275,25 +275,25 @@ export function AccountPage() {
               {activeTab === 'orders' && (
                 <div>
                   <div className="flex items-center justify-between mb-6">
-                    <h2 className="font-serif text-2xl font-light text-ivory">My Orders</h2>
+                    <h2 className="font-serif text-xl sm:text-2xl font-light text-ivory">My Orders</h2>
                     <span className="font-sans text-xs font-semibold text-accent bg-accent/15 border border-accent/30 px-3 py-1 rounded-full uppercase tracking-wider">
                       {ordersLoading ? 'Loading…' : `${orders.length} orders`}
                     </span>
                   </div>
 
                   {ordersLoading ? (
-                    <div className="bg-bg-alt border border-border rounded-2xl p-14 text-center shadow-xl">
+                    <div className="bg-bg-alt border border-border rounded-2xl p-10 sm:p-14 text-center shadow-xl">
                       <Loader2 size={28} className="mx-auto text-accent animate-spin mb-3" />
                       <p className="font-sans text-sm text-muted">Fetching your orders…</p>
                     </div>
                   ) : ordersError ? (
-                    <div className="bg-bg-alt border border-red-500/30 rounded-2xl p-10 text-center shadow-xl">
+                    <div className="bg-bg-alt border border-red-500/30 rounded-2xl p-8 sm:p-10 text-center shadow-xl">
                       <AlertCircle size={30} strokeWidth={1.5} className="mx-auto text-red-400 mb-3" />
                       <p className="font-sans text-sm text-red-300 mb-4">{ordersError}</p>
                       <button onClick={fetchOrders} className="btn-primary">Try Again</button>
                     </div>
                   ) : orders.length === 0 ? (
-                    <div className="bg-bg-alt border border-border rounded-2xl p-14 text-center shadow-xl">
+                    <div className="bg-bg-alt border border-border rounded-2xl p-10 sm:p-14 text-center shadow-xl">
                       <Package size={36} strokeWidth={1} className="mx-auto text-accent/50 mb-4" />
                       <h3 className="font-serif text-xl font-light text-ivory mb-2">No orders yet</h3>
                       <p className="font-sans text-sm text-muted mb-6 font-light">Your order history will appear here once you place your first order.</p>
@@ -306,7 +306,7 @@ export function AccountPage() {
                           key={order._id}
                           initial={{ opacity: 0, y: 10 }}
                           animate={{ opacity: 1, y: 0 }}
-                          className="bg-bg-alt border border-border rounded-2xl p-6 hover:border-accent/40 transition-colors shadow-lg"
+                          className="bg-bg-alt border border-border rounded-2xl p-4 sm:p-6 hover:border-accent/40 transition-colors shadow-lg"
                         >
                           <div className="flex items-start justify-between mb-4">
                             <div>
@@ -315,12 +315,12 @@ export function AccountPage() {
                                 {order.createdAt ? dateFmt.format(new Date(order.createdAt)) : ''}
                               </p>
                             </div>
-                            <span className={`text-[10px] font-sans font-semibold px-3 py-1 uppercase tracking-wider rounded ${STATUS_STYLES[order.status] || STATUS_STYLES.PENDING}`}>
+                            <span className={`text-[10px] font-sans font-semibold px-2.5 py-1 uppercase tracking-wider rounded ${STATUS_STYLES[order.status] || STATUS_STYLES.PENDING}`}>
                               {order.status}
                             </span>
                           </div>
 
-                          <div className="border-t border-border pt-4 flex items-center justify-between gap-4">
+                          <div className="border-t border-border pt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
                             <div className="min-w-0">
                               {(order.items || []).map((item, i) => (
                                 <p key={i} className="font-sans text-sm text-ivory truncate">
@@ -328,8 +328,8 @@ export function AccountPage() {
                                 </p>
                               ))}
                             </div>
-                            <div className="text-right flex-shrink-0">
-                              <p className="font-serif text-lg text-accent">
+                            <div className="text-left sm:text-right flex-shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-border">
+                              <p className="font-serif text-base sm:text-lg text-accent">
                                 {formatPrice(order.billing?.total ?? 0)}
                               </p>
                               <p className="font-sans text-xs text-muted">
@@ -365,7 +365,7 @@ export function AccountPage() {
               {activeTab === 'wishlist' && (
                 <div>
                   <div className="flex items-center justify-between mb-6">
-                    <h2 className="font-serif text-2xl font-light text-ivory">Saved Items</h2>
+                    <h2 className="font-serif text-xl sm:text-2xl font-light text-ivory">Saved Items</h2>
                     {wishlist.length > 0 && (
                       <span className="font-sans text-xs font-semibold text-accent bg-accent/15 border border-accent/30 px-3 py-1 rounded-full uppercase tracking-wider">
                         {wishlist.length} items
@@ -374,14 +374,14 @@ export function AccountPage() {
                   </div>
 
                   {wishlist.length === 0 ? (
-                    <div className="bg-bg-alt border border-border rounded-2xl p-14 text-center shadow-xl">
+                    <div className="bg-bg-alt border border-border rounded-2xl p-10 sm:p-14 text-center shadow-xl">
                       <Heart size={36} strokeWidth={1} className="mx-auto text-accent/50 mb-4" />
                       <h3 className="font-serif text-xl font-light text-ivory mb-2">No saved items</h3>
                       <p className="font-sans text-sm text-muted mb-6 font-light">Heart any product to save it here for later.</p>
                       <Link to="/shop" className="btn-primary">Explore Collection</Link>
                     </div>
                   ) : (
-                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                    <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
                       {wishlist.map((product) => (
                         <div key={product.id} className="bg-bg-alt border border-border rounded-xl overflow-hidden group shadow-md hover:border-accent/40 transition-colors">
                           <Link to={`/products/${product.slug}`} className="block aspect-[4/5] overflow-hidden bg-bg">
@@ -393,7 +393,7 @@ export function AccountPage() {
                               decoding="async"
                             />
                           </Link>
-                          <div className="p-4">
+                          <div className="p-3.5 sm:p-4">
                             <p className="font-serif text-sm font-light text-ivory mb-1 leading-snug truncate">{product.name}</p>
                             <p className="font-sans text-sm font-semibold text-accent mb-3">{formatPrice(product.price)}</p>
                             <div className="flex gap-2">
@@ -422,9 +422,9 @@ export function AccountPage() {
 
               {/* ── Address Tab ── */}
               {activeTab === 'address' && (
-                <div className="bg-bg-alt border border-border rounded-2xl p-8 shadow-xl">
-                  <h2 className="font-serif text-2xl font-light text-ivory mb-8">Saved Addresses</h2>
-                  <div className="border-2 border-dashed border-border rounded-xl p-10 text-center bg-bg">
+                <div className="bg-bg-alt border border-border rounded-2xl p-5 sm:p-8 shadow-xl">
+                  <h2 className="font-serif text-xl sm:text-2xl font-light text-ivory mb-6 sm:mb-8">Saved Addresses</h2>
+                  <div className="border-2 border-dashed border-border rounded-xl p-6 sm:p-10 text-center bg-bg">
                     <MapPin size={32} strokeWidth={1} className="mx-auto text-accent mb-4" />
                     <p className="font-sans text-sm text-ivory mb-2 font-medium">No saved addresses yet</p>
                     <p className="font-sans text-xs text-muted leading-relaxed font-light">

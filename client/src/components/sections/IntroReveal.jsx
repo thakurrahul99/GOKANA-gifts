@@ -61,9 +61,9 @@ export function IntroReveal({ onComplete }) {
             </motion.p>
 
             {/* GŌKANA wordmark */}
-            <div className="overflow-hidden">
+            <div className="overflow-hidden px-4">
               <motion.h1
-                className="font-serif text-[clamp(4rem,12vw,9rem)] font-light tracking-[0.25em] uppercase text-white leading-none"
+                className="font-serif text-[clamp(2.4rem,10vw,9rem)] font-light tracking-[0.16em] xs:tracking-[0.2em] sm:tracking-[0.25em] uppercase text-white leading-none"
                 initial={{ y: '110%' }}
                 animate={phase !== 'in' ? { y: '0%' } : {}}
                 transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}

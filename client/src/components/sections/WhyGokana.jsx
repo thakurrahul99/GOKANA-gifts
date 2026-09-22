@@ -47,7 +47,7 @@ export function WhyGokana() {
           </AnimatedHeading>
           <ScrollReveal delay={0.25}>
             {/* Journey Flow Indicator */}
-            <div className="inline-flex flex-wrap items-center justify-center gap-2 md:gap-3 py-2 px-5 rounded-full bg-surface-alt border border-border text-accent font-sans text-xs font-semibold tracking-[0.18em] uppercase">
+            <div className="inline-flex flex-wrap items-center justify-center gap-1.5 xs:gap-2 md:gap-3 py-2 px-3 xs:px-5 rounded-full bg-surface-alt border border-border text-accent font-sans text-[10px] xs:text-xs font-semibold tracking-[0.12em] xs:tracking-[0.18em] uppercase max-w-full">
               <span>Choose</span>
               <span className="text-ivory/30">→</span>
               <span>Personalise</span>
@@ -61,7 +61,7 @@ export function WhyGokana() {
 
         {/* 4 Steps Journey Grid */}
         <StaggerReveal
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+          className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6"
           stagger={0.08}
           delay={0.2}
         >
@@ -69,7 +69,7 @@ export function WhyGokana() {
             <motion.div
               key={step}
               variants={staggerItem}
-              className="card-premium group relative flex flex-col justify-between p-6 md:p-7 bg-surface border border-border hover:border-border transition-all duration-300"
+              className="card-premium group relative flex flex-col justify-between p-5 sm:p-6 md:p-7 bg-surface border border-border hover:border-border transition-all duration-300"
             >
               <div>
                 {/* Step Marker & Icon */}

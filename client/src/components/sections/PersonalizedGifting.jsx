@@ -33,30 +33,30 @@ export function PersonalizedGifting() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Left — Visually Rich Calligraphy Keepsake Simulation */}
           <ScrollReveal direction="scale" className="relative">
-            <div className="relative aspect-square max-w-md mx-auto bg-bg-alt rounded-[8px] p-8 md:p-12 border border-border-light shadow-[0_12px_40px_rgba(0,0,0,0.7)] flex flex-col items-center justify-center text-center">
+            <div className="relative aspect-square max-w-md mx-auto bg-bg-alt rounded-[8px] p-6 sm:p-8 md:p-12 border border-border-light shadow-[0_12px_40px_rgba(0,0,0,0.7)] flex flex-col items-center justify-center text-center">
               {/* Subtle Gold Ornamental Stamp */}
-              <div className="w-12 h-12 rounded-full border border-border bg-surface-alt flex items-center justify-center text-accent mb-6">
-                <Sparkles size={20} className="text-accent" />
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-border bg-surface-alt flex items-center justify-center text-accent mb-4 sm:mb-6">
+                <Sparkles size={18} className="text-accent" />
               </div>
 
               {/* Sample Calligraphy Letter */}
               <p className="font-sans text-[10px] font-semibold uppercase tracking-[0.24em] text-accent mb-2">
                 Handwritten with Care
               </p>
-              <h4 className="font-serif text-3xl md:text-4xl font-light text-ivory mb-3 italic">
+              <h4 className="font-serif text-2xl sm:text-3xl md:text-4xl font-light text-ivory mb-2 sm:mb-3 italic">
                 Dearest Deepti,
               </h4>
-              <p className="font-serif text-base md:text-lg text-[#C7BFB5] leading-relaxed max-w-xs italic mb-6 font-light">
+              <p className="font-serif text-sm sm:text-base md:text-lg text-[#C7BFB5] leading-relaxed max-w-xs italic mb-4 sm:mb-6 font-light">
                 "May this milestone bring you quiet joy, unforgettable celebrations, and dreams realized."
               </p>
 
-              <div className="pt-4 border-t border-border w-full flex items-center justify-between text-xs text-muted font-sans">
-                <span className="font-medium tracking-wider">Wax Sealed • 300 GSM</span>
-                <span className="font-semibold text-accent uppercase tracking-wider">Complimentary</span>
+              <div className="pt-3 sm:pt-4 border-t border-border w-full flex items-center justify-between text-xs text-muted font-sans">
+                <span className="font-medium tracking-wider text-[11px] sm:text-xs">Wax Sealed • 300 GSM</span>
+                <span className="font-semibold text-accent uppercase tracking-wider text-[11px] sm:text-xs">Complimentary</span>
               </div>
 
               {/* Floating Tag */}
-              <div className="absolute -top-3 -right-3 bg-surface-alt border border-border text-accent px-4 py-1.5 rounded-full text-[11px] font-semibold tracking-[0.14em] uppercase shadow-lg flex items-center gap-1.5">
+              <div className="absolute top-2 right-2 sm:-top-3 sm:-right-3 bg-surface-alt border border-border text-accent px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-[10px] sm:text-[11px] font-semibold tracking-[0.14em] uppercase shadow-lg flex items-center gap-1.5">
                 <Sparkles size={12} className="text-accent" />
                 100% Personalised
               </div>
@@ -95,7 +95,7 @@ export function PersonalizedGifting() {
             </StaggerReveal>
 
             <ScrollReveal delay={0.4}>
-              <Link to="/shop?personalised=true" className="btn-primary inline-flex items-center gap-2">
+              <Link to="/shop?personalised=true" className="btn-primary inline-flex items-center justify-center w-full sm:w-auto gap-2">
                 PERSONALISE A GIFT →
               </Link>
             </ScrollReveal>

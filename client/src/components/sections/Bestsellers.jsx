@@ -118,7 +118,7 @@ export function Bestsellers() {
           onMouseUp={handleMouseUpOrLeave}
           onMouseLeave={handleMouseUpOrLeave}
           onClickCapture={handleClickCapture}
-          className={`flex gap-6 overflow-x-auto no-scrollbar pb-6 -mx-5 px-5 sm:-mx-8 sm:px-8 select-none ${
+          className={`flex gap-4 sm:gap-6 overflow-x-auto no-scrollbar pb-6 -mx-4 px-4 sm:-mx-6 sm:px-6 md:-mx-8 md:px-8 select-none ${
             isDragging ? 'cursor-grabbing' : 'cursor-grab'
           }`}
           style={{
@@ -130,7 +130,7 @@ export function Bestsellers() {
           {carouselItems.map((product, i) => (
             <div
               key={`${product.id}-${i}`}
-              className={`flex-none w-[280px] sm:w-[320px] ${isDragging ? 'pointer-events-none' : ''}`}
+              className={`flex-none w-[240px] xs:w-[270px] sm:w-[320px] ${isDragging ? 'pointer-events-none' : ''}`}
               style={{ scrollSnapAlign: 'start' }}
             >
               <ProductCard product={product} index={i} />

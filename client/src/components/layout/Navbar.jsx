@@ -133,18 +133,18 @@ export function Navbar({ onSearchOpen }) {
           {/* Logo & Tagline */}
           <Link
             to="/"
-            className="flex flex-col group py-1 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent rounded-sm"
+            className="flex flex-col group py-1 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent rounded-sm flex-shrink-0"
             aria-label="GŌKANA Home — Gifts Curated With Love"
           >
             <span
               className={clsx(
-                "font-serif text-[1.65rem] md:text-[1.95rem] font-light tracking-[0.14em] uppercase leading-none transition-colors duration-200 group-hover:text-accent",
+                "font-serif text-[1.35rem] xs:text-[1.5rem] sm:text-[1.65rem] md:text-[1.95rem] font-light tracking-[0.12em] xs:tracking-[0.14em] uppercase leading-none transition-colors duration-200 group-hover:text-accent",
                 logoColor,
               )}
             >
               GŌKANA
             </span>
-            <span className="font-sans text-[8px] md:text-[9px] tracking-[0.28em] uppercase text-accent font-medium mt-1 opacity-90 group-hover:opacity-100 transition-opacity">
+            <span className="font-sans text-[7.5px] xs:text-[8px] md:text-[9px] tracking-[0.22em] xs:tracking-[0.28em] uppercase text-accent font-medium mt-1 opacity-90 group-hover:opacity-100 transition-opacity">
               Gifts • Curated • With Love
             </span>
           </Link>
@@ -190,13 +190,13 @@ export function Navbar({ onSearchOpen }) {
           </nav>
 
           {/* Right Action Icons: Search, Account, Wishlist, Shopping Bag */}
-          <div className="flex items-center gap-1 sm:gap-1.5">
+          <div className="flex items-center gap-0.5 xs:gap-1 sm:gap-1.5 flex-shrink-0">
             {/* 1. Search Icon */}
             <button
               onClick={onSearchOpen}
               aria-label="Open search dialog"
               className={clsx(
-                "min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent hover:bg-white/5 hover:!text-accent",
+                "w-10 h-10 xs:min-w-[44px] xs:min-h-[44px] flex items-center justify-center rounded-full transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent hover:bg-white/5 hover:!text-accent",
                 textColor,
               )}
             >
@@ -208,7 +208,7 @@ export function Navbar({ onSearchOpen }) {
               to={user ? "/account" : "/login"}
               aria-label={user ? "My Account" : "Sign in to account"}
               className={clsx(
-                "min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent hover:bg-white/5 hover:!text-accent",
+                "w-10 h-10 xs:min-w-[44px] xs:min-h-[44px] flex items-center justify-center rounded-full transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent hover:bg-white/5 hover:!text-accent",
                 textColor,
               )}
             >
@@ -220,13 +220,13 @@ export function Navbar({ onSearchOpen }) {
               to="/wishlist"
               aria-label={`Wishlist, ${wishCount} items`}
               className={clsx(
-                "relative min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent hover:bg-white/5 hover:!text-accent",
+                "relative w-10 h-10 xs:min-w-[44px] xs:min-h-[44px] flex items-center justify-center rounded-full transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent hover:bg-white/5 hover:!text-accent",
                 textColor,
               )}
             >
               <Heart size={18} strokeWidth={1.8} />
               {wishCount > 0 && (
-                <span className="absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-accent text-bg text-[9px] font-bold font-sans flex items-center justify-center">
+                <span className="absolute top-1 right-1 xs:top-1.5 xs:right-1.5 w-4 h-4 rounded-full bg-accent text-bg text-[9px] font-bold font-sans flex items-center justify-center">
                   {wishCount > 9 ? "9+" : wishCount}
                 </span>
               )}
@@ -237,7 +237,7 @@ export function Navbar({ onSearchOpen }) {
               onClick={openCart}
               aria-label={`Open shopping cart, ${cartCount} items`}
               className={clsx(
-                "relative min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent hover:bg-white/5 hover:!text-accent",
+                "relative w-10 h-10 xs:min-w-[44px] xs:min-h-[44px] flex items-center justify-center rounded-full transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent hover:bg-white/5 hover:!text-accent",
                 textColor,
               )}
             >
@@ -247,7 +247,7 @@ export function Navbar({ onSearchOpen }) {
                   key={cartCount}
                   initial={{ scale: 0.6 }}
                   animate={{ scale: 1 }}
-                  className="absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-accent text-bg text-[9px] font-bold font-sans flex items-center justify-center shadow-xs"
+                  className="absolute top-1 right-1 xs:top-1.5 xs:right-1.5 w-4 h-4 rounded-full bg-accent text-bg text-[9px] font-bold font-sans flex items-center justify-center shadow-xs"
                 >
                   {cartCount > 9 ? "9+" : cartCount}
                 </motion.span>
@@ -257,14 +257,14 @@ export function Navbar({ onSearchOpen }) {
             {/* Mobile Hamburger Toggle */}
             <button
               className={clsx(
-                "lg:hidden min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent hover:bg-white/5 hover:!text-accent",
+                "lg:hidden w-10 h-10 xs:min-w-[44px] xs:min-h-[44px] flex items-center justify-center rounded-full transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent hover:bg-white/5 hover:!text-accent",
                 textColor,
               )}
               onClick={() => setMobileOpen(true)}
               aria-label="Open mobile navigation menu"
               aria-expanded={mobileOpen}
             >
-              <Menu size={24} strokeWidth={1.8} />
+              <Menu size={22} strokeWidth={1.8} />
             </button>
           </div>
         </div>
@@ -286,7 +286,7 @@ export function Navbar({ onSearchOpen }) {
             {/* Slide-in panel from right */}
             <motion.div
               data-lenis-prevent
-              className="fixed top-0 right-0 bottom-0 z-50 w-full max-w-sm bg-bg flex flex-col shadow-2xl border-l border-border"
+              className="fixed top-0 right-0 bottom-0 z-50 w-[86vw] max-w-sm bg-bg flex flex-col shadow-2xl border-l border-border"
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
@@ -296,8 +296,8 @@ export function Navbar({ onSearchOpen }) {
                 ease: [0.25, 0.1, 0.25, 1],
               }}
             >
-              <div className="flex items-center justify-between px-6 py-5 border-b border-border bg-bg-alt">
-                <span className="font-serif text-2xl font-light tracking-[0.15em] uppercase text-ivory">
+              <div className="flex items-center justify-between px-5 sm:px-6 py-4 sm:py-5 border-b border-border bg-bg-alt">
+                <span className="font-serif text-xl sm:text-2xl font-light tracking-[0.15em] uppercase text-ivory">
                   GŌKANA
                 </span>
                 <button
@@ -305,17 +305,17 @@ export function Navbar({ onSearchOpen }) {
                   aria-label="Close navigation menu"
                   className="min-w-[44px] min-h-[44px] flex items-center justify-center text-muted hover:text-accent rounded-lg transition-colors"
                 >
-                  <X size={24} strokeWidth={1.8} />
+                  <X size={22} strokeWidth={1.8} />
                 </button>
               </div>
 
-              <nav className="flex-1 overflow-y-auto px-6 py-8 space-y-4 bg-bg">
+              <nav className="flex-1 overflow-y-auto px-5 sm:px-6 py-6 sm:py-8 space-y-2 sm:space-y-3 bg-bg">
                 {navLinks.map((link) => (
                   <Link
                     key={link.label}
                     to={link.href}
                     onClick={(e) => handleNavClick(link, e)}
-                    className="block py-4 px-2 font-serif text-2xl font-light text-ivory hover:text-accent transition-colors border-b border-border"
+                    className="block py-3 sm:py-4 px-2 font-serif text-xl sm:text-2xl font-light text-ivory hover:text-accent transition-colors border-b border-border/70"
                   >
                     {link.label}
                   </Link>
@@ -325,14 +325,14 @@ export function Navbar({ onSearchOpen }) {
                   <Link
                     to="/admin"
                     onClick={() => setMobileOpen(false)}
-                    className="block py-3 font-sans text-sm font-semibold tracking-wider uppercase text-accent border-b border-border"
+                    className="block py-3 px-2 font-sans text-xs sm:text-sm font-semibold tracking-wider uppercase text-accent border-b border-border/70"
                   >
                     Admin Dashboard
                   </Link>
                 )}
               </nav>
 
-              <div className="p-6 border-t border-border bg-bg-alt">
+              <div className="p-5 sm:p-6 border-t border-border bg-bg-alt pb-[max(1.5rem,env(safe-area-inset-bottom))]">
                 <div className="text-center text-xs font-medium tracking-wide text-muted">
                   Handcrafted & Delivered Across India
                 </div>

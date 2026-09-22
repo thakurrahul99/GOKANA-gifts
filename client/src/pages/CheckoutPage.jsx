@@ -248,29 +248,29 @@ export function CheckoutPage() {
     <main id="main-content" className="pt-28 min-h-screen bg-bg text-ivory pb-20">
       <div className="container-gokana max-w-5xl py-8">
         {/* Multi-Step Progress Tracker */}
-        <div className="mb-10" aria-label="Checkout Progress">
+        <div className="mb-8 sm:mb-10" aria-label="Checkout Progress">
           <div className="flex items-center justify-between max-w-2xl mx-auto">
             {STEPS.map((s, idx) => (
               <div key={s} className="flex items-center flex-1 last:flex-none">
                 <div className="flex flex-col items-center">
                   <div
-                    className={`w-9 h-9 rounded-full flex items-center justify-center font-sans text-xs font-bold transition-all ${
+                    className={`w-7 h-7 sm:w-9 sm:h-9 rounded-full flex items-center justify-center font-sans text-[11px] sm:text-xs font-bold transition-all ${
                       idx < step
                         ? 'bg-accent text-bg'
                         : idx === step
-                        ? 'bg-accent text-bg ring-4 ring-accent/30'
+                        ? 'bg-accent text-bg ring-2 sm:ring-4 ring-accent/30'
                         : 'bg-surface-alt border border-border text-muted'
                     }`}
                   >
-                    {idx < step ? <Check size={16} /> : idx + 1}
+                    {idx < step ? <Check size={14} /> : idx + 1}
                   </div>
-                  <span className={`font-sans text-[11px] font-semibold mt-2 hidden sm:block ${idx <= step ? 'text-ivory' : 'text-muted'}`}>
+                  <span className={`font-sans text-[10px] sm:text-[11px] font-semibold mt-1.5 sm:mt-2 hidden sm:block ${idx <= step ? 'text-ivory' : 'text-muted'}`}>
                     {s}
                   </span>
                 </div>
                 {idx < STEPS.length - 1 && (
                   <div
-                    className={`flex-1 h-0.5 mx-2 transition-all ${
+                    className={`flex-1 h-0.5 mx-1 sm:mx-2 transition-all ${
                       idx < step ? 'bg-accent' : 'bg-accent/20'
                     }`}
                   />
@@ -307,14 +307,14 @@ export function CheckoutPage() {
           </div>
         ) : (
           /* Two-Column Checkout Layout: Form (Left) + Order Summary (Right) */
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
             {/* Form Steps (7 cols) */}
             <div className="lg:col-span-7">
-              <div className="bg-bg-alt border border-border rounded-2xl shadow-xl p-6 md:p-8">
+              <div className="bg-bg-alt border border-border rounded-2xl shadow-xl p-4 sm:p-6 md:p-8">
                 {/* Step 0: Contact Info */}
                 {step === 0 && (
                   <div>
-                    <h2 className="heading-md text-ivory mb-6">Contact Information</h2>
+                    <h2 className="heading-md text-ivory mb-5 sm:mb-6">Contact Information</h2>
                     <div className="space-y-4">
                       <div className="form-group">
                         <label htmlFor="checkout-name" className="form-label text-accent text-xs uppercase tracking-wider">Full Name</label>
@@ -326,7 +326,7 @@ export function CheckoutPage() {
                           placeholder="e.g. Deepti Agarwal"
                           value={formData.name}
                           onChange={(e) => setField('name', e.target.value)}
-                          className={`w-full bg-bg border rounded-lg px-4 py-3 text-ivory placeholder:text-muted/60 focus:border-accent focus:outline-none transition-colors ${errors.name ? 'border-red-500/50' : 'border-border'}`}
+                          className={`w-full bg-bg border rounded-lg px-4 py-3 text-ivory placeholder:text-muted/60 focus:border-accent focus:outline-none transition-colors min-h-[44px] ${errors.name ? 'border-red-500/50' : 'border-border'}`}
                           aria-invalid={errors.name ? 'true' : 'false'}
                         />
                         {errors.name && <span className="text-xs text-red-400 mt-1 block" role="alert">{errors.name}</span>}
@@ -342,7 +342,7 @@ export function CheckoutPage() {
                           placeholder="deepti@example.com"
                           value={formData.email}
                           onChange={(e) => setField('email', e.target.value)}
-                          className={`w-full bg-bg border rounded-lg px-4 py-3 text-ivory placeholder:text-muted/60 focus:border-accent focus:outline-none transition-colors ${errors.email ? 'border-red-500/50' : 'border-border'}`}
+                          className={`w-full bg-bg border rounded-lg px-4 py-3 text-ivory placeholder:text-muted/60 focus:border-accent focus:outline-none transition-colors min-h-[44px] ${errors.email ? 'border-red-500/50' : 'border-border'}`}
                           aria-invalid={errors.email ? 'true' : 'false'}
                         />
                         {errors.email && <span className="text-xs text-red-400 mt-1 block" role="alert">{errors.email}</span>}
@@ -358,7 +358,7 @@ export function CheckoutPage() {
                           placeholder="9876543210"
                           value={formData.phone}
                           onChange={(e) => setField('phone', e.target.value)}
-                          className={`w-full bg-bg border rounded-lg px-4 py-3 text-ivory placeholder:text-muted/60 focus:border-accent focus:outline-none transition-colors ${errors.phone ? 'border-red-500/50' : 'border-border'}`}
+                          className={`w-full bg-bg border rounded-lg px-4 py-3 text-ivory placeholder:text-muted/60 focus:border-accent focus:outline-none transition-colors min-h-[44px] ${errors.phone ? 'border-red-500/50' : 'border-border'}`}
                           aria-invalid={errors.phone ? 'true' : 'false'}
                         />
                         {errors.phone && <span className="text-xs text-red-400 mt-1 block" role="alert">{errors.phone}</span>}
@@ -370,7 +370,7 @@ export function CheckoutPage() {
                 {/* Step 1: Delivery Address */}
                 {step === 1 && (
                   <div>
-                    <h2 className="heading-md text-ivory mb-6">Delivery Address</h2>
+                    <h2 className="heading-md text-ivory mb-5 sm:mb-6">Delivery Address</h2>
                     <div className="space-y-4">
                       <div className="form-group">
                         <label htmlFor="checkout-address" className="form-label text-accent text-xs uppercase tracking-wider">Street Address & Landmark</label>
@@ -382,12 +382,12 @@ export function CheckoutPage() {
                           placeholder="Flat 402, Lotus Enclave, 14th Main"
                           value={formData.address}
                           onChange={(e) => setField('address', e.target.value)}
-                          className={`w-full bg-bg border rounded-lg px-4 py-3 text-ivory placeholder:text-muted/60 focus:border-accent focus:outline-none transition-colors ${errors.address ? 'border-red-500/50' : 'border-border'}`}
+                          className={`w-full bg-bg border rounded-lg px-4 py-3 text-ivory placeholder:text-muted/60 focus:border-accent focus:outline-none transition-colors min-h-[44px] ${errors.address ? 'border-red-500/50' : 'border-border'}`}
                         />
                         {errors.address && <span className="text-xs text-red-400 mt-1 block" role="alert">{errors.address}</span>}
                       </div>
 
-                      <div className="grid grid-cols-2 gap-4">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                         <div className="form-group">
                           <label htmlFor="checkout-city" className="form-label text-accent text-xs uppercase tracking-wider">City</label>
                           <input
@@ -398,7 +398,7 @@ export function CheckoutPage() {
                             placeholder="Mumbai"
                             value={formData.city}
                             onChange={(e) => setField('city', e.target.value)}
-                            className={`w-full bg-bg border rounded-lg px-4 py-3 text-ivory placeholder:text-muted/60 focus:border-accent focus:outline-none transition-colors ${errors.city ? 'border-red-500/50' : 'border-border'}`}
+                            className={`w-full bg-bg border rounded-lg px-4 py-3 text-ivory placeholder:text-muted/60 focus:border-accent focus:outline-none transition-colors min-h-[44px] ${errors.city ? 'border-red-500/50' : 'border-border'}`}
                           />
                           {errors.city && <span className="text-xs text-red-400 mt-1 block" role="alert">{errors.city}</span>}
                         </div>
@@ -412,7 +412,7 @@ export function CheckoutPage() {
                             placeholder="400001"
                             value={formData.pincode}
                             onChange={(e) => setField('pincode', e.target.value)}
-                            className={`w-full bg-bg border rounded-lg px-4 py-3 text-ivory placeholder:text-muted/60 focus:border-accent focus:outline-none transition-colors ${errors.pincode ? 'border-red-500/50' : 'border-border'}`}
+                            className={`w-full bg-bg border rounded-lg px-4 py-3 text-ivory placeholder:text-muted/60 focus:border-accent focus:outline-none transition-colors min-h-[44px] ${errors.pincode ? 'border-red-500/50' : 'border-border'}`}
                           />
                           {errors.pincode && <span className="text-xs text-red-400 mt-1 block" role="alert">{errors.pincode}</span>}
                         </div>
@@ -428,7 +428,7 @@ export function CheckoutPage() {
                           placeholder="Maharashtra"
                           value={formData.state}
                           onChange={(e) => setField('state', e.target.value)}
-                          className={`w-full bg-bg border rounded-lg px-4 py-3 text-ivory placeholder:text-muted/60 focus:border-accent focus:outline-none transition-colors ${errors.state ? 'border-red-500/50' : 'border-border'}`}
+                          className={`w-full bg-bg border rounded-lg px-4 py-3 text-ivory placeholder:text-muted/60 focus:border-accent focus:outline-none transition-colors min-h-[44px] ${errors.state ? 'border-red-500/50' : 'border-border'}`}
                         />
                         {errors.state && <span className="text-xs text-red-400 mt-1 block" role="alert">{errors.state}</span>}
                       </div>
@@ -439,7 +439,7 @@ export function CheckoutPage() {
                 {/* Step 2: Shipping Option */}
                 {step === 2 && (
                   <div>
-                    <h2 className="heading-md text-ivory mb-6">Choose Shipping Speed</h2>
+                    <h2 className="heading-md text-ivory mb-5 sm:mb-6">Choose Shipping Speed</h2>
                     <div className="space-y-3">
                       {[
                         { id: 'standard', title: 'Standard Express Shipping', time: '2–4 Business Days', cost: subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : 99 },
@@ -447,7 +447,7 @@ export function CheckoutPage() {
                       ].map((opt) => (
                         <label
                           key={opt.id}
-                          className={`p-4 rounded-xl border flex items-center justify-between cursor-pointer transition-all ${
+                          className={`p-3.5 sm:p-4 rounded-xl border flex items-center justify-between cursor-pointer transition-all ${
                             formData.shippingMethod === opt.id
                               ? 'border-accent bg-accent/15 shadow-sm'
                               : 'border-border bg-bg hover:border-accent'
@@ -478,7 +478,7 @@ export function CheckoutPage() {
                 {/* Step 3: Payment Method */}
                 {step === 3 && (
                   <div>
-                    <h2 className="heading-md text-ivory mb-6">Payment Method</h2>
+                    <h2 className="heading-md text-ivory mb-5 sm:mb-6">Payment Method</h2>
                     <div className="space-y-3">
                       {[
                         { id: 'upi', label: 'Instant UPI (Google Pay, PhonePe, Paytm)', desc: 'Fastest & zero transaction fees' },
@@ -488,7 +488,7 @@ export function CheckoutPage() {
                       ].map((m) => (
                         <label
                           key={m.id}
-                          className={`p-4 rounded-xl border flex items-start gap-3 cursor-pointer transition-all ${
+                          className={`p-3.5 sm:p-4 rounded-xl border flex items-start gap-3 cursor-pointer transition-all ${
                             formData.paymentMethod === m.id
                               ? 'border-accent bg-accent/15 shadow-sm'
                               : 'border-border bg-bg hover:border-accent'
@@ -523,11 +523,11 @@ export function CheckoutPage() {
                 )}
 
                 {/* Navigation Buttons */}
-                <div className="flex items-center justify-between pt-6 mt-8 border-t border-border">
+                <div className="flex flex-col-reverse sm:flex-row items-center justify-between gap-3 pt-6 mt-6 sm:mt-8 border-t border-border">
                   {step > 0 ? (
                     <button
                       onClick={handleBack}
-                      className="btn-secondary py-2.5 px-5 text-xs flex items-center gap-1.5"
+                      className="btn-secondary py-2.5 px-5 text-xs flex items-center justify-center w-full sm:w-auto gap-1.5 min-h-[44px]"
                     >
                       <ArrowLeft size={15} />
                       Previous Step
@@ -537,7 +537,7 @@ export function CheckoutPage() {
                   <button
                     onClick={handleNext}
                     disabled={processing}
-                    className="btn-primary py-3 px-7 text-xs flex items-center gap-2"
+                    className="btn-primary py-3 px-6 sm:px-7 text-xs flex items-center justify-center w-full sm:w-auto gap-2 min-h-[44px]"
                   >
                     {processing ? (
                       'Securing Order...'
@@ -556,7 +556,7 @@ export function CheckoutPage() {
 
             {/* Right Column: Order Summary (5 cols) */}
             <div className="lg:col-span-5">
-              <div className="bg-bg-alt border border-border rounded-2xl shadow-xl p-6 sticky top-28 space-y-4">
+              <div className="bg-bg-alt border border-border rounded-2xl shadow-xl p-4 sm:p-6 sticky top-28 space-y-4">
                 <h3 className="font-serif text-base font-light text-ivory pb-3 border-b border-border">
                   Order Summary ({items.reduce((a, i) => a + i.qty, 0)} Items)
                 </h3>

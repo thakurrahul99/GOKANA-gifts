@@ -49,21 +49,21 @@ export function AdminDashboard() {
       {error && !loading && <div className="flex items-center gap-3 bg-red-950/40 border border-red-500/30 text-red-300 px-5 py-4 text-sm"><AlertCircle size={16} /><span>Could not load stats: {error}</span></div>}
       {!loading && (
         <>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-5">
             {stats.map((s) => (
-              <div key={s.label} className="bg-bg-alt border border-border p-5 shadow-lg rounded-xl">
-                <div className="flex items-start justify-between mb-4">
-                  <div className={`p-2.5 ${s.bg} rounded-lg`}><s.icon size={18} className={s.color} /></div>
-                  {data?.stats.pendingOrders > 0 && s.label === 'Total Orders' && <span className="text-xs text-accent font-semibold bg-accent/15 border border-accent/30 px-2 py-0.5 rounded">{data.stats.pendingOrders} pending</span>}
+              <div key={s.label} className="bg-bg-alt border border-border p-4 sm:p-5 shadow-lg rounded-xl">
+                <div className="flex items-start justify-between mb-3 sm:mb-4">
+                  <div className={`p-2 sm:p-2.5 ${s.bg} rounded-lg`}><s.icon size={18} className={s.color} /></div>
+                  {data?.stats.pendingOrders > 0 && s.label === 'Total Orders' && <span className="text-[10px] sm:text-xs text-accent font-semibold bg-accent/15 border border-accent/30 px-2 py-0.5 rounded">{data.stats.pendingOrders} pending</span>}
                 </div>
-                <p className="text-2xl font-semibold text-ivory font-serif">{s.value}</p>
-                <p className="text-xs text-muted mt-1">{s.label}</p>
+                <p className="text-xl sm:text-2xl font-semibold text-ivory font-serif">{s.value}</p>
+                <p className="text-[11px] sm:text-xs text-muted mt-1">{s.label}</p>
               </div>
             ))}
           </div>
 
           <div className="bg-bg-alt border border-border rounded-xl shadow-lg overflow-hidden">
-            <div className="flex items-center justify-between px-6 py-4 border-b border-border">
+            <div className="flex items-center justify-between px-4 sm:px-6 py-3.5 sm:py-4 border-b border-border">
               <h3 className="font-serif text-base font-light text-ivory">Recent Orders</h3>
               <a href="/admin/orders" className="text-xs text-accent hover:text-accent-light font-medium">View all →</a>
             </div>

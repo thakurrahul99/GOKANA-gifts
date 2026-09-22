@@ -71,7 +71,7 @@ export function FAQ() {
                   aria-expanded={isOpen}
                   aria-controls={`faq-answer-${idx}`}
                 >
-                  <span className="font-serif text-lg md:text-xl font-light text-ivory pr-4">
+                  <span className="font-serif text-base sm:text-lg md:text-xl font-light text-ivory pr-3 sm:pr-4">
                     {item.q}
                   </span>
                   <motion.div
@@ -92,7 +92,7 @@ export function FAQ() {
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                     >
-                      <div className="px-5 pb-5 md:px-6 md:pb-6 pt-1 text-sm font-sans text-muted leading-relaxed border-t border-border">
+                      <div className="px-5 pb-5 md:px-6 md:pb-6 pt-1 text-xs sm:text-sm font-sans text-muted leading-relaxed border-t border-border">
                         {item.a}
                       </div>
                     </motion.div>
@@ -104,12 +104,12 @@ export function FAQ() {
         </div>
 
         {/* Support Help Callout */}
-        <div className="mt-12 text-center p-6 rounded-2xl bg-bg-alt border border-border flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xl">
-          <div className="text-left">
-            <h4 className="font-serif text-lg font-light text-ivory">
+        <div className="mt-12 text-center sm:text-left p-5 sm:p-6 rounded-2xl bg-bg-alt border border-border flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xl">
+          <div className="text-center sm:text-left">
+            <h4 className="font-serif text-base sm:text-lg font-light text-ivory">
               Still have questions or need a custom gift box?
             </h4>
-            <p className="font-sans text-xs text-muted">
+            <p className="font-sans text-xs text-muted mt-1">
               Our gifting specialists are active 9am to 7pm on WhatsApp to assist you.
             </p>
           </div>
@@ -117,7 +117,7 @@ export function FAQ() {
             href="https://wa.me/919999999999?text=Hi%20GŌKANA!%20I%20have%20a%20question%20about%20your%20gifts."
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-primary py-2.5 px-5 text-xs whitespace-nowrap flex items-center gap-2"
+            className="btn-primary py-3 px-5 text-xs whitespace-nowrap flex items-center justify-center w-full sm:w-auto gap-2 min-h-[44px]"
           >
             <MessageCircle size={16} />
             Chat on WhatsApp

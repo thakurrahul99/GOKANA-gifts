@@ -582,19 +582,30 @@ button:disabled, input:disabled, textarea:disabled, select:disabled {
 
 @media (max-width: 639px) {
   .container-gokana {
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
   .section-py {
-    padding-top: 3rem;
-    padding-bottom: 3rem;
+    padding-top: 2.75rem;
+    padding-bottom: 2.75rem;
+  }
+  .section-py-sm {
+    padding-top: 1.75rem;
+    padding-bottom: 1.75rem;
   }
   .hero-cta-stack > a {
     width: 100%;
   }
   .card-premium {
-    padding: 8px;
+    padding: 10px;
     border-radius: 8px;
+  }
+}
+
+@media (min-width: 375px) and (max-width: 639px) {
+  .container-gokana {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
   }
 }
 

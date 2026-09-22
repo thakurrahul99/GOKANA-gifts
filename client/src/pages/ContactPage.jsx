@@ -67,72 +67,72 @@ export function ContactPage() {
         </div>
       </section>
 
-      <div className="container-gokana py-12 sm:py-16">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
+      <div className="container-gokana py-10 sm:py-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14">
           {/* Left Column: Direct Support Touchpoints */}
-          <div className="lg:col-span-5 space-y-6">
-            <div className="bg-bg-alt border border-border rounded-2xl p-7 shadow-xl">
-              <h2 className="font-serif text-2xl font-light text-ivory mb-2">Direct Contact</h2>
-              <p className="font-sans text-xs text-muted mb-6 font-light leading-relaxed">
+          <div className="lg:col-span-5 space-y-5 sm:space-y-6">
+            <div className="bg-bg-alt border border-border rounded-2xl p-5 sm:p-7 shadow-xl">
+              <h2 className="font-serif text-xl sm:text-2xl font-light text-ivory mb-2">Direct Contact</h2>
+              <p className="font-sans text-xs text-muted mb-5 sm:mb-6 font-light leading-relaxed">
                 Connect directly with our team for quick help, recommendations, or custom gifting advice.
               </p>
 
-              <div className="space-y-5">
+              <div className="space-y-4 sm:space-y-5">
                 {/* WhatsApp */}
                 <a
                   href="https://wa.me/919999999999?text=Hi%20GŌKANA,%20I%20would%20like%20to%20inquire%20about%20curated%20gifting"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-start gap-4 p-4 rounded-xl bg-bg border border-border hover:border-accent hover:bg-surface transition-all group"
+                  className="flex items-start gap-3.5 sm:gap-4 p-3.5 sm:p-4 rounded-xl bg-bg border border-border hover:border-accent hover:bg-surface transition-all group min-h-[48px]"
                 >
-                  <div className="w-10 h-10 rounded-full bg-accent/15 border border-accent/30 flex items-center justify-center text-accent flex-shrink-0 group-hover:scale-105 transition-transform">
-                    <MessageSquare size={18} />
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-accent/15 border border-accent/30 flex items-center justify-center text-accent flex-shrink-0 group-hover:scale-105 transition-transform">
+                    <MessageSquare size={17} />
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between">
-                      <span className="font-sans text-xs uppercase tracking-wider text-muted font-medium">WhatsApp Support</span>
+                      <span className="font-sans text-[11px] sm:text-xs uppercase tracking-wider text-muted font-medium">WhatsApp Support</span>
                       <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-950/60 text-emerald-300 border border-emerald-500/30">Fast Reply</span>
                     </div>
-                    <p className="font-serif text-lg text-ivory group-hover:text-accent transition-colors mt-0.5">+91 99999 99999</p>
+                    <p className="font-serif text-base sm:text-lg text-ivory group-hover:text-accent transition-colors mt-0.5">+91 99999 99999</p>
                   </div>
                 </a>
 
                 {/* Email */}
                 <a
                   href="mailto:hello@gokana.in"
-                  className="flex items-start gap-4 p-4 rounded-xl bg-bg border border-border hover:border-accent hover:bg-surface transition-all group"
+                  className="flex items-start gap-3.5 sm:gap-4 p-3.5 sm:p-4 rounded-xl bg-bg border border-border hover:border-accent hover:bg-surface transition-all group min-h-[48px]"
                 >
-                  <div className="w-10 h-10 rounded-full bg-accent/15 border border-accent/30 flex items-center justify-center text-accent flex-shrink-0 group-hover:scale-105 transition-transform">
-                    <Mail size={18} />
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-accent/15 border border-accent/30 flex items-center justify-center text-accent flex-shrink-0 group-hover:scale-105 transition-transform">
+                    <Mail size={17} />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <span className="font-sans text-xs uppercase tracking-wider text-muted font-medium">Email Support</span>
-                    <p className="font-serif text-lg text-ivory group-hover:text-accent transition-colors mt-0.5">hello@gokana.in</p>
+                    <span className="font-sans text-[11px] sm:text-xs uppercase tracking-wider text-muted font-medium">Email Support</span>
+                    <p className="font-serif text-base sm:text-lg text-ivory group-hover:text-accent transition-colors mt-0.5">hello@gokana.in</p>
                   </div>
                 </a>
 
                 {/* Phone */}
                 <a
                   href="tel:+919999999999"
-                  className="flex items-start gap-4 p-4 rounded-xl bg-bg border border-border hover:border-accent hover:bg-surface transition-all group"
+                  className="flex items-start gap-3.5 sm:gap-4 p-3.5 sm:p-4 rounded-xl bg-bg border border-border hover:border-accent hover:bg-surface transition-all group min-h-[48px]"
                 >
-                  <div className="w-10 h-10 rounded-full bg-accent/15 border border-accent/30 flex items-center justify-center text-accent flex-shrink-0 group-hover:scale-105 transition-transform">
-                    <Phone size={18} />
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-accent/15 border border-accent/30 flex items-center justify-center text-accent flex-shrink-0 group-hover:scale-105 transition-transform">
+                    <Phone size={17} />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <span className="font-sans text-xs uppercase tracking-wider text-muted font-medium">Phone Support</span>
-                    <p className="font-serif text-lg text-ivory group-hover:text-accent transition-colors mt-0.5">+91 99999 99999</p>
+                    <span className="font-sans text-[11px] sm:text-xs uppercase tracking-wider text-muted font-medium">Phone Support</span>
+                    <p className="font-serif text-base sm:text-lg text-ivory group-hover:text-accent transition-colors mt-0.5">+91 99999 99999</p>
                   </div>
                 </a>
 
                 {/* Operating Hours */}
-                <div className="flex items-start gap-4 p-4 rounded-xl bg-bg border border-border">
-                  <div className="w-10 h-10 rounded-full bg-accent/15 border border-accent/30 flex items-center justify-center text-accent flex-shrink-0">
-                    <Clock size={18} />
+                <div className="flex items-start gap-3.5 sm:gap-4 p-3.5 sm:p-4 rounded-xl bg-bg border border-border">
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-accent/15 border border-accent/30 flex items-center justify-center text-accent flex-shrink-0">
+                    <Clock size={17} />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <span className="font-sans text-xs uppercase tracking-wider text-muted font-medium">Working Hours</span>
-                    <p className="font-serif text-base text-ivory mt-0.5">Monday – Saturday: 9:00 AM – 8:00 PM IST</p>
+                    <span className="font-sans text-[11px] sm:text-xs uppercase tracking-wider text-muted font-medium">Working Hours</span>
+                    <p className="font-serif text-sm sm:text-base text-ivory mt-0.5">Monday – Saturday: 9:00 AM – 8:00 PM IST</p>
                     <p className="text-[11px] text-muted mt-0.5">Orders placed on Sundays dispatched on Monday morning.</p>
                   </div>
                 </div>
@@ -140,16 +140,16 @@ export function ContactPage() {
             </div>
 
             {/* Corporate Highlight */}
-            <div className="bg-bg-alt border border-border rounded-2xl p-6 shadow-xl relative overflow-hidden">
-              <div className="flex items-center gap-3 mb-3">
-                <Building2 size={20} className="text-accent" />
-                <h3 className="font-serif text-lg font-light text-ivory">Corporate & Bulk Orders</h3>
+            <div className="bg-bg-alt border border-border rounded-2xl p-5 sm:p-6 shadow-xl relative overflow-hidden">
+              <div className="flex items-center gap-3 mb-2.5">
+                <Building2 size={18} className="text-accent" />
+                <h3 className="font-serif text-base sm:text-lg font-light text-ivory">Corporate & Bulk Orders</h3>
               </div>
-              <p className="font-sans text-xs text-muted leading-relaxed font-light mb-4">
+              <p className="font-sans text-xs text-muted leading-relaxed font-light mb-3.5">
                 Planning celebratory bulk orders or company client gifting? We provide custom logos, branded ribbons, and special bulk pricing.
               </p>
               <div className="flex items-center gap-2 text-xs text-accent font-medium">
-                <ShieldCheck size={16} />
+                <ShieldCheck size={15} />
                 <span>Dedicated account manager for bulk orders</span>
               </div>
             </div>
@@ -157,13 +157,13 @@ export function ContactPage() {
 
           {/* Right Column: Inquiry Form */}
           <div className="lg:col-span-7">
-            <div className="bg-bg-alt border border-border rounded-2xl p-8 sm:p-10 shadow-2xl">
-              <div className="mb-8">
+            <div className="bg-bg-alt border border-border rounded-2xl p-5 sm:p-8 md:p-10 shadow-2xl">
+              <div className="mb-6 sm:mb-8">
                 <span className="inline-block text-xs font-semibold tracking-[0.18em] text-accent uppercase mb-2">
                   ✦ GET IN TOUCH
                 </span>
-                <h2 className="font-serif text-3xl font-light text-ivory mb-2">Send Us a Message</h2>
-                <p className="font-sans text-sm text-muted font-light">
+                <h2 className="font-serif text-2xl sm:text-3xl font-light text-ivory mb-2">Send Us a Message</h2>
+                <p className="font-sans text-xs sm:text-sm text-muted font-light">
                   Fill out the details below and our team will get back to you within 4 business hours.
                 </p>
               </div>

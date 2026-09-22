@@ -19,7 +19,7 @@ export function FAB() {
     <AnimatePresence>
       {visible && (
         <motion.div
-          className="fixed bottom-6 right-5 z-40 md:hidden"
+          className="fixed bottom-[calc(1.25rem+env(safe-area-inset-bottom))] right-4 z-40 md:hidden"
           initial={{ opacity: 0, scale: 0.8, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.8, y: 20 }}
@@ -27,15 +27,10 @@ export function FAB() {
         >
           <Link
             to="/gift-finder"
-            className="flex items-center gap-2.5 py-3.5 pl-4 pr-5 rounded-full shadow-gold focus-visible:outline-none focus-visible:ring-2 font-sans text-sm font-semibold"
-            style={{
-              background: 'var(--accent)',
-              color: 'var(--text)',
-              '--tw-ring-color': 'var(--primary)',
-            }}
+            className="flex items-center gap-2 py-3 pl-3.5 pr-4.5 rounded-full shadow-[0_6px_20px_rgba(197,160,89,0.35)] focus-visible:outline-none focus-visible:ring-2 font-sans text-xs font-semibold uppercase tracking-wider text-bg bg-accent hover:bg-accent-light transition-all"
             aria-label="Open Gift Finder"
           >
-            <Gift size={18} strokeWidth={1.5} />
+            <Gift size={16} strokeWidth={1.8} className="text-bg" />
             Gift Finder
           </Link>
         </motion.div>

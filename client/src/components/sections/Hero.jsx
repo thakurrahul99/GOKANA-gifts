@@ -57,23 +57,23 @@ export function Hero() {
             <div className="w-full max-w-[650px] text-left flex flex-col items-start">
               {/* Trust Badge */}
               <motion.div
-                className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-primary-2/85 backdrop-blur-md border border-border-light shadow-[0_4px_20px_rgba(0,0,0,0.5)] text-ivory text-xs font-sans mb-6"
+                className="inline-flex items-center gap-2 sm:gap-3 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full bg-primary-2/85 backdrop-blur-md border border-border-light shadow-[0_4px_20px_rgba(0,0,0,0.5)] text-ivory text-[11px] sm:text-xs font-sans mb-5 sm:mb-6"
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                <div className="flex items-center gap-1.5 text-accent">
-                  <Star size={13} className="fill-accent text-accent" />
+                <div className="flex items-center gap-1 text-accent flex-shrink-0">
+                  <Star size={12} className="fill-accent text-accent" />
                   <span className="font-semibold text-ivory">★ 4.9/5 Rating</span>
                 </div>
                 <span className="text-accent/40">•</span>
-                <span className="text-ivory/90 tracking-wide">50,000+ Gifts Delivered with Love</span>
+                <span className="text-ivory/90 tracking-wide truncate">50,000+ Gifts Delivered with Love</span>
               </motion.div>
 
               {/* Main Headline */}
-              <div className="overflow-hidden mb-4 w-full">
+              <div className="overflow-hidden mb-3.5 sm:mb-4 w-full">
                 <motion.h1
-                  className="font-serif text-[clamp(2.6rem,5.4vw,5.6rem)] font-light text-ivory leading-[1.03] tracking-[-0.015em] drop-shadow-[0_8px_24px_rgba(0,0,0,0.6)] text-left"
+                  className="font-serif text-[clamp(2.1rem,6.2vw,5.6rem)] font-light text-ivory leading-[1.05] sm:leading-[1.03] tracking-[-0.015em] drop-shadow-[0_8px_24px_rgba(0,0,0,0.6)] text-left"
                   initial={{ y: '100%' }}
                   animate={{ y: '0%' }}
                   transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
@@ -85,7 +85,7 @@ export function Hero() {
 
               {/* Eyebrow */}
               <motion.p
-                className="font-sans text-[11px] md:text-xs font-semibold tracking-[0.24em] uppercase text-accent mb-3.5 text-left"
+                className="font-sans text-[10px] sm:text-[11px] md:text-xs font-semibold tracking-[0.2em] sm:tracking-[0.24em] uppercase text-accent mb-3 sm:mb-3.5 text-left"
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.45 }}
@@ -95,7 +95,7 @@ export function Hero() {
 
               {/* Description */}
               <motion.p
-                className="font-sans text-[14px] md:text-[16px] text-[#D8D0C5] leading-[1.8] max-w-[580px] mb-8 font-light text-left"
+                className="font-sans text-[13.5px] sm:text-[14px] md:text-[16px] text-[#D8D0C5] leading-[1.7] sm:leading-[1.8] max-w-[580px] mb-7 sm:mb-8 font-light text-left"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.55 }}
@@ -105,7 +105,7 @@ export function Hero() {
 
               {/* CTA Buttons */}
               <motion.div
-                className="hero-cta-stack flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-3.5 w-full sm:w-auto"
+                className="hero-cta-stack flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-3 sm:gap-3.5 w-full sm:w-auto"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.65 }}
@@ -148,66 +148,66 @@ export function Hero() {
 
       {/* ── TRUST / VALUE BAR (4 Pillars directly anchored below Hero) ── */}
       <aside
-        className="bg-bg-alt border-y border-border py-6 relative z-10 -mt-px shadow-lg"
+        className="bg-bg-alt border-y border-border py-5 sm:py-6 relative z-10 -mt-px shadow-lg"
         aria-label="Trust and Guarantees"
       >
         <div className="container-gokana">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-0 divide-y lg:divide-y-0 lg:divide-x divide-border/50">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-0 lg:divide-x divide-border/50">
             {/* 1. PREMIUM QUALITY */}
-            <div className="flex items-center gap-3.5 lg:px-6 first:lg:pl-0">
-              <div className="w-10 h-10 rounded-full border border-border-light bg-surface-alt flex items-center justify-center text-accent flex-shrink-0">
-                <Award size={19} strokeWidth={1.6} />
+            <div className="flex items-center gap-2.5 sm:gap-3.5 lg:px-6 first:lg:pl-0">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-border-light bg-surface-alt flex items-center justify-center text-accent flex-shrink-0">
+                <Award size={18} strokeWidth={1.6} />
               </div>
-              <div>
-                <p className="font-sans text-xs font-semibold uppercase tracking-[0.16em] text-ivory">
+              <div className="min-w-0">
+                <p className="font-sans text-[11px] sm:text-xs font-semibold uppercase tracking-[0.12em] sm:tracking-[0.16em] text-ivory truncate">
                   1. PREMIUM QUALITY
                 </p>
-                <p className="font-sans text-xs text-muted mt-0.5">
-                  Only the finest ingredients
+                <p className="font-sans text-[11px] sm:text-xs text-muted mt-0.5 truncate">
+                  Finest ingredients
                 </p>
               </div>
             </div>
 
             {/* 2. BEAUTIFULLY PACKED */}
-            <div className="flex items-center gap-3.5 pt-4 lg:pt-0 lg:px-6">
-              <div className="w-10 h-10 rounded-full border border-border-light bg-surface-alt flex items-center justify-center text-accent flex-shrink-0">
-                <Gift size={19} strokeWidth={1.6} />
+            <div className="flex items-center gap-2.5 sm:gap-3.5 lg:px-6">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-border-light bg-surface-alt flex items-center justify-center text-accent flex-shrink-0">
+                <Gift size={18} strokeWidth={1.6} />
               </div>
-              <div>
-                <p className="font-sans text-xs font-semibold uppercase tracking-[0.16em] text-ivory">
+              <div className="min-w-0">
+                <p className="font-sans text-[11px] sm:text-xs font-semibold uppercase tracking-[0.12em] sm:tracking-[0.16em] text-ivory truncate">
                   2. BEAUTIFULLY PACKED
                 </p>
-                <p className="font-sans text-xs text-muted mt-0.5">
+                <p className="font-sans text-[11px] sm:text-xs text-muted mt-0.5 truncate">
                   Ready to gift
                 </p>
               </div>
             </div>
 
             {/* 3. PERSONALISATION */}
-            <div className="flex items-center gap-3.5 pt-4 lg:pt-0 lg:px-6">
-              <div className="w-10 h-10 rounded-full border border-border-light bg-surface-alt flex items-center justify-center text-accent flex-shrink-0">
-                <Sparkles size={19} strokeWidth={1.6} />
+            <div className="flex items-center gap-2.5 sm:gap-3.5 pt-3 sm:pt-0 border-t sm:border-t-0 border-border/40 lg:border-0 lg:px-6">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-border-light bg-surface-alt flex items-center justify-center text-accent flex-shrink-0">
+                <Sparkles size={18} strokeWidth={1.6} />
               </div>
-              <div>
-                <p className="font-sans text-xs font-semibold uppercase tracking-[0.16em] text-ivory">
+              <div className="min-w-0">
+                <p className="font-sans text-[11px] sm:text-xs font-semibold uppercase tracking-[0.12em] sm:tracking-[0.16em] text-ivory truncate">
                   3. PERSONALISATION
                 </p>
-                <p className="font-sans text-xs text-muted mt-0.5">
-                  Make it truly yours
+                <p className="font-sans text-[11px] sm:text-xs text-muted mt-0.5 truncate">
+                  Truly yours
                 </p>
               </div>
             </div>
 
             {/* 4. FAST & RELIABLE */}
-            <div className="flex items-center gap-3.5 pt-4 lg:pt-0 lg:px-6 last:lg:pr-0">
-              <div className="w-10 h-10 rounded-full border border-border-light bg-surface-alt flex items-center justify-center text-accent flex-shrink-0">
-                <Truck size={19} strokeWidth={1.6} />
+            <div className="flex items-center gap-2.5 sm:gap-3.5 pt-3 sm:pt-0 border-t sm:border-t-0 border-border/40 lg:border-0 lg:px-6 last:lg:pr-0">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-border-light bg-surface-alt flex items-center justify-center text-accent flex-shrink-0">
+                <Truck size={18} strokeWidth={1.6} />
               </div>
-              <div>
-                <p className="font-sans text-xs font-semibold uppercase tracking-[0.16em] text-ivory">
+              <div className="min-w-0">
+                <p className="font-sans text-[11px] sm:text-xs font-semibold uppercase tracking-[0.12em] sm:tracking-[0.16em] text-ivory truncate">
                   4. FAST & RELIABLE
                 </p>
-                <p className="font-sans text-xs text-muted mt-0.5">
+                <p className="font-sans text-[11px] sm:text-xs text-muted mt-0.5 truncate">
                   Pan India delivery
                 </p>
               </div>

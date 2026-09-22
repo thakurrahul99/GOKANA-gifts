@@ -46,7 +46,7 @@ export function SearchModal({ isOpen, onClose }) {
         <div role="dialog" aria-modal="true" aria-label="Search Catalog">
           {/* Backdrop */}
           <motion.div
-            className="fixed inset-0 z-50 bg-primary-dark/80 backdrop-blur-md flex flex-col items-center pt-20 md:pt-28 px-4"
+            className="fixed inset-0 z-50 bg-primary-dark/80 backdrop-blur-md flex flex-col items-center pt-16 sm:pt-20 md:pt-28 px-3 sm:px-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -60,9 +60,9 @@ export function SearchModal({ isOpen, onClose }) {
               transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
             >
               {/* Search Bar Input */}
-              <div className="flex items-center gap-4 px-6 py-4 border-b border-border bg-surface-alt">
+              <div className="flex items-center gap-3 sm:gap-4 px-4 sm:px-6 py-3.5 sm:py-4 border-b border-border bg-surface-alt">
                 <Search
-                  size={20}
+                  size={19}
                   strokeWidth={1.8}
                   className="text-accent flex-shrink-0"
                 />
@@ -72,20 +72,20 @@ export function SearchModal({ isOpen, onClose }) {
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   placeholder="Search by occasion, hamper, or chocolate..."
-                  className="flex-1 bg-transparent text-ivory placeholder:text-muted/60 font-sans text-base focus:outline-none min-h-[44px]"
+                  className="flex-1 bg-transparent text-ivory placeholder:text-muted/60 font-sans text-sm sm:text-base focus:outline-none min-h-[44px]"
                   aria-label="Search gifts"
                 />
                 <button
                   onClick={onClose}
                   aria-label="Close search"
-                  className="min-w-[44px] min-h-[44px] flex items-center justify-center text-muted hover:text-accent rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                  className="min-w-[40px] min-h-[40px] sm:min-w-[44px] sm:min-h-[44px] flex items-center justify-center text-muted hover:text-accent rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                 >
                   <X size={20} />
                 </button>
               </div>
 
               {/* Suggestions / Results */}
-              <div data-lenis-prevent className="max-h-[60vh] overflow-y-auto p-6 bg-bg-alt">
+              <div data-lenis-prevent className="max-h-[65vh] overflow-y-auto p-4 sm:p-6 bg-bg-alt">
                 {query.trim().length > 1 ? (
                   results.length > 0 ? (
                     <div className="space-y-3">

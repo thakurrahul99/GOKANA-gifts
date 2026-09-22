@@ -340,20 +340,20 @@ export function GiftFinderPage() {
       {/* ── Stepper Quiz Section ── */}
       <section className="section-py bg-bg">
         <div className="container-gokana max-w-4xl mx-auto">
-          <div className="p-6 md:p-12 rounded-2xl bg-bg-alt border border-border shadow-2xl">
+          <div className="p-4 sm:p-6 md:p-12 rounded-2xl bg-bg-alt border border-border shadow-2xl">
             {/* Header / Progress bar */}
-            <div className="flex items-center justify-between gap-4 mb-8 pb-6 border-b border-border">
-              <div className="flex items-center gap-3">
-                <span className="w-8 h-8 rounded-full flex items-center justify-center font-sans text-sm font-bold bg-accent text-bg">
+            <div className="flex items-center justify-between gap-3 mb-6 sm:mb-8 pb-4 sm:pb-6 border-b border-border">
+              <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+                <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center font-sans text-xs sm:text-sm font-bold bg-accent text-bg flex-shrink-0">
                   {showResults ? "5" : currentStep + 1}
                 </span>
-                <div>
-                  <p className="font-sans text-xs uppercase tracking-wider text-muted">
+                <div className="min-w-0">
+                  <p className="font-sans text-[11px] sm:text-xs uppercase tracking-wider text-muted truncate">
                     {showResults
                       ? "Completed • Step 5 of 5"
                       : `Step ${currentStep + 1} of 5`}
                   </p>
-                  <p className="font-sans text-sm font-semibold text-ivory">
+                  <p className="font-sans text-xs sm:text-sm font-semibold text-ivory truncate">
                     {showResults
                       ? "Your Curated Selection"
                       : currentStepData.title.split(": ")[1]}
@@ -364,7 +364,7 @@ export function GiftFinderPage() {
               {(showResults || currentStep > 0) && (
                 <button
                   onClick={handleReset}
-                  className="flex items-center gap-2 font-sans text-xs font-medium text-muted hover:text-ivory px-3 py-1.5 rounded-lg border border-border hover:bg-white/5 transition-colors"
+                  className="flex items-center gap-1.5 font-sans text-xs font-medium text-muted hover:text-ivory px-2.5 sm:px-3 py-1.5 rounded-lg border border-border hover:bg-white/5 transition-colors flex-shrink-0"
                 >
                   <RotateCcw size={13} />
                   Reset Quiz
@@ -373,11 +373,11 @@ export function GiftFinderPage() {
             </div>
 
             {/* Step Indicators */}
-            <div className="flex items-center gap-2 mb-8">
+            <div className="flex items-center gap-1.5 sm:gap-2 mb-6 sm:mb-8">
               {[1, 2, 3, 4, 5].map((s, idx) => (
                 <div
                   key={s}
-                  className={`flex-1 h-2 rounded-full transition-all duration-300 ${
+                  className={`flex-1 h-1.5 sm:h-2 rounded-full transition-all duration-300 ${
                     idx < currentStep || showResults
                       ? "bg-accent"
                       : idx === currentStep
@@ -401,12 +401,12 @@ export function GiftFinderPage() {
                   <h2 className="heading-md text-ivory mb-1">
                     {currentStepData.title}
                   </h2>
-                  <p className="font-sans text-sm text-muted mb-8">
+                  <p className="font-sans text-xs sm:text-sm text-muted mb-6 sm:mb-8">
                     {currentStepData.subtitle}
                   </p>
 
                   {/* Options */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-10">
+                  <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 mb-8 sm:mb-10">
                     {currentStepData.options.map((opt) => {
                       const isSelected =
                         selections[currentStepData.id] === opt.id;
@@ -416,7 +416,7 @@ export function GiftFinderPage() {
                           onClick={() =>
                             handleSelect(currentStepData.id, opt.id)
                           }
-                          className={`p-5 rounded-xl border text-left transition-all duration-200 flex flex-col justify-between focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
+                          className={`p-4 sm:p-5 rounded-xl border text-left transition-all duration-200 flex flex-col justify-between focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
                             isSelected
                               ? "border-accent bg-accent/15 text-ivory shadow-lg shadow-accent/10"
                               : "border-border bg-bg text-ivory hover:border-accent hover:bg-surface"
@@ -424,17 +424,17 @@ export function GiftFinderPage() {
                         >
                           <div className="flex items-center justify-between mb-3">
                             <span
-                              className="text-3xl p-2 rounded-lg bg-surface-alt border border-border"
+                              className="text-2xl sm:text-3xl p-1.5 sm:p-2 rounded-lg bg-surface-alt border border-border"
                               aria-hidden="true"
                             >
                               {opt.emoji}
                             </span>
                             {isSelected && (
-                              <CheckCircle2 size={20} className="text-accent" />
+                              <CheckCircle2 size={18} className="text-accent" />
                             )}
                           </div>
                           <div>
-                            <p className="font-sans text-base font-semibold text-ivory mb-1">
+                            <p className="font-sans text-sm sm:text-base font-semibold text-ivory mb-1">
                               {opt.label}
                             </p>
                             <p className="font-sans text-xs text-muted leading-relaxed">
@@ -451,7 +451,7 @@ export function GiftFinderPage() {
                     {currentStep > 0 ? (
                       <button
                         onClick={() => setCurrentStep((s) => s - 1)}
-                        className="btn-secondary py-2.5 px-5 text-xs flex items-center gap-2"
+                        className="btn-secondary py-2.5 px-4 sm:px-5 text-xs flex items-center gap-2"
                       >
                         <ChevronLeft size={16} />
                         Back
@@ -477,13 +477,13 @@ export function GiftFinderPage() {
                   transition={{ duration: 0.4 }}
                 >
                   {/* Active Criteria Chips */}
-                  <div className="flex flex-wrap items-center gap-2 mb-8 p-4 rounded-xl bg-bg border border-border">
+                  <div className="flex flex-wrap items-center gap-2 mb-6 sm:mb-8 p-3 sm:p-4 rounded-xl bg-bg border border-border">
                     <span className="font-sans text-xs font-semibold uppercase tracking-wider text-ivory mr-2 flex items-center gap-1.5">
                       <SlidersHorizontal size={14} className="text-accent" />
                       Your Matches:
                     </span>
                     {selections.occasion && (
-                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-bg-alt border border-border text-ivory">
+                      <span className="px-2.5 sm:px-3 py-1 rounded-full text-[11px] sm:text-xs font-medium bg-bg-alt border border-border text-ivory">
                         Occasion:{" "}
                         <b className="text-accent">
                           {
@@ -495,7 +495,7 @@ export function GiftFinderPage() {
                       </span>
                     )}
                     {selections.recipient && (
-                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-bg-alt border border-border text-ivory">
+                      <span className="px-2.5 sm:px-3 py-1 rounded-full text-[11px] sm:text-xs font-medium bg-bg-alt border border-border text-ivory">
                         Recipient:{" "}
                         <b className="text-accent">
                           {
@@ -507,7 +507,7 @@ export function GiftFinderPage() {
                       </span>
                     )}
                     {selections.budget && (
-                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-bg-alt border border-border text-ivory">
+                      <span className="px-2.5 sm:px-3 py-1 rounded-full text-[11px] sm:text-xs font-medium bg-bg-alt border border-border text-ivory">
                         Budget:{" "}
                         <b className="text-accent">
                           {
@@ -520,18 +520,18 @@ export function GiftFinderPage() {
                     )}
                     <button
                       onClick={handleReset}
-                      className="text-xs text-accent hover:text-accent-light font-semibold ml-auto"
+                      className="text-xs text-accent hover:text-accent-light font-semibold w-full sm:w-auto text-left sm:text-right mt-1 sm:mt-0 sm:ml-auto"
                     >
                       Change Preferences
                     </button>
                   </div>
 
-                  <div className="flex items-center justify-between mb-8">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 sm:mb-8">
                     <div>
                       <h2 className="heading-md text-ivory mb-1">
                         Curated Gifts For You
                       </h2>
-                      <p className="font-sans text-sm text-muted">
+                      <p className="font-sans text-xs sm:text-sm text-muted">
                         Showing {matchedProducts.length} thoughtfully matched
                         presents
                       </p>
@@ -539,7 +539,7 @@ export function GiftFinderPage() {
 
                     <Link
                       to="/shop"
-                      className="btn-secondary py-2 px-4 text-xs inline-flex items-center gap-2"
+                      className="btn-secondary py-2.5 px-4 text-xs inline-flex items-center justify-center w-full sm:w-auto gap-2"
                     >
                       Explore All Collections
                       <ArrowRight size={14} />
@@ -547,7 +547,7 @@ export function GiftFinderPage() {
                   </div>
 
                   {/* Product Cards with Live Add to Cart */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-12">
+                  <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 mb-12">
                     {matchedProducts.map((product, idx) => (
                       <ProductCard
                         key={product.id}

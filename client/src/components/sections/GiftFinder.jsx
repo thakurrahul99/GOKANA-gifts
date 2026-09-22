@@ -195,22 +195,22 @@ export function GiftFinder() {
           </div>
 
           <ScrollReveal delay={0.3}>
-            <div className="p-6 md:p-10 rounded-2xl bg-bg-alt border border-border shadow-2xl">
+            <div className="p-4 sm:p-6 md:p-10 rounded-2xl bg-bg-alt border border-border shadow-2xl">
               {/* Progress Indicator (Step X of 4) */}
-              <div className="flex items-center justify-between gap-4 mb-8 pb-4 border-b border-border">
-                <div className="flex items-center gap-2.5">
-                  <span className="w-7 h-7 rounded-full bg-accent text-bg font-sans text-xs font-bold flex items-center justify-center">
+              <div className="flex items-center justify-between gap-2 sm:gap-4 mb-6 sm:mb-8 pb-4 border-b border-border">
+                <div className="flex items-center gap-2 min-w-0">
+                  <span className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-accent text-bg font-sans text-xs font-bold flex items-center justify-center flex-shrink-0">
                     {showResults ? '4' : currentStep + 1}
                   </span>
-                  <span className="font-sans text-xs uppercase tracking-wider text-muted">
-                    {showResults ? 'Completed • Curated Results' : `Step ${currentStep + 1} of 4: ${currentStepData.title}`}
+                  <span className="font-sans text-[11px] sm:text-xs uppercase tracking-wider text-muted truncate">
+                    {showResults ? 'Completed • Results' : `Step ${currentStep + 1} of 4: ${currentStepData.title}`}
                   </span>
                 </div>
 
                 {(showResults || currentStep > 0) && (
                   <button
                     onClick={handleReset}
-                    className="flex items-center gap-1.5 text-xs text-muted hover:text-accent transition-colors"
+                    className="flex items-center gap-1 text-[11px] sm:text-xs text-muted hover:text-accent transition-colors flex-shrink-0"
                     aria-label="Restart quiz"
                   >
                     <RotateCcw size={13} />
@@ -228,29 +228,29 @@ export function GiftFinder() {
                     exit={{ opacity: 0, x: -20 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <h3 className="font-serif text-2xl md:text-3xl font-light text-ivory mb-2">
+                    <h3 className="font-serif text-xl sm:text-2xl md:text-3xl font-light text-ivory mb-1 sm:mb-2">
                       {currentStepData.title}
                     </h3>
-                    <p className="font-sans text-xs text-muted mb-6">
+                    <p className="font-sans text-xs text-muted mb-5 sm:mb-6">
                       {currentStepData.subtitle}
                     </p>
 
                     {/* Step Options Grid */}
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-8">
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-2.5 sm:gap-3 mb-6 sm:mb-8">
                       {currentStepData.options.map((opt) => {
                         const isSelected = selections[currentStepData.id] === opt.value;
                         return (
                           <button
                             key={opt.value}
                             onClick={() => handleSelect(currentStepData.id, opt.value)}
-                            className={`p-4 rounded-xl border text-left transition-all duration-200 flex flex-col justify-between min-h-[84px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
+                            className={`p-3 sm:p-4 rounded-xl border text-left transition-all duration-200 flex flex-col justify-between min-h-[78px] sm:min-h-[84px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
                               isSelected
                                 ? 'border-accent bg-accent/15 text-accent shadow-sm'
                                 : 'border-border bg-bg text-ivory hover:border-accent hover:bg-surface'
                             }`}
                           >
-                            <span className="text-2xl mb-2" aria-hidden="true">{opt.emoji}</span>
-                            <span className="font-sans text-xs font-semibold tracking-wide">
+                            <span className="text-xl sm:text-2xl mb-1.5 sm:mb-2" aria-hidden="true">{opt.emoji}</span>
+                            <span className="font-sans text-[11px] sm:text-xs font-semibold tracking-wide">
                               {opt.label}
                             </span>
                           </button>
@@ -354,7 +354,7 @@ export function GiftFinder() {
                     </div>
 
                     <div className="text-center pt-2">
-                      <Link to="/shop" className="btn-primary py-3 px-8 text-xs">
+                      <Link to="/shop" className="btn-primary py-3 px-8 text-xs inline-flex items-center justify-center w-full sm:w-auto gap-2">
                         Explore Full Collection
                         <ArrowRight size={15} />
                       </Link>

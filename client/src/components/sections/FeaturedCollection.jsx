@@ -51,7 +51,7 @@ export function FeaturedCollection() {
         </div>
 
         {/* Product Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {displayProducts.map((product, i) => (
             <ProductCard key={product.id} product={product} index={i} />
           ))}
@@ -59,7 +59,7 @@ export function FeaturedCollection() {
 
         {/* Bottom CTA */}
         <ScrollReveal delay={0.2} className="text-center mt-12">
-          <Link to="/shop" className="btn-primary inline-flex items-center gap-2">
+          <Link to="/shop" className="btn-primary inline-flex items-center justify-center w-full xs:w-auto gap-2">
             View Complete Collection
             <ArrowRight size={16} />
           </Link>

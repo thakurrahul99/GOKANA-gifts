@@ -26,16 +26,16 @@ function OccasionCard({ occasion, index }) {
         <div className="absolute inset-0 bg-bg/20 group-hover:bg-bg/10 transition-colors duration-500" />
 
         {/* Content */}
-        <div className="absolute inset-0 flex flex-col justify-end p-6">
+        <div className="absolute inset-0 flex flex-col justify-end p-4 sm:p-6">
           <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-accent font-semibold mb-1.5">
             {occasion.emoji} {occasion.description}
           </p>
           <div className="flex items-end justify-between gap-2">
-            <h3 className="font-serif text-2xl md:text-3xl font-light text-ivory leading-tight group-hover:text-accent transition-colors duration-300">
+            <h3 className="font-serif text-xl sm:text-2xl md:text-3xl font-light text-ivory leading-tight group-hover:text-accent transition-colors duration-300">
               {occasion.label}
             </h3>
-            <div className="w-10 h-10 rounded-full border border-border-light bg-bg/70 backdrop-blur-xs flex items-center justify-center text-accent transition-all duration-300 group-hover:bg-accent group-hover:text-bg group-hover:border-accent flex-shrink-0">
-              <ArrowRight size={16} />
+            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-border-light bg-bg/70 backdrop-blur-xs flex items-center justify-center text-accent transition-all duration-300 group-hover:bg-accent group-hover:text-bg group-hover:border-accent flex-shrink-0">
+              <ArrowRight size={15} />
             </div>
           </div>
         </div>
@@ -71,10 +71,10 @@ export function ShopByOccasion() {
             </ScrollReveal>
           </div>
 
-          <ScrollReveal delay={0.3}>
+          <ScrollReveal delay={0.3} className="w-full md:w-auto">
             <Link
               to="/shop"
-              className="btn-outline inline-flex items-center gap-2 text-xs py-3 px-6 !text-accent border-accent hover:bg-accent/10 hover:border-accent-light"
+              className="btn-outline inline-flex items-center justify-center w-full md:w-auto gap-2 text-xs py-3 px-6 !text-accent border-accent hover:bg-accent/10 hover:border-accent-light"
             >
               View All Occasions
               <ArrowRight size={15} />
@@ -84,7 +84,7 @@ export function ShopByOccasion() {
 
         {/* 6 Core Occasion Cards Grid */}
         <StaggerReveal
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+          className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8"
           stagger={0.07}
           delay={0.2}
         >

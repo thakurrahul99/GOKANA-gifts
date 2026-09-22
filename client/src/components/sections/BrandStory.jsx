@@ -51,7 +51,7 @@ export function BrandStory() {
             </ScrollReveal>
 
             <ScrollReveal delay={0.5}>
-              <Link to="/about" className="btn-outline inline-flex items-center gap-2 !text-accent border-accent hover:bg-accent/10 hover:border-accent-light">
+              <Link to="/about" className="btn-outline inline-flex items-center justify-center w-full sm:w-auto gap-2 !text-accent border-accent hover:bg-accent/10 hover:border-accent-light">
                 Read Our Story
                 <ArrowRight size={16} />
               </Link>
@@ -59,18 +59,18 @@ export function BrandStory() {
 
             {/* Impact & Quality Metrics */}
             <ScrollReveal delay={0.6}>
-              <div className="grid grid-cols-3 gap-6 mt-12 pt-8 border-t border-border">
+              <div className="grid grid-cols-3 gap-2 xs:gap-4 sm:gap-6 mt-10 sm:mt-12 pt-6 sm:pt-8 border-t border-border">
                 <div>
-                  <p className="font-serif text-3xl font-light text-accent">50K+</p>
-                  <p className="font-sans text-[11px] text-muted uppercase tracking-wider mt-1">Gifts Delivered</p>
+                  <p className="font-serif text-2xl xs:text-3xl font-light text-accent">50K+</p>
+                  <p className="font-sans text-[9px] xs:text-[11px] text-muted uppercase tracking-wider mt-1">Gifts Delivered</p>
                 </div>
                 <div>
-                  <p className="font-serif text-3xl font-light text-accent">4.9★</p>
-                  <p className="font-sans text-[11px] text-muted uppercase tracking-wider mt-1">Buyer Rating</p>
+                  <p className="font-serif text-2xl xs:text-3xl font-light text-accent">4.9★</p>
+                  <p className="font-sans text-[9px] xs:text-[11px] text-muted uppercase tracking-wider mt-1">Buyer Rating</p>
                 </div>
                 <div>
-                  <p className="font-serif text-3xl font-light text-accent">100%</p>
-                  <p className="font-sans text-[11px] text-muted uppercase tracking-wider mt-1">Artisan Made</p>
+                  <p className="font-serif text-2xl xs:text-3xl font-light text-accent">100%</p>
+                  <p className="font-sans text-[9px] xs:text-[11px] text-muted uppercase tracking-wider mt-1">Artisan Made</p>
                 </div>
               </div>
             </ScrollReveal>

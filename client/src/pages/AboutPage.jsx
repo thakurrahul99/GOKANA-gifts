@@ -65,7 +65,7 @@ export function AboutPage() {
           </motion.p>
           <div className="overflow-hidden">
             <motion.h1
-              className="font-serif text-5xl md:text-7xl font-light text-ivory leading-tight"
+              className="font-serif text-3xl xs:text-4xl sm:text-5xl md:text-7xl font-light text-ivory leading-tight"
               initial={{ y: '100%' }}
               animate={{ y: 0 }}
               transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
@@ -74,7 +74,7 @@ export function AboutPage() {
             </motion.h1>
           </div>
           <motion.p
-            className="font-sans text-muted mt-6 text-base leading-relaxed max-w-lg mx-auto"
+            className="font-sans text-muted mt-4 sm:mt-6 text-sm sm:text-base leading-relaxed max-w-lg mx-auto font-light"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.9 }}
@@ -87,18 +87,18 @@ export function AboutPage() {
       {/* Metrics Strip */}
       <div className="bg-bg-alt border-b border-border">
         <div className="container-gokana">
-          <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-border/50">
+          <div className="grid grid-cols-2 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-border/50">
             {metrics.map((m, i) => (
               <motion.div
                 key={m.label}
-                className="py-8 px-6 text-center"
+                className="py-6 px-3 sm:py-8 sm:px-6 text-center"
                 initial={{ opacity: 0, y: 12 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, duration: 0.5 }}
               >
-                <p className="font-serif text-3xl font-light text-accent mb-1">{m.value}</p>
-                <p className="font-sans text-xs text-muted uppercase tracking-wider">{m.label}</p>
+                <p className="font-serif text-2xl sm:text-3xl font-light text-accent mb-1">{m.value}</p>
+                <p className="font-sans text-[11px] sm:text-xs text-muted uppercase tracking-wider">{m.label}</p>
               </motion.div>
             ))}
           </div>
@@ -159,12 +159,12 @@ export function AboutPage() {
             </AnimatedHeading>
           </div>
 
-          <StaggerReveal className="grid grid-cols-1 md:grid-cols-3 gap-8" stagger={0.15}>
+          <StaggerReveal className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-8" stagger={0.15}>
             {values.map(({ num, Icon, title, desc }) => (
               <motion.div
                 key={num}
                 variants={staggerItem}
-                className="border border-border p-8 bg-bg rounded-xl hover:border-accent/50 transition-all duration-300 group shadow-lg"
+                className="border border-border p-5 sm:p-8 bg-bg rounded-xl hover:border-accent/50 transition-all duration-300 group shadow-lg"
               >
                 <div className="flex items-start justify-between mb-5">
                   <p className="font-serif text-5xl font-light text-accent/40">{num}</p>

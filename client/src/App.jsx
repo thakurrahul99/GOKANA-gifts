@@ -146,8 +146,8 @@ function AdminCustomers() {
         <p className="text-sm text-muted mt-1">{customers.length} registered customers</p>
       </div>
 
-      <div className="flex items-center gap-2 bg-bg-alt border border-border rounded-xl px-4 py-3">
-        <Search size={17} className="text-muted" />
+      <div className="flex items-center gap-2 bg-bg-alt border border-border rounded-xl px-4 py-3 min-h-[44px]">
+        <Search size={17} className="text-muted flex-shrink-0" />
         <input
           value={search}
           onChange={(e) => setSearch(e.target.value)}
@@ -165,17 +165,17 @@ function AdminCustomers() {
           <div className="py-16 text-center text-muted"><Users className="mx-auto mb-3 text-accent" size={28} />No customers found.</div>
         ) : (
           <div className="overflow-x-auto">
-            <table className="w-full text-sm">
+            <table className="w-full text-sm min-w-[480px]">
               <thead className="border-b border-border bg-surface-alt text-muted text-xs uppercase">
-                <tr><th className="text-left px-5 py-4">Customer</th><th className="text-left px-5 py-4">Email</th><th className="text-left px-5 py-4">Phone</th><th className="text-left px-5 py-4">Status</th></tr>
+                <tr><th className="text-left px-3.5 sm:px-5 py-3.5 sm:py-4">Customer</th><th className="text-left px-3.5 sm:px-5 py-3.5 sm:py-4">Email</th><th className="text-left px-3.5 sm:px-5 py-3.5 sm:py-4">Phone</th><th className="text-left px-3.5 sm:px-5 py-3.5 sm:py-4">Status</th></tr>
               </thead>
               <tbody className="divide-y divide-border/50">
                 {customers.map((customer) => (
                   <tr key={customer._id} className="hover:bg-white/5 transition-colors">
-                    <td className="px-5 py-4 text-ivory font-medium">{customer.name}</td>
-                    <td className="px-5 py-4 text-muted">{customer.email}</td>
-                    <td className="px-5 py-4 text-muted">{customer.phone || '—'}</td>
-                    <td className="px-5 py-4"><span className="text-xs text-accent px-2 py-0.5 rounded bg-accent/10 border border-accent/25">{customer.isActive ? 'Active' : 'Inactive'}</span></td>
+                    <td className="px-3.5 sm:px-5 py-3.5 sm:py-4 text-ivory font-medium">{customer.name}</td>
+                    <td className="px-3.5 sm:px-5 py-3.5 sm:py-4 text-muted">{customer.email}</td>
+                    <td className="px-3.5 sm:px-5 py-3.5 sm:py-4 text-muted">{customer.phone || '—'}</td>
+                    <td className="px-3.5 sm:px-5 py-3.5 sm:py-4"><span className="text-xs text-accent px-2 py-0.5 rounded bg-accent/10 border border-accent/25">{customer.isActive ? 'Active' : 'Inactive'}</span></td>
                   </tr>
                 ))}
               </tbody>
@@ -223,7 +223,7 @@ function AdminSettings() {
     setSaved(false);
   };
 
-  const inputClass = 'w-full rounded-lg border border-border bg-bg px-3.5 py-2.5 text-sm text-ivory outline-none focus:border-accent focus:ring-1 focus:ring-accent/30';
+  const inputClass = 'w-full rounded-lg border border-border bg-bg px-3.5 py-2.5 text-sm text-ivory outline-none focus:border-accent focus:ring-1 focus:ring-accent/30 min-h-[44px]';
 
   return (
     <section className="space-y-6 text-ivory">
@@ -232,12 +232,12 @@ function AdminSettings() {
         <p className="text-sm text-muted mt-1">Manage store preferences and admin notifications.</p>
       </div>
 
-      <div className="bg-bg-alt border border-border rounded-xl p-6 space-y-6 shadow-lg">
+      <div className="bg-bg-alt border border-border rounded-xl p-4 sm:p-6 space-y-6 shadow-lg">
         <div>
           <h3 className="font-serif text-lg font-light text-ivory">Store Information</h3>
           <p className="text-xs text-muted mt-1">These preferences are saved for this admin browser.</p>
         </div>
-        <div className="grid md:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
           <label className="space-y-2"><span className="text-sm font-medium text-ivory">Store name</span><input className={inputClass} value={settings.storeName} onChange={(e) => update('storeName', e.target.value)} /></label>
           <label className="space-y-2"><span className="text-sm font-medium text-ivory">Support email</span><input type="email" className={inputClass} value={settings.supportEmail} onChange={(e) => update('supportEmail', e.target.value)} /></label>
           <label className="space-y-2"><span className="text-sm font-medium text-ivory">Support phone</span><input className={inputClass} value={settings.supportPhone} onChange={(e) => update('supportPhone', e.target.value)} /></label>
@@ -246,20 +246,20 @@ function AdminSettings() {
         </div>
       </div>
 
-      <div className="bg-bg-alt border border-border rounded-xl p-6 space-y-4 shadow-lg">
+      <div className="bg-bg-alt border border-border rounded-xl p-4 sm:p-6 space-y-4 shadow-lg">
         <div><h3 className="font-serif text-lg font-light text-ivory">Notifications</h3><p className="text-xs text-muted mt-1">Control which admin alerts are enabled.</p></div>
         {[
           ['orderNotifications', 'New order notifications', 'Show a notification preference for new orders.'],
           ['lowStockNotifications', 'Low-stock notifications', 'Enable low-stock alert preference.'],
         ].map(([key, title, description]) => (
-          <label key={key} className="flex items-center justify-between gap-4 rounded-lg border border-border bg-surface-alt p-4 cursor-pointer hover:border-accent/30 transition-colors">
+          <label key={key} className="flex items-center justify-between gap-4 rounded-lg border border-border bg-surface-alt p-3.5 sm:p-4 cursor-pointer hover:border-accent/30 transition-colors min-h-[48px]">
             <span><span className="block text-sm font-medium text-ivory">{title}</span><span className="block text-xs text-muted mt-1">{description}</span></span>
-            <input type="checkbox" className="h-5 w-5 accent-accent" checked={settings[key]} onChange={(e) => update(key, e.target.checked)} />
+            <input type="checkbox" className="h-5 w-5 accent-accent flex-shrink-0" checked={settings[key]} onChange={(e) => update(key, e.target.checked)} />
           </label>
         ))}
-        <div className="flex flex-wrap gap-3 pt-2">
-          <button onClick={saveSettings} className="btn-primary py-2.5 px-6 text-xs uppercase tracking-wider font-semibold">Save Settings</button>
-          <button onClick={resetSettings} className="btn-outline py-2.5 px-6 text-xs uppercase tracking-wider font-semibold">Reset</button>
+        <div className="flex flex-col xs:flex-row flex-wrap gap-3 pt-2">
+          <button onClick={saveSettings} className="btn-primary py-2.5 px-6 text-xs uppercase tracking-wider font-semibold min-h-[44px] inline-flex items-center justify-center">Save Settings</button>
+          <button onClick={resetSettings} className="btn-outline py-2.5 px-6 text-xs uppercase tracking-wider font-semibold min-h-[44px] inline-flex items-center justify-center">Reset</button>
           {saved && <span className="self-center text-sm font-medium text-accent">✓ Settings saved</span>}
         </div>
       </div>

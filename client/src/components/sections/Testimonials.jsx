@@ -7,14 +7,14 @@ function TestimonialCard({ testimonial }) {
   return (
     <motion.div
       variants={staggerItem}
-      className="card-premium flex flex-col justify-between bg-bg-alt border border-border hover:border-border transition-all p-7"
+      className="card-premium flex flex-col justify-between bg-bg-alt border border-border hover:border-border transition-all p-5 sm:p-7"
     >
       <div>
         {/* Rating Stars + Verified Tag */}
-        <div className="flex items-center justify-between gap-2 mb-5">
+        <div className="flex items-center justify-between gap-2 mb-4 sm:mb-5">
           <div className="flex items-center gap-1">
             {Array.from({ length: testimonial.rating }).map((_, i) => (
-              <Star key={i} size={15} className="text-accent fill-accent" />
+              <Star key={i} size={14} className="text-accent fill-accent" />
             ))}
           </div>
           <span className="inline-flex items-center gap-1 text-[10px] font-sans font-semibold tracking-wider uppercase text-accent bg-surface-alt border border-border px-2.5 py-0.5 rounded-full">
@@ -24,14 +24,14 @@ function TestimonialCard({ testimonial }) {
         </div>
 
         {/* Quote */}
-        <blockquote className="font-serif text-lg font-light text-[#E8E2D8] leading-relaxed mb-6 italic">
+        <blockquote className="font-serif text-base sm:text-lg font-light text-[#E8E2D8] leading-relaxed mb-5 sm:mb-6 italic">
           "{testimonial.review}"
         </blockquote>
       </div>
 
       {/* Author & Product */}
-      <div className="pt-5 border-t border-border flex items-center gap-3">
-        <div className="w-10 h-10 rounded-full bg-surface-alt border border-border-light text-accent font-serif font-light text-base flex items-center justify-center flex-shrink-0">
+      <div className="pt-4 sm:pt-5 border-t border-border flex items-center gap-3">
+        <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-surface-alt border border-border-light text-accent font-serif font-light text-sm sm:text-base flex items-center justify-center flex-shrink-0">
           {testimonial.initials}
         </div>
         <div className="min-w-0">
@@ -62,21 +62,21 @@ export function Testimonials() {
 
           {/* Aggregate Rating Banner */}
           <ScrollReveal delay={0.25}>
-            <div className="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-bg-alt border border-border-light shadow-md">
+            <div className="inline-flex flex-wrap items-center justify-center gap-2 sm:gap-3 px-3.5 sm:px-5 py-2 rounded-full bg-bg-alt border border-border-light shadow-md">
               <div className="flex gap-1 text-accent">
                 {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} size={15} className="text-accent fill-accent" />
+                  <Star key={i} size={14} className="text-accent fill-accent" />
                 ))}
               </div>
-              <span className="font-serif text-xl font-light text-ivory">4.9 / 5.0</span>
-              <span className="text-xs font-sans text-muted">from 2,300+ Verified Buyers</span>
+              <span className="font-serif text-lg sm:text-xl font-light text-ivory">4.9 / 5.0</span>
+              <span className="text-[11px] sm:text-xs font-sans text-muted">from 2,300+ Verified Buyers</span>
             </div>
           </ScrollReveal>
         </div>
 
         {/* Reviews Grid */}
         <StaggerReveal
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"
           stagger={0.08}
           delay={0.2}
         >

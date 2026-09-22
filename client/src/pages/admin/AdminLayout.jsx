@@ -14,10 +14,17 @@ const navItems = [
 ];
 
 export function AdminLayout() {
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(() => typeof window !== 'undefined' ? window.innerWidth >= 768 : true);
   const { user, token, logout } = useAuthStore();
   const navigate = useNavigate();
   const location = useLocation();
+
+  // Close mobile sidebar on route navigation
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.innerWidth < 768) {
+      setSidebarOpen(false);
+    }
+  }, [location.pathname]);
 
   useEffect(() => {
     if (!token || !user) navigate('/login', { replace: true });
@@ -29,11 +36,37 @@ export function AdminLayout() {
   const handleLogout = () => { logout(); navigate('/'); };
 
   return (
-    <div data-lenis-prevent className="flex h-screen bg-bg font-sans text-ivory overflow-hidden">
-      <aside data-lenis-prevent className={clsx('flex flex-col bg-bg-alt border-r border-border transition-all duration-300 flex-shrink-0 shadow-xl overflow-y-auto', sidebarOpen ? 'w-60' : 'w-16')}>
-        <div className="flex items-center gap-3 px-4 py-5 border-b border-border">
-          <span className={clsx('font-serif tracking-[0.15em] uppercase text-ivory transition-all', sidebarOpen ? 'text-xl' : 'text-sm')}>{sidebarOpen ? 'GŌKANA' : 'G'}</span>
-          {sidebarOpen && <span className="text-[10px] text-accent font-sans font-semibold tracking-widest uppercase bg-accent/10 border border-accent/30 px-1.5 py-0.5 rounded">Admin</span>}
+    <div data-lenis-prevent className="flex h-screen bg-bg font-sans text-ivory overflow-hidden relative">
+      {/* Mobile Drawer Backdrop */}
+      {sidebarOpen && (
+        <div
+          onClick={() => setSidebarOpen(false)}
+          className="fixed inset-0 bg-black/70 backdrop-blur-xs z-40 md:hidden transition-opacity"
+          aria-hidden="true"
+        />
+      )}
+
+      {/* Sidebar (Desktop static / Mobile drawer) */}
+      <aside
+        data-lenis-prevent
+        className={clsx(
+          'flex flex-col bg-bg-alt border-r border-border transition-all duration-300 flex-shrink-0 shadow-2xl z-50 overflow-y-auto',
+          'fixed inset-y-0 left-0 md:static',
+          sidebarOpen ? 'w-64 md:w-60 translate-x-0' : '-translate-x-full md:translate-x-0 md:w-16'
+        )}
+      >
+        <div className="flex items-center justify-between px-4 py-5 border-b border-border">
+          <div className="flex items-center gap-2.5">
+            <span className={clsx('font-serif tracking-[0.15em] uppercase text-ivory transition-all', sidebarOpen ? 'text-xl' : 'text-sm')}>{sidebarOpen ? 'GŌKANA' : 'G'}</span>
+            {sidebarOpen && <span className="text-[10px] text-accent font-sans font-semibold tracking-widest uppercase bg-accent/10 border border-accent/30 px-1.5 py-0.5 rounded">Admin</span>}
+          </div>
+          <button
+            onClick={() => setSidebarOpen(false)}
+            className="md:hidden p-1.5 text-muted hover:text-ivory"
+            aria-label="Close admin menu"
+          >
+            <X size={18} />
+          </button>
         </div>
         <nav className="flex-1 py-4 space-y-1">
           {navItems.map(({ icon: Icon, label, href }) => {
@@ -50,7 +83,7 @@ export function AdminLayout() {
         <div className="p-4 border-t border-border">
           {sidebarOpen && (
             <div className="flex items-center gap-2.5 mb-3">
-              <div className="w-8 h-8 bg-accent/20 rounded-full flex items-center justify-center border border-accent/30">
+              <div className="w-8 h-8 bg-accent/20 rounded-full flex items-center justify-center border border-accent/30 flex-shrink-0">
                 <span className="text-accent text-xs font-semibold">{user?.name?.[0]?.toUpperCase() || 'A'}</span>
               </div>
               <div className="truncate">
@@ -62,13 +95,13 @@ export function AdminLayout() {
           <button onClick={handleLogout} className="flex items-center gap-2 text-muted hover:text-accent transition-colors text-xs min-h-[40px] w-full"><LogOut size={14} />{sidebarOpen && 'Logout'}</button>
         </div>
       </aside>
-      <div className="flex-1 flex flex-col overflow-hidden">
-        <header className="bg-bg-alt border-b border-border px-6 py-4 flex items-center gap-4 shadow-sm flex-shrink-0">
+      <div className="flex-1 flex flex-col overflow-hidden min-w-0">
+        <header className="bg-bg-alt border-b border-border px-4 sm:px-6 py-3 sm:py-4 flex items-center gap-3 sm:gap-4 shadow-sm flex-shrink-0">
           <button onClick={() => setSidebarOpen(!sidebarOpen)} className="text-ivory hover:text-accent transition-colors p-1.5 min-h-[40px] min-w-[40px] flex items-center justify-center rounded hover:bg-white/5" aria-label={sidebarOpen ? 'Collapse sidebar' : 'Expand sidebar'}>{sidebarOpen ? <X size={20} /> : <Menu size={20} />}</button>
-          <h1 className="font-sans text-sm font-semibold text-ivory tracking-wide uppercase">{navItems.find(n => n.href === location.pathname)?.label || 'Admin'}</h1>
-          <div className="ml-auto flex items-center gap-3"><Link to="/" target="_blank" className="text-xs text-accent hover:text-accent-light font-medium flex items-center gap-1">View Store ↗</Link></div>
+          <h1 className="font-sans text-xs sm:text-sm font-semibold text-ivory tracking-wide uppercase truncate">{navItems.find(n => n.href === location.pathname)?.label || 'Admin'}</h1>
+          <div className="ml-auto flex items-center gap-3"><Link to="/" target="_blank" className="text-xs text-accent hover:text-accent-light font-medium flex items-center gap-1 whitespace-nowrap">View Store ↗</Link></div>
         </header>
-        <main data-lenis-prevent className="flex-1 overflow-y-auto p-6 bg-bg text-ivory overscroll-contain"><Outlet /></main>
+        <main data-lenis-prevent className="flex-1 overflow-y-auto p-3.5 sm:p-6 bg-bg text-ivory overscroll-contain"><Outlet /></main>
       </div>
     </div>
   );

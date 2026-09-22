@@ -89,30 +89,30 @@ export function LoginPage() {
       </div>
 
       {/* Right — Form */}
-      <div className="flex-1 flex items-center justify-center px-6 sm:px-10 py-16">
+      <div className="flex-1 flex items-center justify-center px-4 xs:px-6 sm:px-10 py-10 sm:py-16">
         <motion.div
           key={mode}
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="w-full max-w-md bg-bg-alt p-8 sm:p-10 border border-border rounded-2xl shadow-2xl"
+          className="w-full max-w-md bg-bg-alt p-5 xs:p-7 sm:p-10 border border-border rounded-2xl shadow-2xl"
         >
           {/* Logo on mobile */}
           <Link
             to="/"
-            className="lg:hidden block font-serif text-2xl font-light tracking-[0.18em] uppercase text-ivory mb-8 text-center hover:text-accent transition-colors"
+            className="lg:hidden block font-serif text-2xl font-light tracking-[0.18em] uppercase text-ivory mb-6 sm:mb-8 text-center hover:text-accent transition-colors"
           >
             GŌKANA
           </Link>
 
-          <div className="mb-8">
+          <div className="mb-6 sm:mb-8">
             <span className="inline-block text-xs font-semibold tracking-[0.18em] text-accent uppercase mb-2">
               {mode === 'login' ? '✦ WELCOME BACK' : '✦ JOIN GŌKANA'}
             </span>
-            <h1 className="font-serif text-3xl font-light text-ivory mb-2">
+            <h1 className="font-serif text-2xl sm:text-3xl font-light text-ivory mb-2">
               {mode === 'login' ? 'Sign In' : 'Create Account'}
             </h1>
-            <p className="font-sans text-sm text-muted font-light">
+            <p className="font-sans text-xs sm:text-sm text-muted font-light">
               {mode === 'login'
                 ? 'Sign in to access your orders, saved addresses, and wishlist.'
                 : 'Create your account for personalized gifting and tracking.'}
@@ -124,7 +124,7 @@ export function LoginPage() {
             <button
               type="button"
               onClick={() => { setMode('login'); setError(''); }}
-              className={`flex-1 py-2 text-xs font-semibold uppercase tracking-wider rounded-md transition-all ${
+              className={`flex-1 py-2.5 text-xs font-semibold uppercase tracking-wider rounded-md transition-all min-h-[40px] ${
                 mode === 'login'
                   ? 'bg-accent text-bg shadow-sm'
                   : 'text-muted hover:text-ivory'
@@ -135,7 +135,7 @@ export function LoginPage() {
             <button
               type="button"
               onClick={() => { setMode('register'); setError(''); }}
-              className={`flex-1 py-2 text-xs font-semibold uppercase tracking-wider rounded-md transition-all ${
+              className={`flex-1 py-2.5 text-xs font-semibold uppercase tracking-wider rounded-md transition-all min-h-[40px] ${
                 mode === 'register'
                   ? 'bg-accent text-bg shadow-sm'
                   : 'text-muted hover:text-ivory'

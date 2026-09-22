@@ -130,19 +130,19 @@ export function AdminCoupons() {
 
   return (
     <div className="text-ivory">
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
         <div>
           <h2 className="text-2xl font-semibold text-ivory font-serif">Coupons</h2>
           <p className="text-sm text-muted mt-0.5">{loading ? 'Loading…' : `${coupons.length} coupons`}</p>
         </div>
-        <button onClick={openAdd} className="btn-primary py-2.5 px-5 text-xs inline-flex items-center gap-2 uppercase tracking-wider font-semibold">
+        <button onClick={openAdd} className="btn-primary py-2.5 px-5 text-xs inline-flex items-center justify-center gap-2 uppercase tracking-wider font-semibold w-full sm:w-auto min-h-[44px]">
           <Plus size={14} /> Create Coupon
         </button>
       </div>
 
       {/* Error */}
       {error && !loading && (
-        <div className="flex items-center gap-3 bg-red-950/40 border border-red-500/30 text-red-300 px-5 py-4 text-sm mb-5 rounded-lg">
+        <div className="flex items-center gap-3 bg-red-950/40 border border-red-500/30 text-red-300 px-4 sm:px-5 py-3.5 sm:py-4 text-sm mb-5 rounded-lg">
           <AlertCircle size={16} />
           <span>{error}</span>
           <button
@@ -165,15 +165,15 @@ export function AdminCoupons() {
 
       {/* Form Modal */}
       {showForm && (
-        <div data-lenis-prevent className="fixed inset-0 bg-black/75 backdrop-blur-xs flex items-center justify-center z-50 p-4">
-          <div data-lenis-prevent className="bg-bg-alt text-ivory border border-border rounded-xl max-w-lg w-full max-h-[90vh] overflow-y-auto p-6 shadow-2xl overscroll-contain">
+        <div data-lenis-prevent className="fixed inset-0 bg-black/75 backdrop-blur-xs flex items-center justify-center z-50 p-3 sm:p-4">
+          <div data-lenis-prevent className="bg-bg-alt text-ivory border border-border rounded-xl max-w-lg w-full max-h-[90vh] overflow-y-auto p-4 sm:p-6 shadow-2xl overscroll-contain">
             <div className="flex items-center justify-between mb-4 pb-3 border-b border-border">
               <h3 className="text-lg font-serif font-light text-ivory">
                 {editCoupon ? 'Edit Coupon' : 'Create Coupon'}
               </h3>
               <button
                 onClick={() => setShowForm(false)}
-                className="p-1 text-muted hover:text-accent transition-colors rounded"
+                className="p-1.5 text-muted hover:text-accent transition-colors rounded min-w-[36px] min-h-[36px] flex items-center justify-center"
                 aria-label="Close"
               >
                 <X size={18} />
@@ -195,17 +195,17 @@ export function AdminCoupons() {
                   value={formData.code}
                   onChange={(e) => setFormData({ ...formData, code: e.target.value })}
                   placeholder="e.g. WELCOME10"
-                  className="w-full mt-1 px-3.5 py-2.5 border border-border bg-bg text-ivory text-sm focus:border-accent outline-none rounded-lg"
+                  className="w-full mt-1 px-3.5 py-2.5 border border-border bg-bg text-ivory text-sm focus:border-accent outline-none rounded-lg min-h-[44px]"
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="text-xs font-semibold text-muted uppercase tracking-wider">Type</label>
                   <select
                     value={formData.type}
                     onChange={(e) => setFormData({ ...formData, type: e.target.value })}
-                    className="w-full mt-1 px-3.5 py-2.5 border border-border bg-bg text-ivory text-sm focus:border-accent rounded-lg cursor-pointer"
+                    className="w-full mt-1 px-3.5 py-2.5 border border-border bg-bg text-ivory text-sm focus:border-accent rounded-lg cursor-pointer min-h-[44px]"
                   >
                     <option value="percentage">Percentage %</option>
                     <option value="fixed">Fixed ₹</option>
@@ -218,7 +218,7 @@ export function AdminCoupons() {
                     value={formData.value}
                     onChange={(e) => setFormData({ ...formData, value: e.target.value })}
                     placeholder="e.g. 10"
-                    className="w-full mt-1 px-3.5 py-2.5 border border-border bg-bg text-ivory text-sm focus:border-accent outline-none rounded-lg"
+                    className="w-full mt-1 px-3.5 py-2.5 border border-border bg-bg text-ivory text-sm focus:border-accent outline-none rounded-lg min-h-[44px]"
                   />
                 </div>
               </div>
@@ -230,7 +230,7 @@ export function AdminCoupons() {
                   value={formData.minOrderAmount}
                   onChange={(e) => setFormData({ ...formData, minOrderAmount: e.target.value })}
                   placeholder="e.g. 500"
-                  className="w-full mt-1 px-3.5 py-2.5 border border-border bg-bg text-ivory text-sm focus:border-accent outline-none rounded-lg"
+                  className="w-full mt-1 px-3.5 py-2.5 border border-border bg-bg text-ivory text-sm focus:border-accent outline-none rounded-lg min-h-[44px]"
                 />
               </div>
 
@@ -242,7 +242,7 @@ export function AdminCoupons() {
                     value={formData.maxDiscount}
                     onChange={(e) => setFormData({ ...formData, maxDiscount: e.target.value })}
                     placeholder="e.g. 300"
-                    className="w-full mt-1 px-3.5 py-2.5 border border-border bg-bg text-ivory text-sm focus:border-accent outline-none rounded-lg"
+                    className="w-full mt-1 px-3.5 py-2.5 border border-border bg-bg text-ivory text-sm focus:border-accent outline-none rounded-lg min-h-[44px]"
                   />
                 </div>
               )}
@@ -254,11 +254,11 @@ export function AdminCoupons() {
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                   placeholder="e.g. Welcome discount for new users"
-                  className="w-full mt-1 px-3.5 py-2.5 border border-border bg-bg text-ivory text-sm focus:border-accent outline-none rounded-lg"
+                  className="w-full mt-1 px-3.5 py-2.5 border border-border bg-bg text-ivory text-sm focus:border-accent outline-none rounded-lg min-h-[44px]"
                 />
               </div>
 
-              <label className="flex items-center gap-2 text-xs cursor-pointer pt-1">
+              <label className="flex items-center gap-2 text-xs cursor-pointer pt-1 min-h-[36px]">
                 <input
                   type="checkbox"
                   checked={formData.isActive}
@@ -272,14 +272,14 @@ export function AdminCoupons() {
             <div className="flex items-center justify-end gap-2 mt-5 pt-4 border-t border-border">
               <button
                 onClick={() => setShowForm(false)}
-                className="px-4 py-2 text-xs font-semibold text-muted hover:text-ivory transition-colors"
+                className="px-4 py-2 text-xs font-semibold text-muted hover:text-ivory transition-colors min-h-[44px]"
               >
                 Cancel
               </button>
               <button
                 onClick={handleSave}
                 disabled={formSaving}
-                className="px-5 py-2.5 bg-accent text-bg text-xs font-semibold uppercase tracking-wider rounded-sm hover:bg-accent-light transition-colors disabled:opacity-40"
+                className="px-5 py-2.5 bg-accent text-bg text-xs font-semibold uppercase tracking-wider rounded-sm hover:bg-accent-light transition-colors disabled:opacity-40 min-h-[44px] inline-flex items-center justify-center"
               >
                 {formSaving ? 'Saving…' : 'Save Coupon'}
               </button>
@@ -296,7 +296,7 @@ export function AdminCoupons() {
               {coupons.length === 0 ? 'No coupons yet. Create one to get started.' : 'No coupons match your search.'}
             </div>
           ) : (
-            <table className="w-full text-sm">
+            <table className="w-full text-sm min-w-[540px]">
               <thead>
                 <tr className="text-xs text-muted border-b border-border bg-surface-alt">
                   <th className="text-left px-4 py-3.5 font-semibold">Code</th>

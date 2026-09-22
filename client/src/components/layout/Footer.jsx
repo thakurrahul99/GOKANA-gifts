@@ -72,14 +72,14 @@ export function Footer() {
       <div className="h-[1px] bg-gradient-to-r from-transparent via-accent to-transparent opacity-50" />
 
       <div className="container-gokana pt-16 pb-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 pb-14 border-b border-border">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-12 gap-8 md:gap-10 lg:gap-8 pb-12 sm:pb-14 border-b border-border">
           {/* Brand & Newsletter Column */}
-          <div className="lg:col-span-4">
+          <div className="col-span-2 md:col-span-2 lg:col-span-4">
             <Link to="/" className="flex flex-col group mb-4">
-              <span className="font-serif text-3xl font-light tracking-[0.14em] uppercase text-ivory group-hover:text-accent transition-colors">
+              <span className="font-serif text-2xl sm:text-3xl font-light tracking-[0.14em] uppercase text-ivory group-hover:text-accent transition-colors">
                 GŌKANA
               </span>
-              <span className="font-sans text-[9px] tracking-[0.26em] uppercase text-accent font-medium mt-1">
+              <span className="font-sans text-[8px] sm:text-[9px] tracking-[0.26em] uppercase text-accent font-medium mt-1">
                 Gifts • Curated • With Love
               </span>
             </Link>
@@ -105,13 +105,13 @@ export function Footer() {
                       value={email}
                       onChange={(e) => { setEmail(e.target.value); if (error) setError(""); }}
                       placeholder="Enter your email address"
-                      className="flex-1 bg-bg-alt px-4 py-2.5 text-xs text-ivory placeholder-[#6E665C] focus:outline-none min-h-[44px]"
+                      className="flex-1 min-w-0 bg-bg-alt px-3.5 sm:px-4 py-2.5 text-xs text-ivory placeholder-[#6E665C] focus:outline-none min-h-[44px]"
                       aria-label="Email for newsletter"
                       required
                     />
                     <button
                       type="submit"
-                      className="px-5 bg-accent text-bg font-sans text-xs font-semibold uppercase tracking-[0.14em] hover:bg-accent-light transition-colors flex items-center gap-1.5 min-h-[44px] cursor-pointer"
+                      className="px-4 sm:px-5 bg-accent text-bg font-sans text-xs font-semibold uppercase tracking-[0.14em] hover:bg-accent-light transition-colors flex items-center gap-1.5 min-h-[44px] cursor-pointer flex-shrink-0"
                       aria-label="Subscribe to newsletter"
                     >
                       Join <ArrowRight size={13} />
@@ -146,8 +146,8 @@ export function Footer() {
 
           {/* 4 Categorized Columns */}
           {Object.entries(footerColumns).map(([title, items]) => (
-            <div key={title} className="lg:col-span-2">
-              <h4 className="font-sans text-[11px] font-semibold uppercase tracking-[0.2em] text-accent mb-4">
+            <div key={title} className="col-span-1 md:col-span-1 lg:col-span-2">
+              <h4 className="font-sans text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.18em] sm:tracking-[0.2em] text-accent mb-3 sm:mb-4">
                 {title}
               </h4>
               <ul className="space-y-2.5 text-xs">

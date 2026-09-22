@@ -125,7 +125,7 @@ export function ProductCard({ product, index = 0 }) {
           </div>
 
           {/* Title */}
-          <h3 className="font-serif text-lg md:text-xl font-light text-ivory group-hover:text-accent transition-colors line-clamp-1">
+          <h3 className="font-serif text-base sm:text-lg md:text-xl font-light text-ivory group-hover:text-accent transition-colors line-clamp-1">
             <Link to={`/products/${product.slug}`}>{product.name}</Link>
           </h3>
 

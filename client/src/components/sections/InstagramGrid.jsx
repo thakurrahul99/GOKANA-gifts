@@ -88,12 +88,12 @@ export function InstagramGrid() {
 
         {/* Asymmetric Gallery Grid */}
         <ScrollReveal direction="scale" delay={0.2}>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4" style={{ height: 'min(65vh, 560px)' }}>
-            <div className="flex flex-col gap-3 md:gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-2.5 sm:gap-3 md:gap-4 h-[380px] xs:h-[440px] md:h-[520px] lg:h-[560px]">
+            <div className="flex flex-col gap-2.5 sm:gap-3 md:gap-4">
               <InstagramPost post={p1} className="flex-[2] min-h-0" />
               <InstagramPost post={p2} className="flex-1 min-h-0" />
             </div>
-            <div className="flex flex-col gap-3 md:gap-4">
+            <div className="flex flex-col gap-2.5 sm:gap-3 md:gap-4">
               <InstagramPost post={p3} className="flex-1 min-h-0" />
               <InstagramPost post={p4} className="flex-[2] min-h-0" />
             </div>
@@ -110,7 +110,7 @@ export function InstagramGrid() {
             href="https://instagram.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-outline inline-flex items-center gap-2.5 text-xs py-3.5 px-8 !text-accent border-accent hover:bg-accent/10 hover:border-accent-light"
+            className="btn-outline inline-flex items-center justify-center w-full sm:w-auto gap-2.5 text-xs py-3.5 px-6 sm:px-8 !text-accent border-accent hover:bg-accent/10 hover:border-accent-light"
           >
             <SvgInstagram size={17} className="text-accent" />
             Follow @gokana.in on Instagram

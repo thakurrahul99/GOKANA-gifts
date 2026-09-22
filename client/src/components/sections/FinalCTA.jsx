@@ -33,16 +33,16 @@ export function FinalCTA() {
         </ScrollReveal>
 
         <ScrollReveal delay={0.35}>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full">
             <Link
               to="/shop"
-              className="btn-primary text-xs py-4 px-8 uppercase tracking-[0.14em] font-semibold shadow-[0_8px_30px_rgba(197,160,89,0.25)]"
+              className="btn-primary inline-flex items-center justify-center w-full sm:w-auto text-xs py-4 px-8 uppercase tracking-[0.14em] font-semibold shadow-[0_8px_30px_rgba(197,160,89,0.25)] min-h-[48px]"
             >
               EXPLORE THE COLLECTION →
             </Link>
             <Link
               to="/gift-finder"
-              className="btn-outline text-xs py-4 px-7 uppercase tracking-[0.14em] font-semibold !text-accent border-accent hover:bg-accent/10"
+              className="btn-outline inline-flex items-center justify-center w-full sm:w-auto text-xs py-4 px-7 uppercase tracking-[0.14em] font-semibold !text-accent border-accent hover:bg-accent/10 min-h-[48px]"
             >
               🎁 FIND THE PERFECT GIFT →
             </Link>
