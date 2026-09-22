@@ -28,7 +28,7 @@ export function FinalCTA() {
 
         <ScrollReveal delay={0.25}>
           <p className="font-sans text-sm md:text-base text-muted leading-relaxed max-w-xl mx-auto mb-10 font-light">
-            Whether celebrating a special occasion or sending a heartfelt surprise, create a personalized gift that leaves an unforgettable impression.
+            Whether celebrating a special occasion or sending a heartfelt surprise, create a personalised gift that leaves an unforgettable impression.
           </p>
         </ScrollReveal>
 

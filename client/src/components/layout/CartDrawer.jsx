@@ -52,7 +52,7 @@ export function CartDrawer() {
                 <Truck size={15} className="text-accent flex-shrink-0" />
                 {subtotal >= FREE_SHIPPING_THRESHOLD ? <span className="text-accent font-semibold">🎉 You unlocked FREE express delivery!</span> : <span>Add <b className="text-accent">{formatPrice(diffToFree)}</b> more to unlock <b className="text-ivory">FREE shipping</b></span>}
               </div>
-              <div className="w-full h-1.5 bg-[#2E2721] rounded-full overflow-hidden"><motion.div className="h-full bg-gradient-to-r from-accent via-accent-light to-accent rounded-full" initial={{ width: 0 }} animate={{ width: `${progressToFree}%` }} transition={{ duration: 0.4 }} /></div>
+              <div className="w-full h-1.5 bg-border rounded-full overflow-hidden"><motion.div className="h-full bg-gradient-to-r from-accent via-accent-light to-accent rounded-full" initial={{ width: 0 }} animate={{ width: `${progressToFree}%` }} transition={{ duration: 0.4 }} /></div>
             </div>
 
             {/* Cart Items List */}

@@ -115,7 +115,7 @@ export function LoginPage() {
             <p className="font-sans text-xs sm:text-sm text-muted font-light">
               {mode === 'login'
                 ? 'Sign in to access your orders, saved addresses, and wishlist.'
-                : 'Create your account for personalized gifting and tracking.'}
+                : 'Create your account for personalised gifting and tracking.'}
             </p>
           </div>
 

@@ -38,14 +38,14 @@ export function Rating({ value = 5, count, size = 'sm', className }) {
 
 export function Badge({ children, variant = 'default', className }) {
   const variantStyles = {
-    default: 'bg-surface-alt text-ivory border border-border-light',
-    gold: 'bg-accent/20 text-accent-light border border-border',
-    bestseller: 'bg-accent/20 text-accent-light border border-border',
-    new: 'bg-surface-alt text-accent border border-border-light',
-    sale: 'bg-badge-sale-bg text-badge-sale-text border border-badge-sale-border',
-    limited: 'bg-badge-sale-bg text-badge-sale-text border border-badge-sale-border',
-    champagne: 'bg-accent/20 text-accent-light border border-border',
-    personalisable: 'bg-accent/15 text-accent border border-border-light',
+    default: 'bg-surface-alt text-ivory border border-border',
+    gold: 'bg-accent/15 text-accent-light border border-accent/30',
+    bestseller: 'bg-accent/15 text-accent-light border border-accent/30',
+    new: 'bg-surface-alt text-accent border border-border',
+    sale: 'bg-accent/12 text-accent-light border border-accent/30',
+    limited: 'bg-accent/12 text-accent-light border border-accent/30',
+    champagne: 'bg-accent/15 text-accent-light border border-accent/30',
+    personalisable: 'bg-accent/12 text-accent border border-accent/30',
     outline: 'border border-border text-accent bg-transparent',
   };
 

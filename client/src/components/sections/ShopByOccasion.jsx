@@ -22,7 +22,7 @@ function OccasionCard({ occasion, index }) {
         />
 
         {/* Cinematic Vignette Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#12100E] via-[#12100E]/40 to-transparent transition-opacity duration-500" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-[#111111]/40 to-transparent transition-opacity duration-500" />
         <div className="absolute inset-0 bg-bg/20 group-hover:bg-bg/10 transition-colors duration-500" />
 
         {/* Content */}
@@ -34,7 +34,7 @@ function OccasionCard({ occasion, index }) {
             <h3 className="font-serif text-xl sm:text-2xl md:text-3xl font-light text-ivory leading-tight group-hover:text-accent transition-colors duration-300">
               {occasion.label}
             </h3>
-            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-border-light bg-bg/70 backdrop-blur-xs flex items-center justify-center text-accent transition-all duration-300 group-hover:bg-accent group-hover:text-bg group-hover:border-accent flex-shrink-0">
+            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-border bg-bg/70 backdrop-blur-xs flex items-center justify-center text-accent transition-all duration-300 group-hover:bg-accent group-hover:text-bg group-hover:border-accent flex-shrink-0">
               <ArrowRight size={15} />
             </div>
           </div>

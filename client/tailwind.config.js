@@ -4,73 +4,75 @@ export default {
   theme: {
     extend: {
       colors: {
-        // ── Luxury Editorial Palette: Dark Espresso & Champagne Gold ──
+        // ── Luxury Editorial Palette: Charcoal & Champagne Gold ──
         bg: {
-          DEFAULT: '#12100E', // Dark Espresso
-          alt: '#181512',     // Warm Charcoal
-          elevated: '#1F1A16', // Deep Warm Olive/Espresso
-          banner: '#0E0C0A',  // Deep Obsidian for Hero/Headers
+          DEFAULT: '#111111',  // Main page background
+          alt: '#171717',      // Alternate section
+          surface: '#1E1E1E',  // Normal card/surface
+          elevated: '#242424', // Elevated card / modal
+          banner: '#0B0B0B',   // Deepest / Hero / Navbar
         },
         surface: {
-          DEFAULT: '#191613',
-          alt: '#1F1A16',
-          tint: '#27221C',
-          skeleton: '#2A231C',
+          DEFAULT: '#1E1E1E',
+          alt: '#242424',
+          tint: '#282828',
+          skeleton: '#242424',
         },
         border: {
-          DEFAULT: '#2E2721',
+          DEFAULT: '#303030',
           soft: 'rgba(197, 160, 89, 0.22)',
           gold: '#C5A059',
         },
         badge: {
-          'sale-bg': '#2D1B18',
-          'sale-text': '#F3A59B',
-          'sale-border': '#8C3B32',
+          'sale-bg': 'rgba(197, 160, 89, 0.12)',
+          'sale-text': '#E5C378',
+          'sale-border': 'rgba(197, 160, 89, 0.3)',
         },
         primary: {
-          DEFAULT: '#12100E', // Deep Espresso
-          2: '#1C1814',
-          dark: '#0B0A09',
-          soft: '#25201A',
+          DEFAULT: '#111111',
+          2: '#171717',
+          dark: '#0B0B0B',
+          soft: '#1E1E1E',
         },
         accent: {
-          DEFAULT: '#C5A059', // Warm Champagne Gold
+          DEFAULT: '#C5A059', // Main Gold
           dark: '#9E7B36',   // Deep Metallic Gold
-          light: '#E5C378',  // Radiant Champagne
-          soft: '#E8D5B5',   // Pale Gold / Muted Champagne
+          light: '#E5C378',  // Light Gold / Hover
+          soft: '#E8D5B5',   // Soft Champagne
         },
         ivory: {
           DEFAULT: '#FAF8F5',
           soft: '#F5F2EB',
-          muted: '#E6E0D5',
+          muted: '#B0AAA0',
         },
         text: {
           DEFAULT: '#FAF8F5',
           strong: '#FAF8F5',
-          muted: '#A39A8E',
+          secondary: '#B0AAA0',
+          muted: '#77736D',
         },
         muted: {
-          DEFAULT: '#A39A8E',
-          2: '#6E665C',
+          DEFAULT: '#B0AAA0',
+          2: '#77736D',
         },
         success: '#2E7D32',
         warning: '#C5A059',
         error: '#B3261E',
         info: '#C5A059',
 
-        // ── Backward Compatible Aliases (Mapped to Espresso & Champagne Gold) ──
+        // ── Backward Compatible Aliases (Mapped to Charcoal & Champagne Gold) ──
         charcoal: {
-          DEFAULT: '#181512',
+          DEFAULT: '#1E1E1E',
           50: '#FAF8F5',
           100: '#E8D5B5',
-          200: '#2E2721',
-          300: '#6E665C',
-          400: '#A39A8E',
-          500: '#1F1A16',
-          600: '#191613',
-          700: '#181512',
-          800: '#12100E',
-          900: '#0B0A09',
+          200: '#303030',
+          300: '#77736D',
+          400: '#B0AAA0',
+          500: '#242424',
+          600: '#1E1E1E',
+          700: '#171717',
+          800: '#111111',
+          900: '#0B0B0B',
         },
         champagne: {
           DEFAULT: '#C5A059',
@@ -95,12 +97,12 @@ export default {
           900: '#38290B',
         },
         beige: {
-          DEFAULT: '#1F1A16',
+          DEFAULT: '#242424',
           100: '#FAF8F5',
           200: '#F5F2EB',
           300: '#E8D5B5',
-          400: '#2E2721',
-          500: '#1F1A16',
+          400: '#303030',
+          500: '#242424',
         },
       },
       fontFamily: {
@@ -180,11 +182,11 @@ export default {
         },
       },
       boxShadow: {
-        'premium': '0 2px 8px rgba(27, 77, 62, 0.04)',
-        'premium-lg': '0 8px 24px rgba(27, 77, 62, 0.08)',
-        'gold': '0 4px 14px rgba(196, 136, 96, 0.25)',
-        'gold-lg': '0 6px 18px rgba(196, 136, 96, 0.35)',
-        'inset-top': 'inset 0 1px 0 rgba(255,255,255,0.1)',
+        'premium': '0 4px 20px rgba(0, 0, 0, 0.45)',
+        'premium-lg': '0 8px 32px rgba(0, 0, 0, 0.6)',
+        'gold': '0 4px 14px rgba(197, 160, 89, 0.22)',
+        'gold-lg': '0 6px 20px rgba(197, 160, 89, 0.32)',
+        'inset-top': 'inset 0 1px 0 rgba(255, 255, 255, 0.06)',
       },
       screens: {
         'xs': '375px',

@@ -587,7 +587,7 @@ export function GiftFinderPage() {
               </h3>
               <p className="font-sans text-sm text-muted leading-relaxed">
                 Connect directly with our team for custom gift boxes, company
-                logos, volume discounts, and personalized cards.
+                logos, volume discounts, and personalised cards.
               </p>
             </div>
 

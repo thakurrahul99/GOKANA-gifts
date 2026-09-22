@@ -122,7 +122,7 @@ export function WishlistPage() {
               animate={{ opacity: 1, y: 0 }}
               className="flex flex-col items-center justify-center py-20 text-center max-w-sm mx-auto"
             >
-              <div className="w-20 h-20 border border-border-light bg-bg-alt rounded-full flex items-center justify-center mb-7 shadow-lg">
+              <div className="w-20 h-20 border border-border bg-bg-alt rounded-full flex items-center justify-center mb-7 shadow-lg">
                 <Heart size={32} strokeWidth={1} className="text-accent" />
               </div>
               <h2 className="font-serif text-2xl font-light text-ivory mb-3">Your wishlist is empty</h2>

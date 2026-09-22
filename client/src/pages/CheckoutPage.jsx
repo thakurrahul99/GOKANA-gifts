@@ -177,7 +177,7 @@ export function CheckoutPage() {
             email: formData.email,
             contact: formData.phone,
           },
-          theme: { color: '#1B4D3E' },
+          theme: { color: '#C5A059' },
           handler: async (response) => {
             try {
               // The server re-verifies the signature AND checks that this

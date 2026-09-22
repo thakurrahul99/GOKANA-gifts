@@ -5,30 +5,30 @@ import { ScrollReveal, StaggerReveal, staggerItem, AnimatedHeading } from '../ui
 const journeySteps = [
   {
     step: '01',
-    action: 'CHOOSE',
-    title: 'Curated with Intention',
-    desc: 'Select from masterfully curated collections of Belgian chocolates, artisanal soy candles, and luxury keepsakes.',
+    action: 'CURATE',
+    title: 'Thoughtfully Curated',
+    desc: 'Gifts selected with intention — from Belgian chocolates to artisanal soy candles and keepsake items.',
     icon: Compass,
   },
   {
     step: '02',
     action: 'PERSONALISE',
-    title: 'Crafted for Their Story',
-    desc: 'Custom laser engraving, heartfelt wax-sealed calligraphy notes on 300 GSM paper, and custom ribbon finishes.',
+    title: 'Personalised With Care',
+    desc: 'Add a meaningful personal touch with custom engravings, heartfelt calligraphy notes, and luxury wax seals.',
     icon: Sparkles,
   },
   {
     step: '03',
-    action: 'WE PACK',
-    title: 'The Art of the Rigid Box',
-    desc: 'Every gift is meticulously hand-assembled in textured rigid boxes, accented with champagne gold foil.',
+    action: 'PRESENTATION',
+    title: 'Premium Presentation',
+    desc: 'Designed to make the moment feel special — hand-assembled in textured rigid boxes tied with silk ribbons.',
     icon: PackageCheck,
   },
   {
     step: '04',
-    action: 'THEY REMEMBER',
-    title: 'An Enduring Memory',
-    desc: 'Delivered in immaculate condition across India — creating a breathtaking moment of reverence and unboxing joy.',
+    action: 'DELIVERY',
+    title: 'Delivered With Care',
+    desc: 'Careful packaging and reliable pan-India delivery, ensuring an unforgettable unboxing experience.',
     icon: HeartHandshake,
   },
 ];
@@ -48,13 +48,13 @@ export function WhyGokana() {
           <ScrollReveal delay={0.25}>
             {/* Journey Flow Indicator */}
             <div className="inline-flex flex-wrap items-center justify-center gap-1.5 xs:gap-2 md:gap-3 py-2 px-3 xs:px-5 rounded-full bg-surface-alt border border-border text-accent font-sans text-[10px] xs:text-xs font-semibold tracking-[0.12em] xs:tracking-[0.18em] uppercase max-w-full">
-              <span>Choose</span>
+              <span>Curate</span>
               <span className="text-ivory/30">→</span>
               <span>Personalise</span>
               <span className="text-ivory/30">→</span>
-              <span>We Pack</span>
+              <span>Present</span>
               <span className="text-ivory/30">→</span>
-              <span>They Remember</span>
+              <span>Deliver</span>
             </div>
           </ScrollReveal>
         </div>
@@ -77,7 +77,7 @@ export function WhyGokana() {
                   <span className="font-serif text-3xl font-light text-accent/60 tracking-wider">
                     {step}
                   </span>
-                  <div className="w-10 h-10 rounded-full border border-border-light bg-surface-alt flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-bg group-hover:border-accent transition-all duration-300">
+                  <div className="w-10 h-10 rounded-full border border-border bg-surface-alt flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-bg group-hover:border-accent transition-all duration-300">
                     <Icon size={18} strokeWidth={1.7} />
                   </div>
                 </div>

@@ -33,7 +33,7 @@ export function PersonalizedGifting() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Left — Visually Rich Calligraphy Keepsake Simulation */}
           <ScrollReveal direction="scale" className="relative">
-            <div className="relative aspect-square max-w-md mx-auto bg-bg-alt rounded-[8px] p-6 sm:p-8 md:p-12 border border-border-light shadow-[0_12px_40px_rgba(0,0,0,0.7)] flex flex-col items-center justify-center text-center">
+            <div className="relative aspect-square max-w-md mx-auto bg-bg-alt rounded-[8px] p-6 sm:p-8 md:p-12 border border-border shadow-[0_12px_40px_rgba(0,0,0,0.7)] flex flex-col items-center justify-center text-center">
               {/* Subtle Gold Ornamental Stamp */}
               <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-border bg-surface-alt flex items-center justify-center text-accent mb-4 sm:mb-6">
                 <Sparkles size={18} className="text-accent" />
@@ -46,7 +46,7 @@ export function PersonalizedGifting() {
               <h4 className="font-serif text-2xl sm:text-3xl md:text-4xl font-light text-ivory mb-2 sm:mb-3 italic">
                 Dearest Deepti,
               </h4>
-              <p className="font-serif text-sm sm:text-base md:text-lg text-[#C7BFB5] leading-relaxed max-w-xs italic mb-4 sm:mb-6 font-light">
+              <p className="font-serif text-sm sm:text-base md:text-lg text-ivory/90 leading-relaxed max-w-xs italic mb-4 sm:mb-6 font-light">
                 "May this milestone bring you quiet joy, unforgettable celebrations, and dreams realized."
               </p>
 
@@ -69,11 +69,11 @@ export function PersonalizedGifting() {
               <p className="label-text text-accent mb-3">✦ Personalised Gifting</p>
             </ScrollReveal>
             <AnimatedHeading id="personalisation-heading" className="heading-lg text-ivory mb-4" delay={0.15}>
-              Make it theirs.
+              Make It Truly Theirs
             </AnimatedHeading>
             <ScrollReveal delay={0.25}>
               <p className="font-sans text-sm md:text-base text-muted leading-relaxed mb-8 max-w-lg">
-                A gift should never feel generic. Our artisans hand-letter your exact words, apply custom laser names, and tailor each element so your gift becomes an unforgettable keepsake.
+                Add a name, message or personal touch to turn a beautiful gift into a lasting memory.
               </p>
             </ScrollReveal>
 
@@ -83,7 +83,7 @@ export function PersonalizedGifting() {
                 <motion.div
                   key={title}
                   variants={staggerItem}
-                  className="p-4 rounded-[6px] bg-bg-alt border border-border hover:border-border transition-colors"
+                  className="p-4 rounded-[6px] bg-bg-alt border border-border hover:border-accent/40 transition-colors"
                 >
                   <div className="flex items-center gap-2.5 mb-1.5 text-accent">
                     <Icon size={16} strokeWidth={1.8} className="text-accent" />
@@ -96,7 +96,7 @@ export function PersonalizedGifting() {
 
             <ScrollReveal delay={0.4}>
               <Link to="/shop?personalised=true" className="btn-primary inline-flex items-center justify-center w-full sm:w-auto gap-2">
-                PERSONALISE A GIFT →
+                EXPLORE PERSONALISATION →
               </Link>
             </ScrollReveal>
           </div>

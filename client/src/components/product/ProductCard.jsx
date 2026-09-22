@@ -103,7 +103,7 @@ export function ProductCard({ product, index = 0 }) {
           <button
             onClick={handleWishlist}
             aria-label={isWished ? `Remove ${product.name} from wishlist` : `Save ${product.name} to wishlist`}
-            className="absolute top-3 right-3 w-11 h-11 rounded-full bg-bg/80 backdrop-blur-xs border border-border-light flex items-center justify-center text-ivory hover:text-accent hover:border-accent transition-all z-10 min-w-[44px] min-h-[44px] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent cursor-pointer"
+            className="absolute top-3 right-3 w-11 h-11 rounded-full bg-bg/80 backdrop-blur-xs border border-border flex items-center justify-center text-ivory hover:text-accent hover:border-accent transition-all z-10 min-w-[44px] min-h-[44px] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent cursor-pointer"
           >
             <Heart
               size={17}

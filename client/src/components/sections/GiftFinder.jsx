@@ -188,8 +188,8 @@ export function GiftFinder() {
               Not Sure What to Gift?
             </AnimatedHeading>
             <ScrollReveal delay={0.25}>
-              <p className="font-sans text-base text-muted max-w-md mx-auto leading-relaxed">
-                Take our 60-second quiz. We will match you with hand-selected gifts guaranteed to be remembered.
+              <p className="font-sans text-sm sm:text-base text-muted max-w-lg mx-auto leading-relaxed">
+                Tell us who you're gifting for, the occasion and your budget — we'll help you find something they'll love.
               </p>
             </ScrollReveal>
           </div>
@@ -336,7 +336,7 @@ export function GiftFinder() {
                               onClick={(e) => handleAddToCart(e, product)}
                               className={`w-full py-2.5 px-3 rounded-lg text-xs font-sans font-semibold uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 min-h-[40px] ${
                                 addedId === product.id
-                                  ? 'bg-emerald-800 text-ivory'
+                                  ? 'bg-accent-light text-bg'
                                   : 'bg-accent text-bg hover:bg-accent-light'
                               }`}
                             >

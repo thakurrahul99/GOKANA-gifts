@@ -43,8 +43,8 @@ export function Hero() {
             fetchPriority="high"
           />
           {/* Cinematic Contrast Overlays — Left 40% darker for crystal clear typography */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0E0C0A] via-[#12100E]/75 md:via-[#12100E]/55 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#12100E] via-transparent to-[#12100E]/60" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0B0B0B] via-[#111111]/80 md:via-[#111111]/60 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-transparent to-[#0B0B0B]/60" />
           <div className="absolute inset-0 bg-bg/20" />
         </motion.div>
 
@@ -57,7 +57,7 @@ export function Hero() {
             <div className="w-full max-w-[650px] text-left flex flex-col items-start">
               {/* Trust Badge */}
               <motion.div
-                className="inline-flex items-center gap-2 sm:gap-3 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full bg-primary-2/85 backdrop-blur-md border border-border-light shadow-[0_4px_20px_rgba(0,0,0,0.5)] text-ivory text-[11px] sm:text-xs font-sans mb-5 sm:mb-6"
+                className="inline-flex items-center gap-2 sm:gap-3 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full bg-bg-alt/85 backdrop-blur-md border border-border shadow-[0_4px_20px_rgba(0,0,0,0.5)] text-ivory text-[11px] sm:text-xs font-sans mb-5 sm:mb-6"
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
@@ -95,12 +95,12 @@ export function Hero() {
 
               {/* Description */}
               <motion.p
-                className="font-sans text-[13.5px] sm:text-[14px] md:text-[16px] text-[#D8D0C5] leading-[1.7] sm:leading-[1.8] max-w-[580px] mb-7 sm:mb-8 font-light text-left"
+                className="font-sans text-[13.5px] sm:text-[14px] md:text-[16px] text-muted leading-[1.7] sm:leading-[1.8] max-w-[580px] mb-7 sm:mb-8 font-light text-left"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.55 }}
               >
-                Artisan chocolates, hand-poured soy candles, and personalized gifts. Hand-packed in luxury gift boxes with complimentary handwritten calligraphy cards.
+                Artisan chocolates, hand-poured soy candles, and personalised keepsakes. Hand-packed in luxury gift boxes with complimentary handwritten calligraphy cards.
               </motion.p>
 
               {/* CTA Buttons */}
@@ -155,7 +155,7 @@ export function Hero() {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-0 lg:divide-x divide-border/50">
             {/* 1. PREMIUM QUALITY */}
             <div className="flex items-center gap-2.5 sm:gap-3.5 lg:px-6 first:lg:pl-0">
-              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-border-light bg-surface-alt flex items-center justify-center text-accent flex-shrink-0">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-border bg-surface-alt flex items-center justify-center text-accent flex-shrink-0">
                 <Award size={18} strokeWidth={1.6} />
               </div>
               <div className="min-w-0">
@@ -170,7 +170,7 @@ export function Hero() {
 
             {/* 2. BEAUTIFULLY PACKED */}
             <div className="flex items-center gap-2.5 sm:gap-3.5 lg:px-6">
-              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-border-light bg-surface-alt flex items-center justify-center text-accent flex-shrink-0">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-border bg-surface-alt flex items-center justify-center text-accent flex-shrink-0">
                 <Gift size={18} strokeWidth={1.6} />
               </div>
               <div className="min-w-0">
@@ -185,7 +185,7 @@ export function Hero() {
 
             {/* 3. PERSONALISATION */}
             <div className="flex items-center gap-2.5 sm:gap-3.5 pt-3 sm:pt-0 border-t sm:border-t-0 border-border/40 lg:border-0 lg:px-6">
-              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-border-light bg-surface-alt flex items-center justify-center text-accent flex-shrink-0">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-border bg-surface-alt flex items-center justify-center text-accent flex-shrink-0">
                 <Sparkles size={18} strokeWidth={1.6} />
               </div>
               <div className="min-w-0">
@@ -200,7 +200,7 @@ export function Hero() {
 
             {/* 4. FAST & RELIABLE */}
             <div className="flex items-center gap-2.5 sm:gap-3.5 pt-3 sm:pt-0 border-t sm:border-t-0 border-border/40 lg:border-0 lg:px-6 last:lg:pr-0">
-              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-border-light bg-surface-alt flex items-center justify-center text-accent flex-shrink-0">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-border bg-surface-alt flex items-center justify-center text-accent flex-shrink-0">
                 <Truck size={18} strokeWidth={1.6} />
               </div>
               <div className="min-w-0">

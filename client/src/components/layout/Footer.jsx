@@ -85,7 +85,7 @@ export function Footer() {
             </Link>
 
             <p className="font-sans text-xs text-muted leading-relaxed max-w-sm mb-6 font-light">
-              Thoughtfully chosen. Beautifully wrapped. Meaningfully remembered. Luxury gift hampers, handmade chocolates, and personalized gifts for every special occasion.
+              Thoughtfully chosen. Beautifully wrapped. Meaningfully remembered. Luxury gift hampers, handmade chocolates, and personalised gifts for every special occasion.
             </p>
 
             {/* Newsletter Signup */}
@@ -99,13 +99,13 @@ export function Footer() {
 
               {!subscribed ? (
                 <form onSubmit={handleSubscribe} className="space-y-2" noValidate>
-                  <div className="flex rounded-[4px] overflow-hidden border border-border-light focus-within:border-accent transition-colors">
+                  <div className="flex rounded-[4px] overflow-hidden border border-border focus-within:border-accent transition-colors">
                     <input
                       type="email"
                       value={email}
                       onChange={(e) => { setEmail(e.target.value); if (error) setError(""); }}
                       placeholder="Enter your email address"
-                      className="flex-1 min-w-0 bg-bg-alt px-3.5 sm:px-4 py-2.5 text-xs text-ivory placeholder-[#6E665C] focus:outline-none min-h-[44px]"
+                      className="flex-1 min-w-0 bg-bg-alt px-3.5 sm:px-4 py-2.5 text-xs text-ivory placeholder-muted-2 focus:outline-none min-h-[44px]"
                       aria-label="Email for newsletter"
                       required
                     />

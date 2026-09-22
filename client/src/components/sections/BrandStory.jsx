@@ -39,7 +39,7 @@ export function BrandStory() {
             </ScrollReveal>
 
             <ScrollReveal delay={0.3}>
-              <p className="font-sans text-sm md:text-base text-[#D4CDC3] leading-relaxed mb-4 max-w-lg font-light">
+              <p className="font-sans text-sm md:text-base text-muted leading-relaxed mb-4 max-w-lg font-light">
                 At GŌKANA, we believe a gift is never merely an object — it is a heartfelt sentiment wrapped in joyful anticipation, a tangible token of affection, gratitude, and lasting remembrance.
               </p>
             </ScrollReveal>
@@ -77,7 +77,7 @@ export function BrandStory() {
           </div>
 
           {/* Right Column — Imagery with Parallax & Gold Border */}
-          <div ref={imageRef} className="order-1 lg:order-2 overflow-hidden rounded-[8px] border border-border-light shadow-[0_12px_40px_rgba(0,0,0,0.7)] aspect-square bg-bg">
+          <div ref={imageRef} className="order-1 lg:order-2 overflow-hidden rounded-[8px] border border-border shadow-[0_12px_40px_rgba(0,0,0,0.7)] aspect-square bg-bg">
             <motion.img
               src={brandStoryImg}
               alt="Artisan handcrafting GŌKANA luxury gift hamper"

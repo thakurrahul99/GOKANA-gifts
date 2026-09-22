@@ -24,14 +24,14 @@ function TestimonialCard({ testimonial }) {
         </div>
 
         {/* Quote */}
-        <blockquote className="font-serif text-base sm:text-lg font-light text-[#E8E2D8] leading-relaxed mb-5 sm:mb-6 italic">
+        <blockquote className="font-serif text-base sm:text-lg font-light text-ivory leading-relaxed mb-5 sm:mb-6 italic">
           "{testimonial.review}"
         </blockquote>
       </div>
 
       {/* Author & Product */}
       <div className="pt-4 sm:pt-5 border-t border-border flex items-center gap-3">
-        <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-surface-alt border border-border-light text-accent font-serif font-light text-sm sm:text-base flex items-center justify-center flex-shrink-0">
+        <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-surface-alt border border-border text-accent font-serif font-light text-sm sm:text-base flex items-center justify-center flex-shrink-0">
           {testimonial.initials}
         </div>
         <div className="min-w-0">
@@ -62,7 +62,7 @@ export function Testimonials() {
 
           {/* Aggregate Rating Banner */}
           <ScrollReveal delay={0.25}>
-            <div className="inline-flex flex-wrap items-center justify-center gap-2 sm:gap-3 px-3.5 sm:px-5 py-2 rounded-full bg-bg-alt border border-border-light shadow-md">
+            <div className="inline-flex flex-wrap items-center justify-center gap-2 sm:gap-3 px-3.5 sm:px-5 py-2 rounded-full bg-bg-alt border border-border shadow-md">
               <div className="flex gap-1 text-accent">
                 {Array.from({ length: 5 }).map((_, i) => (
                   <Star key={i} size={14} className="text-accent fill-accent" />
