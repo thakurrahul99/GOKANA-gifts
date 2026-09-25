@@ -56,35 +56,36 @@ export function GokanaPromise() {
           </ScrollReveal>
         </div>
 
-        <StaggerReveal className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 lg:gap-8" stagger={0.1} delay={0.2}>
+        <StaggerReveal className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-6 lg:gap-8" stagger={0.1} delay={0.2}>
           {promisePillars.map(({ category, title, icon: Icon, desc, features }) => (
             <motion.div
               key={category}
               variants={staggerItem}
-              className="card-premium flex flex-col justify-between bg-bg-alt border border-border hover:border-accent/40 transition-all duration-300 p-6 sm:p-8 rounded-2xl shadow-xl group"
+              className="card-premium flex flex-col justify-between bg-bg-alt border border-border hover:border-accent/40 transition-all duration-300 p-4 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl shadow-xl group"
             >
               <div>
-                <div className="flex items-center justify-end mb-6">
-                  <div className="w-11 h-11 rounded-full bg-surface-alt border border-border group-hover:border-accent/50 flex items-center justify-center text-accent transition-all duration-300">
-                    <Icon size={20} strokeWidth={1.7} />
+                <div className="flex items-center justify-between mb-2.5 sm:mb-5">
+                  <p className="font-sans text-[9px] sm:text-[11px] font-semibold uppercase tracking-[0.16em] sm:tracking-[0.2em] text-accent">
+                    {category}
+                  </p>
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 md:w-11 md:h-11 rounded-full bg-surface-alt border border-border group-hover:border-accent/50 flex items-center justify-center text-accent transition-all duration-300 flex-shrink-0">
+                    <Icon size={16} className="sm:hidden" strokeWidth={1.7} />
+                    <Icon size={20} className="hidden sm:block" strokeWidth={1.7} />
                   </div>
                 </div>
 
-                <p className="font-sans text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.2em] text-accent mb-2">
-                  {category}
-                </p>
-                <h3 className="font-serif text-xl sm:text-2xl font-light text-ivory mb-3">
+                <h3 className="font-serif text-lg sm:text-xl md:text-2xl font-light text-ivory mb-1.5 sm:mb-3">
                   {title}
                 </h3>
-                <p className="font-sans text-xs sm:text-sm text-muted leading-relaxed font-light mb-6">
+                <p className="font-sans text-xs sm:text-sm text-muted leading-relaxed font-light mb-3.5 sm:mb-6">
                   {desc}
                 </p>
               </div>
 
-              <div className="pt-4 border-t border-border/70 space-y-2">
+              <div className="pt-2.5 sm:pt-4 border-t border-border/70 space-y-1.5 sm:space-y-2">
                 {features.map((feat) => (
-                  <div key={feat} className="flex items-center gap-2 text-xs text-ivory/90 font-light">
-                    <CheckCircle2 size={13} className="text-accent flex-shrink-0" />
+                  <div key={feat} className="flex items-center gap-2 text-[11px] sm:text-xs text-ivory/90 font-light">
+                    <CheckCircle2 size={12} className="text-accent flex-shrink-0" />
                     <span>{feat}</span>
                   </div>
                 ))}

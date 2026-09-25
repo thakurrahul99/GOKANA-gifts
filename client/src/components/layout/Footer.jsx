@@ -36,7 +36,7 @@ const footerColumns = {
     { label: "WhatsApp: " + BUSINESS_INFO.phone.display, href: BUSINESS_INFO.whatsapp.buildUrl("Hi GŌKANA Gifts! I need help with an order/gift."), isExternal: true },
     { label: "Email: " + BUSINESS_INFO.email.address, href: BUSINESS_INFO.email.mailto, isExternal: true },
     { label: "Track Your Order", href: "/account" },
-    { label: "Frequently Asked Questions", href: "/#faq" },
+    { label: "Frequently Asked Questions", href: "/faq" },
     { label: "Contact & Location", href: "/contact" },
   ],
   Personalisation: [
@@ -46,9 +46,9 @@ const footerColumns = {
     { label: "Premium Ribbon Wrapping", href: "/#personalisation" },
   ],
   "Shipping & Policies": [
-    { label: "Pan India Delivery", href: "/#faq" },
-    { label: "Signature Gift Packaging", href: "/#faq" },
-    { label: "Replacement & Support", href: "/#faq" },
+    { label: "Pan India Delivery", href: "/faq" },
+    { label: "Signature Gift Packaging", href: "/faq" },
+    { label: "Replacement & Support", href: "/faq" },
     { label: "Help & Inquiries", href: "/contact" },
   ],
 };

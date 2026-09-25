@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { IntroReveal } from '../components/sections/IntroReveal';
 import { Hero } from '../components/sections/Hero';
 import { ShopByOccasion } from '../components/sections/ShopByOccasion';
@@ -10,7 +10,6 @@ import { WhyGokana } from '../components/sections/WhyGokana';
 import { GokanaPromise } from '../components/sections/GokanaPromise';
 import { BrandStory } from '../components/sections/BrandStory';
 import { InstagramGrid } from '../components/sections/InstagramGrid';
-import { FAQ } from '../components/sections/FAQ';
 import { Newsletter } from '../components/sections/Newsletter';
 import { FinalCTA } from '../components/sections/FinalCTA';
 
@@ -70,13 +69,10 @@ export function HomePage() {
         {/* 10. Community Moments Instagram Grid */}
         <InstagramGrid />
 
-        {/* 11. Frequently Asked Questions */}
-        <FAQ />
-
-        {/* 12. Private Circle Newsletter */}
+        {/* 11. Stay Connected / Direct Communication */}
         <Newsletter />
 
-        {/* 13. Final Unboxing CTA */}
+        {/* 12. Final Unboxing CTA */}
         <FinalCTA />
       </main>
     </>
