@@ -70,11 +70,6 @@ body {
   min-height: 100vh;
 }
 
-/* Keep the homepage hidden until IntroReveal is mounted on a fresh session. */
-html.intro-pending #root {
-  visibility: hidden;
-}
-
 body, #root {
   max-width: 100%;
   overflow-x: clip;
