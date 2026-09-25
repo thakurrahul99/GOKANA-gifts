@@ -15,12 +15,12 @@ export function Newsletter() {
           </ScrollReveal>
 
           <AnimatedHeading id="newsletter-heading" className="heading-lg text-ivory mb-4" delay={0.15}>
-            Curated Gifting Insights &amp; Updates
+            Gift Collections &amp; Updates
           </AnimatedHeading>
 
           <ScrollReveal delay={0.25}>
             <p className="font-sans text-sm md:text-base text-muted mb-8 max-w-md mx-auto leading-relaxed font-light">
-              Connect directly with our team in Mathura, UP for bespoke hampers, corporate gifting previews, and seasonal festive recommendations.
+              Connect directly with our team in Mathura, UP for custom gift hampers, corporate gifting previews, and seasonal festive recommendations.
             </p>
           </ScrollReveal>
 

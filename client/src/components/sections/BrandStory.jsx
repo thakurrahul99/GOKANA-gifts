@@ -17,7 +17,7 @@ export function BrandStory() {
   return (
     <section className="section-py bg-bg-alt text-ivory overflow-hidden border-b border-border" aria-labelledby="brand-philosophy-heading">
       <div className="container-gokana">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-20 items-center">
           {/* Left Column — Philosophy Text */}
           <div className="order-2 lg:order-1">
             <ScrollReveal delay={0.1}>
@@ -46,7 +46,7 @@ export function BrandStory() {
 
             <ScrollReveal delay={0.4}>
               <p className="font-sans text-sm md:text-base text-muted leading-relaxed mb-8 max-w-lg font-light">
-                We partner with master chocolatiers, ceramicists, and artisanal perfumers who refuse shortcuts. Every ribbon is hand-tied, every note hand-lettered, and every rigid box hand-checked.
+                We partner with expert chocolate makers, artisan creators, and master candle makers who refuse shortcuts. Every ribbon is hand-tied, every note hand-lettered, and every box hand-checked.
               </p>
             </ScrollReveal>
 
@@ -62,15 +62,15 @@ export function BrandStory() {
               <div className="grid grid-cols-3 gap-2 xs:gap-4 sm:gap-6 mt-10 sm:mt-12 pt-6 sm:pt-8 border-t border-border">
                 <div>
                   <p className="font-serif text-xl xs:text-2xl font-light text-accent">Small Batch</p>
-                  <p className="font-sans text-[9px] xs:text-[11px] text-muted uppercase tracking-wider mt-1">Artisanal Making</p>
+                  <p className="font-sans text-[9px] xs:text-[11px] text-muted uppercase tracking-wider mt-1">Handmade Care</p>
                 </div>
                 <div>
-                  <p className="font-serif text-xl xs:text-2xl font-light text-accent">Bespoke</p>
-                  <p className="font-sans text-[9px] xs:text-[11px] text-muted uppercase tracking-wider mt-1">Custom Engraved</p>
+                  <p className="font-serif text-xl xs:text-2xl font-light text-accent">Custom</p>
+                  <p className="font-sans text-[9px] xs:text-[11px] text-muted uppercase tracking-wider mt-1">Personalised</p>
                 </div>
                 <div>
                   <p className="font-serif text-xl xs:text-2xl font-light text-accent">100%</p>
-                  <p className="font-sans text-[9px] xs:text-[11px] text-muted uppercase tracking-wider mt-1">Handcrafted Care</p>
+                  <p className="font-sans text-[9px] xs:text-[11px] text-muted uppercase tracking-wider mt-1">Premium Quality</p>
                 </div>
               </div>
             </ScrollReveal>

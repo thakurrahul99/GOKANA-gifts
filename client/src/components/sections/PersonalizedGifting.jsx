@@ -30,7 +30,7 @@ export function PersonalizedGifting() {
   return (
     <section id="personalisation" className="section-py bg-bg text-ivory overflow-hidden border-b border-border" aria-labelledby="personalisation-heading">
       <div className="container-gokana">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-20 items-center">
           {/* Left — Visually Rich Calligraphy Keepsake Simulation */}
           <ScrollReveal direction="scale" className="relative">
             <div className="relative aspect-square max-w-md mx-auto bg-bg-alt rounded-[8px] p-6 sm:p-8 md:p-12 border border-border shadow-[0_12px_40px_rgba(0,0,0,0.7)] flex flex-col items-center justify-center text-center">

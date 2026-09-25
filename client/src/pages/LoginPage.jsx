@@ -73,7 +73,7 @@ export function LoginPage() {
           </blockquote>
           <div className="flex items-center justify-center gap-6 text-xs text-muted tracking-wider uppercase">
             <span>✦ Handcrafted</span>
-            <span>✦ Artisanal</span>
+            <span>✦ Personalised</span>
             <span>✦ Pan-India Delivery</span>
           </div>
         </div>

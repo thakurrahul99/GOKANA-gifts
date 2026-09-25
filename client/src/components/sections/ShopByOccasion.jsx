@@ -56,17 +56,17 @@ export function ShopByOccasion() {
     <section className="section-py bg-bg text-ivory overflow-hidden border-b border-border" aria-labelledby="occasions-heading">
       <div className="container-gokana">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 mb-8 sm:mb-14">
           <div>
             <ScrollReveal delay={0.1}>
-              <p className="label-text text-accent mb-3">✦ Curated For Every Milestone</p>
+              <p className="label-text text-accent mb-3">✦ Made For Every Celebration</p>
             </ScrollReveal>
             <AnimatedHeading id="occasions-heading" className="heading-lg text-ivory mb-2" delay={0.15}>
               Shop by Occasion
             </AnimatedHeading>
             <ScrollReveal delay={0.25}>
               <p className="font-sans text-sm text-muted max-w-lg leading-relaxed">
-                From milestone celebrations to heartfelt tokens of gratitude, explore curations tailored to the sentiment of the moment.
+                From milestone celebrations to heartfelt thank you gifts, explore gift boxes made for every special moment.
               </p>
             </ScrollReveal>
           </div>
@@ -84,7 +84,7 @@ export function ShopByOccasion() {
 
         {/* 6 Core Occasion Cards Grid */}
         <StaggerReveal
-          className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8"
+          className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6 md:gap-8"
           stagger={0.07}
           delay={0.2}
         >

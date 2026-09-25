@@ -304,7 +304,7 @@ export function ProductPage() {
             <div className="p-3.5 sm:p-4 rounded-xl bg-bg-alt border border-border space-y-2.5 mb-6 shadow-md">
               <div className="flex items-center gap-2 text-xs font-semibold text-accent">
                 <AlertCircle size={15} />
-                <span>Handcrafted in limited artisanal batches</span>
+                <span>Handcrafted in fresh small batches</span>
               </div>
               <div className="flex items-center gap-2 text-xs text-ivory font-medium pt-2 border-t border-border">
                 <Clock size={15} className="text-accent" />

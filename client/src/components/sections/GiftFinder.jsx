@@ -180,7 +180,7 @@ export function GiftFinder() {
       <div className="container-gokana">
         <div className="max-w-3xl mx-auto">
           {/* Header */}
-          <div className="text-center mb-12">
+          <div className="text-center mb-8 sm:mb-12">
             <ScrollReveal delay={0.1}>
               <p className="label-text text-accent mb-3">✦ 4-Step Gifting Assistant</p>
             </ScrollReveal>
@@ -195,7 +195,7 @@ export function GiftFinder() {
           </div>
 
           <ScrollReveal delay={0.3}>
-            <div className="p-4 sm:p-6 md:p-10 rounded-2xl bg-bg-alt border border-border shadow-2xl">
+            <div className="p-3.5 sm:p-6 md:p-10 rounded-xl sm:rounded-2xl bg-bg-alt border border-border shadow-2xl">
               {/* Progress Indicator (Step X of 4) */}
               <div className="flex items-center justify-between gap-2 sm:gap-4 mb-6 sm:mb-8 pb-4 border-b border-border">
                 <div className="flex items-center gap-2 min-w-0">
@@ -243,16 +243,21 @@ export function GiftFinder() {
                           <button
                             key={opt.value}
                             onClick={() => handleSelect(currentStepData.id, opt.value)}
-                            className={`p-3 sm:p-4 rounded-xl border text-left transition-all duration-200 flex flex-col justify-between min-h-[78px] sm:min-h-[84px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
+                            className={`p-3 sm:p-4 rounded-lg sm:rounded-xl border text-left transition-all duration-200 flex flex-col justify-between min-h-[72px] sm:min-h-[84px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent relative ${
                               isSelected
-                                ? 'border-accent bg-accent/15 text-accent shadow-sm'
-                                : 'border-border bg-bg text-ivory hover:border-accent hover:bg-surface'
+                                ? 'border-accent bg-accent/15 text-accent shadow-[0_0_0_1px_rgba(197,160,89,0.5)]'
+                                : 'border-border bg-bg text-ivory hover:border-accent/50 hover:bg-surface'
                             }`}
                           >
-                            <span className="text-xl sm:text-2xl mb-1.5 sm:mb-2" aria-hidden="true">{opt.emoji}</span>
+                            <span className="text-lg sm:text-2xl mb-1 sm:mb-2" aria-hidden="true">{opt.emoji}</span>
                             <span className="font-sans text-[11px] sm:text-xs font-semibold tracking-wide">
                               {opt.label}
                             </span>
+                            {isSelected && (
+                              <span className="absolute top-2 right-2 w-4 h-4 rounded-full bg-accent flex items-center justify-center">
+                                <Check size={10} className="text-bg" />
+                              </span>
+                            )}
                           </button>
                         );
                       })}

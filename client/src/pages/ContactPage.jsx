@@ -163,7 +163,7 @@ export function ContactPage() {
                 <h3 className="font-serif text-base sm:text-lg font-light text-ivory">Corporate & Bulk Orders</h3>
               </div>
               <p className="font-sans text-xs text-muted leading-relaxed font-light mb-3.5">
-                Planning celebratory bulk orders or company client gifting? We provide custom branding, bespoke ribbons, and corporate pricing.
+                Planning celebratory bulk orders or company client gifting? We provide custom branding, personalised ribbons, and special corporate pricing.
               </p>
               <div className="flex items-center gap-2 text-xs text-accent font-medium">
                 <ShieldCheck size={15} />

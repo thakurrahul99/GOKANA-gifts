@@ -43,7 +43,7 @@ export function FAQ() {
     <section id="faq" className="section-py bg-bg" aria-labelledby="faq-heading">
       <div className="container-gokana max-w-4xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-14">
+        <div className="text-center mb-8 sm:mb-14">
           <ScrollReveal delay={0.1}>
             <p className="label-text text-accent mb-3">✦ Got Questions?</p>
           </ScrollReveal>

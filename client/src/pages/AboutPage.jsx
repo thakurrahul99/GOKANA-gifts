@@ -27,8 +27,8 @@ const values = [
 ];
 
 const metrics = [
-  { value: 'Artisan', label: 'Handcrafted Quality' },
-  { value: 'Bespoke', label: 'Custom Personalisation' },
+  { value: 'Handmade', label: 'Handcrafted Quality' },
+  { value: 'Custom', label: 'Personalised Gifting' },
   { value: 'Pan-India', label: 'Doorstep Delivery' },
   { value: 'Care', label: 'Complimentary Cards' },
 ];
@@ -126,7 +126,7 @@ export function AboutPage() {
               gift — yet often settle for something generic that fails to capture the true depth of the relationship.
             </p>
             <p>
-              We realised that thoughtful gifting in India deserved a higher standard of artistry, personalisation, and care — combining hand-curated Belgian chocolates, hand-poured candles, and bespoke calligraphy notes into memorable keepsake boxes.
+              We realised that thoughtful gifting in India deserved a higher standard of quality, personalisation, and care — combining hand-selected Belgian chocolates, hand-poured candles, and personalised handwritten notes into memorable gift boxes.
             </p>
             <p>
               From Mathura, Uttar Pradesh to doorsteps across India, GŌKANA Gifts treats every gift like a

@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowRight, ChevronDown, Star, Award, Gift, Sparkles, Truck } from 'lucide-react';
+import { ArrowRight, ChevronDown, Award, Gift, Sparkles, Truck } from 'lucide-react';
 import { heroLuxuryImg } from '../../data';
 
 export function Hero() {
@@ -50,14 +50,14 @@ export function Hero() {
 
         {/* Content — Positioned around 8% from left edge, vertically centered at 40-50% hero height */}
         <motion.div
-          className="absolute inset-0 flex flex-col justify-center pt-20 md:pt-16 pb-16 md:pb-20"
+          className="absolute inset-0 flex flex-col justify-center pt-16 sm:pt-20 md:pt-16 pb-14 sm:pb-16 md:pb-20"
           style={{ y: textY, opacity }}
         >
           <div className="w-full px-5 sm:px-8 md:px-12 lg:px-0 lg:pl-[8vw]">
             <div className="w-full max-w-[650px] text-left flex flex-col items-start">
               {/* Trust Badge */}
               <motion.div
-                className="inline-flex items-center gap-2 sm:gap-3 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full bg-bg-alt/85 backdrop-blur-md border border-border shadow-[0_4px_20px_rgba(0,0,0,0.5)] text-ivory text-[11px] sm:text-xs font-sans mb-5 sm:mb-6"
+                className="inline-flex items-center gap-2 sm:gap-3 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full bg-bg-alt/85 backdrop-blur-md border border-border shadow-[0_4px_20px_rgba(0,0,0,0.5)] text-ivory text-[11px] sm:text-xs font-sans mb-4 sm:mb-6"
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
@@ -67,11 +67,11 @@ export function Hero() {
                   <span className="font-semibold text-ivory">The GŌKANA Promise</span>
                 </div>
                 <span className="text-accent/40">•</span>
-                <span className="text-ivory/90 tracking-wide truncate">Handcrafted Luxury Curations</span>
+                <span className="text-ivory/90 tracking-wide truncate">Handcrafted Luxury Gift Hampers</span>
               </motion.div>
 
               {/* Main Headline */}
-              <div className="overflow-hidden mb-3.5 sm:mb-4 w-full">
+              <div className="overflow-hidden mb-3 sm:mb-4 w-full">
                 <motion.h1
                   className="font-serif text-[clamp(2.1rem,6.2vw,5.6rem)] font-light text-ivory leading-[1.05] sm:leading-[1.03] tracking-[-0.015em] drop-shadow-[0_8px_24px_rgba(0,0,0,0.6)] text-left"
                   initial={{ y: '100%' }}
@@ -95,7 +95,7 @@ export function Hero() {
 
               {/* Description */}
               <motion.p
-                className="font-sans text-[13.5px] sm:text-[14px] md:text-[16px] text-muted leading-[1.7] sm:leading-[1.8] max-w-[580px] mb-7 sm:mb-8 font-light text-left"
+                className="font-sans text-[13.5px] sm:text-[14px] md:text-[16px] text-muted leading-[1.65] sm:leading-[1.8] max-w-[580px] mb-6 sm:mb-8 font-light text-left"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.55 }}
@@ -133,7 +133,7 @@ export function Hero() {
         {/* Subtle SCROLL indicator */}
         <button
           onClick={scrollDown}
-          className="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-ivory/60 hover:text-accent transition-colors focus-visible:outline-none rounded p-1 cursor-pointer"
+          className="absolute bottom-4 left-1/2 -translate-x-1/2 hidden xs:flex flex-col items-center gap-1 text-ivory/60 hover:text-accent transition-colors focus-visible:outline-none rounded p-1 cursor-pointer"
           aria-label="Scroll down to content"
         >
           <span className="font-sans text-[10px] tracking-[0.25em] uppercase text-accent font-medium">SCROLL ↓</span>
@@ -160,7 +160,7 @@ export function Hero() {
               </div>
               <div className="min-w-0">
                 <p className="font-sans text-[11px] sm:text-xs font-semibold uppercase tracking-[0.12em] sm:tracking-[0.16em] text-ivory truncate">
-                  1. PREMIUM QUALITY
+                  PREMIUM QUALITY
                 </p>
                 <p className="font-sans text-[11px] sm:text-xs text-muted mt-0.5 truncate">
                   Finest ingredients
@@ -175,7 +175,7 @@ export function Hero() {
               </div>
               <div className="min-w-0">
                 <p className="font-sans text-[11px] sm:text-xs font-semibold uppercase tracking-[0.12em] sm:tracking-[0.16em] text-ivory truncate">
-                  2. BEAUTIFULLY PACKED
+                  BEAUTIFULLY PACKED
                 </p>
                 <p className="font-sans text-[11px] sm:text-xs text-muted mt-0.5 truncate">
                   Ready to gift
@@ -190,7 +190,7 @@ export function Hero() {
               </div>
               <div className="min-w-0">
                 <p className="font-sans text-[11px] sm:text-xs font-semibold uppercase tracking-[0.12em] sm:tracking-[0.16em] text-ivory truncate">
-                  3. PERSONALISATION
+                  PERSONALISATION
                 </p>
                 <p className="font-sans text-[11px] sm:text-xs text-muted mt-0.5 truncate">
                   Truly yours
@@ -205,7 +205,7 @@ export function Hero() {
               </div>
               <div className="min-w-0">
                 <p className="font-sans text-[11px] sm:text-xs font-semibold uppercase tracking-[0.12em] sm:tracking-[0.16em] text-ivory truncate">
-                  4. FAST & RELIABLE
+                  FAST & RELIABLE
                 </p>
                 <p className="font-sans text-[11px] sm:text-xs text-muted mt-0.5 truncate">
                   Pan India delivery

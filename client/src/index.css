@@ -587,12 +587,12 @@ button:disabled, input:disabled, textarea:disabled, select:disabled {
     padding-right: 1rem;
   }
   .section-py {
-    padding-top: 2.75rem;
-    padding-bottom: 2.75rem;
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
   }
   .section-py-sm {
-    padding-top: 1.75rem;
-    padding-bottom: 1.75rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
   }
   .hero-cta-stack > a {
     width: 100%;
@@ -600,6 +600,28 @@ button:disabled, input:disabled, textarea:disabled, select:disabled {
   .card-premium {
     padding: 10px;
     border-radius: 8px;
+  }
+
+  /* ── Mobile Heading Rhythm ── */
+  .heading-lg {
+    margin-bottom: 0.625rem;
+  }
+  .label-text {
+    margin-bottom: 0.5rem;
+  }
+
+  /* ── Mobile Button Consistency ── */
+  .btn-primary,
+  .btn-accent {
+    padding: 12px 20px;
+    font-size: 0.75rem;
+    min-height: 46px;
+  }
+  .btn-secondary,
+  .btn-outline {
+    padding: 12px 20px;
+    font-size: 0.75rem;
+    min-height: 44px;
   }
 }
 

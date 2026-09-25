@@ -5,19 +5,19 @@ import { ScrollReveal, StaggerReveal, staggerItem, AnimatedHeading } from '../ui
 const promisePillars = [
   {
     num: '01',
-    category: 'Curation',
+    category: 'Quality Selection',
     title: 'Thoughtful Gifting',
     icon: Sparkles,
     desc: 'Every gift is chosen with intention. From handcrafted Belgian chocolates to soothing soy candles, we select only the finest items that spark genuine joy.',
-    features: ['Handcrafted in small batches', 'Artisanal recipes & ingredients', 'Zero generic compromises'],
+    features: ['Handcrafted in small batches', 'Pure premium ingredients', 'Zero generic compromises'],
   },
   {
     num: '02',
     category: 'Personalisation',
     title: 'Personal Touch',
     icon: Heart,
-    desc: 'A gift should feel like it was made exclusively for them. We provide complimentary handwritten calligraphy note cards and bespoke name engravings.',
-    features: ['Handwritten calligraphy notes', 'Custom keepsake engraving', 'Tailored to your occasion'],
+    desc: 'A gift should feel like it was made exclusively for them. We provide complimentary handwritten note cards and personalised custom name engravings.',
+    features: ['Handwritten note cards', 'Custom name engraving', 'Tailored to your occasion'],
   },
   {
     num: '03',
@@ -45,7 +45,7 @@ export function GokanaPromise() {
 
       <div className="container-gokana relative z-10">
         {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-14 sm:mb-16">
+        <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-14 md:mb-16">
           <ScrollReveal delay={0.1}>
             <p className="label-text text-accent mb-3 flex items-center justify-center gap-1.5">
               <ShieldCheck size={14} />
@@ -63,7 +63,7 @@ export function GokanaPromise() {
         </div>
 
         {/* 3 Pillars Grid */}
-        <StaggerReveal className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8" stagger={0.1} delay={0.2}>
+        <StaggerReveal className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 lg:gap-8" stagger={0.1} delay={0.2}>
           {promisePillars.map(({ num, category, title, icon: Icon, desc, features }) => (
             <motion.div
               key={num}
@@ -107,7 +107,7 @@ export function GokanaPromise() {
         </StaggerReveal>
 
         {/* Bottom Trust Assurance Badge */}
-        <ScrollReveal delay={0.35} className="mt-12 text-center">
+        <ScrollReveal delay={0.35} className="mt-8 sm:mt-12 text-center">
           <div className="inline-flex items-center gap-2.5 px-4 sm:px-6 py-2.5 rounded-full bg-surface-alt border border-border text-xs text-muted font-light shadow-md">
             <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
             <span>Every single gift is hand-inspected and packed with care in Mathura, Uttar Pradesh</span>

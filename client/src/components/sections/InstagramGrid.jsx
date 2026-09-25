@@ -74,7 +74,7 @@ export function InstagramGrid() {
           </AnimatedHeading>
           <ScrollReveal delay={0.25}>
             <p className="font-sans text-xs sm:text-sm text-muted leading-relaxed font-light">
-              Explore our latest gift curations, artisanal packaging, and behind-the-scenes moments from Mathura, Uttar Pradesh.
+              Explore our latest gift hampers, handcrafted packaging, and behind-the-scenes moments from Mathura, Uttar Pradesh.
             </p>
           </ScrollReveal>
         </div>

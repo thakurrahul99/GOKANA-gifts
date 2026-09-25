@@ -61,8 +61,8 @@ export function CartDrawer() {
                 <div className="flex flex-col items-center justify-center h-full text-center py-12">
                   <div className="w-16 h-16 rounded-full bg-accent/15 border border-accent/30 flex items-center justify-center text-accent mb-4"><ShoppingBag size={28} strokeWidth={1.5} /></div>
                   <h3 className="font-serif text-2xl font-light text-ivory mb-2">Your cart is empty</h3>
-                  <p className="font-sans text-sm text-muted max-w-xs mb-8">Discover handcrafted gift boxes, artisanal chocolates, and luxury hampers.</p>
-                  <Link to="/shop" onClick={closeCart} className="btn-primary">Explore Curated Gifts <ArrowRight size={16} /></Link>
+                  <p className="font-sans text-sm text-muted max-w-xs mb-8">Discover handcrafted gift boxes, premium chocolates, and luxury hampers.</p>
+                  <Link to="/shop" onClick={closeCart} className="btn-primary">Explore Gifts <ArrowRight size={16} /></Link>
                 </div>
               ) : (
                 <div className="space-y-3.5 sm:space-y-4">

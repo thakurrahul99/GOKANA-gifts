@@ -82,7 +82,7 @@ export function Bestsellers() {
     <section id="bestsellers" className="section-py bg-bg overflow-hidden" aria-labelledby="bestsellers-heading">
       <div className="container-gokana">
         {/* Header with Navigation Controls */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 sm:gap-4 mb-6 sm:mb-12">
           <div>
             <ScrollReveal delay={0.1}>
               <p className="label-text text-accent mb-3">✦ Most Adored</p>
@@ -118,7 +118,7 @@ export function Bestsellers() {
           onMouseUp={handleMouseUpOrLeave}
           onMouseLeave={handleMouseUpOrLeave}
           onClickCapture={handleClickCapture}
-          className={`flex gap-4 sm:gap-6 overflow-x-auto no-scrollbar pb-6 -mx-4 px-4 sm:-mx-6 sm:px-6 md:-mx-8 md:px-8 select-none ${
+          className={`flex gap-3 sm:gap-6 overflow-x-auto no-scrollbar pb-4 sm:pb-6 -mx-4 px-4 sm:-mx-6 sm:px-6 md:-mx-8 md:px-8 select-none ${
             isDragging ? 'cursor-grabbing' : 'cursor-grab'
           }`}
           style={{

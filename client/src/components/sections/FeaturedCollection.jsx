@@ -33,7 +33,7 @@ export function FeaturedCollection() {
     <section className="section-py bg-bg-alt text-ivory border-b border-border" aria-labelledby="featured-heading">
       <div className="container-gokana">
         {/* Header */}
-        <div className="text-center mb-14 max-w-xl mx-auto">
+        <div className="text-center mb-8 sm:mb-14 max-w-xl mx-auto">
           <ScrollReveal delay={0.1}>
             <p className="label-text text-accent mb-3">✦ Hand-Selected Excellence</p>
           </ScrollReveal>
@@ -42,7 +42,7 @@ export function FeaturedCollection() {
           </AnimatedHeading>
           <ScrollReveal delay={0.25}>
             <p className="font-sans text-sm md:text-base text-muted leading-relaxed">
-              Every hamper hand-assembled for its narrative, finest artisanal ingredients, and memorable unboxing grandeur.
+              Every hamper hand-assembled with care, finest premium ingredients, and a memorable unboxing experience.
             </p>
           </ScrollReveal>
           <div className="flex justify-center mt-5">
@@ -51,14 +51,14 @@ export function FeaturedCollection() {
         </div>
 
         {/* Product Grid */}
-        <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
           {displayProducts.map((product, i) => (
             <ProductCard key={product.id} product={product} index={i} />
           ))}
         </div>
 
         {/* Bottom CTA */}
-        <ScrollReveal delay={0.2} className="text-center mt-12">
+        <ScrollReveal delay={0.2} className="text-center mt-8 sm:mt-12">
           <Link to="/shop" className="btn-primary inline-flex items-center justify-center w-full xs:w-auto gap-2">
             View Complete Collection
             <ArrowRight size={16} />

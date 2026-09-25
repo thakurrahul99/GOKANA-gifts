@@ -5,16 +5,16 @@ import { ScrollReveal, StaggerReveal, staggerItem, AnimatedHeading } from '../ui
 const journeySteps = [
   {
     step: '01',
-    action: 'CURATE',
-    title: 'Thoughtfully Curated',
-    desc: 'Gifts selected with intention — from Belgian chocolates to artisanal soy candles and keepsake items.',
+    action: 'SELECT',
+    title: 'Thoughtfully Selected',
+    desc: 'Gifts selected with care — from Belgian chocolates to premium soy candles and special keepsake gifts.',
     icon: Compass,
   },
   {
     step: '02',
     action: 'PERSONALISE',
     title: 'Personalised With Care',
-    desc: 'Add a meaningful personal touch with custom engravings, heartfelt calligraphy notes, and luxury wax seals.',
+    desc: 'Add a meaningful personal touch with custom engravings, heartfelt handwritten notes, and luxury wax seals.',
     icon: Sparkles,
   },
   {
@@ -38,7 +38,7 @@ export function WhyGokana() {
     <section className="section-py bg-bg-alt text-ivory border-b border-border" aria-labelledby="experience-heading">
       <div className="container-gokana">
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16">
+        <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-16">
           <ScrollReveal delay={0.1}>
             <p className="label-text text-accent mb-3">✦ The Gifting Journey</p>
           </ScrollReveal>
@@ -61,7 +61,7 @@ export function WhyGokana() {
 
         {/* 4 Steps Journey Grid */}
         <StaggerReveal
-          className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6"
+          className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6"
           stagger={0.08}
           delay={0.2}
         >

@@ -4,7 +4,7 @@ import { ScrollReveal, AnimatedHeading } from '../ui/ScrollReveal';
 
 export function FinalCTA() {
   return (
-    <section className="relative py-24 md:py-32 bg-bg text-ivory overflow-hidden border-b border-border" aria-labelledby="final-cta-heading">
+    <section className="relative py-16 sm:py-24 md:py-32 bg-bg text-ivory overflow-hidden border-b border-border" aria-labelledby="final-cta-heading">
       {/* Subtle Ambient Radial Glow */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(197,160,89,0.12)_0%,transparent_65%)] pointer-events-none" />
 
