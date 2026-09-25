@@ -39,7 +39,7 @@ export function IntroReveal({ onComplete }) {
           {/* Subtle texture lines */}
           <div className="absolute inset-0 opacity-[0.04]"
             style={{
-              backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(196,136,96,0.4) 40px, rgba(196,136,96,0.4) 41px)',
+              backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(197,160,89,0.4) 40px, rgba(197,160,89,0.4) 41px)',
             }}
           />
 
