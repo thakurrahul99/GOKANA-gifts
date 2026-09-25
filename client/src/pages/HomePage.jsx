@@ -32,14 +32,13 @@ export function HomePage() {
     } catch {
       // safe fallback
     }
-    document.documentElement.classList.remove('intro-pending');
     setShowIntro(false);
   };
 
   return (
     <>
       {showIntro && <IntroReveal onComplete={handleIntroComplete} />}
-      <main id="main-content" className="bg-bg">
+      <main id="main-content" className={showIntro ? 'bg-bg invisible' : 'bg-bg'}>
         {/* 1. Hero with Trust / Value Bar */}
         <Hero />
 
@@ -79,4 +78,3 @@ export function HomePage() {
     </>
   );
 }
-
