@@ -156,7 +156,7 @@ export function Hero() {
             </div>
 
             <div className="flex items-center gap-2.5 sm:gap-3.5 lg:px-6">
-              <div className="w-9 h-9 sm:w-10 h-10 rounded-full border border-border bg-surface-alt flex items-center justify-center text-accent flex-shrink-0">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-border bg-surface-alt flex items-center justify-center text-accent flex-shrink-0">
                 <Gift size={18} strokeWidth={1.6} />
               </div>
               <div className="min-w-0">
@@ -170,7 +170,7 @@ export function Hero() {
             </div>
 
             <div className="flex items-center gap-2.5 sm:gap-3.5 pt-3 sm:pt-0 border-t sm:border-t-0 border-border/40 lg:border-0 lg:px-6">
-              <div className="w-9 h-9 sm:w-10 h-10 rounded-full border border-border bg-surface-alt flex items-center justify-center text-accent flex-shrink-0">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-border bg-surface-alt flex items-center justify-center text-accent flex-shrink-0">
                 <Sparkles size={18} strokeWidth={1.6} />
               </div>
               <div className="min-w-0">
