@@ -9,14 +9,17 @@ export function IntroReveal({ onComplete }) {
   const [phase, setPhase] = useState('in'); // 'in' | 'hold' | 'out' | 'done'
 
   useEffect(() => {
+    document.body.style.overflow = 'hidden';
     const t1 = setTimeout(() => setPhase('hold'), 600);
     const t2 = setTimeout(() => setPhase('out'), 2800);
     const t3 = setTimeout(() => {
+      document.body.style.overflow = '';
       setPhase('done');
       onComplete?.();
     }, 4000);
 
     return () => {
+      document.body.style.overflow = '';
       clearTimeout(t1);
       clearTimeout(t2);
       clearTimeout(t3);

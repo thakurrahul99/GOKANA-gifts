@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ChevronDown, Award, Gift, Sparkles, Truck } from 'lucide-react';
-import { heroLuxuryImg } from '../../data';
+import { heroLuxuryImg, heroMobileImg } from '../../data';
 
 export function Hero() {
   const containerRef = useRef(null);
@@ -34,13 +34,16 @@ export function Hero() {
           className="absolute inset-0 scale-105 origin-center"
           style={{ y: imgY }}
         >
-          <img
-            src={heroLuxuryImg}
-            alt="GŌKANA luxury handcrafted gift boxes, chocolates, and candles"
-            className="w-full h-full object-cover object-right md:object-center"
-            loading="eager"
-            fetchPriority="high"
-          />
+          <picture className="w-full h-full block">
+            <source media="(max-width: 767px)" srcSet={heroMobileImg} />
+            <img
+              src={heroLuxuryImg}
+              alt="GŌKANA luxury handcrafted gift boxes, chocolates, and candles"
+              className="w-full h-full object-cover object-bottom md:object-center"
+              loading="eager"
+              fetchPriority="high"
+            />
+          </picture>
           <div className="absolute inset-0 bg-gradient-to-r from-[#0B0B0B] via-[#111111]/80 md:via-[#111111]/60 to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-transparent to-[#0B0B0B]/60" />
           <div className="absolute inset-0 bg-bg/20" />

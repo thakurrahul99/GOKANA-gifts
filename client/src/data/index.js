@@ -2,6 +2,7 @@
 
 import heroImg from '../assets/images/hero.webp';
 import heroLuxuryImg from '../assets/images/hero_luxury.webp';
+import heroMobileImg from '../assets/images/hero_mobile.webp';
 import brandStoryImg from '../assets/images/brand_story.webp';
 import birthdayImg from '../assets/images/occasion_birthday.webp';
 import diwaliImg from '../assets/images/occasion_diwali.webp';
@@ -14,7 +15,7 @@ import skincareImg from '../assets/images/product_skincare.webp';
 
 import { BUSINESS_INFO } from './business';
 
-export { heroImg, heroLuxuryImg, brandStoryImg, birthdayImg, diwaliImg, anniversaryImg, weddingImg, BUSINESS_INFO };
+export { heroImg, heroLuxuryImg, heroMobileImg, brandStoryImg, birthdayImg, diwaliImg, anniversaryImg, weddingImg, BUSINESS_INFO };
 
 export const occasions = [
   { id: 'birthday', label: 'Birthday', emoji: '🎂', image: birthdayImg, description: 'Celebrate their special day with joy' },

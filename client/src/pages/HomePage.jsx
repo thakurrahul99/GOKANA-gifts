@@ -16,19 +16,23 @@ import { FinalCTA } from '../components/sections/FinalCTA';
 
 const INTRO_KEY = 'gokana_intro_shown';
 
-export function HomePage() {
-  const [showIntro, setShowIntro] = useState(false);
+function isIntroRequired() {
+  try {
+    return !sessionStorage.getItem(INTRO_KEY);
+  } catch {
+    return false;
+  }
+}
 
-  useEffect(() => {
-    // Show intro only once per session
-    const shown = sessionStorage.getItem(INTRO_KEY);
-    if (!shown) {
-      setShowIntro(true);
-    }
-  }, []);
+export function HomePage() {
+  const [showIntro, setShowIntro] = useState(isIntroRequired);
 
   const handleIntroComplete = () => {
-    sessionStorage.setItem(INTRO_KEY, '1');
+    try {
+      sessionStorage.setItem(INTRO_KEY, '1');
+    } catch {
+      // safe fallback
+    }
     setShowIntro(false);
   };
 
