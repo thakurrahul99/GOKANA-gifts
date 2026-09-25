@@ -57,20 +57,20 @@ export function BrandStory() {
               </Link>
             </ScrollReveal>
 
-            {/* Impact & Quality Metrics */}
+            {/* Craft & Quality Standards */}
             <ScrollReveal delay={0.6}>
               <div className="grid grid-cols-3 gap-2 xs:gap-4 sm:gap-6 mt-10 sm:mt-12 pt-6 sm:pt-8 border-t border-border">
                 <div>
-                  <p className="font-serif text-2xl xs:text-3xl font-light text-accent">50K+</p>
-                  <p className="font-sans text-[9px] xs:text-[11px] text-muted uppercase tracking-wider mt-1">Gifts Delivered</p>
+                  <p className="font-serif text-xl xs:text-2xl font-light text-accent">Small Batch</p>
+                  <p className="font-sans text-[9px] xs:text-[11px] text-muted uppercase tracking-wider mt-1">Artisanal Making</p>
                 </div>
                 <div>
-                  <p className="font-serif text-2xl xs:text-3xl font-light text-accent">4.9★</p>
-                  <p className="font-sans text-[9px] xs:text-[11px] text-muted uppercase tracking-wider mt-1">Buyer Rating</p>
+                  <p className="font-serif text-xl xs:text-2xl font-light text-accent">Bespoke</p>
+                  <p className="font-sans text-[9px] xs:text-[11px] text-muted uppercase tracking-wider mt-1">Custom Engraved</p>
                 </div>
                 <div>
-                  <p className="font-serif text-2xl xs:text-3xl font-light text-accent">100%</p>
-                  <p className="font-sans text-[9px] xs:text-[11px] text-muted uppercase tracking-wider mt-1">Artisan Made</p>
+                  <p className="font-serif text-xl xs:text-2xl font-light text-accent">100%</p>
+                  <p className="font-sans text-[9px] xs:text-[11px] text-muted uppercase tracking-wider mt-1">Handcrafted Care</p>
                 </div>
               </div>
             </ScrollReveal>

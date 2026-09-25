@@ -27,10 +27,10 @@ const values = [
 ];
 
 const metrics = [
-  { value: '50,000+', label: 'Gifts Delivered' },
-  { value: '4.9 ★', label: 'Average Rating' },
-  { value: '200+', label: 'Corporate Clients' },
-  { value: '48h', label: 'Express Dispatch' },
+  { value: 'Artisan', label: 'Handcrafted Quality' },
+  { value: 'Bespoke', label: 'Custom Personalisation' },
+  { value: 'Pan-India', label: 'Doorstep Delivery' },
+  { value: 'Care', label: 'Complimentary Cards' },
 ];
 
 export function AboutPage() {

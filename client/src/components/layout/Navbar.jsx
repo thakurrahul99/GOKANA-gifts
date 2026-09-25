@@ -9,7 +9,7 @@ const navLinks = [
   { label: "Home", href: "/" },
   { label: "Shop", href: "/shop" },
   { label: "Personalisation", href: "/#personalisation", isHash: true },
-  { label: "Reviews", href: "/#reviews", isHash: true },
+  { label: "Our Promise", href: "/#promise", isHash: true },
   { label: "Contact", href: "/contact" },
 ];
 

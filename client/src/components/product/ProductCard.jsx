@@ -78,24 +78,25 @@ export function ProductCard({ product, index = 0 }) {
 
           {/* Badges Container */}
           <div className="absolute top-3 left-3 flex flex-col gap-1.5 z-10">
-            {product.badge && (
+            {product.badge && product.badge.toLowerCase() !== 'bestseller' && product.badge.toLowerCase() !== 'most loved' ? (
               <Badge
                 variant={
-                  product.badge.toLowerCase() === 'new'
+                  product.badge.toLowerCase().includes('new')
                     ? 'new'
-                    : product.badge.toLowerCase() === 'bestseller'
-                    ? 'bestseller'
+                    : product.badge.toLowerCase().includes('personalise')
+                    ? 'personalisable'
                     : 'default'
                 }
               >
                 {product.badge}
               </Badge>
+            ) : product.personalisable ? (
+              <Badge variant="personalisable">Personalise It</Badge>
+            ) : (
+              <Badge variant="new">New Arrival</Badge>
             )}
             {discount && (
               <Badge variant="sale">−{discount}%</Badge>
-            )}
-            {product.personalisable && (
-              <Badge variant="personalisable">✦ Custom</Badge>
             )}
           </div>
 
@@ -114,9 +115,15 @@ export function ProductCard({ product, index = 0 }) {
 
         {/* Product Details */}
         <div className="space-y-1.5 mb-4">
-          {/* Rating */}
-          <div className="flex items-center justify-between">
-            <Rating value={product.rating || 5} count={product.reviews || 48} size="sm" />
+          {/* Rating or Factual Attribute */}
+          <div className="flex items-center justify-between min-h-[20px]">
+            {product.reviews > 0 && product.rating > 0 ? (
+              <Rating value={product.rating} count={product.reviews} size="sm" />
+            ) : (
+              <span className="text-[10px] font-sans font-medium tracking-wider uppercase text-accent/90">
+                {product.personalisable ? '✦ Personalise It' : '✦ New Arrival'}
+              </span>
+            )}
             {product.inStock && (
               <span className="text-[10px] font-sans font-semibold tracking-[0.1em] uppercase text-accent">
                 In Stock

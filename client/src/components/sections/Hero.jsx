@@ -62,12 +62,12 @@ export function Hero() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                <div className="flex items-center gap-1 text-accent flex-shrink-0">
-                  <Star size={12} className="fill-accent text-accent" />
-                  <span className="font-semibold text-ivory">★ 4.9/5 Rating</span>
+                <div className="flex items-center gap-1.5 text-accent flex-shrink-0">
+                  <Sparkles size={12} className="text-accent" />
+                  <span className="font-semibold text-ivory">The GŌKANA Promise</span>
                 </div>
                 <span className="text-accent/40">•</span>
-                <span className="text-ivory/90 tracking-wide truncate">50,000+ Gifts Delivered with Love</span>
+                <span className="text-ivory/90 tracking-wide truncate">Handcrafted Luxury Curations</span>
               </motion.div>
 
               {/* Main Headline */}

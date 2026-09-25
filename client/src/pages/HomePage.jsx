@@ -7,7 +7,7 @@ import { FeaturedCollection } from '../components/sections/FeaturedCollection';
 import { PersonalizedGifting } from '../components/sections/PersonalizedGifting';
 import { GiftFinder } from '../components/sections/GiftFinder';
 import { WhyGokana } from '../components/sections/WhyGokana';
-import { Testimonials } from '../components/sections/Testimonials';
+import { GokanaPromise } from '../components/sections/GokanaPromise';
 import { BrandStory } from '../components/sections/BrandStory';
 import { InstagramGrid } from '../components/sections/InstagramGrid';
 import { FAQ } from '../components/sections/FAQ';
@@ -57,8 +57,8 @@ export function HomePage() {
         {/* 7. The GŌKANA Experience */}
         <WhyGokana />
 
-        {/* 8. Customer Reviews */}
-        <Testimonials />
+        {/* 8. The GŌKANA Promise */}
+        <GokanaPromise />
 
         {/* 9. Brand Philosophy & Story */}
         <BrandStory />
