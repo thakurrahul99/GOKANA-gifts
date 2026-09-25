@@ -221,7 +221,7 @@ export function ProductPage() {
     : null;
 
   // Compute live rating statistics from genuine verified reviews or product DB
-  const genuineReviewCount = reviews.length > 0 ? reviews.length : (product?.reviews || 0);
+  const genuineReviewCount = reviews.length > 0 ? reviews.length : (product?.reviews || product?.reviewCount || 0);
   const genuineRating =
     reviews.length > 0
       ? Math.round((reviews.reduce((acc, r) => acc + (r.rating || 5), 0) / reviews.length) * 10) / 10
@@ -517,7 +517,7 @@ export function ProductPage() {
                             {rev.title && <p className="font-serif text-sm text-ivory font-light">{rev.title}</p>}
                             <p className="text-xs text-muted font-light">{rev.review}</p>
                             <p className="text-[10px] text-accent font-medium">
-                              — {rev.user?.name || 'Verified Buyer'}
+                              — {rev.user?.name || 'Customer'}
                             </p>
                           </div>
                         ))}

@@ -117,8 +117,8 @@ export function ProductCard({ product, index = 0 }) {
         <div className="space-y-1.5 mb-4">
           {/* Rating or Factual Attribute */}
           <div className="flex items-center justify-between min-h-[20px]">
-            {product.reviews > 0 && product.rating > 0 ? (
-              <Rating value={product.rating} count={product.reviews} size="sm" />
+            {(product.reviews > 0 || product.reviewCount > 0) && product.rating > 0 ? (
+              <Rating value={product.rating} count={product.reviews || product.reviewCount} size="sm" />
             ) : (
               <span className="text-[10px] font-sans font-medium tracking-wider uppercase text-accent/90">
                 {product.personalisable ? '✦ Personalise It' : '✦ New Arrival'}
