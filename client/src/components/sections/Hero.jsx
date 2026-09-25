@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowRight, ChevronDown, Award, Gift, Sparkles, Truck } from 'lucide-react';
+import { ChevronDown, Award, Gift, Sparkles, Truck } from 'lucide-react';
 import { heroLuxuryImg } from '../../data';
 
 export function Hero() {
@@ -30,7 +30,6 @@ export function Hero() {
         className="relative w-full min-h-[720px] h-screen max-h-[1050px] overflow-hidden bg-bg"
         aria-label="Hero Introduction"
       >
-        {/* Parallax Cinematic Image */}
         <motion.div
           className="absolute inset-0 scale-105 origin-center"
           style={{ y: imgY }}
@@ -42,20 +41,17 @@ export function Hero() {
             loading="eager"
             fetchPriority="high"
           />
-          {/* Cinematic Contrast Overlays — Left 40% darker for crystal clear typography */}
           <div className="absolute inset-0 bg-gradient-to-r from-[#0B0B0B] via-[#111111]/80 md:via-[#111111]/60 to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-transparent to-[#0B0B0B]/60" />
           <div className="absolute inset-0 bg-bg/20" />
         </motion.div>
 
-        {/* Content — Positioned around 8% from left edge, vertically centered at 40-50% hero height */}
         <motion.div
           className="absolute inset-0 flex flex-col justify-center pt-16 sm:pt-20 md:pt-16 pb-14 sm:pb-16 md:pb-20"
           style={{ y: textY, opacity }}
         >
           <div className="w-full px-5 sm:px-8 md:px-12 lg:px-0 lg:pl-[8vw]">
             <div className="w-full max-w-[650px] text-left flex flex-col items-start">
-              {/* Trust Badge */}
               <motion.div
                 className="inline-flex items-center gap-2 sm:gap-3 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full bg-bg-alt/85 backdrop-blur-md border border-border shadow-[0_4px_20px_rgba(0,0,0,0.5)] text-ivory text-[11px] sm:text-xs font-sans mb-4 sm:mb-6"
                 initial={{ opacity: 0, y: 15 }}
@@ -70,7 +66,6 @@ export function Hero() {
                 <span className="text-ivory/90 tracking-wide truncate">Handcrafted Luxury Gift Hampers</span>
               </motion.div>
 
-              {/* Main Headline */}
               <div className="overflow-hidden mb-3 sm:mb-4 w-full">
                 <motion.h1
                   className="font-serif text-[clamp(2.1rem,6.2vw,5.6rem)] font-light text-ivory leading-[1.05] sm:leading-[1.03] tracking-[-0.015em] drop-shadow-[0_8px_24px_rgba(0,0,0,0.6)] text-left"
@@ -83,7 +78,6 @@ export function Hero() {
                 </motion.h1>
               </div>
 
-              {/* Eyebrow */}
               <motion.p
                 className="font-sans text-[10px] sm:text-[11px] md:text-xs font-semibold tracking-[0.2em] sm:tracking-[0.24em] uppercase text-accent mb-3 sm:mb-3.5 text-left"
                 initial={{ opacity: 0, y: 15 }}
@@ -93,7 +87,6 @@ export function Hero() {
                 LUXURY HANDCRAFTED GIFTS &nbsp;|&nbsp; PERSONALISED WITH CARE
               </motion.p>
 
-              {/* Description */}
               <motion.p
                 className="font-sans text-[13.5px] sm:text-[14px] md:text-[16px] text-muted leading-[1.65] sm:leading-[1.8] max-w-[580px] mb-6 sm:mb-8 font-light text-left"
                 initial={{ opacity: 0, y: 20 }}
@@ -103,14 +96,12 @@ export function Hero() {
                 Artisan chocolates, hand-poured soy candles, and personalised keepsakes. Hand-packed in luxury gift boxes with complimentary handwritten calligraphy cards.
               </motion.p>
 
-              {/* CTA Buttons */}
               <motion.div
                 className="hero-cta-stack flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-3 sm:gap-3.5 w-full sm:w-auto"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.65 }}
               >
-                {/* Primary CTA */}
                 <Link
                   to="/shop"
                   className="btn-primary inline-flex items-center justify-center gap-2 text-xs py-3.5 px-7 rounded-[4px] uppercase tracking-[0.14em] font-semibold"
@@ -118,7 +109,6 @@ export function Hero() {
                   EXPLORE COLLECTION →
                 </Link>
 
-                {/* Secondary CTA */}
                 <Link
                   to="/gift-finder"
                   className="btn-outline inline-flex items-center justify-center gap-2 text-xs py-3.5 px-6 rounded-[4px] uppercase tracking-[0.14em] font-semibold !text-accent border-accent hover:bg-accent/10 hover:border-accent-light"
@@ -130,7 +120,6 @@ export function Hero() {
           </div>
         </motion.div>
 
-        {/* Subtle SCROLL indicator */}
         <button
           onClick={scrollDown}
           className="absolute bottom-4 left-1/2 -translate-x-1/2 hidden xs:flex flex-col items-center gap-1 text-ivory/60 hover:text-accent transition-colors focus-visible:outline-none rounded p-1 cursor-pointer"
@@ -146,14 +135,12 @@ export function Hero() {
         </button>
       </section>
 
-      {/* ── TRUST / VALUE BAR (4 Pillars directly anchored below Hero) ── */}
       <aside
         className="bg-bg-alt border-y border-border py-5 sm:py-6 relative z-10 -mt-px shadow-lg"
         aria-label="Trust and Guarantees"
       >
         <div className="container-gokana">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-0 lg:divide-x divide-border/50">
-            {/* 1. PREMIUM QUALITY */}
             <div className="flex items-center gap-2.5 sm:gap-3.5 lg:px-6 first:lg:pl-0">
               <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-border bg-surface-alt flex items-center justify-center text-accent flex-shrink-0">
                 <Award size={18} strokeWidth={1.6} />
@@ -168,9 +155,8 @@ export function Hero() {
               </div>
             </div>
 
-            {/* 2. BEAUTIFULLY PACKED */}
             <div className="flex items-center gap-2.5 sm:gap-3.5 lg:px-6">
-              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-border bg-surface-alt flex items-center justify-center text-accent flex-shrink-0">
+              <div className="w-9 h-9 sm:w-10 h-10 rounded-full border border-border bg-surface-alt flex items-center justify-center text-accent flex-shrink-0">
                 <Gift size={18} strokeWidth={1.6} />
               </div>
               <div className="min-w-0">
@@ -183,9 +169,8 @@ export function Hero() {
               </div>
             </div>
 
-            {/* 3. PERSONALISATION */}
             <div className="flex items-center gap-2.5 sm:gap-3.5 pt-3 sm:pt-0 border-t sm:border-t-0 border-border/40 lg:border-0 lg:px-6">
-              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-border bg-surface-alt flex items-center justify-center text-accent flex-shrink-0">
+              <div className="w-9 h-9 sm:w-10 h-10 rounded-full border border-border bg-surface-alt flex items-center justify-center text-accent flex-shrink-0">
                 <Sparkles size={18} strokeWidth={1.6} />
               </div>
               <div className="min-w-0">
@@ -198,7 +183,6 @@ export function Hero() {
               </div>
             </div>
 
-            {/* 4. FAST & RELIABLE */}
             <div className="flex items-center gap-2.5 sm:gap-3.5 pt-3 sm:pt-0 border-t sm:border-t-0 border-border/40 lg:border-0 lg:px-6 last:lg:pr-0">
               <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-border bg-surface-alt flex items-center justify-center text-accent flex-shrink-0">
                 <Truck size={18} strokeWidth={1.6} />
