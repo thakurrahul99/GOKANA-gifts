@@ -28,6 +28,7 @@ import { FAB } from './components/ui/FAB';
 import { SmoothScroll } from './components/common/SmoothScroll';
 import { API_BASE } from './lib/api';
 import { useAuthStore } from './store';
+import { BUSINESS_INFO } from './data/business';
 
 function StorePage() {
   const location = useLocation();
@@ -189,9 +190,9 @@ function AdminCustomers() {
 
 function AdminSettings() {
   const defaults = {
-    storeName: 'GŌKANA',
-    supportEmail: 'hello@gokana.in',
-    supportPhone: '+91 99999 99999',
+    storeName: BUSINESS_INFO.brandName,
+    supportEmail: BUSINESS_INFO.email.address,
+    supportPhone: BUSINESS_INFO.phone.display,
     freeShipping: '999',
     lowStock: '5',
     orderNotifications: true,

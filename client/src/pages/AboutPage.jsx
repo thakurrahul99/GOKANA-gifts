@@ -122,17 +122,15 @@ export function AboutPage() {
           </ScrollReveal>
           <ScrollReveal delay={0.35} className="space-y-5 body-text text-muted leading-relaxed">
             <p>
-              Our founder, Deepti Agarwal, had a habit: every birthday, anniversary, or festival, she'd spend hours searching for the perfect
-              gift — and almost always settle for something generic that felt nothing like the person she was gifting.
+              GŌKANA Gifts was founded on a simple observation: during every birthday, anniversary, or festival, people spend hours searching for the perfect
+              gift — yet often settle for something generic that fails to capture the true depth of the relationship.
             </p>
             <p>
-              She realised that premium gifting in India was either overly corporate (branded merchandise no one wanted) or
-              completely generic (the same chocolate boxes everyone gives). Nobody was doing beautiful, thoughtful, curated
-              gifting at scale.
+              We realised that thoughtful gifting in India deserved a higher standard of artistry, personalisation, and care — combining hand-curated Belgian chocolates, hand-poured candles, and bespoke calligraphy notes into memorable keepsake boxes.
             </p>
             <p>
-              So GŌKANA was born — to be the gifting brand India always deserved. A brand that treats every gift like a
-              moment, and every moment like a story worth telling beautifully.
+              From Mathura, Uttar Pradesh to doorsteps across India, GŌKANA Gifts treats every gift like a
+              cherished moment, and every moment like a story worth telling beautifully.
             </p>
           </ScrollReveal>
         </div>

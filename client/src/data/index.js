@@ -12,7 +12,9 @@ import candlesImg from '../assets/images/product_candles.webp';
 import hamperImg from '../assets/images/product_hamper.webp';
 import skincareImg from '../assets/images/product_skincare.webp';
 
-export { heroImg, heroLuxuryImg, brandStoryImg, birthdayImg, diwaliImg, anniversaryImg, weddingImg };
+import { BUSINESS_INFO } from './business';
+
+export { heroImg, heroLuxuryImg, brandStoryImg, birthdayImg, diwaliImg, anniversaryImg, weddingImg, BUSINESS_INFO };
 
 export const occasions = [
   { id: 'birthday', label: 'Birthday', emoji: '🎂', image: birthdayImg, description: 'Celebrate their special day with joy' },

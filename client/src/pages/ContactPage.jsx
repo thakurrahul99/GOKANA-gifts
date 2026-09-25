@@ -7,12 +7,13 @@ import {
   Clock,
   Sparkles,
   Send,
-  CheckCircle2,
   ShieldCheck,
   Building2,
-  Gift,
+  MapPin,
+  ExternalLink,
 } from 'lucide-react';
 import { ScrollReveal } from '../components/ui/ScrollReveal';
+import { BUSINESS_INFO } from '../data/business';
 
 export function ContactPage() {
   const [form, setForm] = useState({
@@ -22,16 +23,22 @@ export function ContactPage() {
     inquiryType: 'Personal Gifting',
     message: '',
   });
-  const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const buildWhatsAppInquiry = () => {
+    const text = `Hi GŌKANA Gifts! 👋\n\n*New Inquiry*\n👤 Name: ${form.name || 'Not provided'}\n✉️ Email: ${form.email || 'Not provided'}\n📞 Phone: ${form.phone || 'Not provided'}\n🏷️ Topic: ${form.inquiryType}\n\n📝 Message:\n${form.message || 'I would like to inquire about your curated gifting collection.'}`;
+    return BUSINESS_INFO.whatsapp.buildUrl(text);
+  };
+
+  const handleSendEmail = (e) => {
     e.preventDefault();
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      setSubmitted(true);
-    }, 800);
+    const subject = `[GŌKANA Inquiry] ${form.inquiryType} - ${form.name || 'Customer'}`;
+    const body = `Name: ${form.name}\nEmail: ${form.email}\nPhone: ${form.phone}\nTopic: ${form.inquiryType}\n\nMessage:\n${form.message}`;
+    window.location.href = BUSINESS_INFO.email.buildMailto(subject, body);
+  };
+
+  const handleSendWhatsApp = (e) => {
+    e.preventDefault();
+    window.open(buildWhatsAppInquiry(), '_blank', 'noopener,noreferrer');
   };
 
   const inputClass =
@@ -61,7 +68,7 @@ export function ContactPage() {
           </ScrollReveal>
           <ScrollReveal delay={0.2}>
             <p className="font-sans text-sm md:text-base text-muted mt-4 leading-relaxed font-light">
-              Our support team is here to assist you with custom orders, corporate gifts, tracking, and any special questions.
+              Our support team is here to assist you with custom orders, corporate gifts, tracking, and any special gifting questions.
             </p>
           </ScrollReveal>
         </div>
@@ -80,7 +87,7 @@ export function ContactPage() {
               <div className="space-y-4 sm:space-y-5">
                 {/* WhatsApp */}
                 <a
-                  href="https://wa.me/919999999999?text=Hi%20GŌKANA,%20I%20would%20like%20to%20inquire%20about%20curated%20gifting"
+                  href={BUSINESS_INFO.whatsapp.buildUrl("Hi GŌKANA Gifts, I would like to inquire about curated gifting.")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-start gap-3.5 sm:gap-4 p-3.5 sm:p-4 rounded-xl bg-bg border border-border hover:border-accent hover:bg-surface transition-all group min-h-[48px]"
@@ -93,13 +100,13 @@ export function ContactPage() {
                       <span className="font-sans text-[11px] sm:text-xs uppercase tracking-wider text-muted font-medium">WhatsApp Support</span>
                       <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-950/60 text-emerald-300 border border-emerald-500/30">Fast Reply</span>
                     </div>
-                    <p className="font-serif text-base sm:text-lg text-ivory group-hover:text-accent transition-colors mt-0.5">+91 99999 99999</p>
+                    <p className="font-serif text-base sm:text-lg text-ivory group-hover:text-accent transition-colors mt-0.5">{BUSINESS_INFO.phone.display}</p>
                   </div>
                 </a>
 
                 {/* Email */}
                 <a
-                  href="mailto:hello@gokana.in"
+                  href={BUSINESS_INFO.email.mailto}
                   className="flex items-start gap-3.5 sm:gap-4 p-3.5 sm:p-4 rounded-xl bg-bg border border-border hover:border-accent hover:bg-surface transition-all group min-h-[48px]"
                 >
                   <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-accent/15 border border-accent/30 flex items-center justify-center text-accent flex-shrink-0 group-hover:scale-105 transition-transform">
@@ -107,13 +114,13 @@ export function ContactPage() {
                   </div>
                   <div className="flex-1 min-w-0">
                     <span className="font-sans text-[11px] sm:text-xs uppercase tracking-wider text-muted font-medium">Email Support</span>
-                    <p className="font-serif text-base sm:text-lg text-ivory group-hover:text-accent transition-colors mt-0.5">hello@gokana.in</p>
+                    <p className="font-serif text-base sm:text-lg text-ivory group-hover:text-accent transition-colors mt-0.5">{BUSINESS_INFO.email.address}</p>
                   </div>
                 </a>
 
                 {/* Phone */}
                 <a
-                  href="tel:+919999999999"
+                  href={BUSINESS_INFO.phone.tel}
                   className="flex items-start gap-3.5 sm:gap-4 p-3.5 sm:p-4 rounded-xl bg-bg border border-border hover:border-accent hover:bg-surface transition-all group min-h-[48px]"
                 >
                   <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-accent/15 border border-accent/30 flex items-center justify-center text-accent flex-shrink-0 group-hover:scale-105 transition-transform">
@@ -121,9 +128,20 @@ export function ContactPage() {
                   </div>
                   <div className="flex-1 min-w-0">
                     <span className="font-sans text-[11px] sm:text-xs uppercase tracking-wider text-muted font-medium">Phone Support</span>
-                    <p className="font-serif text-base sm:text-lg text-ivory group-hover:text-accent transition-colors mt-0.5">+91 99999 99999</p>
+                    <p className="font-serif text-base sm:text-lg text-ivory group-hover:text-accent transition-colors mt-0.5">{BUSINESS_INFO.phone.display}</p>
                   </div>
                 </a>
+
+                {/* Public Location */}
+                <div className="flex items-start gap-3.5 sm:gap-4 p-3.5 sm:p-4 rounded-xl bg-bg border border-border">
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-accent/15 border border-accent/30 flex items-center justify-center text-accent flex-shrink-0">
+                    <MapPin size={17} />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <span className="font-sans text-[11px] sm:text-xs uppercase tracking-wider text-muted font-medium">Public Location</span>
+                    <p className="font-serif text-sm sm:text-base text-ivory mt-0.5">{BUSINESS_INFO.location.display}</p>
+                  </div>
+                </div>
 
                 {/* Operating Hours */}
                 <div className="flex items-start gap-3.5 sm:gap-4 p-3.5 sm:p-4 rounded-xl bg-bg border border-border">
@@ -131,9 +149,8 @@ export function ContactPage() {
                     <Clock size={17} />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <span className="font-sans text-[11px] sm:text-xs uppercase tracking-wider text-muted font-medium">Working Hours</span>
-                    <p className="font-serif text-sm sm:text-base text-ivory mt-0.5">Monday – Saturday: 9:00 AM – 8:00 PM IST</p>
-                    <p className="text-[11px] text-muted mt-0.5">Orders placed on Sundays dispatched on Monday morning.</p>
+                    <span className="font-sans text-[11px] sm:text-xs uppercase tracking-wider text-muted font-medium">Customer Support Hours</span>
+                    <p className="font-serif text-sm sm:text-base text-ivory mt-0.5">{BUSINESS_INFO.supportHours.display}</p>
                   </div>
                 </div>
               </div>
@@ -146,149 +163,127 @@ export function ContactPage() {
                 <h3 className="font-serif text-base sm:text-lg font-light text-ivory">Corporate & Bulk Orders</h3>
               </div>
               <p className="font-sans text-xs text-muted leading-relaxed font-light mb-3.5">
-                Planning celebratory bulk orders or company client gifting? We provide custom logos, branded ribbons, and special bulk pricing.
+                Planning celebratory bulk orders or company client gifting? We provide custom branding, bespoke ribbons, and corporate pricing.
               </p>
               <div className="flex items-center gap-2 text-xs text-accent font-medium">
                 <ShieldCheck size={15} />
-                <span>Dedicated account manager for bulk orders</span>
+                <span>Dedicated support for custom & bulk orders</span>
               </div>
             </div>
           </div>
 
-          {/* Right Column: Inquiry Form */}
+          {/* Right Column: Inquiry Form with Genuine Functional Dispatch */}
           <div className="lg:col-span-7">
             <div className="bg-bg-alt border border-border rounded-2xl p-5 sm:p-8 md:p-10 shadow-2xl">
               <div className="mb-6 sm:mb-8">
                 <span className="inline-block text-xs font-semibold tracking-[0.18em] text-accent uppercase mb-2">
                   ✦ GET IN TOUCH
                 </span>
-                <h2 className="font-serif text-2xl sm:text-3xl font-light text-ivory mb-2">Send Us a Message</h2>
+                <h2 className="font-serif text-2xl sm:text-3xl font-light text-ivory mb-2">Send Us an Inquiry</h2>
                 <p className="font-sans text-xs sm:text-sm text-muted font-light">
-                  Fill out the details below and our team will get back to you within 4 business hours.
+                  Fill out your details below and choose to send directly via WhatsApp or Email.
                 </p>
               </div>
 
-              {submitted ? (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="text-center py-16 px-6 bg-bg border border-accent/40 rounded-xl"
-                >
-                  <div className="w-16 h-16 rounded-full bg-accent/20 border border-accent flex items-center justify-center text-accent mx-auto mb-4">
-                    <CheckCircle2 size={32} />
-                  </div>
-                  <h3 className="font-serif text-2xl text-ivory mb-2">Thank You, {form.name || 'Valued Guest'}</h3>
-                  <p className="font-sans text-sm text-muted max-w-md mx-auto mb-6 leading-relaxed">
-                    Your message has been received! Our support team will get back to you shortly.
-                  </p>
-                  <button
-                    onClick={() => {
-                      setSubmitted(false);
-                      setForm({ name: '', email: '', phone: '', inquiryType: 'Personal Gifting', message: '' });
-                    }}
-                    className="btn-outline text-xs uppercase tracking-wider py-2.5 px-6"
-                  >
-                    Send Another Message
-                  </button>
-                </motion.div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-5">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                    <div>
-                      <label className="block font-sans text-xs font-semibold text-ivory mb-2 uppercase tracking-wider">
-                        Your Name <span className="text-accent">*</span>
-                      </label>
-                      <input
-                        type="text"
-                        required
-                        value={form.name}
-                        onChange={(e) => setForm({ ...form, name: e.target.value })}
-                        placeholder="e.g. Deepti Agarwal"
-                        className={inputClass}
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block font-sans text-xs font-semibold text-ivory mb-2 uppercase tracking-wider">
-                        Email Address <span className="text-accent">*</span>
-                      </label>
-                      <input
-                        type="email"
-                        required
-                        value={form.email}
-                        onChange={(e) => setForm({ ...form, email: e.target.value })}
-                        placeholder="you@domain.com"
-                        className={inputClass}
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                    <div>
-                      <label className="block font-sans text-xs font-semibold text-ivory mb-2 uppercase tracking-wider">
-                        Phone Number
-                      </label>
-                      <input
-                        type="tel"
-                        value={form.phone}
-                        onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                        placeholder="+91 98765 43210"
-                        className={inputClass}
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block font-sans text-xs font-semibold text-ivory mb-2 uppercase tracking-wider">
-                        Type of Request
-                      </label>
-                      <select
-                        value={form.inquiryType}
-                        onChange={(e) => setForm({ ...form, inquiryType: e.target.value })}
-                        className={inputClass}
-                      >
-                        <option value="Personal Gifting">Personal Gifting Help</option>
-                        <option value="Corporate Order">Corporate / Bulk Gifting</option>
-                        <option value="Custom Hamper">Custom Gift Box</option>
-                        <option value="Order Tracking">Order Help / Tracking</option>
-                        <option value="Other">General Question</option>
-                      </select>
-                    </div>
+              <form onSubmit={handleSendWhatsApp} className="space-y-5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div>
+                    <label className="block font-sans text-xs font-semibold text-ivory mb-2 uppercase tracking-wider">
+                      Your Name <span className="text-accent">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={form.name}
+                      onChange={(e) => setForm({ ...form, name: e.target.value })}
+                      placeholder="Your full name"
+                      className={inputClass}
+                    />
                   </div>
 
                   <div>
                     <label className="block font-sans text-xs font-semibold text-ivory mb-2 uppercase tracking-wider">
-                      Your Message <span className="text-accent">*</span>
+                      Email Address <span className="text-accent">*</span>
                     </label>
-                    <textarea
-                      rows={4}
+                    <input
+                      type="email"
                       required
-                      value={form.message}
-                      onChange={(e) => setForm({ ...form, message: e.target.value })}
-                      placeholder="Tell us about your occasion, gift requirements, or questions..."
-                      className={`${inputClass} resize-none`}
+                      value={form.email}
+                      onChange={(e) => setForm({ ...form, email: e.target.value })}
+                      placeholder="you@domain.com"
+                      className={inputClass}
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div>
+                    <label className="block font-sans text-xs font-semibold text-ivory mb-2 uppercase tracking-wider">
+                      Phone Number
+                    </label>
+                    <input
+                      type="tel"
+                      value={form.phone}
+                      onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                      placeholder="+91 98765 43210"
+                      className={inputClass}
                     />
                   </div>
 
+                  <div>
+                    <label className="block font-sans text-xs font-semibold text-ivory mb-2 uppercase tracking-wider">
+                      Type of Request
+                    </label>
+                    <select
+                      value={form.inquiryType}
+                      onChange={(e) => setForm({ ...form, inquiryType: e.target.value })}
+                      className={inputClass}
+                    >
+                      <option value="Personal Gifting">Personal Gifting Help</option>
+                      <option value="Corporate Order">Corporate / Bulk Gifting</option>
+                      <option value="Custom Hamper">Custom Gift Box</option>
+                      <option value="Order Tracking">Order Help / Tracking</option>
+                      <option value="General Question">General Question</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block font-sans text-xs font-semibold text-ivory mb-2 uppercase tracking-wider">
+                    Your Message <span className="text-accent">*</span>
+                  </label>
+                  <textarea
+                    rows={4}
+                    required
+                    value={form.message}
+                    onChange={(e) => setForm({ ...form, message: e.target.value })}
+                    placeholder="Tell us about your occasion, gift requirements, or questions..."
+                    className={`${inputClass} resize-none`}
+                  />
+                </div>
+
+                <div className="pt-2 grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                   <button
                     type="submit"
-                    disabled={loading}
-                    className="btn-primary w-full justify-center min-h-[48px] uppercase tracking-wider font-semibold text-xs flex items-center gap-2 mt-4"
+                    className="btn-primary w-full justify-center min-h-[48px] uppercase tracking-wider font-semibold text-xs flex items-center gap-2 cursor-pointer"
                   >
-                    {loading ? (
-                      'Sending Message…'
-                    ) : (
-                      <>
-                        <Send size={15} />
-                        Send Message
-                      </>
-                    )}
+                    <MessageSquare size={16} />
+                    Send via WhatsApp
                   </button>
+                  <button
+                    type="button"
+                    onClick={handleSendEmail}
+                    className="btn-outline w-full justify-center min-h-[48px] uppercase tracking-wider font-semibold text-xs flex items-center gap-2 cursor-pointer"
+                  >
+                    <Mail size={16} />
+                    Send via Email
+                  </button>
+                </div>
 
-                  <p className="text-center font-sans text-[11px] text-muted pt-2 font-light">
-                    ✦ Respect for privacy: Your information is handled securely and never shared.
-                  </p>
-                </form>
-              )}
+                <p className="text-center font-sans text-[11px] text-muted pt-2 font-light">
+                  ✦ Direct inquiry dispatch: Connects directly with our {BUSINESS_INFO.brandName} customer support team ({BUSINESS_INFO.supportHours.short}).
+                </p>
+              </form>
             </div>
           </div>
         </div>

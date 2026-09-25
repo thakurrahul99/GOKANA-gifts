@@ -1,6 +1,6 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { ArrowRight, MapPin, Clock, Mail, MessageSquare } from "lucide-react";
+import { BUSINESS_INFO } from "../../data/business";
 
 const SvgInstagram = ({ size = 18, ...props }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...props}>
@@ -10,9 +10,16 @@ const SvgInstagram = ({ size = 18, ...props }) => (
   </svg>
 );
 
-const SvgPinterest = ({ size = 18, ...props }) => (
+const SvgFacebook = ({ size = 18, ...props }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...props}>
-    <path d="M12 2C6.477 2 2 6.477 2 12c0 4.236 2.636 7.855 6.356 9.312-.088-.791-.167-2.005.035-2.868.181-.78 1.172-4.97 1.172-4.97s-.299-.598-.299-1.482c0-1.388.806-2.428 1.808-2.428.852 0 1.265.64 1.265 1.408 0 .858-.546 2.14-.828 3.33-.236.995.499 1.806 1.476 1.806 1.771 0 3.133-1.867 3.133-4.562 0-2.387-1.715-4.057-4.163-4.057-2.836 0-4.5 2.127-4.5 4.326 0 .856.33 1.775.741 2.276a.3.3 0 0 1 .069.285c-.075.314-.243.995-.276 1.134-.044.183-.146.222-.337.134-1.249-.581-2.03-2.407-2.03-3.874 0-3.154 2.292-6.052 6.608-6.052 3.469 0 6.165 2.473 6.165 5.776 0 3.447-2.173 6.22-5.19 6.22-1.013 0-1.967-.527-2.292-1.148l-.623 2.378c-.226.869-.835 1.958-1.244 2.621.938.29 1.931.446 2.962.446 5.523 0 10-4.477 10-10S17.523 2 12 2z" />
+    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+  </svg>
+);
+
+const SvgYouTube = ({ size = 18, ...props }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19.1c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.43z" />
+    <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="currentColor" stroke="none" />
   </svg>
 );
 
@@ -26,10 +33,11 @@ const footerColumns = {
     { label: "Corporate Gifting", href: "/contact" },
   ],
   "Customer Care": [
-    { label: "WhatsApp Gift Support", href: "https://wa.me/919999999999", isExternal: true },
+    { label: "WhatsApp: " + BUSINESS_INFO.phone.display, href: BUSINESS_INFO.whatsapp.buildUrl("Hi GŌKANA Gifts! I need help with an order/gift."), isExternal: true },
+    { label: "Email: " + BUSINESS_INFO.email.address, href: BUSINESS_INFO.email.mailto, isExternal: true },
     { label: "Track Your Order", href: "/account" },
     { label: "Frequently Asked Questions", href: "/#faq" },
-    { label: "Contact Us", href: "/contact" },
+    { label: "Contact & Location", href: "/contact" },
   ],
   Personalisation: [
     { label: "Name Engraving", href: "/#personalisation" },
@@ -37,35 +45,21 @@ const footerColumns = {
     { label: "Handwritten Calligraphy", href: "/#personalisation" },
     { label: "Premium Ribbon Wrapping", href: "/#personalisation" },
   ],
-  "Shipping & Returns": [
-    { label: "Pan India Express Delivery", href: "/#faq" },
-    { label: "Carefully Packed Dispatch", href: "/#faq" },
-    { label: "Signature Gift Box Packaging", href: "/#faq" },
-    { label: "7-Day Easy Returns Policy", href: "/#faq" },
+  "Shipping & Policies": [
+    { label: "Pan India Delivery", href: "/#faq" },
+    { label: "Signature Gift Packaging", href: "/#faq" },
+    { label: "Replacement & Support", href: "/#faq" },
+    { label: "Help & Inquiries", href: "/contact" },
   ],
 };
 
 const socials = [
-  { Icon: SvgInstagram, href: "https://instagram.com", label: "Instagram" },
-  { Icon: SvgPinterest, href: "https://pinterest.com", label: "Pinterest" },
+  { Icon: SvgInstagram, href: BUSINESS_INFO.socials.instagram.url, label: BUSINESS_INFO.socials.instagram.label },
+  { Icon: SvgFacebook, href: BUSINESS_INFO.socials.facebook.url, label: BUSINESS_INFO.socials.facebook.label },
+  { Icon: SvgYouTube, href: BUSINESS_INFO.socials.youtube.url, label: BUSINESS_INFO.socials.youtube.label },
 ];
 
 export function Footer() {
-  const [email, setEmail] = useState("");
-  const [subscribed, setSubscribed] = useState(false);
-  const [error, setError] = useState("");
-
-  const handleSubscribe = (e) => {
-    e.preventDefault();
-    if (!email || !email.includes("@") || !email.includes(".")) {
-      setError("Please enter a valid email address");
-      return;
-    }
-    setError("");
-    setSubscribed(true);
-    setEmail("");
-  };
-
   return (
     <footer className="bg-primary-dark text-ivory border-t border-border" aria-label="Site Footer">
       {/* Delicate Gold Gradient Hairline */}
@@ -73,74 +67,52 @@ export function Footer() {
 
       <div className="container-gokana pt-16 pb-12">
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-12 gap-8 md:gap-10 lg:gap-8 pb-12 sm:pb-14 border-b border-border">
-          {/* Brand & Newsletter Column */}
+          {/* Brand & Direct Channels Column */}
           <div className="col-span-2 md:col-span-2 lg:col-span-4">
             <Link to="/" className="flex flex-col group mb-4">
               <span className="font-serif text-2xl sm:text-3xl font-light tracking-[0.14em] uppercase text-ivory group-hover:text-accent transition-colors">
-                GŌKANA
+                {BUSINESS_INFO.brandName}
               </span>
               <span className="font-sans text-[8px] sm:text-[9px] tracking-[0.26em] uppercase text-accent font-medium mt-1">
-                Gifts • Curated • With Love
+                {BUSINESS_INFO.tagline}
               </span>
             </Link>
 
-            <p className="font-sans text-xs text-muted leading-relaxed max-w-sm mb-6 font-light">
+            <p className="font-sans text-xs text-muted leading-relaxed max-w-sm mb-5 font-light">
               Thoughtfully chosen. Beautifully wrapped. Meaningfully remembered. Luxury gift hampers, handmade chocolates, and personalised gifts for every special occasion.
             </p>
 
-            {/* Newsletter Signup */}
-            <div className="mb-6">
-              <p className="font-sans text-[11px] font-semibold tracking-[0.18em] uppercase text-accent mb-1.5">
-                Join the GŌKANA Circle
-              </p>
-              <p className="font-sans text-xs text-muted mb-3 font-light">
-                Receive private collection previews, gifting reminders, and festive privileges.
-              </p>
-
-              {!subscribed ? (
-                <form onSubmit={handleSubscribe} className="space-y-2" noValidate>
-                  <div className="flex rounded-[4px] overflow-hidden border border-border focus-within:border-accent transition-colors">
-                    <input
-                      type="email"
-                      value={email}
-                      onChange={(e) => { setEmail(e.target.value); if (error) setError(""); }}
-                      placeholder="Enter your email address"
-                      className="flex-1 min-w-0 bg-bg-alt px-3.5 sm:px-4 py-2.5 text-xs text-ivory placeholder-muted-2 focus:outline-none min-h-[44px]"
-                      aria-label="Email for newsletter"
-                      required
-                    />
-                    <button
-                      type="submit"
-                      className="px-4 sm:px-5 bg-accent text-bg font-sans text-xs font-semibold uppercase tracking-[0.14em] hover:bg-accent-light transition-colors flex items-center gap-1.5 min-h-[44px] cursor-pointer flex-shrink-0"
-                      aria-label="Subscribe to newsletter"
-                    >
-                      Join <ArrowRight size={13} />
-                    </button>
-                  </div>
-                  {error && <p className="text-xs text-[#E5C378] font-medium mt-1" role="alert">{error}</p>}
-                </form>
-              ) : (
-                <div className="flex items-center gap-2 p-3 rounded-[4px] bg-bg-alt border border-accent/40 text-accent text-xs" role="status" aria-live="polite">
-                  <CheckCircle2 size={15} />
-                  <span>Welcome to GŌKANA. You're on our private list.</span>
-                </div>
-              )}
+            {/* Verified Business Details */}
+            <div className="space-y-2 mb-6 text-xs text-muted font-light">
+              <div className="flex items-center gap-2">
+                <MapPin size={14} className="text-accent flex-shrink-0" />
+                <span>{BUSINESS_INFO.location.display}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Clock size={14} className="text-accent flex-shrink-0" />
+                <span>Support Hours: {BUSINESS_INFO.supportHours.display}</span>
+              </div>
             </div>
 
-            {/* Social Channels: Instagram & Pinterest */}
-            <div className="flex items-center gap-3">
-              {socials.map(({ Icon, href, label }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  className="w-10 h-10 rounded-full border border-border bg-bg-alt flex items-center justify-center text-accent hover:text-bg hover:bg-accent hover:border-accent transition-all cursor-pointer"
-                >
-                  <Icon size={17} />
-                </a>
-              ))}
+            {/* Social Channels: Instagram, Facebook & YouTube */}
+            <div>
+              <p className="font-sans text-[11px] font-semibold tracking-[0.18em] uppercase text-accent mb-3">
+                Connect With Us
+              </p>
+              <div className="flex items-center gap-3">
+                {socials.map(({ Icon, href, label }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                    className="w-10 h-10 rounded-full border border-border bg-bg-alt flex items-center justify-center text-accent hover:text-bg hover:bg-accent hover:border-accent transition-all cursor-pointer"
+                  >
+                    <Icon size={17} />
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
 
@@ -179,7 +151,7 @@ export function Footer() {
 
         {/* Bottom Bar: Copyright & Craft Statement */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted-2">
-          <p>© {new Date().getFullYear()} GŌKANA Luxury Gifts. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} {BUSINESS_INFO.brandName}. All rights reserved.</p>
           <p className="font-serif italic text-accent/80 font-light">
             Crafted with love & reverence in India.
           </p>

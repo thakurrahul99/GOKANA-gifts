@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 import { ProductCard } from "../components/product/ProductCard";
 import { ScrollReveal, AnimatedHeading } from "../components/ui/ScrollReveal";
-import { products, occasions } from "../data";
+import { products, occasions, BUSINESS_INFO } from "../data";
 import { formatPrice } from "../components/ui";
 import { useCartStore } from "../store";
 
@@ -592,7 +592,7 @@ export function GiftFinderPage() {
             </div>
 
             <a
-              href="https://wa.me/919999999999?text=Hi%20GŌKANA!%20I'd%20like%20assistance%20with%20a%20custom%20gift."
+              href={BUSINESS_INFO.whatsapp.buildUrl("Hi GŌKANA Gifts! I'd like assistance with a custom gift.")}
               target="_blank"
               rel="noopener noreferrer"
               className="btn-primary w-full md:w-auto justify-center flex items-center gap-2 min-h-0 py-3 px-4 text-[12px] tracking-normal leading-tight whitespace-nowrap"

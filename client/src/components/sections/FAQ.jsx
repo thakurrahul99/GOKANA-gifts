@@ -1,32 +1,33 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, HelpCircle, MessageCircle } from 'lucide-react';
+import { ChevronDown, MessageCircle } from 'lucide-react';
 import { ScrollReveal, AnimatedHeading } from '../ui/ScrollReveal';
+import { BUSINESS_INFO } from '../../data/business';
 
 const faqs = [
   {
     q: 'How long does shipping and delivery take?',
-    a: 'We dispatch all non-custom orders within 24 hours. Standard delivery across major Indian cities takes 2–4 business days. Express next-day dispatch is also available at checkout for urgent moments.',
+    a: 'We dispatch all non-custom orders within 24 hours. Standard delivery across major Indian cities takes 2–4 business days. Express dispatch is also available at checkout for urgent moments.',
     category: 'Shipping',
   },
   {
     q: 'Can I personalise the gifts with names, photos, or custom messages?',
-    a: 'Yes! Every GŌKANA gift includes a complimentary, handwritten calligraphy note card on 300 GSM handmade cotton paper. Many of our wooden gift boxes and keepsakes can also be engraved with custom names and dates.',
+    a: 'Yes! Every GŌKANA gift includes a complimentary handwritten note card. Many of our gift hampers and keepsakes can also be customised with names and special messages.',
     category: 'Personalisation',
   },
   {
     q: 'What payment methods do you accept?',
-    a: 'We accept all major payment methods including UPI (Google Pay, PhonePe, Paytm), Visa, Mastercard, RuPay, American Express, NetBanking, and Cash on Delivery (COD) for eligible pin codes.',
+    a: 'We accept all major payment methods including UPI (Google Pay, PhonePe, Paytm), Visa, Mastercard, RuPay, NetBanking, and Cash on Delivery (COD) for eligible pin codes.',
     category: 'Payment',
   },
   {
-    q: 'What is your return and refund policy?',
-    a: 'We offer an easy 7-day hassle-free replacement or refund guarantee on all non-personalised products. If your gift arrives damaged or is not up to your expectations, message us on WhatsApp and we will make it right immediately.',
+    q: 'What is your replacement and support policy?',
+    a: `We inspect every product before dispatch. If your gift arrives damaged or requires assistance, connect with us on WhatsApp (${BUSINESS_INFO.phone.display}) or email ${BUSINESS_INFO.email.address} and our team will resolve it promptly.`,
     category: 'Returns',
   },
   {
     q: 'Do you offer bulk, wedding, or corporate gifting?',
-    a: 'Absolutely. We make custom corporate hampers, festive Diwali bulk gifts, and wedding favors with custom company branding, ribbon colors, and bulk volume discounts. Contact our team on WhatsApp for custom options.',
+    a: 'Absolutely. We curate custom corporate hampers, festive bulk gifts, and wedding favors with custom branding and volume coordination. Contact our team on WhatsApp for custom options.',
     category: 'Corporate',
   },
 ];
@@ -51,7 +52,7 @@ export function FAQ() {
           </AnimatedHeading>
           <ScrollReveal delay={0.25}>
             <p className="font-sans text-base text-muted leading-relaxed max-w-lg mx-auto">
-              Everything you need to know about our luxury hampers, delivery promises, and custom notes.
+              Everything you need to know about our luxury hampers, delivery, and custom options.
             </p>
           </ScrollReveal>
         </div>
@@ -110,11 +111,11 @@ export function FAQ() {
               Still have questions or need a custom gift box?
             </h4>
             <p className="font-sans text-xs text-muted mt-1">
-              Our gifting specialists are active 9am to 7pm on WhatsApp to assist you.
+              Our gifting specialists are active {BUSINESS_INFO.supportHours.display} on WhatsApp to assist you.
             </p>
           </div>
           <a
-            href="https://wa.me/919999999999?text=Hi%20GŌKANA!%20I%20have%20a%20question%20about%20your%20gifts."
+            href={BUSINESS_INFO.whatsapp.buildUrl('Hi GŌKANA Gifts! I have a question about your gifts.')}
             target="_blank"
             rel="noopener noreferrer"
             className="btn-primary py-3 px-5 text-xs whitespace-nowrap flex items-center justify-center w-full sm:w-auto gap-2 min-h-[44px]"
