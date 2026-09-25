@@ -32,6 +32,7 @@ export function HomePage() {
     } catch {
       // safe fallback
     }
+    document.documentElement.classList.remove('intro-pending');
     setShowIntro(false);
   };
 
